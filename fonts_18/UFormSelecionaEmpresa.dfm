@@ -111,7 +111,7 @@ object FormSelecionaEmpresa: TFormSelecionaEmpresa
       item
         Color = clAqua
         Expanded = False
-        FieldName = 'NMCTT'
+        FieldName = 'NMRAZAOSOCIAL'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11

@@ -32,6 +32,7 @@ type
     qryEmpresasCNPJEFR: TStringField;
     dsqryEmpresas: TUniDataSource;
     qryaux: TUniQuery;
+    qryEmpresasNMRAZAOSOCIAL: TStringField;
   private
     { Private declarations }
   public

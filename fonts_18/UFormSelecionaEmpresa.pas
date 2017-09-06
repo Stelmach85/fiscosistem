@@ -37,8 +37,8 @@ var
 begin
   // carrega nas variáveis as informações principais da empresa selecionada
   Codcurr:=DMQuerysUteis.qryEmpresas.FieldByName('codigo').AsInteger;
-  Nomeemp:=DMQuerysUteis.qryEmpresas.FieldByName('nmctt').AsString;
-  Empresa:=DMQuerysUteis.qryEmpresas.FieldByName('nmctt').AsString;
+  Nomeemp:=DMQuerysUteis.qryEmpresas.FieldByName('NMRAZAOSOCIAL').AsString;
+  Empresa:=DMQuerysUteis.qryEmpresas.FieldByName('NMRAZAOSOCIAL').AsString;
   
  {  if DMQuerysUteis.unqryEmpresas.Fieldbyname('PJNAOOBRIGADALREAL').Asinteger=1 then
     PJNaoObrigadaLReal:=true

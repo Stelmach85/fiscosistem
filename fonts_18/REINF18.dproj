@@ -49,12 +49,12 @@
 			<DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
 			<DCC_AssertionsAtRuntime>true</DCC_AssertionsAtRuntime>
 			<DCC_MapFile>3</DCC_MapFile>
-			<DCC_ExeOutput>X:\Reinf\fonts\exe</DCC_ExeOutput>
+			<DCC_ExeOutput>X:\Reinf\fonts_18\exe</DCC_ExeOutput>
 			<BRCC_OutputDir>X:\Reinf\fonts\exe</BRCC_OutputDir>
 			<DCC_Warnings>false</DCC_Warnings>
 			<DCC_Hints>false</DCC_Hints>
 			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-			<DCC_DcuOutput>X:\Reinf\fonts\DCU</DCC_DcuOutput>
+			<DCC_DcuOutput>X:\Reinf\fonts_18\DCU</DCC_DcuOutput>
 		</PropertyGroup>
 		<ItemGroup>
 			<DelphiCompile Include="REINF18.dpr">

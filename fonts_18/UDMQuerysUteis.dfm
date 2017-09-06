@@ -88,6 +88,10 @@ object DMQuerysUteis: TDMQuerysUteis
       FieldName = 'CNPJEFR'
       Size = 14
     end
+    object qryEmpresasNMRAZAOSOCIAL: TStringField
+      FieldName = 'NMRAZAOSOCIAL'
+      Size = 100
+    end
   end
   object dsqryEmpresas: TUniDataSource
     DataSet = qryEmpresas
