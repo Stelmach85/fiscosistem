@@ -129,7 +129,7 @@ var
 
 implementation
 
-uses UFormSelecionaEmpresa, UVerificaSistema;
+uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes;
 
 
 
@@ -698,6 +698,15 @@ begin
    end;
   if codempAntes>0 then  
     Codcurr:=codempAntes;   }
+
+    If  not  assigned(formContribuintes ) then
+       Application.CreateForm(TformContribuintes ,formContribuintes);
+     try
+       formContribuintes .ShowModal;
+
+     finally
+      FreeAndNil(formContribuintes );
+     end;
 end;
 
 procedure TREINFForm.btnSairClick(Sender: TObject);

@@ -8,7 +8,8 @@ uses
   UDMQuerysUteis in 'UDMQuerysUteis.pas' {DMQuerysUteis: TDataModule},
   Kill in 'Kill.pas',
   UVerificaSistema in 'UVerificaSistema.pas',
-  UDMScript in 'UDMScript.pas' {DMScript: TDataModule};
+  UDMScript in 'UDMScript.pas' {DMScript: TDataModule},
+  UFormContribuintes in 'UFormContribuintes.pas' {FormContribuintes};
 
 {$R *.res}
 
@@ -19,5 +20,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMQuerysUteis, DMQuerysUteis);
   Application.CreateForm(TDMScript, DMScript);
+  Application.CreateForm(TFormContribuintes, FormContribuintes);
   Application.Run;
 end.

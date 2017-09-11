@@ -1,2 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/09/08 08:52:05.000.042,=X:\Reinf\fonts_18\Unit1.pas</Transaction>
+    <Transaction>2017/09/08 08:52:33.000.078,X:\Reinf\fonts_18\UFormContribuintes.pas=X:\Reinf\fonts_18\Unit1.pas</Transaction>
+    <Transaction>2017/09/08 08:52:33.000.078,X:\Reinf\fonts_18\UFormContribuintes.dfm=X:\Reinf\fonts_18\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
