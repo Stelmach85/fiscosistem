@@ -894,6 +894,36 @@ object FormContribuintes: TFormContribuintes
         ParentShowHint = False
         ShowHint = True
       end
+      object lbl24: TLabel
+        Left = 12
+        Top = 129
+        Width = 31
+        Height = 13
+        Caption = 'E-mail:'
+        FocusControl = dbedtCodemp1
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object lbl25: TLabel
+        Left = 179
+        Top = 187
+        Width = 30
+        Height = 13
+        Caption = 'CNPJ:'
+        FocusControl = dbedtCodemp1
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object lbl26: TLabel
+        Left = 15
+        Top = 186
+        Width = 98
+        Height = 13
+        Caption = 'Org'#227'o Publ. '#233' ERF ?'
+        FocusControl = dbedtCodemp1
+        ParentShowHint = False
+        ShowHint = True
+      end
       object dbedtCodemp1: TDBEdit
         Left = 11
         Top = 20
@@ -1134,6 +1164,70 @@ object FormContribuintes: TFormContribuintes
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
+      end
+      object dbedtEMAIL_CONTATO: TDBEdit
+        Left = 12
+        Top = 148
+        Width = 510
+        Height = 19
+        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Ctl3D = False
+        DataField = 'EMAIL_CONTATO'
+        DataSource = DM.dsContribuintes
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 9
+      end
+      object cbbIDEEFR: TJvDBComboBox
+        Left = 12
+        Top = 205
+        Width = 154
+        Height = 22
+        Hint = 'Selecione o Indicador de Natureza'
+        Style = csOwnerDrawFixed
+        DataField = 'IDEEFR'
+        DataSource = DM.dsContribuintes
+        Items.Strings = (
+          'Sim'
+          'N'#227'o')
+        TabOrder = 10
+        Values.Strings = (
+          'S'
+          'N')
+        ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+        ListSettings.OutfilteredValueFont.Color = clRed
+        ListSettings.OutfilteredValueFont.Height = -11
+        ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+        ListSettings.OutfilteredValueFont.Style = []
+      end
+      object dbedtCNPJEFR: TDBEdit
+        Left = 179
+        Top = 206
+        Width = 198
+        Height = 19
+        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Ctl3D = False
+        DataField = 'CNPJEFR'
+        DataSource = DM.dsContribuintes
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 11
       end
     end
   end

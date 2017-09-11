@@ -79,6 +79,12 @@ type
     lbl11: TLabel;
     cbbCLASSTRIB: TJvDBComboBox;
     lbl12: TLabel;
+    dbedtEMAIL_CONTATO: TDBEdit;
+    lbl24: TLabel;
+    cbbIDEEFR: TJvDBComboBox;
+    dbedtCNPJEFR: TDBEdit;
+    lbl25: TLabel;
+    lbl26: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -128,6 +134,9 @@ dbedtNMCTT.Enabled:=True;
 dbedtCPFCTT.Enabled:=True;
 dbedtFONEFIXO.Enabled:=True;
 dbedtFONECEL.Enabled:=True;
+dbedtEMAIL_CONTATO.Enabled:=True;
+cbbIDEEFR.Enabled:=True;
+dbedtCNPJEFR.Enabled:=True;
 end;
 
 procedure TFormContribuintes.btnAlterarClick(Sender: TObject);
@@ -146,6 +155,9 @@ dbedtNMCTT.Enabled:=False;
 dbedtCPFCTT.Enabled:=False;
 dbedtFONEFIXO.Enabled:=False;
 dbedtFONECEL.Enabled:=False;
+dbedtEMAIL_CONTATO.Enabled:=False;
+cbbIDEEFR.Enabled:=False;
+dbedtCNPJEFR.Enabled:=False;
 end;
 
 procedure TFormContribuintes.btnCancelarClick(Sender: TObject);
@@ -178,6 +190,9 @@ dbedtNMCTT.Enabled:=False;
 dbedtCPFCTT.Enabled:=False;
 dbedtFONEFIXO.Enabled:=False;
 dbedtFONECEL.Enabled:=False;
+dbedtEMAIL_CONTATO.Enabled:=False;
+cbbIDEEFR.Enabled:=False;
+dbedtCNPJEFR.Enabled:=False;
 end;
 
 procedure TFormContribuintes.btnGravarClick(Sender: TObject);

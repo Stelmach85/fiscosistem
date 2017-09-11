@@ -137,6 +137,7 @@ object DM: TDM
     end
     object unContribuintesCNPJEFR: TStringField
       FieldName = 'CNPJEFR'
+      EditMask = '99.999.999/9999-99;1;'
       Size = 14
     end
     object unContribuintesNMRAZAOSOCIAL: TStringField
