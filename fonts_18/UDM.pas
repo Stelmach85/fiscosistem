@@ -54,8 +54,42 @@ type
     unContribuintesNMRAZAOSOCIAL: TStringField;
     unRefClasTrib: TUniTable;
     dsRefClasTrib: TUniDataSource;
+    dsProcessos: TUniDataSource;
+    unProcessosCODIGO: TIntegerField;
+    unProcessosNRINSC: TStringField;
+    unProcessosTPINSC: TIntegerField;
+    unProcessosINIVALID: TDateField;
+    unProcessosFIMVALID: TDateField;
+    unProcessosTPPROC: TStringField;
+    unProcessosNRPROC: TStringField;
+    unProcessosCODSUSP: TStringField;
+    unProcessosINDSUSP: TStringField;
+    unProcessosDTDECISAO: TDateField;
+    unProcessosINDDEPOSITO: TStringField;
+    unProcessosUFVARA: TStringField;
+    unProcessosCODMUNIC: TStringField;
+    unProcessosIDVARA: TStringField;
+    unProcessosINDAUDITORIA: TStringField;
+    unProcessosPERAPUR: TStringField;
+    unParametros: TUniTable;
+    unParametrosCODIGO: TIntegerField;
+    unParametrosID: TIntegerField;
+    unParametrosNOME: TStringField;
+    unParametrosSENHA: TStringField;
+    unParametrosSERIE: TStringField;
+    unParametrosMODELO: TStringField;
+    unParametrosXML_IMPORTADO: TStringField;
+    unParametrosXML_GERADO: TStringField;
+    unParametrosXML_TRANSMITIDO: TStringField;
+    unParametrosXML_RETORNO: TStringField;
+    unParametrosXML_RETORNO_ERRO: TStringField;
+    dsParametros: TUniDataSource;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
+    procedure unProcessosAfterDelete(DataSet: TDataSet);
+    procedure unProcessosAfterPost(DataSet: TDataSet);
+    procedure unParametrosAfterDelete(DataSet: TDataSet);
+    procedure unParametrosAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -84,6 +118,46 @@ begin
  try
    unContribuintes.CommitUpdates;
    unContribuintes.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unParametrosAfterDelete(DataSet: TDataSet);
+begin
+   try
+   unParametros.CommitUpdates;
+   unParametros.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unParametrosAfterPost(DataSet: TDataSet);
+begin
+   try
+   unParametros.CommitUpdates;
+   unParametros.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unProcessosAfterDelete(DataSet: TDataSet);
+begin
+ try
+   unProcessos.CommitUpdates;
+   unProcessos.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unProcessosAfterPost(DataSet: TDataSet);
+begin
+ try
+   unProcessos.CommitUpdates;
+   unProcessos.ApplyUpdates();
 except
 
  end;

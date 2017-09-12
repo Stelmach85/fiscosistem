@@ -60,13 +60,18 @@
 			<DelphiCompile Include="REINF18.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="frm_REINF.pas">
-				<Form>REINFForm</Form>
-			</DCCReference>
 			<DCCReference Include="UDM.pas">
 				<Form>DM</Form>
 				<DesignClass>TDataModule</DesignClass>
 			</DCCReference>
+			<DCCReference Include="UDMScript.pas">
+				<Form>DMScript</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="frm_REINF.pas">
+				<Form>REINFForm</Form>
+			</DCCReference>
+			<DCCReference Include="UVerificaSistema.pas"/>
 			<DCCReference Include="UFormSelecionaEmpresa.pas">
 				<Form>FormSelecionaEmpresa</Form>
 			</DCCReference>
@@ -75,13 +80,17 @@
 				<DesignClass>TDataModule</DesignClass>
 			</DCCReference>
 			<DCCReference Include="Kill.pas"/>
-			<DCCReference Include="UVerificaSistema.pas"/>
-			<DCCReference Include="UDMScript.pas">
-				<Form>DMScript</Form>
-				<DesignClass>TDataModule</DesignClass>
-			</DCCReference>
 			<DCCReference Include="UFormContribuintes.pas">
 				<Form>FormContribuintes</Form>
+			</DCCReference>
+			<DCCReference Include="UFormCadProcessos.pas">
+				<Form>FormCadProcessos</Form>
+			</DCCReference>
+			<DCCReference Include="UFormConexao.pas">
+				<Form>FormConexao</Form>
+			</DCCReference>
+			<DCCReference Include="UFormParametros.pas">
+				<Form>FormParametros</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Debug">
 				<Key>Cfg_2</Key>

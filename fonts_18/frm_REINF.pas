@@ -129,7 +129,8 @@ var
 
 implementation
 
-uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes;
+uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
+  UFormCadProcessos, UFormParametros, UFormConexao;
 
 
 
@@ -396,12 +397,12 @@ begin
       VerificaSistema.ExecuteProgram(REINFdir+'Conexao.Exe','');
   except
   end;
-{  try
+  try
     VerificaSistema.ConectaBanco;
     // pega as empresas do E-LALUR
     VerificaSistema.transfEmpresas;
   except
-  end;   }   
+  end;      
   jvgrdnt1.Align:=alTop;
   sSkinManager1.active:=False;
   sSkinManager1.SkinDirectory:= REINFdir;
@@ -493,7 +494,11 @@ begin
    codconfig:=-1;
    Menu.MontaMenu(codconfig);       }
  ///finaliza  abre menu configuração atualiza menu
-
+ ///
+ // menu inicial só com a conexao e manuais
+ 
+  tvmenu.LoadFromFile(REINFdir+'MenuREINFINI.pkz');
+  tvmenu.Visible:=True;
 end;
 
 procedure TREINFForm.img1Click(Sender: TObject);
@@ -772,14 +777,58 @@ begin
   // inicio menu cadastros
   // ************************
   // alíquotas
- { if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Alíquotas' then
+  if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Contribuintes' then
   begin
-    if not assigned(AliquotasForm) then
-       AliquotasForm:=TAliquotasForm.Create(self);
-    AliquotasForm.showmodal;
+   If  not  assigned(formContribuintes ) then
+       Application.CreateForm(TformContribuintes ,formContribuintes);
+     try
+       formContribuintes .ShowModal;
+
+     finally
+      FreeAndNil(formContribuintes );
+     end;
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end
-  else   }
+  else  
+  if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Processos' then
+  begin
+   If  not  assigned(formCadProcessos ) then
+       Application.CreateForm(TformCadProcessos ,formCadProcessos);
+     try
+       formCadProcessos .ShowModal;
+
+     finally
+      FreeAndNil(formCadProcessos );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+   else 
+   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Parâmetros do Sistema' then
+  begin
+   If  not  assigned(formParametros ) then
+       Application.CreateForm(TformParametros ,formParametros);
+     try
+       formParametros .ShowModal;
+
+     finally
+      FreeAndNil(formParametros );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+   else 
+    if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Conexão do REINF' then
+  begin
+   If  not  assigned(FormConexao ) then
+       Application.CreateForm(TFormConexao ,FormConexao);
+     try
+       FormConexao .ShowModal;
+
+     finally
+      FreeAndNil(FormConexao );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end; 
+  // else 
  
  { if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Ativar/Desativar controle de usuários' then
   begin

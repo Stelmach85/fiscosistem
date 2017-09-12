@@ -1,6 +1,7 @@
 object FormContribuintes: TFormContribuintes
   Left = 0
   Top = 0
+  BorderIcons = []
   Caption = 'Cadastro de Contribuintes'
   ClientHeight = 373
   ClientWidth = 758
@@ -20,7 +21,7 @@ object FormContribuintes: TFormContribuintes
     Top = -1
     Width = 1158
     Height = 617
-    ActivePage = ts1
+    ActivePage = ts2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -11
@@ -55,7 +56,7 @@ object FormContribuintes: TFormContribuintes
         ShowHint = True
       end
       object lbl38: TLabel
-        Left = 220
+        Left = 207
         Top = 51
         Width = 55
         Height = 13
@@ -175,7 +176,7 @@ object FormContribuintes: TFormContribuintes
         ShowHint = True
       end
       object lbl1: TLabel
-        Left = 20
+        Left = 16
         Top = 50
         Width = 85
         Height = 13
@@ -503,7 +504,7 @@ object FormContribuintes: TFormContribuintes
         Top = 311
         Width = 75
         Height = 25
-        Hint = 'Exclui uma Empresa  '
+        Hint = 'Exclui um Contribuinte'
         Caption = 'Excluir'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
@@ -537,7 +538,7 @@ object FormContribuintes: TFormContribuintes
         Top = 311
         Width = 75
         Height = 25
-        Hint = 'Altera os dados da Empresa'
+        Hint = 'Altera os dados do Contribuinte'
         Caption = 'Alterar'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
@@ -571,7 +572,7 @@ object FormContribuintes: TFormContribuintes
         Top = 311
         Width = 75
         Height = 25
-        Hint = 'Grava os dados da Empresa'
+        Hint = 'Grava os dados do Contribuinte'
         Caption = 'Gravar'
         DoubleBuffered = True
         Enabled = False
@@ -606,7 +607,7 @@ object FormContribuintes: TFormContribuintes
         Top = 311
         Width = 75
         Height = 25
-        Hint = 'Cadastra uma nova Empresa'
+        Hint = 'Cadastra um novo Contribuinte'
         Caption = 'Incluir'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
@@ -636,7 +637,7 @@ object FormContribuintes: TFormContribuintes
         OnClick = btnNovoClick
       end
       object btn1: TBitBtn
-        Left = 472
+        Left = 464
         Top = 311
         Width = 75
         Height = 25
@@ -697,7 +698,7 @@ object FormContribuintes: TFormContribuintes
         Top = 70
         Width = 127
         Height = 19
-        Hint = 'Digite o CNPJ da empresa'
+        Hint = 'Digite a data incial'
         Ctl3D = False
         DataField = 'INIVALID'
         DataSource = DM.dsContribuintes
@@ -717,7 +718,7 @@ object FormContribuintes: TFormContribuintes
         Top = 70
         Width = 127
         Height = 19
-        Hint = 'Digite o CNPJ da empresa'
+        Hint = 'Digite a Data Final'
         Ctl3D = False
         DataField = 'FIMVALID'
         DataSource = DM.dsContribuintes
@@ -737,7 +738,7 @@ object FormContribuintes: TFormContribuintes
         Top = 133
         Width = 154
         Height = 22
-        Hint = 'Selecione o Indicador de Natureza'
+        Hint = 'Obrigratoriedade da entregra da ECD'
         Style = csOwnerDrawFixed
         DataField = 'INDESCRITURACAO'
         DataSource = DM.dsContribuintes
@@ -759,7 +760,7 @@ object FormContribuintes: TFormContribuintes
         Top = 133
         Width = 222
         Height = 22
-        Hint = 'Selecione o Indicador de Natureza'
+        Hint = 'Selecione o Indicador de Desonera'#231#227'o da Folha pela CPRB'
         Style = csOwnerDrawFixed
         DataField = 'INDDESONERACAO'
         DataSource = DM.dsContribuintes
@@ -781,7 +782,7 @@ object FormContribuintes: TFormContribuintes
         Top = 133
         Width = 173
         Height = 22
-        Hint = 'Selecione o Indicador de Natureza'
+        Hint = 'Selecione o Indicador de Acordo de Multas'
         Style = csOwnerDrawFixed
         DataField = 'INDACORDOISENMULTA'
         DataSource = DM.dsContribuintes
@@ -803,7 +804,7 @@ object FormContribuintes: TFormContribuintes
         Top = 197
         Width = 173
         Height = 22
-        Hint = 'Selecione o Indicador de Natureza'
+        Hint = 'Selecione o Indicador de Situa'#231#227'o da PJ'
         Style = csOwnerDrawFixed
         DataField = 'INDSITPJ'
         DataSource = DM.dsContribuintes
@@ -828,6 +829,7 @@ object FormContribuintes: TFormContribuintes
         Top = 197
         Width = 355
         Height = 21
+        Hint = 'Selecione a Classifica'#231#227'o tribut'#225'ria da PJ'
         DataField = 'CLASSTRIB'
         DataSource = DM.dsContribuintes
         TabOrder = 30
@@ -1086,7 +1088,7 @@ object FormContribuintes: TFormContribuintes
         Top = 20
         Width = 510
         Height = 19
-        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Hint = 'Informe o Nome do Contato na Empresa'
         Ctl3D = False
         DataField = 'NMCTT'
         DataSource = DM.dsContribuintes
@@ -1107,7 +1109,7 @@ object FormContribuintes: TFormContribuintes
         Top = 84
         Width = 142
         Height = 19
-        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Hint = 'Informe o CPF do Contato'
         Ctl3D = False
         DataField = 'CPFCTT'
         DataSource = DM.dsContribuintes
@@ -1128,7 +1130,7 @@ object FormContribuintes: TFormContribuintes
         Top = 84
         Width = 142
         Height = 19
-        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Hint = 'Informe o Telefone fixo do Contato'
         Ctl3D = False
         DataField = 'FONEFIXO'
         DataSource = DM.dsContribuintes
@@ -1149,7 +1151,7 @@ object FormContribuintes: TFormContribuintes
         Top = 84
         Width = 142
         Height = 19
-        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Hint = 'Informe o Telefone Celular do Contato'
         Ctl3D = False
         DataField = 'FONECEL'
         DataSource = DM.dsContribuintes
@@ -1170,7 +1172,7 @@ object FormContribuintes: TFormContribuintes
         Top = 148
         Width = 510
         Height = 19
-        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Hint = 'Informe o E-mail do Contato'
         Ctl3D = False
         DataField = 'EMAIL_CONTATO'
         DataSource = DM.dsContribuintes
@@ -1191,7 +1193,7 @@ object FormContribuintes: TFormContribuintes
         Top = 205
         Width = 154
         Height = 22
-        Hint = 'Selecione o Indicador de Natureza'
+        Hint = 'Informe se o Org'#227'o Publico '#233' ERF'
         Style = csOwnerDrawFixed
         DataField = 'IDEEFR'
         DataSource = DM.dsContribuintes
@@ -1213,7 +1215,7 @@ object FormContribuintes: TFormContribuintes
         Top = 206
         Width = 198
         Height = 19
-        Hint = 'N'#227'o altere o c'#243'digo da empresa'
+        Hint = 'Informe o CNPJ do Org'#227'o Publico'
         Ctl3D = False
         DataField = 'CNPJEFR'
         DataSource = DM.dsContribuintes

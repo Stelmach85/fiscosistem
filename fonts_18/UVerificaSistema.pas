@@ -174,7 +174,8 @@ begin
      end;
     try
      begin
-       DM.Conexao.Connected:=false;
+       
+       DM.Conexao.Connected:=false ;
       // DMConexaoInterface.sqlConexaoBancosInterface.Connected:=false;
        if not DM.Conexao.Connected then
        begin

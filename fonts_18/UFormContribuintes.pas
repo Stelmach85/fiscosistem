@@ -172,8 +172,8 @@ end;
 
 procedure TFormContribuintes.btnExcluirClick(Sender: TObject);
 begin
- If MessageDLG ('Confirma Exclusão da empresa ' +DM.unContribuintesNMRAZAOSOCIAL.AsString+ '???' +#13+
-     'Lembre-se que este procedimento irá excluir todos os dados cadastrais e lançamentos da empresa.', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+ If MessageDLG ('Confirma Exclusão do contribuinte ' +DM.unContribuintesNMRAZAOSOCIAL.AsString+ '???' +#13+
+     'Lembre-se que este procedimento irá excluir todos os dados cadastrais e lançamentos do contribuinte.', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unContribuintes.Delete;
      End;

@@ -5,12 +5,10 @@ object DM: TDM
   object Conexao: TUniConnection
     ProviderName = 'InterBase'
     Port = 3050
-    Database = 'C:\REINF.fdb'
     SpecificOptions.Strings = (
       'Oracle.Direct=True')
     Username = 'SYSDBA'
     Server = 'localhost'
-    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 4
@@ -148,8 +146,74 @@ object DM: TDM
   object unProcessos: TUniTable
     TableName = 'PROCESSOS_18'
     Connection = Conexao
+    AfterPost = unProcessosAfterPost
+    AfterDelete = unProcessosAfterDelete
     Left = 136
     Top = 136
+    object unProcessosCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unProcessosNRINSC: TStringField
+      FieldName = 'NRINSC'
+      Size = 14
+    end
+    object unProcessosTPINSC: TIntegerField
+      FieldName = 'TPINSC'
+    end
+    object unProcessosINIVALID: TDateField
+      FieldName = 'INIVALID'
+      EditMask = '9999-99;1;'
+    end
+    object unProcessosFIMVALID: TDateField
+      FieldName = 'FIMVALID'
+      EditMask = '9999-99;1;'
+    end
+    object unProcessosTPPROC: TStringField
+      FieldName = 'TPPROC'
+      Size = 1
+    end
+    object unProcessosNRPROC: TStringField
+      FieldName = 'NRPROC'
+      Required = True
+      Size = 21
+    end
+    object unProcessosCODSUSP: TStringField
+      FieldName = 'CODSUSP'
+      Size = 14
+    end
+    object unProcessosINDSUSP: TStringField
+      FieldName = 'INDSUSP'
+      Required = True
+      Size = 2
+    end
+    object unProcessosDTDECISAO: TDateField
+      FieldName = 'DTDECISAO'
+    end
+    object unProcessosINDDEPOSITO: TStringField
+      FieldName = 'INDDEPOSITO'
+      Size = 1
+    end
+    object unProcessosUFVARA: TStringField
+      FieldName = 'UFVARA'
+      Size = 2
+    end
+    object unProcessosCODMUNIC: TStringField
+      FieldName = 'CODMUNIC'
+      Size = 7
+    end
+    object unProcessosIDVARA: TStringField
+      FieldName = 'IDVARA'
+      Size = 2
+    end
+    object unProcessosINDAUDITORIA: TStringField
+      FieldName = 'INDAUDITORIA'
+      Size = 1
+    end
+    object unProcessosPERAPUR: TStringField
+      FieldName = 'PERAPUR'
+      Size = 7
+    end
   end
   object unRetCP_ServTom: TUniTable
     TableName = 'RETCP_SEVTOM_18'
@@ -224,6 +288,76 @@ object DM: TDM
   object dsRefClasTrib: TUniDataSource
     DataSet = unRefClasTrib
     Left = 48
+    Top = 424
+  end
+  object dsProcessos: TUniDataSource
+    DataSet = unProcessos
+    Left = 136
+    Top = 200
+  end
+  object unParametros: TUniTable
+    TableName = 'Parametros_18'
+    Connection = Conexao
+    AfterPost = unParametrosAfterPost
+    AfterDelete = unParametrosAfterDelete
+    Left = 144
+    Top = 352
+    object unParametrosCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unParametrosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object unParametrosNOME: TStringField
+      FieldName = 'NOME'
+      Required = True
+      Size = 100
+    end
+    object unParametrosSENHA: TStringField
+      FieldName = 'SENHA'
+      Required = True
+      Size = 50
+    end
+    object unParametrosSERIE: TStringField
+      FieldName = 'SERIE'
+      Required = True
+      Size = 100
+    end
+    object unParametrosMODELO: TStringField
+      FieldName = 'MODELO'
+      Required = True
+      Size = 2
+    end
+    object unParametrosXML_IMPORTADO: TStringField
+      FieldName = 'XML_IMPORTADO'
+      Size = 100
+    end
+    object unParametrosXML_GERADO: TStringField
+      FieldName = 'XML_GERADO'
+      Required = True
+      Size = 100
+    end
+    object unParametrosXML_TRANSMITIDO: TStringField
+      FieldName = 'XML_TRANSMITIDO'
+      Required = True
+      Size = 100
+    end
+    object unParametrosXML_RETORNO: TStringField
+      FieldName = 'XML_RETORNO'
+      Required = True
+      Size = 100
+    end
+    object unParametrosXML_RETORNO_ERRO: TStringField
+      FieldName = 'XML_RETORNO_ERRO'
+      Required = True
+      Size = 100
+    end
+  end
+  object dsParametros: TUniDataSource
+    DataSet = unParametros
+    Left = 152
     Top = 424
   end
 end
