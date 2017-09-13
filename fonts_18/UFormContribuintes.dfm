@@ -21,7 +21,7 @@ object FormContribuintes: TFormContribuintes
     Top = -1
     Width = 1158
     Height = 617
-    ActivePage = ts2
+    ActivePage = ts1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -11

@@ -12,7 +12,8 @@ uses
   UFormContribuintes in 'UFormContribuintes.pas' {FormContribuintes},
   UFormCadProcessos in 'UFormCadProcessos.pas' {FormCadProcessos},
   UFormConexao in 'UFormConexao.pas' {FormConexao},
-  UFormParametros in 'UFormParametros.pas' {FormParametros};
+  UFormParametros in 'UFormParametros.pas' {FormParametros},
+  Wait in 'Wait.pas' {WaitForm};
 
 {$R *.res}
 
@@ -22,11 +23,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMScript, DMScript);
   Application.CreateForm(TDMQuerysUteis, DMQuerysUteis);
-  Application.CreateForm(TREINFForm, REINFForm);  
-  Application.CreateForm(TFormContribuintes, FormContribuintes);
-  Application.CreateForm(TFormCadProcessos, FormCadProcessos);
-  Application.CreateForm(TFormCadProcessos, FormCadProcessos);
-  Application.CreateForm(TFormConexao, FormConexao);
-  Application.CreateForm(TFormParametros, FormParametros);
+  Application.CreateForm(TREINFForm, REINFForm);
   Application.Run;
 end.

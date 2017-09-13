@@ -153,6 +153,8 @@ Begin
   result := valor;
 end;
 
+
+
 procedure OpenPDF(aFile : TFileName; TypeForm : Integer = SW_NORMAL);
 var
   Pdir: PChar;
@@ -162,6 +164,9 @@ begin
   ShellExecute(0, nil, Pchar(aFile), nil, Pdir, TypeForm);
   FreeMem(pdir, 256);
 end;
+
+
+
 procedure TREINFForm.AtualizaMenuPerfil();
 var
   IdMenuNovo,IdEmp,Idperfil:Integer;

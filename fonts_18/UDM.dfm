@@ -5,10 +5,12 @@ object DM: TDM
   object Conexao: TUniConnection
     ProviderName = 'InterBase'
     Port = 3050
+    Database = 'C:\REINF.FDB'
     SpecificOptions.Strings = (
       'Oracle.Direct=True')
     Username = 'SYSDBA'
     Server = 'localhost'
+    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 4
@@ -150,69 +152,97 @@ object DM: TDM
     AfterDelete = unProcessosAfterDelete
     Left = 136
     Top = 136
-    object unProcessosCODIGO: TIntegerField
-      FieldName = 'CODIGO'
+    object unProcessosPERAPUR: TStringField
+      DisplayLabel = 'Per. Apura'#231#227'o'
+      FieldName = 'PERAPUR'
       Required = True
-    end
-    object unProcessosNRINSC: TStringField
-      FieldName = 'NRINSC'
-      Size = 14
-    end
-    object unProcessosTPINSC: TIntegerField
-      FieldName = 'TPINSC'
-    end
-    object unProcessosINIVALID: TDateField
-      FieldName = 'INIVALID'
       EditMask = '9999-99;1;'
-    end
-    object unProcessosFIMVALID: TDateField
-      FieldName = 'FIMVALID'
-      EditMask = '9999-99;1;'
-    end
-    object unProcessosTPPROC: TStringField
-      FieldName = 'TPPROC'
-      Size = 1
+      Size = 7
     end
     object unProcessosNRPROC: TStringField
+      DisplayLabel = 'N'#186' Proces.'
       FieldName = 'NRPROC'
       Required = True
       Size = 21
     end
-    object unProcessosCODSUSP: TStringField
-      FieldName = 'CODSUSP'
-      Size = 14
-    end
     object unProcessosINDSUSP: TStringField
+      DisplayLabel = 'Ind. de Susp.'
       FieldName = 'INDSUSP'
       Required = True
       Size = 2
     end
-    object unProcessosDTDECISAO: TDateField
+    object unProcessosNRINSC: TStringField
+      DisplayLabel = 'N'#186' de inscr.'
+      FieldName = 'NRINSC'
+      Required = True
+      Size = 18
+    end
+    object unProcessosTPINSC: TIntegerField
+      DisplayLabel = 'Tip. de inscr.'
+      FieldName = 'TPINSC'
+      Required = True
+    end
+    object unProcessosINIVALID: TStringField
+      DisplayLabel = 'Ini. Validade'
+      FieldName = 'INIVALID'
+      Required = True
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object unProcessosFIMVALID: TStringField
+      DisplayLabel = 'Fin. Validade'
+      FieldName = 'FIMVALID'
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object unProcessosTPPROC: TStringField
+      DisplayLabel = 'Tip. de Proc.'
+      FieldName = 'TPPROC'
+      Required = True
+      Size = 1
+    end
+    object unProcessosCODSUSP: TStringField
+      DisplayLabel = 'C'#243'd. Susp.'
+      FieldName = 'CODSUSP'
+      Size = 14
+    end
+    object dtmfldProcessosDTDECISAO: TDateTimeField
+      DisplayLabel = 'Data Decis'#227'o'
       FieldName = 'DTDECISAO'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
     end
     object unProcessosINDDEPOSITO: TStringField
+      DisplayLabel = 'Ind. Depos.'
       FieldName = 'INDDEPOSITO'
+      Required = True
       Size = 1
     end
     object unProcessosUFVARA: TStringField
+      DisplayLabel = 'UF'
       FieldName = 'UFVARA'
+      Required = True
       Size = 2
     end
     object unProcessosCODMUNIC: TStringField
+      DisplayLabel = 'C'#243'd. Munic.'
       FieldName = 'CODMUNIC'
       Size = 7
     end
     object unProcessosIDVARA: TStringField
+      DisplayLabel = 'C'#243'd. Vara'
       FieldName = 'IDVARA'
+      Required = True
       Size = 2
     end
-    object unProcessosINDAUDITORIA: TStringField
-      FieldName = 'INDAUDITORIA'
+    object unProcessosINDAUTORIA: TStringField
+      DisplayLabel = 'Ind. Autor.'
+      FieldName = 'INDAUTORIA'
       Size = 1
     end
-    object unProcessosPERAPUR: TStringField
-      FieldName = 'PERAPUR'
-      Size = 7
+    object unProcessosCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
     end
   end
   object unRetCP_ServTom: TUniTable
@@ -359,5 +389,106 @@ object DM: TDM
     DataSet = unParametros
     Left = 152
     Top = 424
+  end
+  object unConslProcessos: TUniTable
+    TableName = 'PROCESSOS_18'
+    Connection = Conexao
+    AfterPost = unProcessosAfterPost
+    AfterDelete = unProcessosAfterDelete
+    Left = 792
+    Top = 136
+    object StringField1: TStringField
+      DisplayLabel = 'Per. Apura'#231#227'o'
+      FieldName = 'PERAPUR'
+      Required = True
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object StringField2: TStringField
+      DisplayLabel = 'N'#186' Proces.'
+      FieldName = 'NRPROC'
+      Required = True
+      Size = 21
+    end
+    object StringField3: TStringField
+      DisplayLabel = 'Ind. de Susp.'
+      FieldName = 'INDSUSP'
+      Required = True
+      Size = 2
+    end
+    object StringField4: TStringField
+      DisplayLabel = 'N'#186' de inscr.'
+      FieldName = 'NRINSC'
+      Required = True
+      Size = 18
+    end
+    object IntegerField1: TIntegerField
+      DisplayLabel = 'Tip. de inscr.'
+      FieldName = 'TPINSC'
+      Required = True
+    end
+    object StringField5: TStringField
+      DisplayLabel = 'Ini. Validade'
+      FieldName = 'INIVALID'
+      Required = True
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object StringField6: TStringField
+      DisplayLabel = 'Fin. Validade'
+      FieldName = 'FIMVALID'
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object StringField8: TStringField
+      DisplayLabel = 'Tip. de Proc.'
+      FieldName = 'TPPROC'
+      Required = True
+      Size = 1
+    end
+    object StringField9: TStringField
+      DisplayLabel = 'C'#243'd. Susp.'
+      FieldName = 'CODSUSP'
+      Size = 14
+    end
+    object dtmfld1: TDateTimeField
+      DisplayLabel = 'Data Decis'#227'o'
+      FieldName = 'DTDECISAO'
+      Required = True
+      EditMask = '!99/99/0000;1;_'
+    end
+    object StringField10: TStringField
+      DisplayLabel = 'Ind. Depos.'
+      FieldName = 'INDDEPOSITO'
+      Required = True
+      Size = 1
+    end
+    object StringField11: TStringField
+      DisplayLabel = 'UF'
+      FieldName = 'UFVARA'
+      Required = True
+      Size = 2
+    end
+    object StringField12: TStringField
+      DisplayLabel = 'C'#243'd. Munic.'
+      FieldName = 'CODMUNIC'
+      Size = 7
+    end
+    object StringField13: TStringField
+      DisplayLabel = 'C'#243'd. Vara'
+      FieldName = 'IDVARA'
+      Required = True
+      Size = 2
+    end
+    object StringField14: TStringField
+      DisplayLabel = 'Ind. Autor.'
+      FieldName = 'INDAUTORIA'
+      Size = 1
+    end
+  end
+  object dsConslProcessos: TUniDataSource
+    DataSet = unConslProcessos
+    Left = 792
+    Top = 208
   end
 end
