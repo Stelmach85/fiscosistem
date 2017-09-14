@@ -3,8 +3,8 @@ object FormContribuintes: TFormContribuintes
   Top = 0
   BorderIcons = []
   Caption = 'Cadastro de Contribuintes'
-  ClientHeight = 373
-  ClientWidth = 758
+  ClientHeight = 415
+  ClientWidth = 776
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object FormContribuintes: TFormContribuintes
   object pgc1: TPageControl
     Left = 1
     Top = -1
-    Width = 1158
-    Height = 617
+    Width = 768
+    Height = 320
     ActivePage = ts1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
@@ -62,16 +62,6 @@ object FormContribuintes: TFormContribuintes
         Height = 13
         Caption = 'CNPJ/CPF:'
         FocusControl = dbedtCnpj
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object lbl13: TLabel
-        Left = 16
-        Top = 576
-        Width = 19
-        Height = 13
-        Caption = 'Cep'
-        FocusControl = dbedtCep
         ParentShowHint = False
         ShowHint = True
       end
@@ -314,17 +304,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
-      end
-      object dbedtUf: TDBEdit
-        Left = 16
-        Top = 552
-        Width = 30
-        Height = 21
-        DataField = 'Uf'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 10
+        TabOrder = 3
       end
       object dbedtCep: TDBEdit
         Left = 16
@@ -449,227 +429,6 @@ object FormContribuintes: TFormContribuintes
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
-      object dbnvgr1: TDBNavigator
-        Left = 39
-        Top = 264
-        Width = 236
-        Height = 26
-        DataSource = DM.dsContribuintes
-        VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
-        Hints.Strings = (
-          'Primeira Empresa'
-          'Anterior'
-          'Pr'#243'xima '
-          #218'ltima Empresa ')
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-      end
-      object btnCancelar: TBitBtn
-        Left = 383
-        Top = 311
-        Width = 75
-        Height = 25
-        Hint = 'Cancela Opera'#231#227'o Realizada'
-        Caption = 'Cancelar'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000130B0000130B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-          333333333333333333333333333333333333333FFF33FF333FFF339993370733
-          999333777FF37FF377733339993000399933333777F777F77733333399970799
-          93333333777F7377733333333999399933333333377737773333333333990993
-          3333333333737F73333333333331013333333333333777FF3333333333910193
-          333333333337773FF3333333399000993333333337377737FF33333399900099
-          93333333773777377FF333399930003999333337773777F777FF339993370733
-          9993337773337333777333333333333333333333333333333333333333333333
-          3333333333333333333333333333333333333333333333333333}
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 8
-        OnClick = btnCancelarClick
-      end
-      object btnExcluir: TBitBtn
-        Left = 298
-        Top = 311
-        Width = 75
-        Height = 25
-        Hint = 'Exclui um Contribuinte'
-        Caption = 'Excluir'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
-          55555FFFFFFF5F55FFF5777777757559995777777775755777F7555555555550
-          305555555555FF57F7F555555550055BB0555555555775F777F55555550FB000
-          005555555575577777F5555550FB0BF0F05555555755755757F555550FBFBF0F
-          B05555557F55557557F555550BFBF0FB005555557F55575577F555500FBFBFB0
-          B05555577F555557F7F5550E0BFBFB00B055557575F55577F7F550EEE0BFB0B0
-          B05557FF575F5757F7F5000EEE0BFBF0B055777FF575FFF7F7F50000EEE00000
-          B0557777FF577777F7F500000E055550805577777F7555575755500000555555
-          05555777775555557F5555000555555505555577755555557555}
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 7
-        OnClick = btnExcluirClick
-      end
-      object btnAlterar: TBitBtn
-        Left = 212
-        Top = 311
-        Width = 75
-        Height = 25
-        Hint = 'Altera os dados do Contribuinte'
-        Caption = 'Alterar'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333000000
-          000033333377777777773333330FFFFFFFF03FF3FF7FF33F3FF700300000FF0F
-          00F077F777773F737737E00BFBFB0FFFFFF07773333F7F3333F7E0BFBF000FFF
-          F0F077F3337773F3F737E0FBFBFBF0F00FF077F3333FF7F77F37E0BFBF00000B
-          0FF077F3337777737337E0FBFBFBFBF0FFF077F33FFFFFF73337E0BF0000000F
-          FFF077FF777777733FF7000BFB00B0FF00F07773FF77373377373330000B0FFF
-          FFF03337777373333FF7333330B0FFFF00003333373733FF777733330B0FF00F
-          0FF03333737F37737F373330B00FFFFF0F033337F77F33337F733309030FFFFF
-          00333377737FFFFF773333303300000003333337337777777333}
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 6
-        OnClick = btnAlterarClick
-      end
-      object btnGravar: TBitBtn
-        Left = 125
-        Top = 311
-        Width = 75
-        Height = 25
-        Hint = 'Grava os dados do Contribuinte'
-        Caption = 'Gravar'
-        DoubleBuffered = True
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-          3333333333FFFFF3333333333000003333333333F777773FF333333008F88800
-          33333337733333773F33330FFF8F888F033333733333333373F330DEFFF8F8FE
-          D03337F33333333337F330DDEFFFFFEDD0333733333FFF33373F0BBFDE000EDF
-          BB037F33337773F3337F0AABB08880BBAA037F3337F3F7F3337F0EEAA08080AA
-          EE037F3337F737F3337F0AABB08880BBAA037F33373FF733337F0BBFDE000EDB
-          BB0373F333777333337330DDEFFFFFEDD03337F33333333337F330DEF8F8FFFE
-          D033373F333333333733330FFF8F8FFF03333373FF33333F733333300FF8F800
-          3333333773FFFF77333333333000003333333333377777333333}
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 5
-        OnClick = btnGravarClick
-      end
-      object btnNovo: TBitBtn
-        Left = 44
-        Top = 311
-        Width = 75
-        Height = 25
-        Hint = 'Cadastra um novo Contribuinte'
-        Caption = 'Incluir'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000130B0000130B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
-          333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
-          0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
-          07333337F33333337F333330FFFFFFFF07333337F33333337F333330FFFFFFFF
-          07333FF7F33333337FFFBBB0FFFFFFFF0BB37777F3333333777F3BB0FFFFFFFF
-          0BBB3777F3333FFF77773330FFFF000003333337F333777773333330FFFF0FF0
-          33333337F3337F37F3333330FFFF0F0B33333337F3337F77FF333330FFFF003B
-          B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
-          3BB33773333773333773B333333B3333333B7333333733333337}
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 4
-        OnClick = btnNovoClick
-      end
-      object btn1: TBitBtn
-        Left = 464
-        Top = 311
-        Width = 75
-        Height = 25
-        Hint = 'Cancela Opera'#231#227'o Realizada'
-        Caption = 'Fechar'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000130B0000130B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-          333333333333333333333333333333333333333FFF33FF333FFF339993370733
-          999333777FF37FF377733339993000399933333777F777F77733333399970799
-          93333333777F7377733333333999399933333333377737773333333333990993
-          3333333333737F73333333333331013333333333333777FF3333333333910193
-          333333333337773FF3333333399000993333333337377737FF33333399900099
-          93333333773777377FF333399930003999333337773777F777FF339993370733
-          9993337773337333777333333333333333333333333333333333333333333333
-          3333333333333333333333333333333333333333333333333333}
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 9
-        OnClick = btn1Click
-      end
       object cbbTPINSC: TJvDBComboBox
         Left = 16
         Top = 69
@@ -682,7 +441,7 @@ object FormContribuintes: TFormContribuintes
         Items.Strings = (
           '1 - CNPJ'
           '2 - CPF')
-        TabOrder = 23
+        TabOrder = 2
         Values.Strings = (
           '1'
           '2')
@@ -711,7 +470,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 24
+        TabOrder = 4
       end
       object dbedtFIMVALID: TDBEdit
         Left = 588
@@ -731,7 +490,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 25
+        TabOrder = 5
       end
       object JvDBComboBox2: TJvDBComboBox
         Left = 15
@@ -745,7 +504,7 @@ object FormContribuintes: TFormContribuintes
         Items.Strings = (
           '0 - N'#227'o faz'
           '1 - Empresa Entrega a ECD')
-        TabOrder = 26
+        TabOrder = 6
         Values.Strings = (
           '0'
           '1')
@@ -767,7 +526,7 @@ object FormContribuintes: TFormContribuintes
         Items.Strings = (
           '0 - N'#227'o Aplic'#225'vel'
           '1 - Empresa enquadrada nos termos da Lei 12.556/2011')
-        TabOrder = 27
+        TabOrder = 7
         Values.Strings = (
           '0'
           '1')
@@ -789,7 +548,7 @@ object FormContribuintes: TFormContribuintes
         Items.Strings = (
           '0 - Sem Acordo'
           '1 - Com Acordo')
-        TabOrder = 28
+        TabOrder = 8
         Values.Strings = (
           '0'
           '1')
@@ -814,7 +573,7 @@ object FormContribuintes: TFormContribuintes
           '2 - Fus'#227'o'
           '3 - Cis'#227'o'
           '4 - Incorpora'#231#227'o')
-        TabOrder = 29
+        TabOrder = 9
         Values.Strings = (
           '0'
           '1')
@@ -832,7 +591,7 @@ object FormContribuintes: TFormContribuintes
         Hint = 'Selecione a Classifica'#231#227'o tribut'#225'ria da PJ'
         DataField = 'CLASSTRIB'
         DataSource = DM.dsContribuintes
-        TabOrder = 30
+        TabOrder = 10
         ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
         ListSettings.OutfilteredValueFont.Color = clRed
         ListSettings.OutfilteredValueFont.Height = -11
@@ -1012,7 +771,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 9
         OnClick = btnAlterar2Click
       end
       object btnCancelar2: TBitBtn
@@ -1046,7 +805,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 10
         OnClick = btnCancelar2Click
       end
       object btn2: TBitBtn
@@ -1080,7 +839,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 11
         OnClick = btn2Click
       end
       object dbedtNMCTT: TDBEdit
@@ -1102,7 +861,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 2
       end
       object dbedtCPFCTT: TDBEdit
         Left = 11
@@ -1123,7 +882,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 3
       end
       object dbedtFONEFIXO: TDBEdit
         Left = 179
@@ -1144,7 +903,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 7
+        TabOrder = 4
       end
       object dbedtFONECEL: TDBEdit
         Left = 407
@@ -1165,7 +924,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 5
       end
       object dbedtEMAIL_CONTATO: TDBEdit
         Left = 12
@@ -1186,7 +945,7 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 9
+        TabOrder = 6
       end
       object cbbIDEEFR: TJvDBComboBox
         Left = 12
@@ -1200,7 +959,7 @@ object FormContribuintes: TFormContribuintes
         Items.Strings = (
           'Sim'
           'N'#227'o')
-        TabOrder = 10
+        TabOrder = 7
         Values.Strings = (
           'S'
           'N')
@@ -1229,8 +988,229 @@ object FormContribuintes: TFormContribuintes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 11
+        TabOrder = 8
       end
     end
+  end
+  object btn1: TBitBtn
+    Left = 433
+    Top = 367
+    Width = 75
+    Height = 25
+    Hint = 'Cancela Opera'#231#227'o Realizada'
+    Caption = 'Fechar'
+    DoubleBuffered = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000130B0000130B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      333333333333333333333333333333333333333FFF33FF333FFF339993370733
+      999333777FF37FF377733339993000399933333777F777F77733333399970799
+      93333333777F7377733333333999399933333333377737773333333333990993
+      3333333333737F73333333333331013333333333333777FF3333333333910193
+      333333333337773FF3333333399000993333333337377737FF33333399900099
+      93333333773777377FF333399930003999333337773777F777FF339993370733
+      9993337773337333777333333333333333333333333333333333333333333333
+      3333333333333333333333333333333333333333333333333333}
+    NumGlyphs = 2
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    OnClick = btn1Click
+  end
+  object btnCancelar: TBitBtn
+    Left = 352
+    Top = 367
+    Width = 75
+    Height = 25
+    Hint = 'Cancela Opera'#231#227'o Realizada'
+    Caption = 'Cancelar'
+    DoubleBuffered = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000130B0000130B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      333333333333333333333333333333333333333FFF33FF333FFF339993370733
+      999333777FF37FF377733339993000399933333777F777F77733333399970799
+      93333333777F7377733333333999399933333333377737773333333333990993
+      3333333333737F73333333333331013333333333333777FF3333333333910193
+      333333333337773FF3333333399000993333333337377737FF33333399900099
+      93333333773777377FF333399930003999333337773777F777FF339993370733
+      9993337773337333777333333333333333333333333333333333333333333333
+      3333333333333333333333333333333333333333333333333333}
+    NumGlyphs = 2
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    OnClick = btnCancelarClick
+  end
+  object btnExcluir: TBitBtn
+    Left = 267
+    Top = 367
+    Width = 75
+    Height = 25
+    Hint = 'Exclui um Contribuinte'
+    Caption = 'Excluir'
+    DoubleBuffered = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000120B0000120B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+      55555FFFFFFF5F55FFF5777777757559995777777775755777F7555555555550
+      305555555555FF57F7F555555550055BB0555555555775F777F55555550FB000
+      005555555575577777F5555550FB0BF0F05555555755755757F555550FBFBF0F
+      B05555557F55557557F555550BFBF0FB005555557F55575577F555500FBFBFB0
+      B05555577F555557F7F5550E0BFBFB00B055557575F55577F7F550EEE0BFB0B0
+      B05557FF575F5757F7F5000EEE0BFBF0B055777FF575FFF7F7F50000EEE00000
+      B0557777FF577777F7F500000E055550805577777F7555575755500000555555
+      05555777775555557F5555000555555505555577755555557555}
+    NumGlyphs = 2
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+    OnClick = btnExcluirClick
+  end
+  object btnAlterar: TBitBtn
+    Left = 181
+    Top = 367
+    Width = 75
+    Height = 25
+    Hint = 'Altera os dados do Contribuinte'
+    Caption = 'Alterar'
+    DoubleBuffered = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000120B0000120B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333000000
+      000033333377777777773333330FFFFFFFF03FF3FF7FF33F3FF700300000FF0F
+      00F077F777773F737737E00BFBFB0FFFFFF07773333F7F3333F7E0BFBF000FFF
+      F0F077F3337773F3F737E0FBFBFBF0F00FF077F3333FF7F77F37E0BFBF00000B
+      0FF077F3337777737337E0FBFBFBFBF0FFF077F33FFFFFF73337E0BF0000000F
+      FFF077FF777777733FF7000BFB00B0FF00F07773FF77373377373330000B0FFF
+      FFF03337777373333FF7333330B0FFFF00003333373733FF777733330B0FF00F
+      0FF03333737F37737F373330B00FFFFF0F033337F77F33337F733309030FFFFF
+      00333377737FFFFF773333303300000003333337337777777333}
+    NumGlyphs = 2
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+    OnClick = btnAlterarClick
+  end
+  object btnGravar: TBitBtn
+    Left = 94
+    Top = 367
+    Width = 75
+    Height = 25
+    Hint = 'Grava os dados do Contribuinte'
+    Caption = 'Gravar'
+    DoubleBuffered = True
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000120B0000120B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      3333333333FFFFF3333333333000003333333333F777773FF333333008F88800
+      33333337733333773F33330FFF8F888F033333733333333373F330DEFFF8F8FE
+      D03337F33333333337F330DDEFFFFFEDD0333733333FFF33373F0BBFDE000EDF
+      BB037F33337773F3337F0AABB08880BBAA037F3337F3F7F3337F0EEAA08080AA
+      EE037F3337F737F3337F0AABB08880BBAA037F33373FF733337F0BBFDE000EDB
+      BB0373F333777333337330DDEFFFFFEDD03337F33333333337F330DEF8F8FFFE
+      D033373F333333333733330FFF8F8FFF03333373FF33333F733333300FF8F800
+      3333333773FFFF77333333333000003333333333377777333333}
+    NumGlyphs = 2
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+    OnClick = btnGravarClick
+  end
+  object btnNovo: TBitBtn
+    Left = 13
+    Top = 367
+    Width = 75
+    Height = 25
+    Hint = 'Cadastra um novo Contribuinte'
+    Caption = 'Incluir'
+    DoubleBuffered = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000130B0000130B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+      333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+      0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+      07333337F33333337F333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+      07333FF7F33333337FFFBBB0FFFFFFFF0BB37777F3333333777F3BB0FFFFFFFF
+      0BBB3777F3333FFF77773330FFFF000003333337F333777773333330FFFF0FF0
+      33333337F3337F37F3333330FFFF0F0B33333337F3337F77FF333330FFFF003B
+      B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+      3BB33773333773333773B333333B3333333B7333333733333337}
+    NumGlyphs = 2
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 6
+    OnClick = btnNovoClick
+  end
+  object dbnvgr1: TDBNavigator
+    Left = 20
+    Top = 325
+    Width = 236
+    Height = 26
+    DataSource = DM.dsContribuintes
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+    Hints.Strings = (
+      'Primeiro'
+      'Anterior'
+      'Pr'#243'xima '
+      #218'ltimo')
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
   end
 end

@@ -268,7 +268,7 @@ begin
            DM.Conexao.Server:=dono.HostName;
            DM.Conexao.Database:=dono.Banco;
            DM.Conexao.Username:=dono.Usuario;
-           DM.Conexao.Password:=dono.Senha;
+           DM.Conexao.Password:='masterkey';
            DM.Conexao.Port:= StrToInt(dono.porta);
         end;
       try

@@ -130,7 +130,7 @@ var
 implementation
 
 uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
-  UFormCadProcessos, UFormParametros, UFormConexao;
+  UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios;
 
 
 
@@ -808,6 +808,19 @@ begin
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end 
    else 
+   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Beneficiários' then
+  begin
+   If  not  assigned(FormCadBeneficiarios ) then
+       Application.CreateForm(TFormCadBeneficiarios ,FormCadBeneficiarios);
+     try
+       FormCadBeneficiarios .ShowModal;
+
+     finally
+      FreeAndNil(FormCadBeneficiarios );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+   else
    if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Parâmetros do Sistema' then
   begin
    If  not  assigned(formParametros ) then

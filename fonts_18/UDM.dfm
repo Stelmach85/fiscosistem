@@ -58,44 +58,55 @@ object DM: TDM
       FieldName = 'CODIGO'
       Required = True
     end
+    object unContribuintesNMRAZAOSOCIAL: TStringField
+      FieldName = 'NMRAZAOSOCIAL'
+      Required = True
+      Size = 100
+    end
     object unContribuintesNRINSC: TStringField
       FieldName = 'NRINSC'
+      Required = True
       Size = 18
     end
     object unContribuintesTPINSC: TIntegerField
       FieldName = 'TPINSC'
+      Required = True
     end
-    object unContribuintesINIVALID: TDateField
+    object dtmfldContribuintesINIVALID: TDateTimeField
       FieldName = 'INIVALID'
+      Required = True
       EditMask = '!99/99/0000;1;_'
     end
-    object unContribuintesFIMVALID: TDateField
+    object dtmfldContribuintesFIMVALID: TDateTimeField
       FieldName = 'FIMVALID'
       EditMask = '!99/99/0000;1;_'
     end
-    object unContribuintesCLASSTRIB: TIntegerField
-      FieldName = 'CLASSTRIB'
-    end
     object unContribuintesINDESCRITURACAO: TIntegerField
       FieldName = 'INDESCRITURACAO'
+      Required = True
     end
     object unContribuintesINDDESONERACAO: TIntegerField
       FieldName = 'INDDESONERACAO'
+      Required = True
     end
     object unContribuintesINDACORDOISENMULTA: TIntegerField
       FieldName = 'INDACORDOISENMULTA'
+      Required = True
     end
     object unContribuintesINDSITPJ: TIntegerField
       FieldName = 'INDSITPJ'
+      Required = True
     end
     object unContribuintesNMCTT: TStringField
       FieldName = 'NMCTT'
+      Required = True
       Size = 70
     end
     object unContribuintesCPFCTT: TStringField
       FieldName = 'CPFCTT'
+      Required = True
       EditMask = '999.999.999-99;1;'
-      Size = 11
+      Size = 14
     end
     object unContribuintesFONEFIXO: TStringField
       FieldName = 'FONEFIXO'
@@ -111,38 +122,19 @@ object DM: TDM
       FieldName = 'EMAIL_CONTATO'
       Size = 60
     end
-    object unContribuintesEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 60
-    end
-    object unContribuintesCNPJSOFTHOUSE: TStringField
-      FieldName = 'CNPJSOFTHOUSE'
-      Size = 14
-    end
-    object unContribuintesNMRAZAO: TStringField
-      FieldName = 'NMRAZAO'
-      Size = 115
-    end
-    object unContribuintesNMCONT: TStringField
-      FieldName = 'NMCONT'
-      Size = 70
-    end
-    object unContribuintesTELEFONE: TStringField
-      FieldName = 'TELEFONE'
-      Size = 13
-    end
     object unContribuintesIDEEFR: TStringField
       FieldName = 'IDEEFR'
+      Required = True
       Size = 1
     end
     object unContribuintesCNPJEFR: TStringField
       FieldName = 'CNPJEFR'
       EditMask = '99.999.999/9999-99;1;'
-      Size = 14
+      Size = 18
     end
-    object unContribuintesNMRAZAOSOCIAL: TStringField
-      FieldName = 'NMRAZAOSOCIAL'
-      Size = 100
+    object unContribuintesCLASSTRIB: TStringField
+      FieldName = 'CLASSTRIB'
+      Size = 2
     end
   end
   object unProcessos: TUniTable
@@ -278,8 +270,71 @@ object DM: TDM
   object unBeneficiarios: TUniTable
     TableName = 'BENEFICIARIOS_18'
     Connection = Conexao
+    AfterPost = unBeneficiariosAfterPost
+    AfterDelete = unBeneficiariosAfterDelete
     Left = 384
     Top = 136
+    object unBeneficiariosCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unBeneficiariosNRINSCBENEF: TStringField
+      FieldName = 'NRINSCBENEF'
+      Required = True
+      Size = 14
+    end
+    object unBeneficiariosTPINSCBENF: TIntegerField
+      FieldName = 'TPINSCBENF'
+      Required = True
+    end
+    object unBeneficiariosNMRAZAOBENEF: TStringField
+      FieldName = 'NMRAZAOBENEF'
+      Required = True
+      Size = 150
+    end
+    object unBeneficiariosPAISRESID: TStringField
+      FieldName = 'PAISRESID'
+      Size = 3
+    end
+    object unBeneficiariosDSCLOGRAD: TStringField
+      FieldName = 'DSCLOGRAD'
+      Size = 80
+    end
+    object unBeneficiariosNRLOGRAD: TStringField
+      FieldName = 'NRLOGRAD'
+      Size = 10
+    end
+    object unBeneficiariosCOMPLEM: TStringField
+      FieldName = 'COMPLEM'
+      Size = 30
+    end
+    object unBeneficiariosBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 60
+    end
+    object unBeneficiariosCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 30
+    end
+    object unBeneficiariosCODPOSTA: TStringField
+      FieldName = 'CODPOSTA'
+      Size = 12
+    end
+    object unBeneficiariosINDNIF: TIntegerField
+      FieldName = 'INDNIF'
+      Required = True
+    end
+    object unBeneficiariosNIFBENEF: TStringField
+      FieldName = 'NIFBENEF'
+    end
+    object unBeneficiariosRELFONTEPAGAD: TStringField
+      FieldName = 'RELFONTEPAGAD'
+      Size = 3
+    end
+    object dtmfldBeneficiariosDTLAUDO: TDateTimeField
+      FieldName = 'DTLAUDO'
+      EditMask = '!99/99/0000;1;_'
+    end
   end
   object unRendimentos: TUniTable
     TableName = 'RENDIMENTOS_18'
@@ -490,5 +545,114 @@ object DM: TDM
     DataSet = unConslProcessos
     Left = 792
     Top = 208
+  end
+  object dsBeneficiarios: TUniDataSource
+    DataSet = unBeneficiarios
+    Left = 392
+    Top = 200
+  end
+  object unPais: TUniTable
+    TableName = 'REF_PAISES'
+    Connection = Conexao
+    Left = 288
+    Top = 368
+    object unPaisID: TIntegerField
+      FieldName = 'ID'
+    end
+    object unPaisCOD_PAIS: TStringField
+      FieldName = 'COD_PAIS'
+      Size = 5
+    end
+    object unPaisDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+  end
+  object dsPais: TUniDataSource
+    DataSet = unPais
+    Left = 288
+    Top = 424
+  end
+  object unConslBeneficiarios: TUniTable
+    TableName = 'BENEFICIARIOS_18'
+    Connection = Conexao
+    Left = 792
+    Top = 288
+    object StringField7: TStringField
+      DisplayLabel = 'N'#186' de Inscri'#231#227'o'
+      FieldName = 'NRINSCBENEF'
+      Required = True
+      Size = 14
+    end
+    object IntegerField3: TIntegerField
+      DisplayLabel = 'Tipo Inscri'#231#227'o'
+      FieldName = 'TPINSCBENF'
+      Required = True
+    end
+    object StringField15: TStringField
+      DisplayLabel = 'Nome Benef.'
+      FieldName = 'NMRAZAOBENEF'
+      Required = True
+      Size = 150
+    end
+    object StringField16: TStringField
+      DisplayLabel = 'Pa'#237's'
+      FieldName = 'PAISRESID'
+      Size = 3
+    end
+    object StringField17: TStringField
+      DisplayLabel = 'Logradouro'
+      FieldName = 'DSCLOGRAD'
+      Size = 80
+    end
+    object StringField18: TStringField
+      DisplayLabel = 'N'#186' '
+      FieldName = 'NRLOGRAD'
+      Size = 10
+    end
+    object StringField19: TStringField
+      DisplayLabel = 'Compl.'
+      FieldName = 'COMPLEM'
+      Size = 30
+    end
+    object StringField20: TStringField
+      DisplayLabel = 'Bairro'
+      FieldName = 'BAIRRO'
+      Size = 60
+    end
+    object StringField21: TStringField
+      DisplayLabel = 'Cidade'
+      FieldName = 'CIDADE'
+      Size = 30
+    end
+    object StringField22: TStringField
+      DisplayLabel = 'C'#243'd. Postal'
+      FieldName = 'CODPOSTA'
+      Size = 12
+    end
+    object IntegerField4: TIntegerField
+      DisplayLabel = 'Ind. NIF'
+      FieldName = 'INDNIF'
+      Required = True
+    end
+    object StringField23: TStringField
+      DisplayLabel = 'N'#186' NIF'
+      FieldName = 'NIFBENEF'
+    end
+    object StringField24: TStringField
+      DisplayLabel = 'Rel. Fonte'
+      FieldName = 'RELFONTEPAGAD'
+      Size = 3
+    end
+    object dtmfld2: TDateTimeField
+      DisplayLabel = 'Data Laudo'
+      FieldName = 'DTLAUDO'
+      EditMask = '!99/99/0000;1;_'
+    end
+  end
+  object dsConsulBeneficiarios: TUniDataSource
+    DataSet = unConslBeneficiarios
+    Left = 792
+    Top = 344
   end
 end

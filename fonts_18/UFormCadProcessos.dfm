@@ -512,10 +512,10 @@ object FormCadProcessos: TFormCadProcessos
         DataSource = DM.dsProcessos
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
         Hints.Strings = (
-          'Primeira Empresa'
+          'Primeiro'
           'Anterior'
           'Pr'#243'xima '
-          #218'ltima Empresa ')
+          #218'ltimo')
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
@@ -590,7 +590,7 @@ object FormCadProcessos: TFormCadProcessos
         OnClick = btnGravarClick
       end
       object btnAlterar: TBitBtn
-        Left = 193
+        Left = 189
         Top = 452
         Width = 75
         Height = 25

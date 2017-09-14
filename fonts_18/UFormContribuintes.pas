@@ -14,7 +14,6 @@ type
     lbl36: TLabel;
     lbl37: TLabel;
     lbl38: TLabel;
-    lbl13: TLabel;
     lbl14: TLabel;
     lbl15: TLabel;
     lbl16: TLabel;
@@ -28,7 +27,6 @@ type
     dbedtCodemp: TDBEdit;
     dbedtRsocial: TDBEdit;
     dbedtCnpj: TDBEdit;
-    dbedtUf: TDBEdit;
     dbedtCep: TDBEdit;
     dbedtDddfone: TDBEdit;
     dbedtFone: TDBEdit;
@@ -41,13 +39,6 @@ type
     dbedtRepresentante: TDBEdit;
     dbedtResponsavel: TDBEdit;
     dbchkTransferido: TDBCheckBox;
-    dbnvgr1: TDBNavigator;
-    btnCancelar: TBitBtn;
-    btnExcluir: TBitBtn;
-    btnAlterar: TBitBtn;
-    btnGravar: TBitBtn;
-    btnNovo: TBitBtn;
-    btn1: TBitBtn;
     ts2: TTabSheet;
     lbl30: TLabel;
     dbedtCodemp1: TDBEdit;
@@ -85,6 +76,13 @@ type
     dbedtCNPJEFR: TDBEdit;
     lbl25: TLabel;
     lbl26: TLabel;
+    btn1: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnExcluir: TBitBtn;
+    btnAlterar: TBitBtn;
+    btnGravar: TBitBtn;
+    btnNovo: TBitBtn;
+    dbnvgr1: TDBNavigator;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -126,7 +124,7 @@ end;
 
 procedure TFormContribuintes.btnAlterar2Click(Sender: TObject);
 begin
-DM.unContribuintes.Edit;
+{DM.unContribuintes.Edit;
 btnGravar2.Enabled:=True;
 btnCancelar2.Enabled:=True;
 
@@ -136,11 +134,17 @@ dbedtFONEFIXO.Enabled:=True;
 dbedtFONECEL.Enabled:=True;
 dbedtEMAIL_CONTATO.Enabled:=True;
 cbbIDEEFR.Enabled:=True;
-dbedtCNPJEFR.Enabled:=True;
+dbedtCNPJEFR.Enabled:=True;     }
 end;
 
 procedure TFormContribuintes.btnAlterarClick(Sender: TObject);
 begin
+ if DM.unContribuintes.RecordCount=0 then
+ begin
+   ShowMessage('Não há contribuinte selecionado para edição');
+   Abort;
+ end;
+
  DM.unContribuintes.Edit;
  btnAlterar.Enabled:=False;
  btnGravar.Enabled:=True;
@@ -172,11 +176,19 @@ end;
 
 procedure TFormContribuintes.btnExcluirClick(Sender: TObject);
 begin
+ try
+ 
+
+
+
  If MessageDLG ('Confirma Exclusão do contribuinte ' +DM.unContribuintesNMRAZAOSOCIAL.AsString+ '???' +#13+
      'Lembre-se que este procedimento irá excluir todos os dados cadastrais e lançamentos do contribuinte.', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unContribuintes.Delete;
      End;
+ except
+    ShowMessage('Não existem dados para ser excluído');
+ end;
 end;
 
 procedure TFormContribuintes.btnGravar2Click(Sender: TObject);
@@ -200,15 +212,82 @@ begin
  if dbedtRsocial.Text='' then
  begin
    ShowMessage('Informe a Razão Social');
+   pgc1.ActivePage:=ts1;
    dbedtRsocial.SetFocus;
    Abort;
  end;
  if  (dbedtCnpj.Text='') or (dbedtCnpj.Text='   .   .   /    -  ') or (dbedtCnpj.Text='   .   .   -  ') then
  begin
     ShowMessage('Informe o CPF/CNPJ ');
+    pgc1.ActivePage:=ts1;
    dbedtCnpj.SetFocus;
    Abort;
  end;
+
+ if JvDBComboBox2.Text='' then
+ begin
+   ShowMessage('Informe a Obrigratoriedade da entregra da ECD');
+   pgc1.ActivePage:=ts1;
+   JvDBComboBox2.SetFocus;
+   Abort;
+ end;
+
+ if cbbINDDESONERACAO.Text='' then
+ begin
+   ShowMessage('Selecione o Indicador de Desoneração da Folha pela CPRB');
+   pgc1.ActivePage:=ts1;
+   cbbINDDESONERACAO.SetFocus;
+   Abort;
+ end;
+
+ if cbbINDACORDOISENMULTA.Text='' then
+ begin
+   ShowMessage('Selecione o Indicador de Acordo de Multas');
+   pgc1.ActivePage:=ts1;
+   cbbINDACORDOISENMULTA.SetFocus;
+   Abort;
+ end;
+ if cbbINDSITPJ.Text='' then
+ begin
+   ShowMessage('Selecione o Indicador de Situação da PJ');
+   pgc1.ActivePage:=ts1;
+   cbbINDSITPJ.SetFocus;
+   Abort;
+ end;
+ 
+ if cbbCLASSTRIB.Text='' then
+ begin
+   ShowMessage('Selecione a Classificação tributária da PJ');
+   pgc1.ActivePage:=ts1;
+   cbbCLASSTRIB.SetFocus;
+   Abort;
+ end;
+
+ if dbedtNMCTT.Text='' then
+ begin
+   ShowMessage('Informe o Nome do Contato na Empresa');
+   pgc1.ActivePage:=ts2;
+   dbedtNMCTT.SetFocus;
+   Abort;
+ end;
+
+ if dbedtCPFCTT.Text='  .   .   -  ' then
+ begin
+   ShowMessage('Informe o CPF do Contato');
+   pgc1.ActivePage:=ts2;
+   dbedtCPFCTT.SetFocus;
+   Abort;
+ end;
+
+ if cbbIDEEFR.Text='' then
+ begin
+   ShowMessage('Informe se o Orgão Publico é ERF');
+   pgc1.ActivePage:=ts2;
+   cbbIDEEFR.SetFocus;
+   Abort;
+ end;
+
+ 
 
  DM.unContribuintes.Post;
  btnNovo.Enabled:=True;
@@ -249,11 +328,15 @@ begin
  //  medt1.EditMask :='99.999.999/9999-99;1; ';
    DM.unContribuintesNRINSC.EditMask:='99.999.999/9999-99;1; ';
    cbbTPINSC.ItemIndex:=0;
+   dbedtINIVALID.Text:='01/01/2018';
+   dbedtFIMVALID.Text:='31/12/2018';
  end
  else 
  begin  
    DM.unContribuintesNRINSC.EditMask:='999.999.999-99;1; ' ; 
    cbbTPINSC.ItemIndex:=1;
+   dbedtINIVALID.Text:='01/01/2018';
+   dbedtFIMVALID.Text:='31/12/2018';
  end;
 
 end;
@@ -264,6 +347,7 @@ begin
  DM.unContribuintes.First;
  dm.unrefClasTrib.open;
  DesabilitaCampos;
+ pgc1.ActivePage:=ts1;
 end;
 
 procedure TFormContribuintes.HabilitaCampos;
@@ -278,6 +362,13 @@ begin
  cbbINDACORDOISENMULTA.Enabled:=True;
  cbbINDSITPJ.Enabled:=True;
  cbbCLASSTRIB.Enabled:=True;
+ dbedtNMCTT.Enabled:=True;
+dbedtCPFCTT.Enabled:=True;
+dbedtFONEFIXO.Enabled:=True;
+dbedtFONECEL.Enabled:=True;
+dbedtEMAIL_CONTATO.Enabled:=True;
+cbbIDEEFR.Enabled:=True;
+dbedtCNPJEFR.Enabled:=True;
 
 end;
 
@@ -293,6 +384,14 @@ begin
  cbbINDACORDOISENMULTA.Enabled:=False;
  cbbINDSITPJ.Enabled:=False;
  cbbCLASSTRIB.Enabled:=False;
+
+ dbedtNMCTT.Enabled:=False;
+dbedtCPFCTT.Enabled:=False;
+dbedtFONEFIXO.Enabled:=False;
+dbedtFONECEL.Enabled:=False;
+dbedtEMAIL_CONTATO.Enabled:=False;
+cbbIDEEFR.Enabled:=False;
+dbedtCNPJEFR.Enabled:=False;
 
 end;
 

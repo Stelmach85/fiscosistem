@@ -8,12 +8,14 @@ uses
 type
   TDMQuerysUteis = class(TDataModule)
     qryEmpresas: TUniQuery;
+    dsqryEmpresas: TUniDataSource;
+    qryaux: TUniQuery;
     qryEmpresasCODIGO: TIntegerField;
+    qryEmpresasNMRAZAOSOCIAL: TStringField;
     qryEmpresasNRINSC: TStringField;
     qryEmpresasTPINSC: TIntegerField;
-    qryEmpresasINIVALID: TDateField;
-    qryEmpresasFIMVALID: TDateField;
-    qryEmpresasCLASSTRIB: TIntegerField;
+    dtmfldEmpresasINIVALID: TDateTimeField;
+    dtmfldEmpresasFIMVALID: TDateTimeField;
     qryEmpresasINDESCRITURACAO: TIntegerField;
     qryEmpresasINDDESONERACAO: TIntegerField;
     qryEmpresasINDACORDOISENMULTA: TIntegerField;
@@ -23,16 +25,9 @@ type
     qryEmpresasFONEFIXO: TStringField;
     qryEmpresasFONECEL: TStringField;
     qryEmpresasEMAIL_CONTATO: TStringField;
-    qryEmpresasEMAIL: TStringField;
-    qryEmpresasCNPJSOFTHOUSE: TStringField;
-    qryEmpresasNMRAZAO: TStringField;
-    qryEmpresasNMCONT: TStringField;
-    qryEmpresasTELEFONE: TStringField;
     qryEmpresasIDEEFR: TStringField;
     qryEmpresasCNPJEFR: TStringField;
-    dsqryEmpresas: TUniDataSource;
-    qryaux: TUniQuery;
-    qryEmpresasNMRAZAOSOCIAL: TStringField;
+    qryEmpresasCLASSTRIB: TStringField;
   private
     { Private declarations }
   public

@@ -13,7 +13,9 @@ uses
   UFormCadProcessos in 'UFormCadProcessos.pas' {FormCadProcessos},
   UFormConexao in 'UFormConexao.pas' {FormConexao},
   UFormParametros in 'UFormParametros.pas' {FormParametros},
-  Wait in 'Wait.pas' {WaitForm};
+  Wait in 'Wait.pas' {WaitForm},
+  UFormCadBeneficiarios in 'UFormCadBeneficiarios.pas' {FormCadBeneficiarios},
+  UFormCadRetCP_Serv_tomados in 'UFormCadRetCP_Serv_tomados.pas' {FormCadRetCP_Serv_tomados};
 
 {$R *.res}
 

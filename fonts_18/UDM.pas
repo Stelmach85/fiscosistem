@@ -29,29 +29,6 @@ type
     unPagtoExterior: TUniTable;
     dsContribuintes: TUniDataSource;
     qryUtil: TUniQuery;
-    unContribuintesCODIGO: TIntegerField;
-    unContribuintesNRINSC: TStringField;
-    unContribuintesTPINSC: TIntegerField;
-    unContribuintesINIVALID: TDateField;
-    unContribuintesFIMVALID: TDateField;
-    unContribuintesCLASSTRIB: TIntegerField;
-    unContribuintesINDESCRITURACAO: TIntegerField;
-    unContribuintesINDDESONERACAO: TIntegerField;
-    unContribuintesINDACORDOISENMULTA: TIntegerField;
-    unContribuintesINDSITPJ: TIntegerField;
-    unContribuintesNMCTT: TStringField;
-    unContribuintesCPFCTT: TStringField;
-    unContribuintesFONEFIXO: TStringField;
-    unContribuintesFONECEL: TStringField;
-    unContribuintesEMAIL_CONTATO: TStringField;
-    unContribuintesEMAIL: TStringField;
-    unContribuintesCNPJSOFTHOUSE: TStringField;
-    unContribuintesNMRAZAO: TStringField;
-    unContribuintesNMCONT: TStringField;
-    unContribuintesTELEFONE: TStringField;
-    unContribuintesIDEEFR: TStringField;
-    unContribuintesCNPJEFR: TStringField;
-    unContribuintesNMRAZAOSOCIAL: TStringField;
     unRefClasTrib: TUniTable;
     dsRefClasTrib: TUniDataSource;
     dsProcessos: TUniDataSource;
@@ -101,12 +78,69 @@ type
     StringField14: TStringField;
     dsConslProcessos: TUniDataSource;
     unProcessosCODIGO: TIntegerField;
+    dsBeneficiarios: TUniDataSource;
+    unPais: TUniTable;
+    unPaisID: TIntegerField;
+    unPaisCOD_PAIS: TStringField;
+    unPaisDESCRICAO: TStringField;
+    dsPais: TUniDataSource;
+    unBeneficiariosCODIGO: TIntegerField;
+    unBeneficiariosNRINSCBENEF: TStringField;
+    unBeneficiariosTPINSCBENF: TIntegerField;
+    unBeneficiariosNMRAZAOBENEF: TStringField;
+    unBeneficiariosPAISRESID: TStringField;
+    unBeneficiariosDSCLOGRAD: TStringField;
+    unBeneficiariosNRLOGRAD: TStringField;
+    unBeneficiariosCOMPLEM: TStringField;
+    unBeneficiariosBAIRRO: TStringField;
+    unBeneficiariosCIDADE: TStringField;
+    unBeneficiariosCODPOSTA: TStringField;
+    unBeneficiariosINDNIF: TIntegerField;
+    unBeneficiariosNIFBENEF: TStringField;
+    unBeneficiariosRELFONTEPAGAD: TStringField;
+    dtmfldBeneficiariosDTLAUDO: TDateTimeField;
+    unConslBeneficiarios: TUniTable;
+    StringField7: TStringField;
+    IntegerField3: TIntegerField;
+    StringField15: TStringField;
+    StringField16: TStringField;
+    StringField17: TStringField;
+    StringField18: TStringField;
+    StringField19: TStringField;
+    StringField20: TStringField;
+    StringField21: TStringField;
+    StringField22: TStringField;
+    IntegerField4: TIntegerField;
+    StringField23: TStringField;
+    StringField24: TStringField;
+    dtmfld2: TDateTimeField;
+    dsConsulBeneficiarios: TUniDataSource;
+    unContribuintesCODIGO: TIntegerField;
+    unContribuintesNMRAZAOSOCIAL: TStringField;
+    unContribuintesNRINSC: TStringField;
+    unContribuintesTPINSC: TIntegerField;
+    dtmfldContribuintesINIVALID: TDateTimeField;
+    dtmfldContribuintesFIMVALID: TDateTimeField;
+    unContribuintesINDESCRITURACAO: TIntegerField;
+    unContribuintesINDDESONERACAO: TIntegerField;
+    unContribuintesINDACORDOISENMULTA: TIntegerField;
+    unContribuintesINDSITPJ: TIntegerField;
+    unContribuintesNMCTT: TStringField;
+    unContribuintesCPFCTT: TStringField;
+    unContribuintesFONEFIXO: TStringField;
+    unContribuintesFONECEL: TStringField;
+    unContribuintesEMAIL_CONTATO: TStringField;
+    unContribuintesIDEEFR: TStringField;
+    unContribuintesCNPJEFR: TStringField;
+    unContribuintesCLASSTRIB: TStringField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterPost(DataSet: TDataSet);
     procedure unParametrosAfterDelete(DataSet: TDataSet);
     procedure unParametrosAfterPost(DataSet: TDataSet);
+    procedure unBeneficiariosAfterDelete(DataSet: TDataSet);
+    procedure unBeneficiariosAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -119,6 +153,26 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TDM.unBeneficiariosAfterDelete(DataSet: TDataSet);
+begin
+   try
+   unBeneficiarios.CommitUpdates;
+   unBeneficiarios.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unBeneficiariosAfterPost(DataSet: TDataSet);
+begin
+   try
+   unBeneficiarios.CommitUpdates;
+   unBeneficiarios.ApplyUpdates();
+except
+
+ end;
+end;
 
 procedure TDM.unContribuintesAfterDelete(DataSet: TDataSet);
 begin

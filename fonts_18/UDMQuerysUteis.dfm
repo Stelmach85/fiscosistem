@@ -12,41 +12,52 @@ object DMQuerysUteis: TDMQuerysUteis
       FieldName = 'CODIGO'
       Required = True
     end
+    object qryEmpresasNMRAZAOSOCIAL: TStringField
+      FieldName = 'NMRAZAOSOCIAL'
+      Required = True
+      Size = 100
+    end
     object qryEmpresasNRINSC: TStringField
       FieldName = 'NRINSC'
-      Size = 14
+      Required = True
+      Size = 18
     end
     object qryEmpresasTPINSC: TIntegerField
       FieldName = 'TPINSC'
+      Required = True
     end
-    object qryEmpresasINIVALID: TDateField
+    object dtmfldEmpresasINIVALID: TDateTimeField
       FieldName = 'INIVALID'
+      Required = True
     end
-    object qryEmpresasFIMVALID: TDateField
+    object dtmfldEmpresasFIMVALID: TDateTimeField
       FieldName = 'FIMVALID'
-    end
-    object qryEmpresasCLASSTRIB: TIntegerField
-      FieldName = 'CLASSTRIB'
     end
     object qryEmpresasINDESCRITURACAO: TIntegerField
       FieldName = 'INDESCRITURACAO'
+      Required = True
     end
     object qryEmpresasINDDESONERACAO: TIntegerField
       FieldName = 'INDDESONERACAO'
+      Required = True
     end
     object qryEmpresasINDACORDOISENMULTA: TIntegerField
       FieldName = 'INDACORDOISENMULTA'
+      Required = True
     end
     object qryEmpresasINDSITPJ: TIntegerField
       FieldName = 'INDSITPJ'
+      Required = True
     end
     object qryEmpresasNMCTT: TStringField
       FieldName = 'NMCTT'
+      Required = True
       Size = 70
     end
     object qryEmpresasCPFCTT: TStringField
       FieldName = 'CPFCTT'
-      Size = 11
+      Required = True
+      Size = 14
     end
     object qryEmpresasFONEFIXO: TStringField
       FieldName = 'FONEFIXO'
@@ -60,37 +71,18 @@ object DMQuerysUteis: TDMQuerysUteis
       FieldName = 'EMAIL_CONTATO'
       Size = 60
     end
-    object qryEmpresasEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 60
-    end
-    object qryEmpresasCNPJSOFTHOUSE: TStringField
-      FieldName = 'CNPJSOFTHOUSE'
-      Size = 14
-    end
-    object qryEmpresasNMRAZAO: TStringField
-      FieldName = 'NMRAZAO'
-      Size = 115
-    end
-    object qryEmpresasNMCONT: TStringField
-      FieldName = 'NMCONT'
-      Size = 70
-    end
-    object qryEmpresasTELEFONE: TStringField
-      FieldName = 'TELEFONE'
-      Size = 13
-    end
     object qryEmpresasIDEEFR: TStringField
       FieldName = 'IDEEFR'
+      Required = True
       Size = 1
     end
     object qryEmpresasCNPJEFR: TStringField
       FieldName = 'CNPJEFR'
-      Size = 14
+      Size = 18
     end
-    object qryEmpresasNMRAZAOSOCIAL: TStringField
-      FieldName = 'NMRAZAOSOCIAL'
-      Size = 100
+    object qryEmpresasCLASSTRIB: TStringField
+      FieldName = 'CLASSTRIB'
+      Size = 2
     end
   end
   object dsqryEmpresas: TUniDataSource
