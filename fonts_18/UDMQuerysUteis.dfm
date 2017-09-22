@@ -26,13 +26,6 @@ object DMQuerysUteis: TDMQuerysUteis
       FieldName = 'TPINSC'
       Required = True
     end
-    object dtmfldEmpresasINIVALID: TDateTimeField
-      FieldName = 'INIVALID'
-      Required = True
-    end
-    object dtmfldEmpresasFIMVALID: TDateTimeField
-      FieldName = 'FIMVALID'
-    end
     object qryEmpresasINDESCRITURACAO: TIntegerField
       FieldName = 'INDESCRITURACAO'
       Required = True
@@ -83,6 +76,15 @@ object DMQuerysUteis: TDMQuerysUteis
     object qryEmpresasCLASSTRIB: TStringField
       FieldName = 'CLASSTRIB'
       Size = 2
+    end
+    object qryEmpresasINIVALID: TStringField
+      FieldName = 'INIVALID'
+      Required = True
+      Size = 7
+    end
+    object qryEmpresasFIMVALID: TStringField
+      FieldName = 'FIMVALID'
+      Size = 7
     end
   end
   object dsqryEmpresas: TUniDataSource

@@ -130,7 +130,8 @@ var
 implementation
 
 uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
-  UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios;
+  UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios,
+  UFormCadRetCP_Serv_tomados;
 
 
 
@@ -817,6 +818,19 @@ begin
 
      finally
       FreeAndNil(FormCadBeneficiarios );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+   else
+   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Retenção Previdenciária - Serviços Tomados' then
+  begin
+   If  not  assigned(FormCadRetCP_Serv_tomados ) then
+       Application.CreateForm(TFormCadRetCP_Serv_tomados ,FormCadRetCP_Serv_tomados);
+     try
+       FormCadRetCP_Serv_tomados .ShowModal;
+
+     finally
+      FreeAndNil(FormCadRetCP_Serv_tomados );
      end;
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end 

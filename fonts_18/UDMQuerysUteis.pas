@@ -14,8 +14,6 @@ type
     qryEmpresasNMRAZAOSOCIAL: TStringField;
     qryEmpresasNRINSC: TStringField;
     qryEmpresasTPINSC: TIntegerField;
-    dtmfldEmpresasINIVALID: TDateTimeField;
-    dtmfldEmpresasFIMVALID: TDateTimeField;
     qryEmpresasINDESCRITURACAO: TIntegerField;
     qryEmpresasINDDESONERACAO: TIntegerField;
     qryEmpresasINDACORDOISENMULTA: TIntegerField;
@@ -28,6 +26,8 @@ type
     qryEmpresasIDEEFR: TStringField;
     qryEmpresasCNPJEFR: TStringField;
     qryEmpresasCLASSTRIB: TStringField;
+    qryEmpresasINIVALID: TStringField;
+    qryEmpresasFIMVALID: TStringField;
   private
     { Private declarations }
   public

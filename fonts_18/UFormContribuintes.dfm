@@ -17,7 +17,7 @@ object FormContribuintes: TFormContribuintes
   PixelsPerInch = 96
   TextHeight = 13
   object pgc1: TPageControl
-    Left = 1
+    Left = 8
     Top = -1
     Width = 768
     Height = 320

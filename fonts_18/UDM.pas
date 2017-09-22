@@ -119,8 +119,6 @@ type
     unContribuintesNMRAZAOSOCIAL: TStringField;
     unContribuintesNRINSC: TStringField;
     unContribuintesTPINSC: TIntegerField;
-    dtmfldContribuintesINIVALID: TDateTimeField;
-    dtmfldContribuintesFIMVALID: TDateTimeField;
     unContribuintesINDESCRITURACAO: TIntegerField;
     unContribuintesINDDESONERACAO: TIntegerField;
     unContribuintesINDACORDOISENMULTA: TIntegerField;
@@ -133,6 +131,58 @@ type
     unContribuintesIDEEFR: TStringField;
     unContribuintesCNPJEFR: TStringField;
     unContribuintesCLASSTRIB: TStringField;
+    dsRetCP_ServTom: TUniDataSource;
+    dsDetalheNF_ServPrest: TUniDataSource;
+    dsTiposServPrest_NF: TUniDataSource;
+    unRef_Tipo_Servico: TUniTable;
+    dsRef_Tipo_Servico: TUniDataSource;
+    dsInfProcessos: TUniDataSource;
+    unInfProcessosID_PROCESSO: TIntegerField;
+    unInfProcessosNRPROCRETPRINC: TStringField;
+    unInfProcessosTPPROCRETPRINC: TIntegerField;
+    unInfProcessosCODSUSP: TStringField;
+    cdsInfProcessosVALORPRINC: TFloatField;
+    unInfProcessosID_SERVICO: TIntegerField;
+    unContribuintesINIVALID: TStringField;
+    unContribuintesFIMVALID: TStringField;
+    unRetCP_ServTomID_SERVICO: TIntegerField;
+    unRetCP_ServTomCODIGO: TIntegerField;
+    unRetCP_ServTomTPINSCESTABTOM: TIntegerField;
+    unRetCP_ServTomNRINSCESTABTOM: TStringField;
+    unRetCP_ServTomCNPJPRESTADOR: TStringField;
+    unRetCP_ServTomINDOBRA: TIntegerField;
+    unRetCP_ServTomPERAPUR: TStringField;
+    cdsRetCP_ServTomVLRTOTALBRUTO: TFloatField;
+    cdsRetCP_ServTomVLRTOTALBASERET: TFloatField;
+    cdsRetCP_ServTomVLRTOTALRETPRINC: TFloatField;
+    cdsRetCP_ServTomVLRTOTALRETADIC: TFloatField;
+    cdsRetCP_ServTomVLRTOTALNRETPRINC: TFloatField;
+    cdsRetCP_ServTomVLRTOTALNRETADIC: TFloatField;
+    unRetCP_ServTomINDCPRB: TIntegerField;
+    unRetCP_ServTomEVENTO: TStringField;
+    unDetalheNF_ServPrestCODIGO: TIntegerField;
+    unDetalheNF_ServPrestID_NF: TIntegerField;
+    unDetalheNF_ServPrestID_SERVICO: TIntegerField;
+    unDetalheNF_ServPrestSERIE: TStringField;
+    unDetalheNF_ServPrestNUMDOCTO: TStringField;
+    dtmfldDetalheNF_ServPrestDTEMISSAONF: TDateTimeField;
+    cdsDetalheNF_ServPrestVLRBRUTO: TFloatField;
+    unDetalheNF_ServPrestOBS: TStringField;
+    unTiposServPrest_NFCODIGO: TIntegerField;
+    unTiposServPrest_NFTPSERVICO: TStringField;
+    unTiposServPrest_NFID_NF: TIntegerField;
+    unTiposServPrest_NFID_SERVICO: TIntegerField;
+    cdsTiposServPrest_NFVLRBASERET: TFloatField;
+    cdsTiposServPrest_NFVLRRETENCAO: TFloatField;
+    cdsTiposServPrest_NFVLRRETSUB: TFloatField;
+    cdsTiposServPrest_NFVLRNRETPRINC: TFloatField;
+    cdsTiposServPrest_NFVLRSERVICOS15: TFloatField;
+    cdsTiposServPrest_NFVLRSERVICOS20: TFloatField;
+    cdsTiposServPrest_NFVLRSERVICOS25: TFloatField;
+    cdsTiposServPrest_NFVLRADICIONAL: TFloatField;
+    cdsTiposServPrest_NFVLRNRETADIC: TFloatField;
+    unInfProcessosCODIGO: TIntegerField;
+    dsInfProcessosAdic: TUniDataSource;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);
@@ -141,6 +191,18 @@ type
     procedure unParametrosAfterPost(DataSet: TDataSet);
     procedure unBeneficiariosAfterDelete(DataSet: TDataSet);
     procedure unBeneficiariosAfterPost(DataSet: TDataSet);
+    procedure unRetCP_ServTomAfterDelete(DataSet: TDataSet);
+    procedure unRetCP_ServTomAfterPost(DataSet: TDataSet);
+    procedure unDetalheNF_ServPrestAfterDelete(DataSet: TDataSet);
+    procedure unDetalheNF_ServPrestAfterPost(DataSet: TDataSet);
+    procedure unTiposServPrest_NFAfterDelete(DataSet: TDataSet);
+    procedure unTiposServPrest_NFAfterPost(DataSet: TDataSet);
+    procedure unRetCP_ServTomAfterScroll(DataSet: TDataSet);
+    procedure unDetalheNF_ServPrestAfterScroll(DataSet: TDataSet);
+    procedure unInfProcessosAfterDelete(DataSet: TDataSet);
+    procedure unInfProcessosAfterPost(DataSet: TDataSet);
+    procedure unInfProcessosAdicAfterClose(DataSet: TDataSet);
+    procedure unInfProcessosAdicAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -194,6 +256,74 @@ except
  end;
 end;
 
+procedure TDM.unDetalheNF_ServPrestAfterDelete(DataSet: TDataSet);
+begin
+     try
+   unDetalheNF_ServPrest.CommitUpdates;
+   unDetalheNF_ServPrest.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unDetalheNF_ServPrestAfterPost(DataSet: TDataSet);
+begin
+try
+   unDetalheNF_ServPrest.CommitUpdates;
+   unDetalheNF_ServPrest.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unDetalheNF_ServPrestAfterScroll(DataSet: TDataSet);
+begin
+unTiposServPrest_NF.Close;
+unTiposServPrest_NF.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger) + ' and ID_NF='+IntToStr(DM.unDetalheNF_ServPrest.FieldByName('ID_NF').AsInteger);
+unTiposServPrest_NF.Filtered:=True;
+unTiposServPrest_NF.Open;
+end;
+
+procedure TDM.unInfProcessosAdicAfterClose(DataSet: TDataSet);
+begin
+try
+   unInfProcessosAdic.CommitUpdates;
+   unInfProcessosAdic.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unInfProcessosAdicAfterPost(DataSet: TDataSet);
+begin
+try
+   unInfProcessosAdic.CommitUpdates;
+   unInfProcessosAdic.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unInfProcessosAfterDelete(DataSet: TDataSet);
+begin
+try
+   unInfProcessos.CommitUpdates;
+   unInfProcessos.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unInfProcessosAfterPost(DataSet: TDataSet);
+begin
+try
+   unInfProcessos.CommitUpdates;
+   unInfProcessos.ApplyUpdates();
+except
+
+ end;
+end;
+
 procedure TDM.unParametrosAfterDelete(DataSet: TDataSet);
 begin
    try
@@ -229,6 +359,54 @@ begin
  try
    unProcessos.CommitUpdates;
    unProcessos.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unRetCP_ServTomAfterDelete(DataSet: TDataSet);
+begin
+try
+   unRetCP_ServTom.CommitUpdates;
+   unRetCP_ServTom.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unRetCP_ServTomAfterPost(DataSet: TDataSet);
+begin
+try
+   unRetCP_ServTom.CommitUpdates;
+   unRetCP_ServTom.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unRetCP_ServTomAfterScroll(DataSet: TDataSet);
+begin
+DM.unDetalheNF_ServPrest.Close;
+DM.unDetalheNF_ServPrest.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger);
+DM.unDetalheNF_ServPrest.Filtered:=True;
+DM.unDetalheNF_ServPrest.Open;
+end;
+
+procedure TDM.unTiposServPrest_NFAfterDelete(DataSet: TDataSet);
+begin
+try
+   unTiposServPrest_NF.CommitUpdates;
+   unTiposServPrest_NF.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unTiposServPrest_NFAfterPost(DataSet: TDataSet);
+begin
+try
+   unTiposServPrest_NF.CommitUpdates;
+   unTiposServPrest_NF.ApplyUpdates();
 except
 
  end;

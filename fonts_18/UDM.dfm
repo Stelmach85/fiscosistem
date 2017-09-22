@@ -1,6 +1,6 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 496
+  Height = 597
   Width = 880
   object Conexao: TUniConnection
     ProviderName = 'InterBase'
@@ -72,15 +72,6 @@ object DM: TDM
       FieldName = 'TPINSC'
       Required = True
     end
-    object dtmfldContribuintesINIVALID: TDateTimeField
-      FieldName = 'INIVALID'
-      Required = True
-      EditMask = '!99/99/0000;1;_'
-    end
-    object dtmfldContribuintesFIMVALID: TDateTimeField
-      FieldName = 'FIMVALID'
-      EditMask = '!99/99/0000;1;_'
-    end
     object unContribuintesINDESCRITURACAO: TIntegerField
       FieldName = 'INDESCRITURACAO'
       Required = True
@@ -135,6 +126,15 @@ object DM: TDM
     object unContribuintesCLASSTRIB: TStringField
       FieldName = 'CLASSTRIB'
       Size = 2
+    end
+    object unContribuintesINIVALID: TStringField
+      FieldName = 'INIVALID'
+      Required = True
+      Size = 7
+    end
+    object unContribuintesFIMVALID: TStringField
+      FieldName = 'FIMVALID'
+      Size = 7
     end
   end
   object unProcessos: TUniTable
@@ -238,34 +238,208 @@ object DM: TDM
     end
   end
   object unRetCP_ServTom: TUniTable
-    TableName = 'RETCP_SEVTOM_18'
+    TableName = 'RETCP_SERVICOS_18'
     Connection = Conexao
+    AfterPost = unRetCP_ServTomAfterPost
+    AfterDelete = unRetCP_ServTomAfterDelete
+    AfterScroll = unRetCP_ServTomAfterScroll
     Left = 264
     Top = 136
+    object unRetCP_ServTomID_SERVICO: TIntegerField
+      FieldName = 'ID_SERVICO'
+      Required = True
+    end
+    object unRetCP_ServTomCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unRetCP_ServTomTPINSCESTABTOM: TIntegerField
+      FieldName = 'TPINSCESTABTOM'
+      Required = True
+    end
+    object unRetCP_ServTomNRINSCESTABTOM: TStringField
+      FieldName = 'NRINSCESTABTOM'
+      Required = True
+      Size = 18
+    end
+    object unRetCP_ServTomCNPJPRESTADOR: TStringField
+      FieldName = 'CNPJPRESTADOR'
+      Required = True
+      Size = 18
+    end
+    object unRetCP_ServTomINDOBRA: TIntegerField
+      FieldName = 'INDOBRA'
+      Required = True
+    end
+    object unRetCP_ServTomPERAPUR: TStringField
+      FieldName = 'PERAPUR'
+      Required = True
+      Size = 7
+    end
+    object cdsRetCP_ServTomVLRTOTALBRUTO: TFloatField
+      FieldName = 'VLRTOTALBRUTO'
+    end
+    object cdsRetCP_ServTomVLRTOTALBASERET: TFloatField
+      FieldName = 'VLRTOTALBASERET'
+    end
+    object cdsRetCP_ServTomVLRTOTALRETPRINC: TFloatField
+      FieldName = 'VLRTOTALRETPRINC'
+    end
+    object cdsRetCP_ServTomVLRTOTALRETADIC: TFloatField
+      FieldName = 'VLRTOTALRETADIC'
+    end
+    object cdsRetCP_ServTomVLRTOTALNRETPRINC: TFloatField
+      FieldName = 'VLRTOTALNRETPRINC'
+    end
+    object cdsRetCP_ServTomVLRTOTALNRETADIC: TFloatField
+      FieldName = 'VLRTOTALNRETADIC'
+    end
+    object unRetCP_ServTomINDCPRB: TIntegerField
+      FieldName = 'INDCPRB'
+      Required = True
+    end
+    object unRetCP_ServTomEVENTO: TStringField
+      FieldName = 'EVENTO'
+      Size = 6
+    end
   end
   object unDetalheNF_ServPrest: TUniTable
-    TableName = 'DETALHENF_SERVPREST_18'
+    TableName = 'DETALHENF_SERVICOS_18'
     Connection = Conexao
+    AfterPost = unDetalheNF_ServPrestAfterPost
+    AfterDelete = unDetalheNF_ServPrestAfterDelete
+    AfterScroll = unDetalheNF_ServPrestAfterScroll
     Left = 32
     Top = 280
+    object unDetalheNF_ServPrestCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unDetalheNF_ServPrestID_NF: TIntegerField
+      FieldName = 'ID_NF'
+      Required = True
+    end
+    object unDetalheNF_ServPrestID_SERVICO: TIntegerField
+      FieldName = 'ID_SERVICO'
+      Required = True
+    end
+    object unDetalheNF_ServPrestSERIE: TStringField
+      FieldName = 'SERIE'
+      Required = True
+      Size = 5
+    end
+    object unDetalheNF_ServPrestNUMDOCTO: TStringField
+      FieldName = 'NUMDOCTO'
+      Required = True
+      Size = 15
+    end
+    object dtmfldDetalheNF_ServPrestDTEMISSAONF: TDateTimeField
+      FieldName = 'DTEMISSAONF'
+      Required = True
+    end
+    object cdsDetalheNF_ServPrestVLRBRUTO: TFloatField
+      FieldName = 'VLRBRUTO'
+    end
+    object unDetalheNF_ServPrestOBS: TStringField
+      FieldName = 'OBS'
+      Size = 250
+    end
   end
   object unTiposServPrest_NF: TUniTable
-    TableName = 'TIPOSSERVPREST_NF_18'
+    TableName = 'TIPOSSERVICOSNF_18'
     Connection = Conexao
-    Left = 160
-    Top = 288
+    AfterPost = unTiposServPrest_NFAfterPost
+    AfterDelete = unTiposServPrest_NFAfterDelete
+    Left = 168
+    Top = 280
+    object unTiposServPrest_NFCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unTiposServPrest_NFTPSERVICO: TStringField
+      FieldName = 'TPSERVICO'
+      Required = True
+      Size = 9
+    end
+    object unTiposServPrest_NFID_NF: TIntegerField
+      FieldName = 'ID_NF'
+      Required = True
+    end
+    object unTiposServPrest_NFID_SERVICO: TIntegerField
+      FieldName = 'ID_SERVICO'
+      Required = True
+    end
+    object cdsTiposServPrest_NFVLRBASERET: TFloatField
+      FieldName = 'VLRBASERET'
+    end
+    object cdsTiposServPrest_NFVLRRETENCAO: TFloatField
+      FieldName = 'VLRRETENCAO'
+    end
+    object cdsTiposServPrest_NFVLRRETSUB: TFloatField
+      FieldName = 'VLRRETSUB'
+    end
+    object cdsTiposServPrest_NFVLRNRETPRINC: TFloatField
+      FieldName = 'VLRNRETPRINC'
+    end
+    object cdsTiposServPrest_NFVLRSERVICOS15: TFloatField
+      FieldName = 'VLRSERVICOS15'
+    end
+    object cdsTiposServPrest_NFVLRSERVICOS20: TFloatField
+      FieldName = 'VLRSERVICOS20'
+    end
+    object cdsTiposServPrest_NFVLRSERVICOS25: TFloatField
+      FieldName = 'VLRSERVICOS25'
+    end
+    object cdsTiposServPrest_NFVLRADICIONAL: TFloatField
+      FieldName = 'VLRADICIONAL'
+    end
+    object cdsTiposServPrest_NFVLRNRETADIC: TFloatField
+      FieldName = 'VLRNRETADIC'
+    end
   end
   object unInfProcessos: TUniTable
     TableName = 'INFPROCESSOS_18'
     Connection = Conexao
+    AfterPost = unInfProcessosAfterPost
+    AfterDelete = unInfProcessosAfterDelete
     Left = 632
     Top = 136
+    object unInfProcessosID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+      Required = True
+    end
+    object unInfProcessosNRPROCRETPRINC: TStringField
+      FieldName = 'NRPROCRETPRINC'
+      Required = True
+      Size = 21
+    end
+    object unInfProcessosTPPROCRETPRINC: TIntegerField
+      FieldName = 'TPPROCRETPRINC'
+      Required = True
+    end
+    object unInfProcessosCODSUSP: TStringField
+      FieldName = 'CODSUSP'
+      Size = 14
+    end
+    object cdsInfProcessosVALORPRINC: TFloatField
+      FieldName = 'VALORPRINC'
+    end
+    object unInfProcessosID_SERVICO: TIntegerField
+      FieldName = 'ID_SERVICO'
+      Required = True
+    end
+    object unInfProcessosCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
   end
   object unInfProcessosAdic: TUniTable
     TableName = 'INFPROCESSOSADIC_18'
     Connection = Conexao
-    Left = 496
-    Top = 272
+    AfterClose = unInfProcessosAdicAfterClose
+    AfterPost = unInfProcessosAdicAfterPost
+    Left = 616
+    Top = 288
   end
   object unBeneficiarios: TUniTable
     TableName = 'BENEFICIARIOS_18'
@@ -345,14 +519,14 @@ object DM: TDM
   object unRendimentosCum: TUniTable
     TableName = 'RENDIMENTOSCUM_18'
     Connection = Conexao
-    Left = 368
-    Top = 280
+    Left = 480
+    Top = 288
   end
   object unPagtoExterior: TUniTable
     TableName = 'PAGTOEXTERIOR_18'
     Connection = Conexao
-    Left = 272
-    Top = 288
+    Left = 368
+    Top = 296
   end
   object dsContribuintes: TUniDataSource
     DataSet = unContribuintes
@@ -367,13 +541,13 @@ object DM: TDM
   object unRefClasTrib: TUniTable
     TableName = 'REF_CLASSIF_TRIB'
     Connection = Conexao
-    Left = 32
-    Top = 352
+    Left = 24
+    Top = 464
   end
   object dsRefClasTrib: TUniDataSource
     DataSet = unRefClasTrib
-    Left = 48
-    Top = 424
+    Left = 40
+    Top = 536
   end
   object dsProcessos: TUniDataSource
     DataSet = unProcessos
@@ -385,8 +559,8 @@ object DM: TDM
     Connection = Conexao
     AfterPost = unParametrosAfterPost
     AfterDelete = unParametrosAfterDelete
-    Left = 144
-    Top = 352
+    Left = 136
+    Top = 464
     object unParametrosCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -442,8 +616,8 @@ object DM: TDM
   end
   object dsParametros: TUniDataSource
     DataSet = unParametros
-    Left = 152
-    Top = 424
+    Left = 144
+    Top = 536
   end
   object unConslProcessos: TUniTable
     TableName = 'PROCESSOS_18'
@@ -554,8 +728,8 @@ object DM: TDM
   object unPais: TUniTable
     TableName = 'REF_PAISES'
     Connection = Conexao
-    Left = 288
-    Top = 368
+    Left = 280
+    Top = 480
     object unPaisID: TIntegerField
       FieldName = 'ID'
     end
@@ -570,8 +744,8 @@ object DM: TDM
   end
   object dsPais: TUniDataSource
     DataSet = unPais
-    Left = 288
-    Top = 424
+    Left = 280
+    Top = 536
   end
   object unConslBeneficiarios: TUniTable
     TableName = 'BENEFICIARIOS_18'
@@ -654,5 +828,41 @@ object DM: TDM
     DataSet = unConslBeneficiarios
     Left = 792
     Top = 344
+  end
+  object dsRetCP_ServTom: TUniDataSource
+    DataSet = unRetCP_ServTom
+    Left = 264
+    Top = 200
+  end
+  object dsDetalheNF_ServPrest: TUniDataSource
+    DataSet = unDetalheNF_ServPrest
+    Left = 32
+    Top = 344
+  end
+  object dsTiposServPrest_NF: TUniDataSource
+    DataSet = unTiposServPrest_NF
+    Left = 168
+    Top = 336
+  end
+  object unRef_Tipo_Servico: TUniTable
+    TableName = 'REF_TIPO_SERVICOS'
+    Connection = Conexao
+    Left = 416
+    Top = 480
+  end
+  object dsRef_Tipo_Servico: TUniDataSource
+    DataSet = unRef_Tipo_Servico
+    Left = 424
+    Top = 536
+  end
+  object dsInfProcessos: TUniDataSource
+    DataSet = unInfProcessos
+    Left = 632
+    Top = 200
+  end
+  object dsInfProcessosAdic: TUniDataSource
+    DataSet = unInfProcessosAdic
+    Left = 624
+    Top = 352
   end
 end
