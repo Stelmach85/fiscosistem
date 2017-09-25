@@ -87,6 +87,7 @@ uses
   public
     function Money(Value:real):real;
     procedure GeraExcel(Consulta:TUniQuery);
+    function colocaMascara(texto:string):string;
     { Public declarations }
 
   end;
@@ -154,7 +155,21 @@ Begin
   result := valor;
 end;
 
+function TREINFForm.colocaMascara(texto:string):string;
+begin
+ texto:=TiraPontos(texto);
+ if Length(texto)=11 then
+  texto:= Copy(texto,1,3)+'.'+copy(texto,4,3)+'.'+copy(texto,7,3)+'-'+copy(texto,10,2)
+  else
+ if Length(texto)=14 then
+  texto:= Copy(texto,1,2)+'.'+copy(texto,3,3)+'.'+copy(texto,6,3)+'/'+ Copy(texto,9,4)+'-'+copy(texto,13,2)
+ else 
+ texto:='';
 
+  Result:=texto;
+  
+
+end;
 
 procedure OpenPDF(aFile : TFileName; TypeForm : Integer = SW_NORMAL);
 var
@@ -631,6 +646,8 @@ begin
  { If Sobreform = nil then
      Application.CreateForm(TSobreform, Sobreform);
   Sobreform.showmodal;  }
+ ShowMessage( colocaMascara('00718930088') ) ;
+ ShowMessage( colocaMascara('87870952000144'));
 end;
 
 

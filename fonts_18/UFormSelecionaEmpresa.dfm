@@ -18,7 +18,7 @@ object FormSelecionaEmpresa: TFormSelecionaEmpresa
   TextHeight = 13
   object btnOK: TBitBtn
     Left = 615
-    Top = 271
+    Top = 268
     Width = 75
     Height = 25
     Caption = 'OK'

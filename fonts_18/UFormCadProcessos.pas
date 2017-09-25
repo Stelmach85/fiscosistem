@@ -290,7 +290,7 @@ var
  importou:boolean;
  C,Linha:string;
  Imp_CNPJ, perApur,nrProc,indSusp,nrInsc,tpInsc,iniValid,fimValid,tpProc,codSusp,dtDecisao, indDeposito :string;
- ufVara,codMunic,idVara,indAutoria :string  ;
+ ufVara,codMunic,idVara,indAutoria,Registro :string  ;
 begin
  if lbledtArquivo.Text='' then
    begin
@@ -318,7 +318,7 @@ begin
             for i:=0 to T.Count-1 Do
              begin
               linha:=T[i];
-                Imp_CNPJ:=copy(linha,1,pos(c,linha)-1);
+               { Imp_CNPJ:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
 
                 if (Imp_CNPJ <> formataCnpj(cnpj)) then
@@ -326,7 +326,26 @@ begin
                   showmessage('Este não é o arquivo de Processos no leiaute da Fiscosistem.');
                  // WaitForm.Close;
                   Exit;
+                end;     }
+
+                Registro:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+                if Registro<>'R-1070' then
+                begin
+                  ShowMessage('Este não é o arquivo de Processos(R-1070) no leiaute da Fiscosistem');
+                  WaitForm.Close;
+                  Exit;
                 end;
+                
+                nrInsc:= REINFForm.colocaMascara(copy(linha,1,pos(c,linha)-1));
+                delete(linha,1,pos(c,linha));
+                if nrInsc<>cnpjemp then
+                begin
+                  ShowMessage('Registro '+IntToStr(i)+' não corresponde ao contribuinte selecionado.');
+                  WaitForm.Close;
+                  Exit;
+                end;
+                
                 
                 perApur:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
@@ -337,16 +356,18 @@ begin
                 indSusp:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
 
-                nrInsc:=copy(linha,1,pos(c,linha)-1);
-                delete(linha,1,pos(c,linha));
+                
 
-                tpInsc:=copy(linha,1,pos(c,linha)-1);
-                delete(linha,1,pos(c,linha));
+               // tpInsc:=copy(linha,1,pos(c,linha)-1);
+               // delete(linha,1,pos(c,linha));
 
                 iniValid:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
 
                 fimValid:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+
+                indAutoria:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
 
                 tpProc:=copy(linha,1,pos(c,linha)-1);
@@ -366,11 +387,11 @@ begin
 
                 codMunic:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
+                
+                idVara:=linha;
 
-                idVara:=copy(linha,1,pos(c,linha)-1);
-                delete(linha,1,pos(c,linha));
-
-                indAutoria:=linha;
+                if Length(nrInsc)=18  then
+                tpInsc:='1' else tpInsc:='2';
 
                  if (DM.unProcessos.Locate(('CODIGO;PERAPUR;NRPROC;INDSUSP'),VarArrayOf([Codcurr,perApur,nrProc,indSusp]),[loCaseInsensitive] ))  then
                  begin
@@ -500,6 +521,9 @@ DM.unConslProcessos.Close;
 DM.unConslProcessos.FilterSQL:='Codigo=-1';
 DM.unConslProcessos.Filtered:=True;           
 dm.unConslProcessos.Open;
+
+pgc1.ActivePage:=ts1; 
+
 end;
 
 end.

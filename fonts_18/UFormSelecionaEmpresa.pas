@@ -40,6 +40,7 @@ begin
   Nomeemp:=DMQuerysUteis.qryEmpresas.FieldByName('NMRAZAOSOCIAL').AsString;
   Empresa:=DMQuerysUteis.qryEmpresas.FieldByName('NMRAZAOSOCIAL').AsString;
   cnpj:= DMQuerysUteis.qryEmpresas.FieldByName('nrInsc').AsString;
+  cnpjemp:=DMQuerysUteis.qryEmpresas.FieldByName('nrInsc').AsString;;
   
  {  if DMQuerysUteis.unqryEmpresas.Fieldbyname('PJNAOOBRIGADALREAL').Asinteger=1 then
     PJNaoObrigadaLReal:=true

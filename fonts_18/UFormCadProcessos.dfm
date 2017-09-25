@@ -215,8 +215,11 @@ object FormCadProcessos: TFormCadProcessos
           Style = csOwnerDrawFixed
           DataField = 'INDSUSP'
           DataSource = DM.dsProcessos
+          DropDownCount = 13
           Items.Strings = (
             '01 - Liminar em Mandado de Seguran'#231'a'
+            '02 - Dep'#243'sito Judicial do Montante Integral'
+            '03- Dep'#243'sito Administrativo do Montante Integral'
             '04 - Antecipa'#231#227'o de Tutela'
             '05 - Liminar em Medida Cautelar'
             '08 - Sente'#231'a em Mandado de Seguran'#231'a Favor'#225'vel ao Contribuinte'
@@ -238,16 +241,18 @@ object FormCadProcessos: TFormCadProcessos
           TabOrder = 2
           Values.Strings = (
             '01'
+            '02'
+            '03'
             '04'
-            '05 '
+            '05'
             '08'
             '09'
-            '10 '
-            '11 '
-            '12 '
-            '13 '
+            '10'
+            '11'
+            '12'
+            '13'
             '90'
-            '92 ')
+            '92')
           ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
           ListSettings.OutfilteredValueFont.Color = clRed
           ListSettings.OutfilteredValueFont.Height = -11
