@@ -15,7 +15,9 @@ uses
   UFormParametros in 'UFormParametros.pas' {FormParametros},
   Wait in 'Wait.pas' {WaitForm},
   UFormCadBeneficiarios in 'UFormCadBeneficiarios.pas' {FormCadBeneficiarios},
-  UFormCadRetCP_Serv_tomados in 'UFormCadRetCP_Serv_tomados.pas' {FormCadRetCP_Serv_tomados};
+  UFormCadRetCP_Serv_tomados_imp in 'UFormCadRetCP_Serv_tomados_imp.pas' {FormCadRetCP_Serv_tomados_imp},
+  UFormCadComProdRural in 'UFormCadComProdRural.pas' {FormCadComProdRural},
+  UFormCadRetCP_Servicos in 'UFormCadRetCP_Servicos.pas' {FormCadRetCP_Servicos};
 
 {$R *.res}
 
@@ -26,5 +28,7 @@ begin
   Application.CreateForm(TDMScript, DMScript);
   Application.CreateForm(TDMQuerysUteis, DMQuerysUteis);
   Application.CreateForm(TREINFForm, REINFForm);
+  Application.CreateForm(TFormCadComProdRural, FormCadComProdRural);
+  Application.CreateForm(TFormCadRetCP_Servicos, FormCadRetCP_Servicos);
   Application.Run;
 end.

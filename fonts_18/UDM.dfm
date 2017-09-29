@@ -265,6 +265,7 @@ object DM: TDM
     object unRetCP_ServTomCNPJPRESTADOR: TStringField
       FieldName = 'CNPJPRESTADOR'
       Required = True
+      EditMask = '99.999.999/9999-99;1;'
       Size = 18
     end
     object unRetCP_ServTomINDOBRA: TIntegerField
@@ -274,25 +275,38 @@ object DM: TDM
     object unRetCP_ServTomPERAPUR: TStringField
       FieldName = 'PERAPUR'
       Required = True
+      EditMask = '9999-99;1;'
       Size = 7
     end
     object cdsRetCP_ServTomVLRTOTALBRUTO: TFloatField
       FieldName = 'VLRTOTALBRUTO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsRetCP_ServTomVLRTOTALBASERET: TFloatField
       FieldName = 'VLRTOTALBASERET'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsRetCP_ServTomVLRTOTALRETPRINC: TFloatField
       FieldName = 'VLRTOTALRETPRINC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsRetCP_ServTomVLRTOTALRETADIC: TFloatField
       FieldName = 'VLRTOTALRETADIC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsRetCP_ServTomVLRTOTALNRETPRINC: TFloatField
       FieldName = 'VLRTOTALNRETPRINC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsRetCP_ServTomVLRTOTALNRETADIC: TFloatField
       FieldName = 'VLRTOTALNRETADIC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object unRetCP_ServTomINDCPRB: TIntegerField
       FieldName = 'INDCPRB'
@@ -336,9 +350,12 @@ object DM: TDM
     object dtmfldDetalheNF_ServPrestDTEMISSAONF: TDateTimeField
       FieldName = 'DTEMISSAONF'
       Required = True
+      EditMask = '!99/99/0000;1;_'
     end
     object cdsDetalheNF_ServPrestVLRBRUTO: TFloatField
       FieldName = 'VLRBRUTO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object unDetalheNF_ServPrestOBS: TStringField
       FieldName = 'OBS'
@@ -371,30 +388,48 @@ object DM: TDM
     end
     object cdsTiposServPrest_NFVLRBASERET: TFloatField
       FieldName = 'VLRBASERET'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRRETENCAO: TFloatField
       FieldName = 'VLRRETENCAO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRRETSUB: TFloatField
       FieldName = 'VLRRETSUB'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRNRETPRINC: TFloatField
       FieldName = 'VLRNRETPRINC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRSERVICOS15: TFloatField
       FieldName = 'VLRSERVICOS15'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRSERVICOS20: TFloatField
       FieldName = 'VLRSERVICOS20'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRSERVICOS25: TFloatField
       FieldName = 'VLRSERVICOS25'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRADICIONAL: TFloatField
       FieldName = 'VLRADICIONAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsTiposServPrest_NFVLRNRETADIC: TFloatField
       FieldName = 'VLRNRETADIC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
   end
   object unInfProcessos: TUniTable

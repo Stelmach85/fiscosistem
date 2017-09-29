@@ -133,7 +133,7 @@ implementation
 uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
   UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios,
   UFormCadRetCP_Serv_tomados, UFormCadRetCP_Serv_tomados_imp,
-  UFormCadComProdRural;
+  UFormCadComProdRural, UFormCadRetCP_Servicos;
 
 
 
@@ -850,10 +850,10 @@ begin
    else
    if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Retenção Previdenciária - Serviços Tomados' then
   begin
-   If  not  assigned(FormCadRetCP_Serv_tomados ) then
-       Application.CreateForm(TFormCadRetCP_Serv_tomados ,FormCadRetCP_Serv_tomados);
+   If  not  assigned(FormCadRetCP_Servicos ) then
+       Application.CreateForm(TFormCadRetCP_Servicos ,FormCadRetCP_Servicos);
      try
-       FormCadRetCP_Serv_tomados .ShowModal;
+       FormCadRetCP_Servicos.ShowModal;
 
      finally
       FreeAndNil(FormCadRetCP_Serv_tomados );
