@@ -865,4 +865,119 @@ object DM: TDM
     Left = 624
     Top = 352
   end
+  object unProdRural: TUniTable
+    TableName = 'CADCOMPRODRURAL_18'
+    Connection = Conexao
+    IndexFieldNames = 'PERAPUR'
+    AfterPost = unProdRuralAfterPost
+    AfterDelete = unProdRuralAfterDelete
+    AfterScroll = unProdRuralAfterScroll
+    Left = 560
+    Top = 488
+    object unProdRuralCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unProdRuralPERAPUR: TStringField
+      FieldName = 'PERAPUR'
+      Required = True
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object cdsProdRuralVLRRECBRUTATOTAL: TFloatField
+      FieldName = 'VLRRECBRUTATOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsProdRuralVLRCPAPUR: TFloatField
+      FieldName = 'VLRCPAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object unProdRuralNRINSCBENEF: TStringField
+      FieldName = 'NRINSCBENEF'
+      Required = True
+      EditMask = '99.999.999/9999-99;1'
+      Size = 18
+    end
+    object cdsProdRuralVLRRATAPUR: TFloatField
+      FieldName = 'VLRRATAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object unProdRuralINDCOM: TIntegerField
+      FieldName = 'INDCOM'
+      Required = True
+    end
+    object cdsProdRuralVLRSENARAPUR: TFloatField
+      FieldName = 'VLRSENARAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsProdRuralVLRCPSUSPTOTAL: TFloatField
+      FieldName = 'VLRCPSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsProdRuralVLRRATSUSPTOTAL: TFloatField
+      FieldName = 'VLRRATSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsProdRuralVLRSENARSUSPTOTAL: TFloatField
+      FieldName = 'VLRSENARSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+  end
+  object dsProdRural: TUniDataSource
+    DataSet = unProdRural
+    Left = 560
+    Top = 544
+  end
+  object unProcAdmJud: TUniTable
+    TableName = 'PROCADMJUD_TOMADOR_18'
+    Connection = Conexao
+    Left = 656
+    Top = 504
+    object unProcAdmJudCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unProcAdmJudPERAPUR: TStringField
+      FieldName = 'PERAPUR'
+      Required = True
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object unProcAdmJudNRPROC: TStringField
+      FieldName = 'NRPROC'
+      Required = True
+      Size = 21
+    end
+    object unProcAdmJudTPPROC: TIntegerField
+      FieldName = 'TPPROC'
+      Required = True
+    end
+    object cdsProcAdmJudVLRCPSUSP: TFloatField
+      FieldName = 'VLRCPSUSP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsProcAdmJudVLRRATSUSP: TFloatField
+      FieldName = 'VLRRATSUSP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsProcAdmJudVLRSENARSUSP: TFloatField
+      FieldName = 'VLRSENARSUSP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+  end
+  object dsProcAdmJud: TUniDataSource
+    DataSet = unProcAdmJud
+    Left = 656
+    Top = 560
+  end
 end

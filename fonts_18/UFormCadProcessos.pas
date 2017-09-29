@@ -148,6 +148,12 @@ begin
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
  HabilitaCampos;
+
+ btnExcluir.Enabled:=False;
+ btnNovo.Enabled:=False;
+ btnCancelar.Enabled:=True;
+ btnGravar.Enabled:=True;
+ dbnvgr1.Enabled:=False;
 end;
 
 procedure TFormCadProcessos.btnCancelarClick(Sender: TObject);
@@ -158,6 +164,13 @@ begin
  btnGravar.Enabled:=False;
  btnCancelar.Enabled:=False;
  DesabilitaCampos;
+
+ btnExcluir.Enabled:=True;
+ btnAlterar.Enabled:=True;
+ btnNovo.Enabled:=True;
+ btnCancelar.Enabled:=False;
+ btnGravar.Enabled:=False;
+ dbnvgr1.Enabled:=True;
 end;
 
 procedure TFormCadProcessos.btnConsultarClick(Sender: TObject);
@@ -280,6 +293,11 @@ begin
  btnGravar.Enabled:=False;
  btnCancelar.Enabled:=False;
  DesabilitaCampos;
+
+ btnExcluir.Enabled:=True;
+ btnAlterar.Enabled:=True;
+ btnCancelar.Enabled:=False;
+ dbnvgr1.Enabled:=True;
 end;
 
 procedure TFormCadProcessos.btnImportarClick(Sender: TObject);
@@ -465,7 +483,12 @@ begin
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
 
- dbedtPERAPUR.SetFocus;
+ //dbedtPERAPUR.SetFocus;
+
+   btnExcluir.Enabled:=False;
+   btnAlterar.Enabled:=False;
+   btnCancelar.Enabled:=True;
+   dbnvgr1.Enabled:=False;
 end;
 
 procedure TFormCadProcessos.btnSairClick(Sender: TObject);

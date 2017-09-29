@@ -183,6 +183,28 @@ type
     cdsTiposServPrest_NFVLRNRETADIC: TFloatField;
     unInfProcessosCODIGO: TIntegerField;
     dsInfProcessosAdic: TUniDataSource;
+    unProdRural: TUniTable;
+    unProdRuralCODIGO: TIntegerField;
+    unProdRuralPERAPUR: TStringField;
+    cdsProdRuralVLRRECBRUTATOTAL: TFloatField;
+    cdsProdRuralVLRCPAPUR: TFloatField;
+    unProdRuralNRINSCBENEF: TStringField;
+    cdsProdRuralVLRRATAPUR: TFloatField;
+    cdsProdRuralVLRSENARAPUR: TFloatField;
+    dsProdRural: TUniDataSource;
+    unProdRuralINDCOM: TIntegerField;
+    cdsProdRuralVLRCPSUSPTOTAL: TFloatField;
+    cdsProdRuralVLRRATSUSPTOTAL: TFloatField;
+    cdsProdRuralVLRSENARSUSPTOTAL: TFloatField;
+    unProcAdmJud: TUniTable;
+    dsProcAdmJud: TUniDataSource;
+    unProcAdmJudCODIGO: TIntegerField;
+    unProcAdmJudPERAPUR: TStringField;
+    unProcAdmJudNRPROC: TStringField;
+    unProcAdmJudTPPROC: TIntegerField;
+    cdsProcAdmJudVLRCPSUSP: TFloatField;
+    cdsProcAdmJudVLRRATSUSP: TFloatField;
+    cdsProcAdmJudVLRSENARSUSP: TFloatField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);
@@ -203,6 +225,9 @@ type
     procedure unInfProcessosAfterPost(DataSet: TDataSet);
     procedure unInfProcessosAdicAfterClose(DataSet: TDataSet);
     procedure unInfProcessosAdicAfterPost(DataSet: TDataSet);
+    procedure unProdRuralAfterScroll(DataSet: TDataSet);
+    procedure unProdRuralAfterDelete(DataSet: TDataSet);
+    procedure unProdRuralAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -213,6 +238,8 @@ var
   DM: TDM;
 
 implementation
+
+uses frm_REINF;
 
 {$R *.dfm}
 
@@ -362,6 +389,62 @@ begin
 except
 
  end;
+end;
+
+procedure TDM.unProdRuralAfterDelete(DataSet: TDataSet);
+begin
+    try
+   unProdRural.CommitUpdates;
+   unProdRural.ApplyUpdates();
+except
+
+ end;
+  if unProdRural.FieldByName('PERAPUR').AsString<>'' then
+  begin
+    DM.unProcAdmJud.Close;
+    DM.unProcAdmJud.Filtered:=False;
+    DM.unProcAdmJud.FilterSQL:='codigo='+ IntToStr(codcurr) + ' and PERAPUR= ''' + unProdRural.FieldByName('PERAPUR').AsString +'''' ;
+    DM.unProcAdmJud.Filtered:=True;
+    DM.unProcAdmJud.Open;
+  end
+  else
+  begin
+     DM.unProcAdmJud.Close;
+    DM.unProcAdmJud.Filtered:=False;
+    DM.unProcAdmJud.FilterSQL:='codigo=-1' ;
+    DM.unProcAdmJud.Filtered:=True;
+    DM.unProcAdmJud.Open;
+  end;
+end;
+
+procedure TDM.unProdRuralAfterPost(DataSet: TDataSet);
+begin
+try
+   unProdRural.CommitUpdates;
+   unProdRural.ApplyUpdates();
+except
+
+ end;
+  if unProdRural.FieldByName('PERAPUR').AsString<>'' then
+  begin
+    DM.unProcAdmJud.Close;
+    DM.unProcAdmJud.Filtered:=False;
+    DM.unProcAdmJud.FilterSQL:='codigo='+ IntToStr(codcurr) + ' and PERAPUR= ''' + unProdRural.FieldByName('PERAPUR').AsString +'''' ;
+    DM.unProcAdmJud.Filtered:=True;
+    DM.unProcAdmJud.Open;
+  end;
+end;
+
+procedure TDM.unProdRuralAfterScroll(DataSet: TDataSet);
+begin
+  if unProdRural.FieldByName('PERAPUR').AsString<>'' then
+  begin
+    DM.unProcAdmJud.Close;
+    DM.unProcAdmJud.Filtered:=False;
+    DM.unProcAdmJud.FilterSQL:='codigo='+ IntToStr(codcurr) + ' and PERAPUR= ''' + unProdRural.FieldByName('PERAPUR').AsString +'''' ;
+    DM.unProcAdmJud.Filtered:=True;
+    DM.unProcAdmJud.Open;
+  end;
 end;
 
 procedure TDM.unRetCP_ServTomAfterDelete(DataSet: TDataSet);

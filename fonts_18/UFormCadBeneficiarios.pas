@@ -101,6 +101,12 @@ begin
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
 
+  btnExcluir.Enabled:=False;
+ btnNovo.Enabled:=False;
+ btnCancelar.Enabled:=True;
+ btnGravar.Enabled:=True;
+ dbnvgr1.Enabled:=False;
+ 
 end;
 
 procedure TFormCadBeneficiarios.btnCancelarClick(Sender: TObject);
@@ -111,6 +117,14 @@ begin
  btnGravar.Enabled:=False;
  btnCancelar.Enabled:=False;
  DesabilitaCampos;
+
+ btnExcluir.Enabled:=True;
+ btnAlterar.Enabled:=True;
+ btnNovo.Enabled:=True;
+ btnCancelar.Enabled:=False;
+ btnGravar.Enabled:=False;
+ dbnvgr1.Enabled:=True;
+ 
 end;
 
 procedure TFormCadBeneficiarios.btnConsultarClick(Sender: TObject);
@@ -140,6 +154,12 @@ begin
  btnGravar.Enabled:=False;
  btnCancelar.Enabled:=False;
  DesabilitaCampos;
+
+ btnExcluir.Enabled:=True;
+ btnAlterar.Enabled:=True;
+ btnCancelar.Enabled:=False;
+ dbnvgr1.Enabled:=True;
+ 
 end;
 
 procedure TFormCadBeneficiarios.btnNovoClick(Sender: TObject);
@@ -153,6 +173,11 @@ begin
 
  HabilitaCampos;
  dbedtNMRAZAOBENEF.SetFocus;
+ 
+ btnExcluir.Enabled:=False;
+   btnAlterar.Enabled:=False;
+   btnCancelar.Enabled:=True;
+   dbnvgr1.Enabled:=False;
 end;
 
 procedure TFormCadBeneficiarios.btnSairClick(Sender: TObject);
