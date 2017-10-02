@@ -304,7 +304,7 @@ except
 end;
 
 procedure TDM.unDetalheNF_ServPrestAfterScroll(DataSet: TDataSet);
-begin
+begin 
 unTiposServPrest_NF.Close;
 unTiposServPrest_NF.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger) + ' and ID_NF='+IntToStr(DM.unDetalheNF_ServPrest.FieldByName('ID_NF').AsInteger);
 unTiposServPrest_NF.Filtered:=True;
@@ -473,6 +473,25 @@ DM.unDetalheNF_ServPrest.Close;
 DM.unDetalheNF_ServPrest.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger);
 DM.unDetalheNF_ServPrest.Filtered:=True;
 DM.unDetalheNF_ServPrest.Open;
+
+if  DM.unDetalheNF_ServPrest.FieldByName('ID_NF').AsInteger=0 then
+begin
+unTiposServPrest_NF.Close;
+unTiposServPrest_NF.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger) + ' and ID_NF='+IntToStr(-1);
+unTiposServPrest_NF.Filtered:=True;
+unTiposServPrest_NF.Open;
+end;
+
+DM.unInfProcessosAdic.Close;
+DM.unInfProcessosAdic.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger);
+DM.unInfProcessosAdic.Filtered:=True;
+DM.unInfProcessosAdic.Open; 
+
+DM.unInfProcessos.Close;
+DM.unInfProcessos.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger);
+DM.unInfProcessos.Filtered:=True;
+DM.unInfProcessos.Open;
+
 end;
 
 procedure TDM.unTiposServPrest_NFAfterDelete(DataSet: TDataSet);

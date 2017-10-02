@@ -132,6 +132,8 @@ type
     btnExcluir5: TBitBtn;
     btnCancelar5: TBitBtn;
     OpenArquivo: TOpenDialog;
+    lbl35: TLabel;
+    cbbEVENTO: TJvDBComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -168,6 +170,11 @@ type
     procedure btnCancelar4Click(Sender: TObject);
     procedure btnAlterar5Click(Sender: TObject);
     procedure btnCancelar5Click(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnExcluir2Click(Sender: TObject);
+    procedure btnExcluir3Click(Sender: TObject);
+    procedure btnExcluir4Click(Sender: TObject);
+    procedure btnExcluir5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -241,7 +248,7 @@ begin
               //  if (Registro<>'R-2010-1') and (Registro<>'R-2020-1') then
                 if (copy(registro,1,6)='R-2010') and (copy(registro,1,6)='R-2020') then                
                 begin
-                  ShowMessage('Este não é o arquivo de Processos(R-1070) no leiaute da Fiscosistem');
+                  ShowMessage('Este não é o arquivo de Retençoes Previdenciária ( R-2010 ou R-2020) no leiaute da Fiscosistem');
                   WaitForm.Close;
                   Exit;
                 end;
@@ -770,6 +777,53 @@ DesabilitaCampos1;
  btnGravar.Enabled:=False;
 end;
 
+procedure TFormCadRetCP_Servicos.btnExcluir2Click(Sender: TObject);
+begin
+    If MessageDLG ('Confirma Exclusão do Documento ' + '???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.unDetalheNF_ServPrest.Delete;
+     End;
+end;
+
+procedure TFormCadRetCP_Servicos.btnExcluir3Click(Sender: TObject);
+begin
+    If MessageDLG ('Confirma Exclusão do Serviço ' + '???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.unTiposServPrest_NF.Delete;
+     End;
+end;
+
+procedure TFormCadRetCP_Servicos.btnExcluir4Click(Sender: TObject);
+begin
+    If MessageDLG ('Confirma Exclusão do Processo ' + '???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.unInfProcessos.Delete;
+     End;
+end;
+
+procedure TFormCadRetCP_Servicos.btnExcluir5Click(Sender: TObject);
+begin
+     If MessageDLG ('Confirma Exclusão do Processo ' + '???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.unInfProcessosAdic.Delete;
+     End;
+end;
+
+procedure TFormCadRetCP_Servicos.btnExcluirClick(Sender: TObject);
+begin
+
+   If MessageDLG ('Confirma Exclusão do registro ' + '???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.unRetCP_ServTom.Delete;
+     End;
+
+end;
+
 procedure TFormCadRetCP_Servicos.btngravar2Click(Sender: TObject);
 begin
  if dbedtSERIE.Text='' then
@@ -989,10 +1043,10 @@ begin
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.sql.Add(' select * from RetCP_Servicos_18');
  DM.qryUtil.sql.Add(' where Codigo=:cod and NrInscEstabTom=:tom and cnpjPrestador=:prest and PerApur=:per');
- DM.qryUtil.FieldByName('cod').AsInteger:=Codcurr;
- DM.qryUtil.FieldByName('tom').AsString:=dbedtNRINSCESTABTOM.Text;
- DM.qryUtil.FieldByName('prest').AsString:= dbedtCNPJPRESTADOR.Text;
- DM.qryUtil.FieldByName('per').AsString:=  dbedtPERAPUR.Text;
+ DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+ DM.qryUtil.ParamByName('tom').AsString:=dbedtNRINSCESTABTOM.Text;
+ DM.qryUtil.ParamByName('prest').AsString:= dbedtCNPJPRESTADOR.Text;
+ DM.qryUtil.ParamByName('per').AsString:=  dbedtPERAPUR.Text;
  DM.qryUtil.Open;
  if not DM.qryUtil.eof then
  begin
@@ -1100,6 +1154,7 @@ end;
 
 procedure TFormCadRetCP_Servicos.habilitaCampos1;
 begin
+ cbbEVENTO.Enabled:=True;
  cbbTPINSCESTABTOM.Enabled:=True;
  dbedtNRINSCESTABTOM.Enabled:=True;
  dbedtPERAPUR.Enabled:=True;
@@ -1119,6 +1174,7 @@ end;
 
 procedure TFormCadRetCP_Servicos.DesabilitaCampos1;
 begin
+ cbbEVENTO.Enabled:=False;
  cbbTPINSCESTABTOM.Enabled:=False;
  dbedtNRINSCESTABTOM.Enabled:=False;
  dbedtPERAPUR.Enabled:=False;

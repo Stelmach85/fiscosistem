@@ -647,14 +647,7 @@ begin
  { If Sobreform = nil then
      Application.CreateForm(TSobreform, Sobreform);
   Sobreform.showmodal;  }
-  If  not  assigned(FormCadRetCP_Serv_tomados_imp ) then
-       Application.CreateForm(TFormCadRetCP_Serv_tomados_imp ,FormCadRetCP_Serv_tomados_imp);
-     try
-       FormCadRetCP_Serv_tomados_imp .ShowModal;
-
-     finally
-      FreeAndNil(FormCadRetCP_Serv_tomados_imp );
-     end;
+ 
 // ShowMessage( colocaMascara('00718930088') ) ;
 // ShowMessage( colocaMascara('87870952000144'));
 end;
@@ -856,7 +849,7 @@ begin
        FormCadRetCP_Servicos.ShowModal;
 
      finally
-      FreeAndNil(FormCadRetCP_Serv_tomados );
+      FreeAndNil(FormCadRetCP_Servicos );
      end;
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end 

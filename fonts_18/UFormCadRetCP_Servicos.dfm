@@ -34,8 +34,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         Height = 581
         TabOrder = 0
         object lbl1: TLabel
-          Left = 288
-          Top = 19
+          Left = 15
+          Top = 67
           Width = 92
           Height = 13
           Caption = 'Per'#237'odo refer'#234'ncia:'
@@ -52,7 +52,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ShowHint = True
         end
         object lbl5: TLabel
-          Left = 15
+          Left = 120
           Top = 18
           Width = 85
           Height = 13
@@ -61,7 +61,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ShowHint = True
         end
         object lbl4: TLabel
-          Left = 113
+          Left = 218
           Top = 19
           Width = 148
           Height = 13
@@ -70,7 +70,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ShowHint = True
         end
         object lbl2: TLabel
-          Left = 15
+          Left = 195
           Top = 67
           Width = 94
           Height = 13
@@ -141,9 +141,18 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentShowHint = False
           ShowHint = True
         end
+        object lbl35: TLabel
+          Left = 17
+          Top = 18
+          Width = 44
+          Height = 13
+          Caption = 'Registro:'
+          ParentShowHint = False
+          ShowHint = True
+        end
         object dbedtPERAPUR: TDBEdit
-          Left = 288
-          Top = 38
+          Left = 15
+          Top = 86
           Width = 90
           Height = 19
           Hint = 'Informe o per'#237'odo de Ref.'
@@ -188,7 +197,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ListSettings.OutfilteredValueFont.Style = []
         end
         object cbbTPINSCESTABTOM: TJvDBComboBox
-          Left = 15
+          Left = 120
           Top = 37
           Width = 85
           Height = 22
@@ -211,7 +220,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           OnChange = cbbTPINSCESTABTOMChange
         end
         object dbedtNRINSCESTABTOM: TDBEdit
-          Left = 113
+          Left = 218
           Top = 38
           Width = 154
           Height = 19
@@ -231,7 +240,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           TabOrder = 3
         end
         object dbedtCNPJPRESTADOR: TDBEdit
-          Left = 15
+          Left = 195
           Top = 86
           Width = 154
           Height = 19
@@ -255,7 +264,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 190
           Width = 104
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Informe o Valor Total Bruto'
           Ctl3D = False
           DataField = 'VLRTOTALBRUTO'
           DataSource = DM.dsRetCP_ServTom
@@ -275,7 +284,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 190
           Width = 104
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Informe o valor da base de c'#225'lculo da reten'#231#227'o'
           Ctl3D = False
           DataField = 'VLRTOTALBASERET'
           DataSource = DM.dsRetCP_ServTom
@@ -295,7 +304,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 190
           Width = 104
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Soma do Valor da reten'#231#227'o das Notas fiscais de servi'#231'o'
           Ctl3D = False
           DataField = 'VLRTOTALRETPRINC'
           DataSource = DM.dsRetCP_ServTom
@@ -315,7 +324,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 238
           Width = 104
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Soma do valor do adicional da reten'#231#227'o das notas fiscais'
           Ctl3D = False
           DataField = 'VLRTOTALRETADIC'
           DataSource = DM.dsRetCP_ServTom
@@ -335,7 +344,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 238
           Width = 104
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Valor da reten'#231#227'o Principal que deixou de ser efetuada'
           Ctl3D = False
           DataField = 'VLRTOTALNRETPRINC'
           DataSource = DM.dsRetCP_ServTom
@@ -355,7 +364,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 238
           Width = 104
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Soma da reten'#231#227'o adicional que deixou de ser efetuada'
           Ctl3D = False
           DataField = 'VLRTOTALNRETADIC'
           DataSource = DM.dsRetCP_ServTom
@@ -375,7 +384,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Top = 286
           Width = 361
           Height = 22
-          Hint = 'Informe o indicador de Suspens'#227'o da Exigibilidade'
+          Hint = 'Indicador se o Prestador '#233' contribuinte da CPRB'
           Style = csOwnerDrawFixed
           DataField = 'INDCPRB'
           DataSource = DM.dsRetCP_ServTom
@@ -406,7 +415,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             Top = 0
             Width = 969
             Height = 569
-            ActivePage = ts3
+            ActivePage = ts5
             TabOrder = 0
             object ts3: TTabSheet
               Caption = 'Detalhe da NF'
@@ -466,7 +475,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 20
                   Width = 90
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Informe a s'#233'rie do documento'
                   Ctl3D = False
                   DataField = 'SERIE'
                   DataSource = DM.dsDetalheNF_ServPrest
@@ -486,7 +495,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 20
                   Width = 112
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Informe o n'#250'mero do documento'
                   Ctl3D = False
                   DataField = 'NUMDOCTO'
                   DataSource = DM.dsDetalheNF_ServPrest
@@ -506,7 +515,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 20
                   Width = 90
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Informe a data de emiss'#227'o do documento'
                   Ctl3D = False
                   DataField = 'DTEMISSAONF'
                   DataSource = DM.dsDetalheNF_ServPrest
@@ -526,7 +535,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 20
                   Width = 90
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Informe o valor do documento'
                   Ctl3D = False
                   DataField = 'VLRBRUTO'
                   DataSource = DM.dsDetalheNF_ServPrest
@@ -712,6 +721,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentShowHint = False
                   ShowHint = True
                   TabOrder = 9
+                  OnClick = btnExcluir2Click
                 end
                 object btncancelar2: TBitBtn
                   Left = 344
@@ -842,7 +852,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 101
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor da base de c'#225'lculo da reten'#231#227'o'
                   Ctl3D = False
                   DataField = 'VLRBASERET'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1008,6 +1018,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentShowHint = False
                   ShowHint = True
                   TabOrder = 5
+                  OnClick = btnExcluir3Click
                 end
                 object btnCancelar3: TBitBtn
                   Left = 354
@@ -1049,7 +1060,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 101
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'valor da reten'#231#227'o apurada'
                   Ctl3D = False
                   DataField = 'VLRRETENCAO'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1069,7 +1080,9 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 101
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 
+                    'valor da reten'#231#227'o destacada relativos aos servi'#231'os subcontratado' +
+                    's'
                   Ctl3D = False
                   DataField = 'VLRRETSUB'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1089,7 +1102,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 149
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor da reten'#231#227'o principal que deixou de ser efetuada'
                   Ctl3D = False
                   DataField = 'VLRNRETPRINC'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1109,7 +1122,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 149
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor dos servi'#231'os prestados atividade de 15 anos '
                   Ctl3D = False
                   DataField = 'VLRSERVICOS15'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1129,7 +1142,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 149
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor dos servi'#231'os prestados atividade de 20 anos '
                   Ctl3D = False
                   DataField = 'VLRSERVICOS20'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1149,7 +1162,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 149
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor dos servi'#231'os prestados atividade de 25 anos '
                   Ctl3D = False
                   DataField = 'VLRSERVICOS25'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1169,7 +1182,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 200
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor da reten'#231#227'o adicional'
                   Ctl3D = False
                   DataField = 'VLRADICIONAL'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1189,7 +1202,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 200
                   Width = 91
                   Height = 19
-                  Hint = 'Informe o per'#237'odo de Ref.'
+                  Hint = 'Valor adicional n'#227'o retido'
                   Ctl3D = False
                   DataField = 'VLRNRETADIC'
                   DataSource = DM.dsTiposServPrest_NF
@@ -1209,7 +1222,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 55
                   Width = 498
                   Height = 21
-                  Hint = 'Selecione a Classifica'#231#227'o tribut'#225'ria da PJ'
+                  Hint = 'Selecione o tipo de servi'#231'o prestado'
                   DataField = 'TPSERVICO'
                   DataSource = DM.dsTiposServPrest_NF
                   TabOrder = 15
@@ -1274,7 +1287,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 32
                   Width = 129
                   Height = 19
-                  Hint = 'Informe o N'#186' da inscri'#231#227'o'
+                  Hint = 'Informe o N'#186' do Processo'
                   Ctl3D = False
                   DataField = 'NRPROCRETPRINC'
                   DataSource = DM.dsInfProcessos
@@ -1294,7 +1307,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 31
                   Width = 139
                   Height = 22
-                  Hint = 'Informe o indicador de Suspens'#227'o da Exigibilidade'
+                  Hint = 'Informe o tipo do processo'
                   Style = csOwnerDrawFixed
                   DataField = 'TPPROCRETPRINC'
                   DataSource = DM.dsInfProcessos
@@ -1317,7 +1330,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 84
                   Width = 129
                   Height = 19
-                  Hint = 'Informe o N'#186' da inscri'#231#227'o'
+                  Hint = 'Informe o valor da reten'#231#227'o'
                   Ctl3D = False
                   DataField = 'VALORPRINC'
                   DataSource = DM.dsInfProcessos
@@ -1337,7 +1350,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Top = 81
                   Width = 131
                   Height = 21
-                  Hint = 'Selecione a Classifica'#231#227'o tribut'#225'ria da PJ'
+                  Hint = 'Selecione o codigo de suspens'#227'o'
                   DataField = 'CODSUSP'
                   DataSource = DM.dsInfProcessos
                   TabOrder = 3
@@ -1501,6 +1514,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentShowHint = False
                   ShowHint = True
                   TabOrder = 8
+                  OnClick = btnExcluir4Click
                 end
                 object btnCancelar4: TBitBtn
                   Left = 354
@@ -1582,7 +1596,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 Top = 32
                 Width = 129
                 Height = 19
-                Hint = 'Informe o N'#186' da inscri'#231#227'o'
+                Hint = 'Informe o N'#186' do Processo'
                 Ctl3D = False
                 DataField = 'NRPROCRETADIC'
                 DataSource = DM.dsInfProcessosAdic
@@ -1602,7 +1616,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 Top = 31
                 Width = 139
                 Height = 22
-                Hint = 'Informe o indicador de Suspens'#227'o da Exigibilidade'
+                Hint = 'Informe o tipo do Processo'
                 Style = csOwnerDrawFixed
                 DataField = 'TPPROCRETADIC'
                 DataSource = DM.dsInfProcessosAdic
@@ -1625,7 +1639,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 Top = 81
                 Width = 131
                 Height = 21
-                Hint = 'Selecione a Classifica'#231#227'o tribut'#225'ria da PJ'
+                Hint = 'Selecione o c'#243'digo da suspensa'#231#227'o '
                 DataField = 'CODSUSPADIC'
                 DataSource = DM.dsInfProcessosAdic
                 TabOrder = 2
@@ -1639,11 +1653,11 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 ListSettings.DataSource = DM.dsProcessos
               end
               object dbedtVALORADIC: TDBEdit
-                Left = 169
+                Left = 170
                 Top = 84
                 Width = 129
                 Height = 19
-                Hint = 'Informe o N'#186' da inscri'#231#227'o'
+                Hint = 'Informe o valor da reten'#231#227'o'
                 Ctl3D = False
                 DataField = 'VALORADIC'
                 DataSource = DM.dsInfProcessosAdic
@@ -1809,6 +1823,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 8
+                OnClick = btnExcluir5Click
               end
               object btnCancelar5: TBitBtn
                 Left = 354
@@ -1846,6 +1861,30 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
               end
             end
           end
+        end
+        object cbbEVENTO: TJvDBComboBox
+          Left = 17
+          Top = 37
+          Width = 85
+          Height = 22
+          Hint = 'Informe o Evento'
+          Style = csOwnerDrawFixed
+          DataField = 'EVENTO'
+          DataSource = DM.dsRetCP_ServTom
+          Enabled = False
+          EnableValues = False
+          Items.Strings = (
+            'R-2010'
+            'R-2020')
+          TabOrder = 13
+          Values.Strings = (
+            'R-2010'
+            'R-2020')
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
         end
       end
       object dbnvgr1: TDBNavigator
@@ -1999,6 +2038,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
+        OnClick = btnExcluirClick
       end
       object btnCancelar: TBitBtn
         Left = 343
