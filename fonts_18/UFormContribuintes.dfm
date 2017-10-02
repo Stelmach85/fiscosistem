@@ -1034,6 +1034,7 @@ object FormContribuintes: TFormContribuintes
     Hint = 'Cancela Opera'#231#227'o Realizada'
     Caption = 'Cancelar'
     DoubleBuffered = True
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11

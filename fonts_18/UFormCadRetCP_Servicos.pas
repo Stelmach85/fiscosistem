@@ -175,6 +175,9 @@ type
     procedure btnExcluir3Click(Sender: TObject);
     procedure btnExcluir4Click(Sender: TObject);
     procedure btnExcluir5Click(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
+    procedure btnExcluir1Click(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -775,6 +778,40 @@ DesabilitaCampos1;
  btnNovo.Enabled:=True;
  btnCancelar.Enabled:=False;
  btnGravar.Enabled:=False;
+end;
+
+procedure TFormCadRetCP_Servicos.btnConsultarClick(Sender: TObject);
+begin
+ dm.unConsultaServicos.Close;
+ dm.unConsultaServicos.Filtered:=False;
+ dm.unConsultaServicos.FilterSQL:='Codigo='+ IntToStr(Codcurr);
+ dm.unConsultaServicos.Filtered:=True;
+ dm.unConsultaServicos.Open;
+ 
+ 
+end;
+
+procedure TFormCadRetCP_Servicos.btnExcelClick(Sender: TObject);
+begin
+        DM.qryUtil.Close;
+        DM.qryUtil.SQL.Clear;
+        DM.qryUtil.SQL.Add('select * from RETCP_SERVICOS_18 where codigo=:cod')  ;
+        DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+        DM.qryUtil.Open;
+        REINFForm.GeraExcel(DM.qryUtil);
+end;
+
+procedure TFormCadRetCP_Servicos.btnExcluir1Click(Sender: TObject);
+begin
+If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.qryUtil.Close;
+        DM.qryUtil.SQL.Clear;
+        DM.qryUtil.SQL.Add('delete from RETCP_SERVICOS_18 where codigo=:cod')  ;
+        DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+        DM.qryUtil.Execute;
+     End;
 end;
 
 procedure TFormCadRetCP_Servicos.btnExcluir2Click(Sender: TObject);

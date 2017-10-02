@@ -191,19 +191,19 @@ object FormParametros: TFormParametros
       Enabled = False
       TabOrder = 1
       object lbl4: TLabel
-        Left = 15
-        Top = 24
+        Left = 14
+        Top = 20
         Width = 135
-        Height = 26
+        Height = 16
         Caption = 'Caminho do XML Importado:'#13#10
         ParentShowHint = False
         ShowHint = True
       end
       object lbl5: TLabel
         Left = 15
-        Top = 76
-        Width = 250
-        Height = 26
+        Top = 74
+        Width = 238
+        Height = 18
         Caption = 'Caminho do XML Gerado e Assinado pelo Sistema:'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -212,7 +212,7 @@ object FormParametros: TFormParametros
         Left = 15
         Top = 131
         Width = 196
-        Height = 26
+        Height = 14
         Caption = 'Caminho do XML Transmitido para a RFB:'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -221,23 +221,23 @@ object FormParametros: TFormParametros
         Left = 15
         Top = 186
         Width = 234
-        Height = 26
+        Height = 15
         Caption = 'Caminho do XML Retornado sem Erros pela RFB :'#13#10
         ParentShowHint = False
         ShowHint = True
       end
       object lbl8: TLabel
         Left = 15
-        Top = 241
+        Top = 240
         Width = 234
-        Height = 26
+        Height = 15
         Caption = 'Caminho do XML Retornado com Erros pela RFB :'#13#10
         ParentShowHint = False
         ShowHint = True
       end
       object btnLocalizar: TBitBtn
         Left = 447
-        Top = 37
+        Top = 41
         Width = 35
         Height = 20
         Hint = 'Selecione o caminho'
@@ -294,7 +294,7 @@ object FormParametros: TFormParametros
       end
       object dbedtXML_IMPORTADO: TDBEdit
         Left = 15
-        Top = 40
+        Top = 44
         Width = 426
         Height = 19
         Hint = 'informe o caminho dos XML que ser'#227'o importados'
@@ -314,7 +314,7 @@ object FormParametros: TFormParametros
       end
       object dbedtXML_GERADO: TDBEdit
         Left = 15
-        Top = 96
+        Top = 100
         Width = 426
         Height = 19
         Hint = 'informe o caminho onde ser'#227'o salvos os XML gerados'
@@ -334,7 +334,7 @@ object FormParametros: TFormParametros
       end
       object btn1: TBitBtn
         Left = 447
-        Top = 92
+        Top = 96
         Width = 35
         Height = 20
         Hint = 'Selecione o caminho'
@@ -391,7 +391,7 @@ object FormParametros: TFormParametros
       end
       object dbedtXML_TRANSMITIDO: TDBEdit
         Left = 15
-        Top = 151
+        Top = 155
         Width = 426
         Height = 19
         Hint = 'Informe o caminho onde ser'#227'o salvos os XML transmitidos'
@@ -411,7 +411,7 @@ object FormParametros: TFormParametros
       end
       object btn2: TBitBtn
         Left = 447
-        Top = 147
+        Top = 151
         Width = 35
         Height = 20
         Hint = 'Selecione o caminho'
@@ -468,7 +468,7 @@ object FormParametros: TFormParametros
       end
       object dbedtXML_RETORNO: TDBEdit
         Left = 15
-        Top = 206
+        Top = 210
         Width = 426
         Height = 19
         Hint = 'informe o caminho onde ser'#227'o salvos os XML de retorno sem erros'
@@ -488,7 +488,7 @@ object FormParametros: TFormParametros
       end
       object btn3: TBitBtn
         Left = 447
-        Top = 202
+        Top = 206
         Width = 35
         Height = 20
         Hint = 'Selecione o caminho'
@@ -545,7 +545,7 @@ object FormParametros: TFormParametros
       end
       object dbedtXML_RETORNO_ERRO: TDBEdit
         Left = 15
-        Top = 261
+        Top = 265
         Width = 426
         Height = 19
         Hint = 'Informe o caminho onde ser'#227'o salvos os XML de retorno com erros'
@@ -565,7 +565,7 @@ object FormParametros: TFormParametros
       end
       object btn4: TBitBtn
         Left = 447
-        Top = 257
+        Top = 261
         Width = 35
         Height = 20
         Hint = 'Selecione o caminho'
@@ -767,6 +767,7 @@ object FormParametros: TFormParametros
     Hint = 'Cancela Opera'#231#227'o Realizada'
     Caption = 'Cancelar'
     DoubleBuffered = True
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11

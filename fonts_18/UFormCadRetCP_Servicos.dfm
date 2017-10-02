@@ -23,7 +23,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
     Top = -6
     Width = 1369
     Height = 711
-    ActivePage = ts1
+    ActivePage = ts2
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
@@ -2238,7 +2238,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         Hint = 'Dados importados dos Processos'
         OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting, dgeRecordCount, dgeSearchBar]
         Ctl3D = False
-        DataSource = DM.dsConslProcessos
+        DataSource = DM.dsRetCP_ServTom
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlue
         Font.Height = -11
@@ -2344,6 +2344,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         ParentShowHint = False
         ShowHint = True
         TabOrder = 6
+        OnClick = btnExcelClick
       end
       object btnConsultar: TBitBtn
         Left = 537
@@ -2377,6 +2378,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
+        OnClick = btnConsultarClick
       end
       object btnExcluir1: TBitBtn
         Left = 705
@@ -2410,6 +2412,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
+        OnClick = btnExcluir1Click
       end
       object btnSair: TBitBtn
         Left = 786

@@ -103,6 +103,12 @@ end;
 
 procedure TFormParametros.btnAlterarClick(Sender: TObject);
 begin
+ if DM.unParametros.RecordCount=0 then
+ begin
+   ShowMessage('Não há dados para edição');
+   Abort;
+ end;
+ 
    DM.unParametros.Edit;
     btnAlterar.Enabled:=False;
  btnGravar.Enabled:=True;
@@ -124,11 +130,16 @@ end;
 
 procedure TFormParametros.btnExcluirClick(Sender: TObject);
 begin
+ try
  If MessageDLG ('Confirma Exclusão do registro ' +DM.unParametros.FieldByName('ID').AsString+ '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unParametros.Delete;
      End;
+ except
+  ShowMessage('Não existem dados a serem excluídos');
+
+ end;
 end;
 
 procedure TFormParametros.btnGravarClick(Sender: TObject);
@@ -153,7 +164,7 @@ begin
   end;
   if dbedtSERIE.Text='' then
   begin
-    ShowMessage('Informe a serie do certificado');
+    ShowMessage('Informe a série do certificado');
     dbedtSERIE.SetFocus;
     Abort;
   end;

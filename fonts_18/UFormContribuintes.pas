@@ -287,7 +287,14 @@ begin
    Abort;
  end;
 
- 
+ if  cbbTPINSC.text='' then
+ begin
+   ShowMessage('Selecione o tipo da Inscrição');
+   pgc1.ActivePage:=ts1;
+   cbbTPINSC.SetFocus;
+   Abort;
+ end;
+  
 
  DM.unContribuintes.Post;
  btnNovo.Enabled:=True;

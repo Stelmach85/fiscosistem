@@ -1015,4 +1015,93 @@ object DM: TDM
     Left = 656
     Top = 560
   end
+  object unConsultaServicos: TUniTable
+    TableName = 'RETCP_SERVICOS_18'
+    Connection = Conexao
+    AfterPost = unRetCP_ServTomAfterPost
+    AfterDelete = unRetCP_ServTomAfterDelete
+    AfterScroll = unRetCP_ServTomAfterScroll
+    Left = 768
+    Top = 488
+    object StringField28: TStringField
+      FieldName = 'EVENTO'
+      Size = 6
+    end
+    object IntegerField6: TIntegerField
+      DisplayLabel = 'Tip. Servi'#231'o'
+      FieldName = 'TPINSCESTABTOM'
+      Required = True
+    end
+    object StringField25: TStringField
+      DisplayLabel = 'Nr. Insc. Tomad.'
+      FieldName = 'NRINSCESTABTOM'
+      Required = True
+      Size = 18
+    end
+    object StringField26: TStringField
+      DisplayLabel = 'CNPJ Prestador'
+      FieldName = 'CNPJPRESTADOR'
+      Required = True
+      EditMask = '99.999.999/9999-99;1;'
+      Size = 18
+    end
+    object IntegerField7: TIntegerField
+      DisplayLabel = 'Ind. Obra'
+      FieldName = 'INDOBRA'
+      Required = True
+    end
+    object StringField27: TStringField
+      DisplayLabel = 'Per. Apur.'
+      FieldName = 'PERAPUR'
+      Required = True
+      EditMask = '9999-99;1;'
+      Size = 7
+    end
+    object cds1: TFloatField
+      DisplayLabel = 'Vlr. Bruto'
+      FieldName = 'VLRTOTALBRUTO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cds2: TFloatField
+      DisplayLabel = 'Vlr. base Ret.'
+      FieldName = 'VLRTOTALBASERET'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cds3: TFloatField
+      DisplayLabel = 'vlr. Ret.'
+      FieldName = 'VLRTOTALRETPRINC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cds4: TFloatField
+      DisplayLabel = 'Vlr. Ret. Adic.'
+      FieldName = 'VLRTOTALRETADIC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cds5: TFloatField
+      DisplayLabel = 'Vlr. N'#227'o Ret.'
+      FieldName = 'VLRTOTALNRETPRINC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cds6: TFloatField
+      DisplayLabel = 'Vlr. Adic N'#227'o Ret.'
+      FieldName = 'VLRTOTALNRETADIC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object IntegerField8: TIntegerField
+      DisplayLabel = 'Ind. CPRB'
+      FieldName = 'INDCPRB'
+      Required = True
+    end
+  end
+  object dsConsultaServicos: TUniDataSource
+    DataSet = unConsultaServicos
+    Left = 768
+    Top = 552
+  end
 end
