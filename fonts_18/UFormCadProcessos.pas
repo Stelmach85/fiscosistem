@@ -39,7 +39,6 @@ type
     dbedtCODSUSP: TDBEdit;
     dbedtDTDECISAO: TDBEdit;
     cbbINDDEPOSITO: TJvDBComboBox;
-    dbedtUFVARA: TDBEdit;
     dbedtCODMUNIC: TDBEdit;
     dbedtIDVARA: TDBEdit;
     cbbINDAUDITORIA: TJvDBComboBox;
@@ -61,6 +60,7 @@ type
     btnConsultar: TBitBtn;
     btnExcluir1: TBitBtn;
     btnSair: TBitBtn;
+    cbbUFVARA: TJvDBComboBox;
     procedure btn1Click(Sender: TObject);
     procedure habilitaCampos;
     procedure DesabilitaCampos;
@@ -77,6 +77,10 @@ type
     procedure btnExcluir1Click(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
+    procedure validaPeriodo(texto:string);
+    procedure dbedtPERAPURExit(Sender: TObject);
+    procedure dbedtINIVALIDExit(Sender: TObject);
+    procedure dbedtFIMVALIDExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,6 +89,7 @@ type
 
 var
   FormCadProcessos: TFormCadProcessos;
+  errodata:Boolean;
 
 implementation
 
@@ -134,7 +139,7 @@ cbbTPPROC.Enabled:=True;
 dbedtCODSUSP.Enabled:=True;
 dbedtDTDECISAO.Enabled:=True;
 cbbINDDEPOSITO.Enabled:=True;
-dbedtUFVARA.Enabled:=True;
+cbbUFVARA.Enabled:=True;
 dbedtCODMUNIC.Enabled:=True;
 dbedtIDVARA.Enabled:=True;
 cbbINDAUDITORIA.Enabled:=True;
@@ -195,6 +200,8 @@ end;
 
 procedure TFormCadProcessos.btnExcluir1Click(Sender: TObject);
 begin
+ try
+
    If MessageDLG ('Confirma Exclusão de todos registros de Processos deste Contribuinte ???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
@@ -204,15 +211,23 @@ begin
         DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
         DM.qryUtil.Execute;
      End;
+ except
+   ShowMessage('Não existem registros para serem excluídos');
+ end;
 end;
 
 procedure TFormCadProcessos.btnExcluirClick(Sender: TObject);
-begin
+begin   
+try
  If MessageDLG ('Confirma Exclusão do registro ' +DM.unProcessos.FieldByName('NRPROC').AsString+ '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unProcessos.Delete;
      End;
+except
+ ShowMessage('Não existem registros para excluír ');
+
+end;
 end;
 
 procedure TFormCadProcessos.btnGravarClick(Sender: TObject);
@@ -273,12 +288,12 @@ begin
    dbedtDTDECISAO.SetFocus;
    Abort;
  end;
- if dbedtUFVARA.Text='' then
+ if cbbUFVARA.Text='' then
  begin
    ShowMessage('Informe a UF da seção judiciária');
-   dbedtUFVARA.SetFocus;
+   cbbUFVARA.SetFocus;
    Abort;
- end;
+ end;  
   if dbedtIDVARA.Text='' then
  begin
    ShowMessage('Informe o Código de identificação da Vara');
@@ -323,9 +338,13 @@ begin
        end
    else
     begin
+        try
          T:=TStringList.Create;
          T.LoadFromFile(lbledtArquivo.Text);
          c:=lbledtSeparador.Text;
+        except
+          ShowMessage('Arquivo de importação não encontrado');
+        end;
          Application.CreateForm(TWaitForm,WaitForm);
          WaitForm.jvspclprgrs1.Caption:='Importando os Processos.Aguarde...';
          WaitForm.Show;
@@ -375,7 +394,6 @@ begin
                 delete(linha,1,pos(c,linha));
 
                 
-
                // tpInsc:=copy(linha,1,pos(c,linha)-1);
                // delete(linha,1,pos(c,linha));
 
@@ -410,6 +428,16 @@ begin
 
                 if Length(nrInsc)=18  then
                 tpInsc:='1' else tpInsc:='2';
+
+                if (perApur='') or (nrProc='') or (indSusp='') or (nrInsc='') 
+                or (iniValid='') or (tpProc='') or (dtDecisao='') or (ufVara='') or (idVara='') then
+                begin
+                  ShowMessage('Existe campo obrigatório não preenchido, por favor corrija o arquivo ');
+                  Exit;
+                end;
+                
+
+                
 
                  if (DM.unProcessos.Locate(('CODIGO;PERAPUR;NRPROC;INDSUSP'),VarArrayOf([Codcurr,perApur,nrProc,indSusp]),[loCaseInsensitive] ))  then
                  begin
@@ -513,6 +541,30 @@ begin
  end;
 end;
 
+procedure TFormCadProcessos.dbedtFIMVALIDExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtFIMVALID.text,6,2));
+ if errodata then
+   dbedtFIMVALID.SetFocus;
+   
+end;
+
+procedure TFormCadProcessos.dbedtINIVALIDExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtINIVALID.text,6,2));
+ if errodata then
+   dbedtINIVALID.SetFocus;
+
+end;
+
+procedure TFormCadProcessos.dbedtPERAPURExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtPERAPUR.text,6,2));
+ if errodata then
+   dbedtPERAPUR.SetFocus;
+  
+end;
+
 procedure TFormCadProcessos.DesabilitaCampos;
 begin
 dbedtPERAPUR.Enabled:=False;
@@ -526,7 +578,7 @@ cbbTPPROC.Enabled:=False;
 dbedtCODSUSP.Enabled:=False;
 dbedtDTDECISAO.Enabled:=False;
 cbbINDDEPOSITO.Enabled:=False;
-dbedtUFVARA.Enabled:=False;
+cbbUFVARA.Enabled:=False;
 dbedtCODMUNIC.Enabled:=False;
 dbedtIDVARA.Enabled:=False;
 cbbINDAUDITORIA.Enabled:=False;
@@ -547,6 +599,20 @@ dm.unConslProcessos.Open;
 
 pgc1.ActivePage:=ts1; 
 
+end;
+
+procedure TFormCadProcessos.validaPeriodo(texto:string);
+begin
+  if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
+  or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
+  or (texto='11') or (texto='12') )then
+  begin
+  ShowMessage('Mês informado esta errado');
+  errodata:=true;
+  end
+  else
+  errodata:=false;
+  
 end;
 
 end.

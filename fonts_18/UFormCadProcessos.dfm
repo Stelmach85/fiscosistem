@@ -167,11 +167,11 @@ object FormCadProcessos: TFormCadProcessos
           ShowHint = True
         end
         object dbedtPERAPUR: TDBEdit
-          Left = 16
+          Left = 18
           Top = 27
           Width = 90
           Height = 19
-          Hint = 'Informe o per'#237'odo de Ref.'
+          Hint = 'Informe o Per'#237'odo de Ref.'
           Ctl3D = False
           DataField = 'PERAPUR'
           DataSource = DM.dsProcessos
@@ -185,13 +185,14 @@ object FormCadProcessos: TFormCadProcessos
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
+          OnExit = dbedtPERAPURExit
         end
         object dbedtNRPROC: TDBEdit
           Left = 231
           Top = 24
           Width = 170
           Height = 19
-          Hint = 'Informe o n'#186' do Processo'
+          Hint = 'Informe o N'#186' do Processo'
           Ctl3D = False
           DataField = 'NRPROC'
           DataSource = DM.dsProcessos
@@ -238,6 +239,8 @@ object FormCadProcessos: TFormCadProcessos
               ' suspensivo'
             '90 - Decis'#227'o Definitiva a favor do Contribuinte'
             '92 - Sem suspens'#227'o da exigibilidade ')
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 2
           Values.Strings = (
             '01'
@@ -264,7 +267,7 @@ object FormCadProcessos: TFormCadProcessos
           Top = 88
           Width = 154
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Informe o N'#186' da Inscri'#231#227'o'
           Ctl3D = False
           DataField = 'NRINSC'
           DataSource = DM.dsProcessos
@@ -291,6 +294,8 @@ object FormCadProcessos: TFormCadProcessos
           Items.Strings = (
             '1 - CNPJ'
             '2 - CPF')
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 3
           Values.Strings = (
             '1'
@@ -321,6 +326,7 @@ object FormCadProcessos: TFormCadProcessos
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
+          OnExit = dbedtINIVALIDExit
         end
         object dbedtFIMVALID: TDBEdit
           Left = 630
@@ -341,6 +347,7 @@ object FormCadProcessos: TFormCadProcessos
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          OnExit = dbedtFIMVALIDExit
         end
         object cbbTPPROC: TJvDBComboBox
           Left = 16
@@ -354,6 +361,8 @@ object FormCadProcessos: TFormCadProcessos
           Items.Strings = (
             '1 - Administrativo'
             '2 - Judicial')
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 7
           Values.Strings = (
             '1'
@@ -369,7 +378,7 @@ object FormCadProcessos: TFormCadProcessos
           Top = 167
           Width = 186
           Height = 19
-          Hint = 'Informe o c'#243'd. indicativo da suspens'#227'o de exigibilidde'
+          Hint = 'Informe o C'#243'd. Indicativo da Suspens'#227'o de Exigibilidde'
           Ctl3D = False
           DataField = 'CODSUSP'
           DataSource = DM.dsProcessos
@@ -416,6 +425,8 @@ object FormCadProcessos: TFormCadProcessos
           Items.Strings = (
             'S - Sim'
             'N - N'#227'o')
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 10
           Values.Strings = (
             'S'
@@ -426,32 +437,12 @@ object FormCadProcessos: TFormCadProcessos
           ListSettings.OutfilteredValueFont.Name = 'Tahoma'
           ListSettings.OutfilteredValueFont.Style = []
         end
-        object dbedtUFVARA: TDBEdit
-          Left = 16
-          Top = 247
-          Width = 49
-          Height = 19
-          Hint = 'Informe a UF da se'#231#227'o judicial'
-          Ctl3D = False
-          DataField = 'UFVARA'
-          DataSource = DM.dsProcessos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 11
-        end
         object dbedtCODMUNIC: TDBEdit
           Left = 155
           Top = 247
           Width = 102
           Height = 19
-          Hint = 'Informe o C'#243'd do Mun'#237'cipio'
+          Hint = 'Informe o C'#243'd. do Mun'#237'cipio'
           Ctl3D = False
           DataField = 'CODMUNIC'
           DataSource = DM.dsProcessos
@@ -464,14 +455,14 @@ object FormCadProcessos: TFormCadProcessos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 12
+          TabOrder = 11
         end
         object dbedtIDVARA: TDBEdit
           Left = 299
           Top = 247
           Width = 102
           Height = 19
-          Hint = 'Informe o c'#243'd da Vara'
+          Hint = 'Informe o c'#243'd. da Vara'
           Ctl3D = False
           DataField = 'IDVARA'
           DataSource = DM.dsProcessos
@@ -484,7 +475,7 @@ object FormCadProcessos: TFormCadProcessos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 13
+          TabOrder = 12
         end
         object cbbINDAUDITORIA: TJvDBComboBox
           Left = 464
@@ -498,7 +489,9 @@ object FormCadProcessos: TFormCadProcessos
           Items.Strings = (
             '1 - Pr'#243'prio Contribuinte'
             '2 - Outra entidade, empresa ou empregado ')
-          TabOrder = 14
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 13
           Values.Strings = (
             '1'
             '2')
@@ -507,6 +500,81 @@ object FormCadProcessos: TFormCadProcessos
           ListSettings.OutfilteredValueFont.Height = -11
           ListSettings.OutfilteredValueFont.Name = 'Tahoma'
           ListSettings.OutfilteredValueFont.Style = []
+        end
+        object cbbUFVARA: TJvDBComboBox
+          Left = 16
+          Top = 247
+          Width = 67
+          Height = 22
+          Hint = 'Informe a UF da Se'#231#227'o Judicial'
+          Style = csOwnerDrawFixed
+          DataField = 'UFVARA'
+          DataSource = DM.dsProcessos
+          Items.Strings = (
+            'AC'
+            'AL'
+            'AM'
+            'AP'
+            'BA'
+            'CE'
+            'DF'
+            'ES'
+            'GO'
+            'MA'
+            'MT'
+            'MS'
+            'MG'
+            'PA'
+            'PB'
+            'PR'
+            'PE'
+            'PI'
+            'RJ'
+            'RN'
+            'RS'
+            'RO'
+            'RR'
+            'SC'
+            'SP'
+            'SE'
+            'TO')
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 14
+          Values.Strings = (
+            'AC'
+            'AL'
+            'AM'
+            'AP'
+            'BA'
+            'CE'
+            'DF'
+            'ES'
+            'GO'
+            'MA'
+            'MT'
+            'MS'
+            'MG'
+            'PA'
+            'PB'
+            'PR'
+            'PE'
+            'PI'
+            'RJ'
+            'RN'
+            'RS'
+            'RO'
+            'RR'
+            'SC'
+            'SP'
+            'SE'
+            'TO')
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+          OnChange = cbbTPINSCChange
         end
       end
       object dbnvgr1: TDBNavigator
@@ -880,7 +948,7 @@ object FormCadProcessos: TFormCadProcessos
         TitleFont.Style = [fsBold]
       end
       object btnImportar: TBitBtn
-        Left = 452
+        Left = 456
         Top = 458
         Width = 75
         Height = 25

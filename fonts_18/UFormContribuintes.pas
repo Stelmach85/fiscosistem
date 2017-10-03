@@ -316,10 +316,10 @@ begin
  DM.unContribuintes.Insert;
  DM.unContribuintes.FieldByName('Codigo').AsInteger:= codigoNovo;
 
- DM.unContribuintesNRINSC.EditMask:='99.999.999/9999-99;1; ';
+ //DM.unContribuintesNRINSC.EditMask:='99.999.999/9999-99;1; ';
  dbedtINIVALID.Text:='01/01/2018';
  dbedtFIMVALID.Text:='31/12/2018';
- cbbTPINSC.ItemIndex:=0;
+ //cbbTPINSC.ItemIndex:=0;
  
  
  btnNovo.Enabled:=False;
