@@ -178,6 +178,8 @@ type
     procedure btnConsultarClick(Sender: TObject);
     procedure btnExcluir1Click(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure validaPeriodo(texto:string);
+    procedure dbedtPERAPURExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -186,6 +188,7 @@ type
 
 var
   FormCadRetCP_Servicos: TFormCadRetCP_Servicos;
+  errodata,alterando:Boolean;
 
 implementation
 
@@ -534,11 +537,22 @@ procedure TFormCadRetCP_Servicos.btnIncluir2Click(Sender: TObject);
 var
 novoCodigo:Integer;
 begin
+ try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select Max(id_NF) as codigo from DetalheNF_Servicos_18 where ID_SERVICO=:codigo and codigo=:cod ');
  DM.qryUtil.ParamByName('codigo').AsInteger:=DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger;
-  DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+ DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
  DM.qryUtil.Open;
  novoCodigo:= DM.qryUtil.FieldByName('codigo').AsInteger+1;
 
@@ -561,6 +575,18 @@ end;
 
 procedure TFormCadRetCP_Servicos.btnIncluir3Click(Sender: TObject);
 begin
+
+ try
+   if DM.unDetalheNF_ServPrest.FieldByName('ID_NF').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados do Documento primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados do Documento primeiro');
+     Exit;
+ end;
+
  DM.unTiposServPrest_NF.Insert;
  DM.unTiposServPrest_NF.FieldByName('ID_SERVICO').AsInteger:= DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger;
  DM.unTiposServPrest_NF.FieldByName('ID_NF').AsInteger:= DM.unDetalheNF_ServPrest.FieldByName('ID_NF').AsInteger;
@@ -587,6 +613,17 @@ procedure TFormCadRetCP_Servicos.btnIncluir4Click(Sender: TObject);
 var
 novoCodigo:Integer;
 begin
+try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+ 
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select Max(id_processo) as codigo from InfProcessos_18 where ID_SERVICO=:codigo ');
@@ -614,6 +651,18 @@ procedure TFormCadRetCP_Servicos.btnIncluir5Click(Sender: TObject);
 var
 novoCodigo:Integer;
 begin
+
+try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+ 
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select Max(id_processo) as codigo from InfProcessosADIC_18 where ID_SERVICO=:codigo ');
@@ -658,6 +707,7 @@ DesabilitaCampos3;
  btnCancelar3.Enabled:=False;
  btnGravar3.Enabled:=False;
  dbnvgr3.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnCancelar4Click(Sender: TObject);
@@ -672,6 +722,7 @@ DM.unInfProcessos.Cancel;
  btnCancelar4.Enabled:=False;
  btnGravar4.Enabled:=False;
  dbnvgr4.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnCancelar5Click(Sender: TObject);
@@ -686,6 +737,7 @@ DM.unInfProcessosAdic.Cancel;
  btnCancelar5.Enabled:=False;
  btnGravar5.Enabled:=False;
  dbnvgr5.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar2Click(Sender: TObject);
@@ -698,7 +750,8 @@ begin
  btnCancelar2.Enabled:=True;
  btnGravar2.Enabled:=True;
  dbnvgr2.Enabled:=False;
-  btnAlterar2.Enabled:=False;
+ btnAlterar2.Enabled:=False;
+ alterando:=True;
 end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar3Click(Sender: TObject);
@@ -712,6 +765,7 @@ habilitaCampos3;
  btnGravar3.Enabled:=True;
  dbnvgr3.Enabled:=False;
  btnAlterar3.Enabled:=False;
+ alterando:=True;
 end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar4Click(Sender: TObject);
@@ -725,6 +779,7 @@ DM.unInfProcessos.Edit;
  btnGravar4.Enabled:=True;
  dbnvgr4.Enabled:=False;
  btnAlterar4.Enabled:=False;
+ alterando:=True;
  
 end;
 
@@ -739,6 +794,7 @@ DM.unInfProcessosAdic.Edit;
  btnGravar5.Enabled:=True;
  dbnvgr5.Enabled:=False;
  btnAlterar5.Enabled:=False;
+ alterando:=True;
 end;
 
 procedure TFormCadRetCP_Servicos.btnAlterarClick(Sender: TObject);
@@ -752,6 +808,7 @@ begin
  btnGravar.Enabled:=True;
  dbnvgr2.Enabled:=False;
  btnAlterar.Enabled:=False;
+ alterando:=True;
 end;
 
 procedure TFormCadRetCP_Servicos.btncancelar2Click(Sender: TObject);
@@ -766,6 +823,7 @@ btnExcluir2.Enabled:=True;
  btnCancelar2.Enabled:=False;
  btnGravar2.Enabled:=False;
  dbnvgr2.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnCancelarClick(Sender: TObject);
@@ -778,6 +836,7 @@ DesabilitaCampos1;
  btnNovo.Enabled:=True;
  btnCancelar.Enabled:=False;
  btnGravar.Enabled:=False;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnConsultarClick(Sender: TObject);
@@ -803,7 +862,8 @@ end;
 
 procedure TFormCadRetCP_Servicos.btnExcluir1Click(Sender: TObject);
 begin
-If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
+try
+  If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.qryUtil.Close;
@@ -811,53 +871,79 @@ If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
         DM.qryUtil.SQL.Add('delete from RETCP_SERVICOS_18 where codigo=:cod')  ;
         DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
         DM.qryUtil.Execute;
+        ShowMessage('Dados Excluídos com sucesso');
+        dm.unRetCP_ServTom.Close;
+        dm.unRetCP_ServTom.Open;        
+        btnConsultar.OnClick(self);
      End;
+except
+   ShowMessage('Não há Dados para serem excluídos');
+end;
 end;
 
 procedure TFormCadRetCP_Servicos.btnExcluir2Click(Sender: TObject);
 begin
+try
     If MessageDLG ('Confirma Exclusão do Documento ' + '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unDetalheNF_ServPrest.Delete;
      End;
+ except
+    ShowMessage('Não existem dados para serem excluídos');
+ end;
 end;
 
 procedure TFormCadRetCP_Servicos.btnExcluir3Click(Sender: TObject);
 begin
+ try
     If MessageDLG ('Confirma Exclusão do Serviço ' + '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unTiposServPrest_NF.Delete;
      End;
+ except
+    ShowMessage('Não existem dados para serem excluídos');
+ end;
 end;
 
 procedure TFormCadRetCP_Servicos.btnExcluir4Click(Sender: TObject);
 begin
+ try
     If MessageDLG ('Confirma Exclusão do Processo ' + '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unInfProcessos.Delete;
      End;
+  except
+    ShowMessage('Não existem dados para serem excluídos');
+ end;
 end;
 
 procedure TFormCadRetCP_Servicos.btnExcluir5Click(Sender: TObject);
 begin
+ try
      If MessageDLG ('Confirma Exclusão do Processo ' + '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unInfProcessosAdic.Delete;
      End;
+ except
+    ShowMessage('Não existem dados para serem excluídos');
+ end;
 end;
 
 procedure TFormCadRetCP_Servicos.btnExcluirClick(Sender: TObject);
 begin
-
+try
    If MessageDLG ('Confirma Exclusão do registro ' + '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.unRetCP_ServTom.Delete;
      End;
+ except
+    ShowMessage('Não existem dados para serem excluídos');
+ end;
 
 end;
 
@@ -883,6 +969,8 @@ begin
    Exit;
  end;
 
+ if alterando=False then
+begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select * from detalheNF_Servicos_18 where');
@@ -899,6 +987,7 @@ begin
    Exit;
  end;
  
+end;
  
  
  
@@ -909,16 +998,18 @@ begin
   DM.unDetalheNF_ServPrest.Post;
   DesabilitaCampos2;
 
-btnExcluir2.Enabled:=True;
+ btnExcluir2.Enabled:=True;
  btnAlterar2.Enabled:=True;
  btnIncluir2.Enabled:=True;
  btnCancelar2.Enabled:=False;
  btnGravar2.Enabled:=False;
  dbnvgr2.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnGravar3Click(Sender: TObject);
 begin
+
   if cbbCLASSTRIB.Text='' then
   begin
     ShowMessage('Selecione o Serviço');
@@ -926,6 +1017,8 @@ begin
     Exit;
   end;
 
+ if alterando=false then
+begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select * from tiposServicosNF_18 where');
@@ -940,6 +1033,7 @@ begin
    ShowMessage('Serviço já informado para este documento');
    Exit;
  end;
+end;
   
   
 
@@ -951,6 +1045,7 @@ DM.unTiposServPrest_NF.Post;
  btnCancelar3.Enabled:=False;
  dbnvgr3.Enabled:=True;
  DesabilitaCampos3;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnGravar4Click(Sender: TObject);
@@ -969,6 +1064,8 @@ begin
    Exit;
  end;
 
+ if alterando=false then
+ begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select * from InfProcessos_18 where');
@@ -981,6 +1078,7 @@ begin
  begin
    ShowMessage('Processo já cadastrado para este período');
    Exit;
+ end;
  end;
  
  
@@ -996,6 +1094,7 @@ btnExcluir4.Enabled:=True;
  btnCancelar4.Enabled:=False;
  btnGravar4.Enabled:=False;
  dbnvgr4.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnGravar5Click(Sender: TObject);
@@ -1013,6 +1112,8 @@ begin
    Exit;
  end;
 
+ if alterando=False then
+begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.SQL.Add('select * from InfProcessosAdic_18 where');
@@ -1026,10 +1127,11 @@ begin
    ShowMessage('Processo já cadastrado para este período');
    Exit;
  end;
+end;
 
   DM.unInfProcessosAdic.Post;
 
-    DesabilitaCampos5;
+  DesabilitaCampos5;
 
 btnExcluir5.Enabled:=True;
  btnAlterar5.Enabled:=True;
@@ -1037,10 +1139,23 @@ btnExcluir5.Enabled:=True;
  btnCancelar5.Enabled:=False;
  btnGravar5.Enabled:=False;
  dbnvgr5.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnGravarClick(Sender: TObject);
 begin
+  if cbbEVENTO.Text='' then
+  begin
+   ShowMessage('Informe o evento');
+    cbbEVENTO.SetFocus;
+    Exit;
+  end;
+  if cbbTPINSCESTABTOM.Text='' then
+  begin
+    ShowMessage('Informe o Tipo de Inscrição');
+    cbbTPINSCESTABTOM.SetFocus;
+    Exit;
+  end;
   if dbedtNRINSCESTABTOM.Text='  .   .   /    -  ' then
   begin
     ShowMessage('Informe a Inscrição do Contribuinte tomador');
@@ -1076,6 +1191,9 @@ begin
    Exit;
  end;
 
+ 
+ if alterando then
+ begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
  DM.qryUtil.sql.Add(' select * from RetCP_Servicos_18');
@@ -1085,10 +1203,12 @@ begin
  DM.qryUtil.ParamByName('prest').AsString:= dbedtCNPJPRESTADOR.Text;
  DM.qryUtil.ParamByName('per').AsString:=  dbedtPERAPUR.Text;
  DM.qryUtil.Open;
- if not DM.qryUtil.eof then
+ if not DM.qryUtil.Eof then
  begin
    ShowMessage('Já existe un registro cadastrado neste período para este tomador e prestado');
    Exit;
+ end;
+ 
  end;
  
  
@@ -1112,6 +1232,7 @@ begin
  btnAlterar.Enabled:=True;
  btnCancelar.Enabled:=False;
  dbnvgr2.Enabled:=True;
+ alterando:=False;
 end;
 
 procedure TFormCadRetCP_Servicos.btnNovoClick(Sender: TObject);
@@ -1130,6 +1251,14 @@ begin
  novoCodigo:= DM.qryUtil.FieldByName('codigo').AsInteger+1;
  DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger:= novoCodigo;
 
+ DM.unRetCP_ServTom.FieldByName('VLRTOTALBRUTO').AsFloat:=  0;
+ DM.unRetCP_ServTom.FieldByName('VLRTOTALBASERET').AsFloat:=  0;
+ DM.unRetCP_ServTom.FieldByName('VLRTOTALRETPRINC').AsFloat:=  0;
+ DM.unRetCP_ServTom.FieldByName('VLRTOTALRETADIC').AsFloat:= 0;
+ DM.unRetCP_ServTom.FieldByName('VLRTOTALNRETPRINC').AsFloat:= 0;
+ DM.unRetCP_ServTom.FieldByName('VLRTOTALNRETADIC').AsFloat:= 0;
+
+ 
  btnNovo.Enabled:=False;
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
@@ -1157,9 +1286,16 @@ begin
   end
   else 
   begin  
-    DM.unRetCP_ServTomNRINSCESTABTOM.EditMask:='99.999.999/9999-99;1; ' ; 
+    DM.unRetCP_ServTomNRINSCESTABTOM.EditMask:='99.999.999/9999-99;1; ' ;
     cbbTPINSCESTABTOM.ItemIndex:=1;
   end;
+end;
+
+procedure TFormCadRetCP_Servicos.dbedtPERAPURExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtPERAPUR.text,6,2));
+ if errodata then
+   dbedtPERAPUR.SetFocus;
 end;
 
 procedure TFormCadRetCP_Servicos.FormShow(Sender: TObject);
@@ -1388,6 +1524,21 @@ begin
   btnExcluir.Enabled:=True;
   grp1.Enabled:=True;
 end;
+
+procedure TFormCadRetCP_Servicos.validaPeriodo(texto:string);
+begin
+  if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
+  or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
+  or (texto='11') or (texto='12') )then
+  begin
+  ShowMessage('Mês informado esta errado');
+  errodata:=true;
+  end
+  else
+  errodata:=false;
+  
+end;
+
 
 
 end.

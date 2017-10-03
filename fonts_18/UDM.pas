@@ -184,27 +184,9 @@ type
     unInfProcessosCODIGO: TIntegerField;
     dsInfProcessosAdic: TUniDataSource;
     unProdRural: TUniTable;
-    unProdRuralCODIGO: TIntegerField;
-    unProdRuralPERAPUR: TStringField;
-    cdsProdRuralVLRRECBRUTATOTAL: TFloatField;
-    cdsProdRuralVLRCPAPUR: TFloatField;
-    unProdRuralNRINSCBENEF: TStringField;
-    cdsProdRuralVLRRATAPUR: TFloatField;
-    cdsProdRuralVLRSENARAPUR: TFloatField;
     dsProdRural: TUniDataSource;
-    unProdRuralINDCOM: TIntegerField;
-    cdsProdRuralVLRCPSUSPTOTAL: TFloatField;
-    cdsProdRuralVLRRATSUSPTOTAL: TFloatField;
-    cdsProdRuralVLRSENARSUSPTOTAL: TFloatField;
     unProcAdmJud: TUniTable;
     dsProcAdmJud: TUniDataSource;
-    unProcAdmJudCODIGO: TIntegerField;
-    unProcAdmJudPERAPUR: TStringField;
-    unProcAdmJudNRPROC: TStringField;
-    unProcAdmJudTPPROC: TIntegerField;
-    cdsProcAdmJudVLRCPSUSP: TFloatField;
-    cdsProcAdmJudVLRRATSUSP: TFloatField;
-    cdsProcAdmJudVLRSENARSUSP: TFloatField;
     unConsultaServicos: TUniTable;
     IntegerField6: TIntegerField;
     StringField25: TStringField;
@@ -220,6 +202,31 @@ type
     IntegerField8: TIntegerField;
     StringField28: TStringField;
     dsConsultaServicos: TUniDataSource;
+    unProdRuralCODIGO: TIntegerField;
+    unProdRuralPERAPUR: TStringField;
+    unProdRuralNRINSCESTAB: TStringField;
+    cdsProdRuralVLRRECBRUTATOTAL: TFloatField;
+    cdsProdRuralVLRCPAPUR: TFloatField;
+    cdsProdRuralVLRRATAPUR: TFloatField;
+    cdsProdRuralVLRSENARAPUR: TFloatField;
+    cdsProdRuralVLRCPSUSPTOTAL: TFloatField;
+    cdsProdRuralVLRRATSUSPTOTAL: TFloatField;
+    cdsProdRuralVLRSENARSUSPTOTAL: TFloatField;
+    unProcAdmJudCODIGO: TIntegerField;
+    unProcAdmJudPERAPUR: TStringField;
+    unProcAdmJudNRINSCESTAB: TStringField;
+    unProcAdmJudNRPROC: TStringField;
+    unProcAdmJudTPPROC: TIntegerField;
+    cdsProcAdmJudVLRCPSUSP: TFloatField;
+    cdsProcAdmJudVLRSENARSUSP: TFloatField;
+    unTipoComProdRural: TUniTable;
+    dsTipoComProdRural: TUniDataSource;
+    unTipoComProdRuralCODIGO: TIntegerField;
+    unTipoComProdRuralPERAPUR: TStringField;
+    unTipoComProdRuralNRINSCESTAB: TStringField;
+    unTipoComProdRuralINDCOM: TIntegerField;
+    cdsTipoComProdRuralVLRRECBRUTA: TFloatField;
+    cdsProcAdmJudVLRRATSUSP: TFloatField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);
@@ -243,6 +250,8 @@ type
     procedure unProdRuralAfterScroll(DataSet: TDataSet);
     procedure unProdRuralAfterDelete(DataSet: TDataSet);
     procedure unProdRuralAfterPost(DataSet: TDataSet);
+    procedure unTipoComProdRuralAfterPost(DataSet: TDataSet);
+    procedure unTipoComProdRuralAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -507,6 +516,26 @@ DM.unInfProcessos.FilterSQL:='ID_SERVICO='+ IntToStr(DM.unRetCP_ServTom.FieldByN
 DM.unInfProcessos.Filtered:=True;
 DM.unInfProcessos.Open;
 
+end;
+
+procedure TDM.unTipoComProdRuralAfterDelete(DataSet: TDataSet);
+begin
+ try
+   unTipoComProdRural.CommitUpdates;
+   unTipoComProdRural.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unTipoComProdRuralAfterPost(DataSet: TDataSet);
+begin
+  try
+   unTipoComProdRural.CommitUpdates;
+   unTipoComProdRural.ApplyUpdates();
+except
+
+ end;
 end;
 
 procedure TDM.unTiposServPrest_NFAfterDelete(DataSet: TDataSet);

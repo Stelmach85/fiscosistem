@@ -1,6 +1,6 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 597
+  Height = 766
   Width = 880
   object Conexao: TUniConnection
     ProviderName = 'InterBase'
@@ -916,53 +916,33 @@ object DM: TDM
     object unProdRuralPERAPUR: TStringField
       FieldName = 'PERAPUR'
       Required = True
-      EditMask = '9999-99;1;'
       Size = 7
+    end
+    object unProdRuralNRINSCESTAB: TStringField
+      FieldName = 'NRINSCESTAB'
+      Required = True
+      Size = 18
     end
     object cdsProdRuralVLRRECBRUTATOTAL: TFloatField
       FieldName = 'VLRRECBRUTATOTAL'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRCPAPUR: TFloatField
       FieldName = 'VLRCPAPUR'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
-    end
-    object unProdRuralNRINSCBENEF: TStringField
-      FieldName = 'NRINSCBENEF'
-      Required = True
-      EditMask = '99.999.999/9999-99;1'
-      Size = 18
     end
     object cdsProdRuralVLRRATAPUR: TFloatField
       FieldName = 'VLRRATAPUR'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
-    end
-    object unProdRuralINDCOM: TIntegerField
-      FieldName = 'INDCOM'
-      Required = True
     end
     object cdsProdRuralVLRSENARAPUR: TFloatField
       FieldName = 'VLRSENARAPUR'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRCPSUSPTOTAL: TFloatField
       FieldName = 'VLRCPSUSPTOTAL'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRRATSUSPTOTAL: TFloatField
       FieldName = 'VLRRATSUSPTOTAL'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRSENARSUSPTOTAL: TFloatField
       FieldName = 'VLRSENARSUSPTOTAL'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
     end
   end
   object dsProdRural: TUniDataSource
@@ -971,7 +951,7 @@ object DM: TDM
     Top = 544
   end
   object unProcAdmJud: TUniTable
-    TableName = 'PROCADMJUD_TOMADOR_18'
+    TableName = 'PROCADMJUD_PRODRURAL_18'
     Connection = Conexao
     Left = 656
     Top = 504
@@ -982,8 +962,12 @@ object DM: TDM
     object unProcAdmJudPERAPUR: TStringField
       FieldName = 'PERAPUR'
       Required = True
-      EditMask = '9999-99;1;'
       Size = 7
+    end
+    object unProcAdmJudNRINSCESTAB: TStringField
+      FieldName = 'NRINSCESTAB'
+      Required = True
+      Size = 18
     end
     object unProcAdmJudNRPROC: TStringField
       FieldName = 'NRPROC'
@@ -996,18 +980,12 @@ object DM: TDM
     end
     object cdsProcAdmJudVLRCPSUSP: TFloatField
       FieldName = 'VLRCPSUSP'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
-    end
-    object cdsProcAdmJudVLRRATSUSP: TFloatField
-      FieldName = 'VLRRATSUSP'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
     end
     object cdsProcAdmJudVLRSENARSUSP: TFloatField
       FieldName = 'VLRSENARSUSP'
-      DisplayFormat = '#0.00'
-      EditFormat = '#0.00'
+    end
+    object cdsProcAdmJudVLRRATSUSP: TFloatField
+      FieldName = 'VLRRATSUSP'
     end
   end
   object dsProcAdmJud: TUniDataSource
@@ -1103,5 +1081,39 @@ object DM: TDM
     DataSet = unConsultaServicos
     Left = 768
     Top = 552
+  end
+  object unTipoComProdRural: TUniTable
+    TableName = 'TIPOCOMPRODRURAL_18'
+    Connection = Conexao
+    AfterPost = unTipoComProdRuralAfterPost
+    AfterDelete = unTipoComProdRuralAfterDelete
+    Left = 32
+    Top = 592
+    object unTipoComProdRuralCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unTipoComProdRuralPERAPUR: TStringField
+      FieldName = 'PERAPUR'
+      Required = True
+      Size = 7
+    end
+    object unTipoComProdRuralNRINSCESTAB: TStringField
+      FieldName = 'NRINSCESTAB'
+      Required = True
+      Size = 18
+    end
+    object unTipoComProdRuralINDCOM: TIntegerField
+      FieldName = 'INDCOM'
+      Required = True
+    end
+    object cdsTipoComProdRuralVLRRECBRUTA: TFloatField
+      FieldName = 'VLRRECBRUTA'
+    end
+  end
+  object dsTipoComProdRural: TUniDataSource
+    DataSet = unTipoComProdRural
+    Left = 32
+    Top = 648
   end
 end
