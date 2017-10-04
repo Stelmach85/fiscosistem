@@ -194,7 +194,7 @@ object FormParametros: TFormParametros
         Left = 14
         Top = 20
         Width = 135
-        Height = 16
+        Height = 26
         Caption = 'Caminho do XML Importado:'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -203,7 +203,7 @@ object FormParametros: TFormParametros
         Left = 15
         Top = 74
         Width = 238
-        Height = 18
+        Height = 26
         Caption = 'Caminho do XML Gerado e Assinado pelo Sistema:'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -212,7 +212,7 @@ object FormParametros: TFormParametros
         Left = 15
         Top = 131
         Width = 196
-        Height = 14
+        Height = 26
         Caption = 'Caminho do XML Transmitido para a RFB:'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -221,7 +221,7 @@ object FormParametros: TFormParametros
         Left = 15
         Top = 186
         Width = 234
-        Height = 15
+        Height = 26
         Caption = 'Caminho do XML Retornado sem Erros pela RFB :'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -230,7 +230,7 @@ object FormParametros: TFormParametros
         Left = 15
         Top = 240
         Width = 234
-        Height = 15
+        Height = 26
         Caption = 'Caminho do XML Retornado com Erros pela RFB :'#13#10
         ParentShowHint = False
         ShowHint = True
@@ -799,7 +799,7 @@ object FormParametros: TFormParametros
     Top = 599
     Width = 75
     Height = 25
-    Hint = 'Cancela Opera'#231#227'o Realizada'
+    Hint = 'Fechar'
     Caption = 'Fechar'
     DoubleBuffered = True
     Font.Charset = DEFAULT_CHARSET

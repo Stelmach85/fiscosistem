@@ -304,7 +304,7 @@ object FormConexao: TFormConexao
       Top = 89
       Width = 182
       Height = 19
-      Hint = 'hostname do local onde est'#225' o Banco '
+      Hint = 'Hostname do Local onde est'#225' o Banco '
       BevelKind = bkFlat
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET

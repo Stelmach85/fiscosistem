@@ -115,6 +115,12 @@ begin
  btnCancelar.Enabled:=True;
  grpCertificado.Enabled:=True;
  grpXML.Enabled:=True;
+
+ btnExcluir.Enabled:=False;
+ btnNovo.Enabled:=False;
+ btnCancelar.Enabled:=True;
+ btnGravar.Enabled:=True;
+ dbnvgr1.Enabled:=False;
 end;
 
 procedure TFormParametros.btnCancelarClick(Sender: TObject);
@@ -126,6 +132,13 @@ begin
  btnCancelar.Enabled:=False;
  grpCertificado.Enabled:=False;
  grpXML.Enabled:=False;
+ 
+ btnExcluir.Enabled:=True;
+ btnAlterar.Enabled:=True;
+ btnNovo.Enabled:=True;
+ btnCancelar.Enabled:=False;
+ btnGravar.Enabled:=False;
+ dbnvgr1.Enabled:=True;
 end;
 
 procedure TFormParametros.btnExcluirClick(Sender: TObject);
@@ -209,6 +222,11 @@ begin
  btnCancelar.Enabled:=False;
  grpCertificado.Enabled:=False;
  grpXML.Enabled:=False;
+ 
+ btnExcluir.Enabled:=True;
+ btnAlterar.Enabled:=True;
+ btnCancelar.Enabled:=False;
+ dbnvgr1.Enabled:=True;
 end;
 
 procedure TFormParametros.btnLocalizarClick(Sender: TObject);
@@ -229,6 +247,11 @@ DM.unParametros.FieldByName('Codigo').AsInteger:= Codcurr;
 
  grpCertificado.Enabled:=True;
  grpXML.Enabled:=True;
+
+   btnExcluir.Enabled:=False;
+   btnAlterar.Enabled:=False;
+   btnCancelar.Enabled:=True;
+   dbnvgr1.Enabled:=False;
 end;
 
 procedure TFormParametros.FormShow(Sender: TObject);
