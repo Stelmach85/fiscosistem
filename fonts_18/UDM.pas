@@ -227,6 +227,18 @@ type
     unTipoComProdRuralINDCOM: TIntegerField;
     cdsTipoComProdRuralVLRRECBRUTA: TFloatField;
     cdsProcAdmJudVLRRATSUSP: TFloatField;
+    qryConsultaProdRural: TUniQuery;
+    dsConsultaProdRural: TUniDataSource;
+    qryConsultaProdRuralPERAPUR: TStringField;
+    cdsConsultaProdRuralVLRRECBRUTATOTAL: TFloatField;
+    cdsConsultaProdRuralVLRCPAPUR: TFloatField;
+    cdsConsultaProdRuralVLRRATAPUR: TFloatField;
+    cdsConsultaProdRuralVLRSENARAPUR: TFloatField;
+    cdsConsultaProdRuralVLRCPSUSPTOTAL: TFloatField;
+    cdsConsultaProdRuralVLRRATSUSPTOTAL: TFloatField;
+    cdsConsultaProdRuralVLRSENARSUSPTOTAL: TFloatField;
+    qryConsultaProdRuralINDCOM: TIntegerField;
+    cdsConsultaProdRuralVLRRECBRUTA: TFloatField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);
@@ -465,10 +477,18 @@ begin
   begin
     DM.unProcAdmJud.Close;
     DM.unProcAdmJud.Filtered:=False;
-    DM.unProcAdmJud.FilterSQL:='codigo='+ IntToStr(codcurr) + ' and PERAPUR= ''' + unProdRural.FieldByName('PERAPUR').AsString +'''' ;
+    DM.unProcAdmJud.FilterSQL:='codigo='+ IntToStr(codcurr) + ' and PERAPUR= ''' + unProdRural.FieldByName('PERAPUR').AsString +''' and NrinscEstab= '''+ unProdRural.FieldByName('NrinscEstab').AsString + '''';
     DM.unProcAdmJud.Filtered:=True;
     DM.unProcAdmJud.Open;
+
+    DM.unTipoComProdRural.close;
+    DM.unTipoComProdRural.Filtered:=False;
+    DM.unTipoComProdRural.FilterSQL:='codigo='+ IntToStr(codcurr) + ' and PERAPUR= ''' + unProdRural.FieldByName('PERAPUR').AsString +''' and NrinscEstab= '''+ unProdRural.FieldByName('NrinscEstab').AsString + '''';
+    DM.unTipoComProdRural.Filtered:=True;
+    DM.unTipoComProdRural.Open;
+    
   end;
+  
 end;
 
 procedure TDM.unRetCP_ServTomAfterDelete(DataSet: TDataSet);

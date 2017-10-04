@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DBCtrls, Grids, DBGrids, CRGrid, ExtCtrls, StdCtrls, Buttons,
-  JvExStdCtrls, JvCombobox, JvDBCombobox, Mask, ComCtrls;
+  JvExStdCtrls, JvCombobox, JvDBCombobox, Mask, ComCtrls, db;
 
 type
   TFormCadComProdRural = class(TForm)
@@ -86,6 +86,7 @@ type
     lbl3: TLabel;
     lbl9: TLabel;
     dbedtVLRRECBRUTA: TDBEdit;
+    OpenArquivo: TOpenDialog;
     procedure FormShow(Sender: TObject);
     procedure btnIncluir1Click(Sender: TObject);
     procedure btnGravar1Click(Sender: TObject);
@@ -107,6 +108,14 @@ type
     procedure btnAlterar3Click(Sender: TObject);
     procedure btnExcluir3Click(Sender: TObject);
     procedure btnCancelar3Click(Sender: TObject);
+    procedure btnLocalizarClick(Sender: TObject);
+    procedure btnImportarClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure btnExcluir1Click(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure validaPeriodo(texto:string);
+    procedure dbedtPERAPURExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -115,10 +124,11 @@ type
 
 var
   FormCadComProdRural: TFormCadComProdRural;
+  errodata:Boolean;
 
 implementation
 
-uses UDM, frm_REINF;
+uses UDM, frm_REINF, Wait, UVerificaSistema;
 
 {$R *.dfm}
 
@@ -134,6 +144,13 @@ begin
  btnCancelar2.Enabled:=False;
  btnGravar2.Enabled:=False;
  dbnvgr3.Enabled:=True;
+
+ dbnvgr2.Enabled:=true; 
+ btnGravar1.Enabled:=true;
+ btnAlterar1.Enabled:=true;
+ btnIncluir1.Enabled:=true;
+ btnExcluir.Enabled:=true;
+ btnCancelar.Enabled:=true; 
 end;
 
 procedure TFormCadComProdRural.btnCancelar3Click(Sender: TObject);
@@ -151,11 +168,214 @@ begin
 
  pnl1.Enabled:=True;
  pnl2.Enabled:=True;
+
+  dbnvgr2.Enabled:=true; 
+ btnGravar1.Enabled:=true;
+ btnAlterar1.Enabled:=true;
+ btnIncluir1.Enabled:=true;
+ btnExcluir.Enabled:=true;
+ btnCancelar.Enabled:=true; 
 end;
 
 procedure TFormCadComProdRural.btn1Click(Sender: TObject);
 begin
 Close;
+end;
+
+procedure TFormCadComProdRural.btnImportarClick(Sender: TObject);
+var
+ VerificaSistema:Verifica;
+ T:TStringList;
+ I:integer;
+ importou:boolean;
+ C,Linha:string;
+ registro,perapur,nrInscestab,indcom,vlrRecBruta,vlrCPApur,vlrRatApur,VlrSenarApur :string;
+ NrProc,tpproc,vlrcpSusp,VlrRatsusp,vlrSenarSusp :string  ;
+begin
+ if lbledtArquivo.Text='' then
+   begin
+     showmessage('Selecione o arquivo de importação.');
+     lbledtArquivo.SetFocus;
+   end
+   else
+   if lbledtSeparador.Text='' then
+       begin
+         showmessage('Informe o caracter separador de campo.');
+         lbledtSeparador.SetFocus;
+       end
+   else
+    begin
+        try
+         T:=TStringList.Create;
+         T.LoadFromFile(lbledtArquivo.Text);
+         c:=lbledtSeparador.Text;
+        except
+          ShowMessage('Arquivo de importação não encontrado');
+        end;
+         Application.CreateForm(TWaitForm,WaitForm);
+         WaitForm.jvspclprgrs1.Caption:='Importando os Processos.Aguarde...';
+         WaitForm.Show;
+         WaitForm.Update;
+         begin
+            dm.unProcessos.Close;
+            DM.unProcessos.Open;
+            for i:=0 to T.Count-1 Do
+             begin
+              linha:=T[i];
+               { Imp_CNPJ:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+
+                if (Imp_CNPJ <> formataCnpj(cnpj)) then
+                begin
+                  showmessage('Este não é o arquivo de Processos no leiaute da Fiscosistem.');
+                 // WaitForm.Close;
+                  Exit;
+                end;     }
+
+                Registro:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+                if not (copy(registro,1,6)='R-2050')  then                
+                begin
+                  ShowMessage('Este não é o arquivo de Comercialização da Produção Rural ( R-2050) no leiaute da Fiscosistem');
+                  WaitForm.Close;
+                  Exit;
+                end;
+                
+               if Registro='R-2050-1' then
+               begin
+                perApur:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+                
+                nrInscestab:= REINFForm.colocaMascara(copy(linha,1,pos(c,linha)-1));
+                delete(linha,1,pos(c,linha));
+                if nrInscestab<>cnpjemp then
+                begin
+                  ShowMessage('Registro '+IntToStr(i)+' não corresponde ao contribuinte selecionado.');
+                  WaitForm.Close;
+                  Exit;
+                end;
+                                                               
+                indcom:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+
+                vlrRecBruta:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+
+                vlrCPApur:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+
+                vlrRatApur:=copy(linha,1,pos(c,linha)-1);
+                delete(linha,1,pos(c,linha));
+
+                VlrSenarApur:=Linha;
+
+                  if DM.unProdRural.Locate(('CODIGO;PERAPUR;NRINSCESTAB'),VarArrayOf([codcurr,perApur,nrInscestab]),[loCaseInsensitive]) then
+                   begin
+                   //Codigo_servico:= DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger;
+                     DM.unProdRural.Edit;
+                     DM.unProdRural.FieldByName('vlrRecbrutaTotal').AsFloat:= DM.unProdRural.FieldByName('vlrRecbrutaTotal').AsFloat+StrToFloatDef(vlrRecBruta,0);
+                     DM.unProdRural.FieldByName('vlrCPApur').AsFloat:=DM.unProdRural.FieldByName('vlrCPApur').AsFloat + StrToFloatDef(vlrCPApur,0);
+                     DM.unProdRural.FieldByName('vlrRatApur').AsFloat:=DM.unProdRural.FieldByName('vlrRatApur').AsFloat + StrToFloatDef(vlrRatApur,0);
+                     DM.unProdRural.FieldByName('VlrSenarApur').AsFloat:=DM.unProdRural.FieldByName('VlrSenarApur').AsFloat+ StrToFloatDef(VlrSenarApur,0);
+                     DM.unProdRural.Post;
+                   end
+                   else
+                   begin
+                      DM.unProdRural.Insert;
+                      DM.unProdRural.FieldByName('codigo').AsInteger:=Codcurr;
+                      DM.unProdRural.FieldByName('perapur').AsString:=perapur;
+                      DM.unProdRural.FieldByName('nrInscEstab').AsString:= nrInscestab;
+                      DM.unProdRural.FieldByName('vlrRecbrutaTotal').AsFloat:= StrToFloatDef(vlrRecBruta,0);
+                      DM.unProdRural.FieldByName('vlrCPApur').AsFloat:= StrToFloatDef(vlrCPApur,0);
+                      DM.unProdRural.FieldByName('vlrRatApur').AsFloat:= StrToFloatDef(vlrRatApur,0);
+                      DM.unProdRural.FieldByName('VlrSenarApur').AsFloat:= StrToFloatDef(VlrSenarApur,0);
+                      DM.unProdRural.FieldByName('vlrCpSuspTotal').AsFloat:= 0;
+                      DM.unProdRural.FieldByName('VlrRatSuspTotal').AsFloat:= 0;
+                      DM.unProdRural.FieldByName('VLRSENARSUSPTOTAL').AsFloat:=0;
+                      DM.unProdRural.Post;                      
+                   end;
+
+                  if DM.unTipoComProdRural.Locate(('CODIGO;PERAPUR;NRINSCESTAB;INDCOM'),VarArrayOf([codcurr,perApur,nrInscestab,indcom]),[loCaseInsensitive]) then
+                  begin  
+                  
+                  end
+                  else
+                  begin
+                   DM.unTipoComProdRural.Insert;
+                   DM.unTipoComProdRural.FieldByName('codigo').AsInteger:=Codcurr;
+                   DM.unTipoComProdRural.FieldByName('perapur').AsString:=perapur;
+                   DM.unTipoComProdRural.FieldByName('nrInscEstab').AsString:= nrInscestab;
+                   DM.unTipoComProdRural.FieldByName('indCom').AsInteger:=StrToInt(indcom);
+                   DM.unTipoComProdRural.FieldByName('vlrRecBruta').AsFloat:= StrToFloatDef(vlrRecBruta,0);
+                   DM.unTipoComProdRural.Post;
+
+                     
+                  end;
+                
+               end;
+
+               if Registro='R-2050-2' then
+               begin
+                 NrProc:=copy(linha,1,pos(c,linha)-1);
+                 delete(linha,1,pos(c,linha));
+
+                 tpproc:=copy(linha,1,pos(c,linha)-1);
+                 delete(linha,1,pos(c,linha));
+
+                 vlrcpSusp:=copy(linha,1,pos(c,linha)-1);
+                 delete(linha,1,pos(c,linha));
+
+                 VlrRatsusp:=copy(linha,1,pos(c,linha)-1);
+                 delete(linha,1,pos(c,linha));
+
+                 vlrSenarSusp:=linha;
+
+                  if DM.unProcAdmJud.Locate(('CODIGO;PERAPUR;NRINSCESTAB;NrProc'),VarArrayOf([codcurr,perApur,nrInscestab,NrProc]),[loCaseInsensitive]) then
+                  begin
+                  
+                  end
+                  else
+                  begin
+                    DM.unProcAdmJud.Insert;
+                    DM.unProcAdmJud.FieldByName('codigo').AsInteger:=Codcurr;
+                    DM.unProcAdmJud.FieldByName('perapur').AsString:=perapur;
+                    DM.unProcAdmJud.FieldByName('nrInscEstab').AsString:= nrInscestab;
+                    DM.unProcAdmJud.FieldByName('NrProc').AsString:= NrProc;
+                    DM.unProcAdmJud.FieldByName('tpProc').AsInteger:= StrToInt(tpproc);
+                    DM.unProcAdmJud.FieldByName('vlrCpSusp').AsFloat:= StrToFloatDef(vlrcpSusp,0);
+                    DM.unProcAdmJud.FieldByName('vlrRatSusp').AsFloat:= StrToFloatDef(VlrRatsusp,0);
+                    DM.unProcAdmJud.FieldByName('vlrSenarSusp').AsFloat:= StrToFloatDef(vlrSenarSusp,0);
+                    DM.unProcAdmJud.Post;
+                    
+                    
+                     dm.qryUtil.Close;
+                     dm.qryUtil.SQL.Clear;
+                     dm.qryUtil.SQL.Add('select sum(vlrCpSusp)as vlrCpSusp, sum(vlrRatSusp)as vlrRatSusp, sum(vlrSenarSusp)as vlrSenarSusp from ProcAdmJud_ProdRural_18 where') ;
+                     dm.qryUtil.SQL.Add('codigo=:cod and perApur=:per and nrInscEstab=:estab') ;
+                     dm.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+                     dm.qryUtil.ParamByName('per').AsString:= DM.unProdRural.FieldByName('perApur').AsString;
+                     dm.qryUtil.ParamByName('estab').AsString:= DM.unProdRural.FieldByName('nrInscEstab').AsString;
+                     dm.qryUtil.Open;
+
+                     if DM.unProdRural.Locate(('CODIGO;PERAPUR;NRINSCESTAB'),VarArrayOf([codcurr,perApur,nrInscestab]),[loCaseInsensitive]) then
+                     begin 
+                       DM.unProdRural.Edit;
+                       DM.unProdRural.FieldByName('vlrCpSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrCpSusp').AsFloat; 
+                       DM.unProdRural.FieldByName('vlrRatSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrRatSusp').AsFloat; 
+                       DM.unProdRural.FieldByName('vlrSenarSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrSenarSusp').AsFloat; 
+                       DM.unProdRural.Post;
+                     end;
+                  
+                  end;
+               
+               end;
+               
+
+             end;
+         end;
+    end;
+    
+
 end;
 
 procedure TFormCadComProdRural.btnIncluir1Click(Sender: TObject);
@@ -169,7 +389,7 @@ begin
  DM.unProdRural.Insert;
  
  DM.unProdRural.FieldByName('codigo').AsInteger:=Codcurr;
- DM.unProdRural.FieldByName('NRInscBenef').AsString:= cnpjemp;
+ DM.unProdRural.FieldByName('NRINSCESTAB').AsString:= cnpjemp;
  DM.unProdRural.FieldByName('VLRRECBRUTATOTAL').AsFloat:=0.00;
  DM.unProdRural.FieldByName('VLRCPAPUR').AsFloat:=0.00;
  DM.unProdRural.FieldByName('VLRRATAPUR').AsFloat:=0.00;
@@ -229,6 +449,42 @@ pnl3.Enabled:=True;
  dbnvgr2.Enabled:=True;
 end;
 
+procedure TFormCadComProdRural.btnConsultarClick(Sender: TObject);
+begin
+ dm.qryConsultaProdRural.Close;
+ DM.qryConsultaProdRural.ParamByName('cod').AsInteger:=Codcurr;
+ DM.qryConsultaProdRural.Open;
+end;
+
+procedure TFormCadComProdRural.btnExcelClick(Sender: TObject);
+begin
+dm.qryConsultaProdRural.Close;
+ DM.qryConsultaProdRural.ParamByName('cod').AsInteger:=Codcurr;
+ DM.qryConsultaProdRural.Open;
+ REINFForm.GeraExcel(DM.qryConsultaProdRural);
+end;
+
+procedure TFormCadComProdRural.btnExcluir1Click(Sender: TObject);
+begin
+   try
+  If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
+     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+     Begin
+        DM.qryUtil.Close;
+        DM.qryUtil.SQL.Clear;
+        DM.qryUtil.SQL.Add('delete from CadComProdRural_18 where codigo=:cod')  ;
+        DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+        DM.qryUtil.Execute;
+        ShowMessage('Dados Excluídos com sucesso');
+        dm.unRetCP_ServTom.Close;
+        dm.unRetCP_ServTom.Open;        
+        btnConsultar.OnClick(self);
+     End;
+except
+   ShowMessage('Não há Dados para serem excluídos');
+end;
+end;
+
 procedure TFormCadComProdRural.btnExcluir2Click(Sender: TObject);
 begin
 try
@@ -236,6 +492,19 @@ try
      Begin
         DM.unProcAdmJud.Delete;
         ShowMessage('Excluído com Sucesso.');
+         dm.qryUtil.Close;
+         dm.qryUtil.SQL.Clear;
+         dm.qryUtil.SQL.Add('select sum(vlrCpSusp)as vlrCpSusp, sum(vlrRatSusp)as vlrRatSusp, sum(vlrSenarSusp)as vlrSenarSusp from ProcAdmJud_ProdRural_18 where') ;
+         dm.qryUtil.SQL.Add('codigo=:cod and perApur=:per and nrInscEstab=:estab') ;
+         dm.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+         dm.qryUtil.ParamByName('per').AsString:= DM.unProdRural.FieldByName('perApur').AsString;
+         dm.qryUtil.ParamByName('estab').AsString:= DM.unProdRural.FieldByName('nrInscEstab').AsString;
+         dm.qryUtil.Open;
+         DM.unProdRural.Edit;
+         DM.unProdRural.FieldByName('vlrCpSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrCpSusp').AsFloat; 
+         DM.unProdRural.FieldByName('vlrRatSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrRatSusp').AsFloat; 
+         DM.unProdRural.FieldByName('vlrSenarSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrSenarSusp').AsFloat; 
+         DM.unProdRural.Post;
      End;
  except
     ShowMessage('Não existem dados para ser excluído');
@@ -249,6 +518,18 @@ try
      Begin
         DM.unTipoComProdRural.Delete;
         ShowMessage('Excluído com Sucesso.');
+         // atualiza valor do nivel 1
+       dm.qryUtil.Close;
+       dm.qryUtil.SQL.Clear;
+       dm.qryUtil.SQL.Add('select sum(vlrRecBruta)as recBruta from tipoComProdRural_18 where') ;
+       dm.qryUtil.SQL.Add('codigo=:cod and perApur=:per and nrInscEstab=:estab') ;
+       dm.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+       dm.qryUtil.ParamByName('per').AsString:= DM.unProdRural.FieldByName('perApur').AsString;
+       dm.qryUtil.ParamByName('estab').AsString:= DM.unProdRural.FieldByName('nrInscEstab').AsString;
+       dm.qryUtil.Open;
+       DM.unProdRural.Edit;
+       DM.unProdRural.FieldByName('vlrRecBrutaTotal').AsFloat:= dm.qryUtil.FieldByName('recBruta').AsFloat; 
+       DM.unProdRural.Post;
      End;
  except
     ShowMessage('Não existem dados para ser excluído');
@@ -288,6 +569,7 @@ begin
   DM.unProcAdmJud.Insert;
   DM.unProcAdmJud.FieldByName('codigo').AsInteger:=Codcurr;
   DM.unProcAdmJud.FieldByName('PERAPUR').AsString:=DM.unProdRural.FieldByName('PERAPUR').AsString;
+  DM.unProcAdmJud.FieldByName('nrInscEstab').AsString:=DM.unProdRural.FieldByName('nrInscEstab').AsString;
   DM.unProcAdmJud.FieldByName('VLRCPSUSP').AsFloat:=0.00;
   DM.unProcAdmJud.FieldByName('VLRRATSUSP').AsFloat:=0.00;
   DM.unProcAdmJud.FieldByName('VLRSENARSUSP').AsFloat:=0.00;
@@ -299,6 +581,13 @@ begin
    btnAlterar2.Enabled:=False;
    btnCancelar2.Enabled:=True;
    dbnvgr3.Enabled:=False;
+
+    dbnvgr2.Enabled:=False; 
+ btnGravar1.Enabled:=False;
+ btnAlterar1.Enabled:=False;
+ btnIncluir1.Enabled:=False;
+ btnExcluir.Enabled:=False;
+ btnCancelar.Enabled:=False; 
 end;
 
 procedure TFormCadComProdRural.btnIncluir3Click(Sender: TObject);
@@ -313,7 +602,7 @@ begin
  DM.unTipoComProdRural.Insert;
  DM.unTipoComProdRural.FieldByName('codigo').AsInteger:=Codcurr;
  DM.unTipoComProdRural.FieldByName('perapur').AsString:= DM.unProdRural.FieldByName('perApur').AsString;
- DM.unTipoComProdRural.FieldByName('nrInscEstab').AsString:= DM.unProdRural.FieldByName('nrInscEstab').AsString;
+ DM.unTipoComProdRural.FieldByName('nrInscEstab').AsString:= DM.unProdRural.FieldByName('NRINSCESTAB').AsString;
  DM.unTipoComProdRural.FieldByName('VlrRecBruta').AsFloat:=0;
  
  cbbINDCOM.Enabled:=True;
@@ -322,9 +611,38 @@ begin
    btnExcluir3.Enabled:=False;
    btnAlterar3.Enabled:=False;
    btnCancelar3.Enabled:=True;
-   dbnvgr1.Enabled:=False;
+   btnGravar3.Enabled:=True;
+   dbnvgr1.Enabled:=False;   
    pnl1.Enabled:=False;
    pnl2.Enabled:=False;
+
+
+ dbnvgr2.Enabled:=False; 
+ btnGravar1.Enabled:=False;
+ btnAlterar1.Enabled:=False;
+ btnIncluir1.Enabled:=False;
+ btnExcluir.Enabled:=False;
+ btnCancelar.Enabled:=False; 
+end;
+
+procedure TFormCadComProdRural.btnLocalizarClick(Sender: TObject);
+begin
+OpenArquivo.DefaultExt :='.TXT';
+ OpenArquivo.InitialDir :='C:\';
+ if OpenArquivo.Execute Then
+    lbledtArquivo.Text:= OpenArquivo.FileName;
+end;
+
+procedure TFormCadComProdRural.btnSairClick(Sender: TObject);
+begin
+close ;
+end;
+
+procedure TFormCadComProdRural.dbedtPERAPURExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtPERAPUR.text,6,2));
+ if errodata then
+   dbedtPERAPUR.SetFocus;
 end;
 
 procedure TFormCadComProdRural.btnAlterar2Click(Sender: TObject);
@@ -336,8 +654,6 @@ begin
     Exit;
   end;
  
-
-
  DM.unProcAdmJud.Edit;
  
  habilitaCampos2;
@@ -347,6 +663,13 @@ begin
  btnIncluir2.Enabled:=False;
  btnCancelar2.Enabled:=True;
  dbnvgr3.Enabled:=False;
+
+  dbnvgr2.Enabled:=False; 
+ btnGravar1.Enabled:=False;
+ btnAlterar1.Enabled:=False;
+ btnIncluir1.Enabled:=False;
+ btnExcluir.Enabled:=False;
+ btnCancelar.Enabled:=False; 
 end;
 
 procedure TFormCadComProdRural.btnAlterar3Click(Sender: TObject);
@@ -362,6 +685,13 @@ DM.unTipoComProdRural.Edit;
  dbnvgr1.Enabled:=False;
  pnl1.Enabled:=False;
  pnl2.Enabled:=False;
+
+ dbnvgr2.Enabled:=False; 
+ btnGravar1.Enabled:=False;
+ btnAlterar1.Enabled:=False;
+ btnIncluir1.Enabled:=False;
+ btnExcluir.Enabled:=False;
+ btnCancelar.Enabled:=False; 
 end;
 
 procedure TFormCadComProdRural.btnGravar1Click(Sender: TObject);
@@ -373,18 +703,13 @@ begin
     Exit;
   end;
   
-  if cbbINDCOM.Text='' then
-  begin
-    ShowMessage('Informe o indicador de Comercialização');
-    cbbINDCOM.SetFocus;
-    Exit;
-  end; 
+  
 
  if btnAlterar1.Enabled=False then
  begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
- DM.qryUtil.SQL.Add('Select * from CadComProdRural_18 where codigo=:cod and PerApur=:per and NRINSCBENEF=:cnpj') ;
+ DM.qryUtil.SQL.Add('Select * from CadComProdRural_18 where codigo=:cod and PerApur=:per and NRINSCESTAB=:cnpj') ;
  DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
  DM.qryUtil.ParamByName('per').AsString:= dbedtPERAPUR.text;
  DM.qryUtil.ParamByName('cnpj').AsString:= dbedtNRINSCBENEF.text;
@@ -406,7 +731,7 @@ begin
  pnl2.Enabled:=true;
  pnl3.Enabled:=true;
 
-  btnExcluir.Enabled:=True;
+ btnExcluir.Enabled:=True;
  btnAlterar1.Enabled:=True;
  btnCancelar.Enabled:=False;
  dbnvgr2.Enabled:=True;
@@ -454,10 +779,11 @@ begin
  begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
- DM.qryUtil.SQL.Add('Select * from ProcAdmJud_Tomador_18 where codigo=:cod and PerApur=:per and NRPROC=:proc') ;
+ DM.qryUtil.SQL.Add('Select * from ProcAdmJud_ProdRural_18 where codigo=:cod and PerApur=:per and NRPROC=:proc and nrInscEstab=:estab') ;
  DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
  DM.qryUtil.ParamByName('per').AsString:= dbedtPERAPUR.text;
  DM.qryUtil.ParamByName('proc').AsString:= dbedtNRPROC.text;
+ dm.qryUtil.ParamByName('estab').AsString:= DM.unProdRural.FieldByName('nrInscEstab').AsString;
  DM.qryUtil.Open;
  if not DM.qryUtil.eof then
   begin
@@ -493,6 +819,13 @@ begin
  DM.unProdRural.FieldByName('vlrRatSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrRatSusp').AsFloat; 
  DM.unProdRural.FieldByName('vlrSenarSuspTotal').AsFloat:= dm.qryUtil.FieldByName('vlrSenarSusp').AsFloat; 
  DM.unProdRural.Post;
+
+  dbnvgr2.Enabled:=true; 
+ btnGravar1.Enabled:=true;
+ btnAlterar1.Enabled:=true;
+ btnIncluir1.Enabled:=true;
+ btnExcluir.Enabled:=true;
+ btnCancelar.Enabled:=true; 
 end;
 
 procedure TFormCadComProdRural.btnGravar3Click(Sender: TObject);
@@ -512,6 +845,7 @@ DM.unTipoComProdRural.Post;
  btnExcluir3.Enabled:=True;
  btnAlterar3.Enabled:=True;
  btnCancelar3.Enabled:=False;
+ btnGravar3.Enabled:=False;
  dbnvgr1.Enabled:=True;
   pnl1.Enabled:=True;
   pnl2.Enabled:=True;
@@ -528,6 +862,13 @@ DM.unTipoComProdRural.Post;
  DM.unProdRural.Edit;
  DM.unProdRural.FieldByName('vlrRecBrutaTotal').AsFloat:= dm.qryUtil.FieldByName('recBruta').AsFloat; 
  DM.unProdRural.Post;
+
+  dbnvgr2.Enabled:=true; 
+ btnGravar1.Enabled:=true;
+ btnAlterar1.Enabled:=true;
+ btnIncluir1.Enabled:=true;
+ btnExcluir.Enabled:=true;
+ btnCancelar.Enabled:=true; 
 end;
 
 procedure TFormCadComProdRural.FormShow(Sender: TObject);
@@ -537,6 +878,11 @@ begin
     DM.unProdRural.FilterSQL:='codigo='+ IntToStr(codcurr);
     DM.unProdRural.Filtered:=True;
     DM.unProdRural.Open;
+    DM.unTipoComProdRural.open;
+
+     dm.qryConsultaProdRural.Close;
+     DM.qryConsultaProdRural.ParamByName('cod').AsInteger:=-1;
+     DM.qryConsultaProdRural.Open;
 
  DesabilitaCampos;
  DesabilitaCampos2;
@@ -592,6 +938,20 @@ begin
  dbedtVLRCPSUSP.Enabled:=False;
  dbedtVLRRATSUSP.Enabled:=False;
  dbedtVLRSENARSUSP.Enabled:=False;
+end;
+
+procedure TFormCadComProdRural.validaPeriodo(texto:string);
+begin
+ if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
+  or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
+  or (texto='11') or (texto='12') or (texto='') )then
+  begin
+  ShowMessage('Mês informado esta errado');
+  errodata:=true;
+  end
+  else
+  errodata:=false;
+  
 end;
 
 end.

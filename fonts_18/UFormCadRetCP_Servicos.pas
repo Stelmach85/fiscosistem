@@ -289,6 +289,20 @@ begin
 
                   obs:=linha;
 
+                   if (NrInscEstabTom <> cnpjemp) and (Registro='R-2010-1')   then
+                    begin
+                      showmessage('CNPJ do Estabelecimento Não confere com o Contribuinte Cadastrado.');
+                     // WaitForm.Close;
+                      Exit;
+                    end; 
+
+                    if (CNPJPrestador <> cnpjemp) and (Registro='R-2020-1')  then
+                    begin
+                      showmessage('CNPJ do Prestador Não confere com o Contribuinte Cadastrado.');
+                     // WaitForm.Close;
+                      Exit;
+                    end; 
+
                   periodo:= Copy( DtemissaoInf,7,4)+'-'+ Copy( DtemissaoInf,4,2);
 
                    if DM.unRetCP_ServTom.Locate(('CODIGO;NRINSCESTABTOM;CNPJPRESTADOR;PERAPUR'),VarArrayOf([codcurr,NrInscEstabTom,CNPJPrestador,periodo]),[loCaseInsensitive]) then
@@ -1529,7 +1543,7 @@ procedure TFormCadRetCP_Servicos.validaPeriodo(texto:string);
 begin
   if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
   or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
-  or (texto='11') or (texto='12') )then
+  or (texto='11') or (texto='12') or (texto='') )then
   begin
   ShowMessage('Mês informado esta errado');
   errodata:=true;

@@ -916,33 +916,49 @@ object DM: TDM
     object unProdRuralPERAPUR: TStringField
       FieldName = 'PERAPUR'
       Required = True
+      EditMask = '9999-99;1;'
       Size = 7
     end
     object unProdRuralNRINSCESTAB: TStringField
       FieldName = 'NRINSCESTAB'
       Required = True
+      EditMask = '99.999.999/9999-99;1;'
       Size = 18
     end
     object cdsProdRuralVLRRECBRUTATOTAL: TFloatField
       FieldName = 'VLRRECBRUTATOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRCPAPUR: TFloatField
       FieldName = 'VLRCPAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRRATAPUR: TFloatField
       FieldName = 'VLRRATAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRSENARAPUR: TFloatField
       FieldName = 'VLRSENARAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRCPSUSPTOTAL: TFloatField
       FieldName = 'VLRCPSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRRATSUSPTOTAL: TFloatField
       FieldName = 'VLRRATSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProdRuralVLRSENARSUSPTOTAL: TFloatField
       FieldName = 'VLRSENARSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
   end
   object dsProdRural: TUniDataSource
@@ -980,12 +996,18 @@ object DM: TDM
     end
     object cdsProcAdmJudVLRCPSUSP: TFloatField
       FieldName = 'VLRCPSUSP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProcAdmJudVLRSENARSUSP: TFloatField
       FieldName = 'VLRSENARSUSP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
     object cdsProcAdmJudVLRRATSUSP: TFloatField
       FieldName = 'VLRRATSUSP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
   end
   object dsProcAdmJud: TUniDataSource
@@ -1109,11 +1131,101 @@ object DM: TDM
     end
     object cdsTipoComProdRuralVLRRECBRUTA: TFloatField
       FieldName = 'VLRRECBRUTA'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
   end
   object dsTipoComProdRural: TUniDataSource
     DataSet = unTipoComProdRural
     Left = 32
     Top = 648
+  end
+  object qryConsultaProdRural: TUniQuery
+    Connection = Conexao
+    SQL.Strings = (
+      
+        'select  c.PERAPUR,c.VLRRECBRUTATOTAL, c.VLRCPAPUR,c.VLRRATAPUR,c' +
+        '.VLRSENARAPUR,'
+      'c.VLRCPSUSPTOTAL, c.VLRRATSUSPTOTAL, c.VLRSENARSUSPTOTAL,'
+      
+        't.INDCOM, t.VLRRECBRUTA from  TIPOCOMPRODRURAL_18 t,CADCOMPRODRU' +
+        'RAL_18 c'
+      
+        'where  c.CODIGO=t.codigo and c.PERAPUR=t.perapur and c.NRINSCEST' +
+        'AB=t.nrinscestab'
+      'and c.codigo=:cod')
+    Left = 192
+    Top = 616
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+      end>
+    object qryConsultaProdRuralPERAPUR: TStringField
+      DisplayLabel = 'Per'#237'odo'
+      FieldName = 'PERAPUR'
+      Required = True
+      Size = 7
+    end
+    object cdsConsultaProdRuralVLRRECBRUTATOTAL: TFloatField
+      DisplayLabel = 'Vrl. Rec. Total'
+      FieldName = 'VLRRECBRUTATOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaProdRuralVLRCPAPUR: TFloatField
+      DisplayLabel = 'Vlr. RC. Apru'
+      FieldName = 'VLRCPAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaProdRuralVLRRATAPUR: TFloatField
+      DisplayLabel = 'Vlr Rat. Apur'
+      FieldName = 'VLRRATAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaProdRuralVLRSENARAPUR: TFloatField
+      DisplayLabel = 'Vrl SENAR Apur.'
+      FieldName = 'VLRSENARAPUR'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaProdRuralVLRCPSUSPTOTAL: TFloatField
+      DisplayLabel = 'Vrl C.P. Susp.'
+      FieldName = 'VLRCPSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaProdRuralVLRRATSUSPTOTAL: TFloatField
+      DisplayLabel = 'Vrl RAT susp.'
+      FieldName = 'VLRRATSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaProdRuralVLRSENARSUSPTOTAL: TFloatField
+      DisplayLabel = 'Vlr SENAR susp'
+      FieldName = 'VLRSENARSUSPTOTAL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object qryConsultaProdRuralINDCOM: TIntegerField
+      DisplayLabel = 'Ind. Comer.'
+      FieldName = 'INDCOM'
+      ReadOnly = True
+      Required = True
+    end
+    object cdsConsultaProdRuralVLRRECBRUTA: TFloatField
+      DisplayLabel = 'Vrl. Rec. Bruta.'
+      FieldName = 'VLRRECBRUTA'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+  end
+  object dsConsultaProdRural: TUniDataSource
+    DataSet = qryConsultaProdRural
+    Left = 192
+    Top = 672
   end
 end

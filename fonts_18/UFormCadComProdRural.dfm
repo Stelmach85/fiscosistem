@@ -23,11 +23,10 @@ object FormCadComProdRural: TFormCadComProdRural
     Top = 0
     Width = 937
     Height = 521
-    ActivePage = ts1
+    ActivePage = ts2
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
-      ExplicitWidth = 1021
       object pnl1: TPanel
         Left = 3
         Top = 3
@@ -134,6 +133,7 @@ object FormCadComProdRural: TFormCadComProdRural
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
+          OnExit = dbedtPERAPURExit
         end
         object dbedtVLRCPAPUR: TDBEdit
           Left = 176
@@ -162,7 +162,7 @@ object FormCadComProdRural: TFormCadComProdRural
           Height = 19
           Hint = 'CNPJ do Benefici'#225'rio'
           Ctl3D = False
-          DataField = 'NRINSCBENEF'
+          DataField = 'NRINSCESTAB'
           DataSource = DM.dsProdRural
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -173,7 +173,7 @@ object FormCadComProdRural: TFormCadComProdRural
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 2
+          TabOrder = 1
         end
         object dbedtVLRRATAPUR: TDBEdit
           Left = 16
@@ -297,7 +297,7 @@ object FormCadComProdRural: TFormCadComProdRural
           ParentShowHint = False
           ReadOnly = True
           ShowHint = True
-          TabOrder = 1
+          TabOrder = 2
         end
       end
       object btn1: TBitBtn
@@ -820,6 +820,8 @@ object FormCadComProdRural: TFormCadComProdRural
           Items.Strings = (
             '1 - Administrativo'
             '2 - Judicial')
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 12
           Values.Strings = (
             '1'
@@ -1245,12 +1247,14 @@ object FormCadComProdRural: TFormCadComProdRural
             
               '1 - Comercializa'#231#227'o da Produ'#231#227'o por Prod. Rural PJ/Agroindustria' +
               ', exeto PAA'
-            '2 - Comercializa'#231#227'o da Produ'#231#227'o para Entidade do PAA'
+            '8 - Comercializa'#231#227'o da Produ'#231#227'o para Entidade do PAA'
             '9 - Comercializa'#231#227'o direta da Produ'#231#227'o no Mercado Externo')
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 6
           Values.Strings = (
             '1'
-            '2'
+            '8'
             '9')
           ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
           ListSettings.OutfilteredValueFont.Color = clRed
@@ -1284,7 +1288,6 @@ object FormCadComProdRural: TFormCadComProdRural
     object ts2: TTabSheet
       Caption = 'Integra'#231#227'o'
       ImageIndex = 1
-      ExplicitWidth = 1052
       object lblDados: TLabel
         Left = 8
         Top = 37
@@ -1375,6 +1378,7 @@ object FormCadComProdRural: TFormCadComProdRural
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
+        OnClick = btnLocalizarClick
       end
       object lbledtSeparador: TLabeledEdit
         Left = 814
@@ -1409,7 +1413,7 @@ object FormCadComProdRural: TFormCadComProdRural
         Hint = 'Dados importados dos Processos'
         OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting, dgeRecordCount, dgeSearchBar]
         Ctl3D = False
-        DataSource = DM.dsConslProcessos
+        DataSource = DM.dsConsultaProdRural
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlue
         Font.Height = -11
@@ -1460,6 +1464,7 @@ object FormCadComProdRural: TFormCadComProdRural
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
+        OnClick = btnImportarClick
       end
       object btnExcel: TBitBtn
         Left = 624
@@ -1514,6 +1519,7 @@ object FormCadComProdRural: TFormCadComProdRural
         ParentShowHint = False
         ShowHint = True
         TabOrder = 6
+        OnClick = btnExcelClick
       end
       object btnConsultar: TBitBtn
         Left = 537
@@ -1547,6 +1553,7 @@ object FormCadComProdRural: TFormCadComProdRural
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
+        OnClick = btnConsultarClick
       end
       object btnExcluir1: TBitBtn
         Left = 705
@@ -1580,6 +1587,7 @@ object FormCadComProdRural: TFormCadComProdRural
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
+        OnClick = btnExcluir1Click
       end
       object btnSair: TBitBtn
         Left = 786
@@ -1613,7 +1621,15 @@ object FormCadComProdRural: TFormCadComProdRural
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
+        OnClick = btnSairClick
       end
     end
+  end
+  object OpenArquivo: TOpenDialog
+    Filter = 'txt|*.txt'
+    InitialDir = 'C:\'
+    Options = [ofHideReadOnly, ofAllowMultiSelect]
+    Left = 836
+    Top = 140
   end
 end
