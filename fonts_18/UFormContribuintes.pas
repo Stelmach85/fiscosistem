@@ -216,6 +216,13 @@ begin
    dbedtRsocial.SetFocus;
    Abort;
  end;
+ if cbbTPINSC.Text='' then
+ begin
+     ShowMessage('Informe o Tipo de Inscrição ');
+    pgc1.ActivePage:=ts1;
+   cbbTPINSC.SetFocus;
+   Abort;
+ end;
  if  (dbedtCnpj.Text='') or (dbedtCnpj.Text='   .   .   /    -  ') or (dbedtCnpj.Text='   .   .   -  ') then
  begin
     ShowMessage('Informe o CPF/CNPJ ');
@@ -271,7 +278,7 @@ begin
    Abort;
  end;
 
- if dbedtCPFCTT.Text='  .   .   -  ' then
+ if (dbedtCPFCTT.Text='   .   .   -  ') or (dbedtCPFCTT.Text='') or (dbedtCPFCTT.Text='___.___.___-__') then
  begin
    ShowMessage('Informe o CPF do Contato');
    pgc1.ActivePage:=ts2;
@@ -287,14 +294,7 @@ begin
    Abort;
  end;
 
- if  cbbTPINSC.text='' then
- begin
-   ShowMessage('Selecione o tipo da Inscrição');
-   pgc1.ActivePage:=ts1;
-   cbbTPINSC.SetFocus;
-   Abort;
- end;
-  
+
 
  DM.unContribuintes.Post;
  btnNovo.Enabled:=True;
