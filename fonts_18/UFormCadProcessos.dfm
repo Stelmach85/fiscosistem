@@ -455,7 +455,7 @@ object FormCadProcessos: TFormCadProcessos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 11
+          TabOrder = 12
         end
         object dbedtIDVARA: TDBEdit
           Left = 299
@@ -475,7 +475,7 @@ object FormCadProcessos: TFormCadProcessos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 12
+          TabOrder = 13
         end
         object cbbINDAUDITORIA: TJvDBComboBox
           Left = 464
@@ -491,7 +491,7 @@ object FormCadProcessos: TFormCadProcessos
             '2 - Outra entidade, empresa ou empregado ')
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 13
+          TabOrder = 14
           Values.Strings = (
             '1'
             '2')
@@ -540,7 +540,7 @@ object FormCadProcessos: TFormCadProcessos
             'TO')
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 14
+          TabOrder = 11
           Values.Strings = (
             'AC'
             'AL'
