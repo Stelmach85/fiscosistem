@@ -27,6 +27,10 @@ object FormCadComProdRural: TFormCadComProdRural
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnl1: TPanel
         Left = 3
         Top = 3

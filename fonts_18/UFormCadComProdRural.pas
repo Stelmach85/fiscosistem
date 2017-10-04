@@ -944,7 +944,7 @@ procedure TFormCadComProdRural.validaPeriodo(texto:string);
 begin
  if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
   or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
-  or (texto='11') or (texto='12') or (texto='') )then
+  or (texto='11') or (texto='12') or (texto='  ') )then
   begin
   ShowMessage('Mês informado esta errado');
   errodata:=true;

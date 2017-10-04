@@ -27,6 +27,10 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnl1: TPanel
         Left = -4
         Top = 3
@@ -424,6 +428,10 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             TabOrder = 0
             object ts3: TTabSheet
               Caption = 'Detalhe da NF'
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object pnl3: TPanel
                 Left = 3
                 Top = 3
@@ -1247,6 +1255,10 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             object ts4: TTabSheet
               Caption = 'Inf. de Processos'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object pnl4: TPanel
                 Left = 3
                 Top = 3
@@ -1562,6 +1574,10 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             object ts5: TTabSheet
               Caption = 'Inf. de Processos de Adic.'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object lbl31: TLabel
                 Left = 7
                 Top = 13

@@ -770,7 +770,7 @@ object FormCadProcessos: TFormCadProcessos
         Top = 452
         Width = 75
         Height = 25
-        Hint = 'Cancela Opera'#231#227'o Realizada'
+        Hint = 'Fechar'
         Caption = 'Fechar'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET

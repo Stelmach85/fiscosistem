@@ -504,6 +504,7 @@ end;
 
 procedure TFormCadProcessos.btnNovoClick(Sender: TObject);
 begin
+ habilitaCampos;
  DM.unProcessos.Insert;
  DM.unProcessos.FieldByName('Codigo').AsInteger:= Codcurr;
 
@@ -597,7 +598,8 @@ DM.unConslProcessos.FilterSQL:='Codigo=-1';
 DM.unConslProcessos.Filtered:=True;           
 dm.unConslProcessos.Open;
 
-pgc1.ActivePage:=ts1; 
+pgc1.ActivePage:=ts1;
+DesabilitaCampos; 
 
 end;
 
@@ -605,7 +607,7 @@ procedure TFormCadProcessos.validaPeriodo(texto:string);
 begin
   if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
   or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
-  or (texto='11') or (texto='12') or (texto='') )then
+  or (texto='11') or (texto='12') or (texto='  ') )then
   begin
   ShowMessage('Mês informado esta errado');
   errodata:=true;
