@@ -130,10 +130,12 @@ object DM: TDM
     object unContribuintesINIVALID: TStringField
       FieldName = 'INIVALID'
       Required = True
+      EditMask = '9999-99;1;'
       Size = 7
     end
     object unContribuintesFIMVALID: TStringField
       FieldName = 'FIMVALID'
+      EditMask = '9999-99;1;'
       Size = 7
     end
   end

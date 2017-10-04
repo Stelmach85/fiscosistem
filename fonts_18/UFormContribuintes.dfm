@@ -471,6 +471,7 @@ object FormContribuintes: TFormContribuintes
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
+        OnExit = dbedtINIVALIDExit
       end
       object dbedtFIMVALID: TDBEdit
         Left = 588
@@ -491,6 +492,7 @@ object FormContribuintes: TFormContribuintes
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
+        OnExit = dbedtFIMVALIDExit
       end
       object JvDBComboBox2: TJvDBComboBox
         Left = 15

@@ -97,6 +97,9 @@ type
     procedure HabilitaCampos;
     procedure DesabilitaCampos;
     procedure btnCancelar2Click(Sender: TObject);
+    procedure validaPeriodo(texto:string);
+    procedure dbedtINIVALIDExit(Sender: TObject);
+    procedure dbedtFIMVALIDExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,6 +108,7 @@ type
 
 var
   FormContribuintes: TFormContribuintes;
+  errodata:Boolean;
 
 implementation
 
@@ -230,6 +234,15 @@ begin
    dbedtCnpj.SetFocus;
    Abort;
  end;
+  if (dbedtINIVALID.text='    -  ') or (dbedtINIVALID.text='')   then
+  begin
+     ShowMessage('Informe a Data inicial ');
+     pgc1.ActivePage:=ts1;
+     dbedtINIVALID.SetFocus;
+   Abort;
+  end;
+  
+  
 
  if JvDBComboBox2.Text='' then
  begin
@@ -335,17 +348,31 @@ begin
  //  medt1.EditMask :='99.999.999/9999-99;1; ';
    DM.unContribuintesNRINSC.EditMask:='99.999.999/9999-99;1; ';
    cbbTPINSC.ItemIndex:=0;
-   dbedtINIVALID.Text:='01/01/2018';
-   dbedtFIMVALID.Text:='31/12/2018';
+   dbedtINIVALID.Text:='2018-01';
+   dbedtFIMVALID.Text:='2018-12';
  end
  else 
  begin  
    DM.unContribuintesNRINSC.EditMask:='999.999.999-99;1; ' ; 
    cbbTPINSC.ItemIndex:=1;
-   dbedtINIVALID.Text:='01/01/2018';
-   dbedtFIMVALID.Text:='31/12/2018';
+   dbedtINIVALID.Text:='2018-01';
+   dbedtFIMVALID.Text:='2018-12';
  end;
 
+end;
+
+procedure TFormContribuintes.dbedtFIMVALIDExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtFIMVALID.text,6,2));
+ if errodata then
+   dbedtFIMVALID.SetFocus;
+end;
+
+procedure TFormContribuintes.dbedtINIVALIDExit(Sender: TObject);
+begin
+ validaPeriodo(Copy(dbedtINIVALID.text,6,2));
+ if errodata then
+   dbedtINIVALID.SetFocus;
 end;
 
 procedure TFormContribuintes.FormShow(Sender: TObject);
@@ -400,6 +427,20 @@ dbedtEMAIL_CONTATO.Enabled:=False;
 cbbIDEEFR.Enabled:=False;
 dbedtCNPJEFR.Enabled:=False;
 
+end;
+
+procedure TFormContribuintes.validaPeriodo(texto:string);
+begin
+ if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
+  or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')
+  or (texto='11') or (texto='12') or (texto='  ') )then
+  begin
+  ShowMessage('Mês informado esta errado');
+  errodata:=true;
+  end
+  else
+  errodata:=false;
+  
 end;
 
 end.
