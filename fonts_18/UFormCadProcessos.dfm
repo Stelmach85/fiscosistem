@@ -574,7 +574,6 @@ object FormCadProcessos: TFormCadProcessos
           ListSettings.OutfilteredValueFont.Height = -11
           ListSettings.OutfilteredValueFont.Name = 'Tahoma'
           ListSettings.OutfilteredValueFont.Style = []
-          OnChange = cbbTPINSCChange
         end
       end
       object dbnvgr1: TDBNavigator
