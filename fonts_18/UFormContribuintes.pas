@@ -227,7 +227,7 @@ begin
    cbbTPINSC.SetFocus;
    Abort;
  end;
- if  (dbedtCnpj.Text='') or (dbedtCnpj.Text='   .   .   /    -  ') or (dbedtCnpj.Text='   .   .   -  ') then
+ if  (dbedtCnpj.Text='') or (dbedtCnpj.Text='   .   .   /    -  ') or (dbedtCnpj.Text='   .   .   -  ') or (dbedtCnpj.Text='  .   .   /    -  ') then
  begin
     ShowMessage('Informe o CPF/CNPJ ');
     pgc1.ActivePage:=ts1;
@@ -241,6 +241,15 @@ begin
      dbedtINIVALID.SetFocus;
    Abort;
   end;
+
+  if StrToIntdef(Copy(dbedtINIVALID.text,6,2),0) > StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0)  then
+  begin
+      ShowMessage('Informe a Data inicial maior que Data final ');
+       pgc1.ActivePage:=ts1;
+      dbedtINIVALID.SetFocus;
+   Abort;
+  end;
+  
   
   
 
