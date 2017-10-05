@@ -234,6 +234,13 @@ begin
 
                 Registro:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
+
+                if linha='' then
+                begin
+                  Exit;
+                end;
+                
+                
                 if not (copy(registro,1,6)='R-2050')  then                
                 begin
                   ShowMessage('Este não é o arquivo de Comercialização da Produção Rural ( R-2050) no leiaute da Fiscosistem');
@@ -268,6 +275,23 @@ begin
                 delete(linha,1,pos(c,linha));
 
                 VlrSenarApur:=Linha;
+
+                 if not ( (Copy(perApur,6,2)='01') or (Copy(perApur,6,2)='02') or (Copy(perApur,6,2)='03') or (Copy(perApur,6,2)='04') or (Copy(perApur,6,2)='05') 
+                  or (Copy(perApur,6,2)='06')or (Copy(perApur,6,2)='07') or (Copy(perApur,6,2)='08') or (Copy(perApur,6,2)='09') or (Copy(perApur,6,2)='10')
+                  or (Copy(perApur,6,2)='11') or (Copy(perApur,6,2)='12') or (Copy(perApur,6,2)='  ') )then
+                  begin
+                  ShowMessage('Mês informado esta errado');
+                  WaitForm.Close;
+                  Exit;
+                  end ;
+
+                  if (StrToIntDef(Copy(perApur,1,4),0)=0)then
+                  begin
+                    ShowMessage('Ano informado esta errado');
+                    WaitForm.Close;
+                    Exit;
+                  end;
+                  
 
                   if DM.unProdRural.Locate(('CODIGO;PERAPUR;NRINSCESTAB'),VarArrayOf([codcurr,perApur,nrInscestab]),[loCaseInsensitive]) then
                    begin
@@ -329,6 +353,14 @@ begin
                  delete(linha,1,pos(c,linha));
 
                  vlrSenarSusp:=linha;
+
+                 if (NrProc='') or (tpproc='') then
+                 begin
+                   ShowMessage('Campo Obrigatório em branco');
+                   WaitForm.Close;
+                   Exit;
+                 end;
+                 
 
                   if DM.unProcAdmJud.Locate(('CODIGO;PERAPUR;NRINSCESTAB;NrProc'),VarArrayOf([codcurr,perApur,nrInscestab,NrProc]),[loCaseInsensitive]) then
                   begin
@@ -476,8 +508,15 @@ begin
         DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
         DM.qryUtil.Execute;
         ShowMessage('Dados Excluídos com sucesso');
-        dm.unRetCP_ServTom.Close;
-        dm.unRetCP_ServTom.Open;        
+        DM.unProdRural.Close;
+        DM.unProdRural.Open; 
+
+        DM.unTipoComProdRural.Close;
+        DM.unTipoComProdRural.Open;
+
+        DM.unProcAdmJud.Close;
+        DM.unProcAdmJud.Open;
+               
         btnConsultar.OnClick(self);
      End;
 except
@@ -702,6 +741,34 @@ begin
     dbedtPERAPUR.SetFocus;
     Exit;
   end;
+
+  if dbedtVLRRECBRUTATOTAl.Text='    -  ' then
+  begin
+    ShowMessage('Informe o Periódo');
+    dbedtVLRRECBRUTATOTAL.SetFocus;
+    Exit;
+  end;
+
+  if dbedtVLRCPAPUR.Text='    -  ' then
+  begin
+    ShowMessage('Informe o Periódo');
+    dbedtVLRCPAPUR.SetFocus;
+    Exit;
+  end;
+
+  if dbedtVLRRATAPUR.Text='    -  ' then
+  begin
+    ShowMessage('Informe o Periódo');
+    dbedtVLRCPAPUR.SetFocus;
+    Exit;
+  end;
+
+  if dbedtVLRSENARAPUR.Text='    -  ' then
+  begin
+    ShowMessage('Informe o Periódo');
+    dbedtVLRCPAPUR.SetFocus;
+    Exit;
+  end;
   
   
 
@@ -752,6 +819,27 @@ begin
  begin
   ShowMessage('Informe o tipo do Processo');
   cbbTPPROC.SetFocus;
+  Exit
+ end;
+
+  if dbedtVLRCPSUSP.text='' then
+ begin
+  ShowMessage('Informe o tipo do Processo');
+  dbedtVLRCPSUSP.SetFocus;
+  Exit
+ end;
+
+  if dbedtVLRRATSUSP.text='' then
+ begin
+  ShowMessage('Informe o tipo do Processo');
+  dbedtVLRRATSUSP.SetFocus;
+  Exit
+ end;
+
+ if dbedtVLRSENARSUSP.text='' then
+ begin
+  ShowMessage('Informe o tipo do Processo');
+  dbedtVLRSENARSUSP.SetFocus;
   Exit
  end;
 
@@ -834,6 +922,13 @@ begin
  begin
   ShowMessage('Informe o tipo de Comercialização');
   cbbINDCOM.SetFocus;
+  Exit;
+ end;
+
+  if dbedtVLRRECBRUTA.Text='' then
+ begin
+  ShowMessage('Informe o tipo de Comercialização');
+  dbedtVLRRECBRUTA.SetFocus;
   Exit;
  end;
 
