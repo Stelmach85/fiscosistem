@@ -1228,6 +1228,7 @@ btnExcluir3.Enabled:=True;
  btnCancelar3.Enabled:=False;
  btnGravar3.Enabled:=False;
  dbnvgr3.Enabled:=True;
+ DesabilitaCampos3;
  alterando:=False;
 end;
 
