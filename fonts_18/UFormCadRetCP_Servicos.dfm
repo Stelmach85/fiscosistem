@@ -23,7 +23,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
     Top = -6
     Width = 1369
     Height = 711
-    ActivePage = ts1
+    ActivePage = ts2
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'

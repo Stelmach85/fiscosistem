@@ -258,12 +258,20 @@ begin
                 Registro:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
               //  if (Registro<>'R-2010-1') and (Registro<>'R-2020-1') then
+                if registro='' then
+                begin
+                  Exit;                  
+                end;
+                
                 if (copy(registro,1,6)='R-2010') and (copy(registro,1,6)='R-2020') then                
                 begin
                   ShowMessage('Este não é o arquivo de Retençoes Previdenciária ( R-2010 ou R-2020) no leiaute da Fiscosistem');
                   WaitForm.Close;
                   Exit;
                 end;
+
+               
+                
 
                 // nivel 1 
                 if (Registro='R-2010-1') or (Registro='R-2020-1') then
@@ -310,6 +318,21 @@ begin
                     end; 
 
                   periodo:= Copy( DtemissaoInf,7,4)+'-'+ Copy( DtemissaoInf,4,2);
+
+                   if StrToDateDef(DtemissaoInf,0)=0 then
+                   begin
+                     ShowMessage('Data informada inválida');
+                     Exit;
+                   end;
+
+                   if (IndObra='') or (NumDocto='') or (Serie='') or (VlrBruto='')  then
+                   begin
+                     ShowMessage('Arquivo contem registro obrigatórios em branco');
+                     Exit;
+                   end;
+                   
+                   
+                  
 
                    if DM.unRetCP_ServTom.Locate(('CODIGO;NRINSCESTABTOM;CNPJPRESTADOR;PERAPUR'),VarArrayOf([codcurr,NrInscEstabTom,CNPJPrestador,periodo]),[loCaseInsensitive]) then
                    begin
@@ -421,6 +444,13 @@ begin
 
                   VlrNRetAdic:=linha;
 
+                  if Tpservico='' then
+                  begin
+                    ShowMessage('Tipo de serviço em branco');
+                    Exit;
+                  end;
+                  
+
                    if DM.unTiposServPrest_NF.Locate(('tpservico;id_nf;id_servico;codigo'),VarArrayOf([Tpservico,codigo_NF,Codigo_servico,codcurr]),[loCaseInsensitive]) then
                    begin
                    
@@ -481,6 +511,9 @@ begin
                   delete(linha,1,pos(c,linha)); 
 
                   VlrAdic:=linha;
+
+                  
+                  
                   
                   if NrProcRetPrinc<>'' then
                   begin
