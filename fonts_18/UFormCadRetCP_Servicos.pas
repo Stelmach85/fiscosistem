@@ -1023,7 +1023,20 @@ try
         DM.qryUtil.Execute;
         ShowMessage('Dados Excluídos com sucesso');
         dm.unRetCP_ServTom.Close;
-        dm.unRetCP_ServTom.Open;        
+        dm.unRetCP_ServTom.Open;
+
+         DM.unDetalheNF_ServPrest.Close;
+         DM.unDetalheNF_ServPrest.Open; 
+
+         DM.unTiposServPrest_NF.Close;
+         DM.unTiposServPrest_NF.Open;
+
+         DM.unInfProcessos.Close;
+         DM.unInfProcessos.Open;
+
+         DM.unInfProcessosAdic.Close;
+         DM.unInfProcessosAdic.Open;
+               
         btnConsultar.OnClick(self);
      End;
 except

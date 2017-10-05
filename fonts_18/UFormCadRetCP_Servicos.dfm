@@ -420,7 +420,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             Top = 0
             Width = 969
             Height = 569
-            ActivePage = ts3
+            ActivePage = ts4
             TabOrder = 0
             object ts3: TTabSheet
               Caption = 'Detalhe da NF'
@@ -2246,7 +2246,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         Text = '|'
       end
       object crdbgrdPlanoContas: TCRDBGrid
-        Left = 8
+        Left = 3
         Top = 56
         Width = 1328
         Height = 553
