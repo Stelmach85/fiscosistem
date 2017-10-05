@@ -378,6 +378,14 @@ begin
 
                 Registro:=copy(linha,1,pos(c,linha)-1);
                 delete(linha,1,pos(c,linha));
+                if Registro='' then
+                begin
+                  ShowMessage('Arquivo não pode conter linhas em Branco');
+                  WaitForm.Close;
+                  Exit;
+                end;
+                
+                
                 if Registro<>'R-1070' then
                 begin
                   ShowMessage('Este não é o arquivo de Processos(R-1070) no leiaute da Fiscosistem');
@@ -488,6 +496,14 @@ begin
                   WaitForm.Close;
                   Exit;
                   end ; 
+
+                  if (StrToIntDef(Copy(iniValid,1,4),0)=0) or (StrToIntDef(Copy(perApur,1,4),0)=0) then
+                  begin
+                    ShowMessage('Ano informado esta errado');
+                    WaitForm.Close;
+                    Exit;
+                  end;
+                  
                 
                 
 
