@@ -1222,11 +1222,12 @@ end;
 
 DM.unTiposServPrest_NF.Post;
 
- btnExcluir3.Enabled:=True;
+btnExcluir3.Enabled:=True;
  btnAlterar3.Enabled:=True;
+ btnIncluir3.Enabled:=True;
  btnCancelar3.Enabled:=False;
+ btnGravar3.Enabled:=False;
  dbnvgr3.Enabled:=True;
- DesabilitaCampos3;
  alterando:=False;
 end;
 
@@ -1391,6 +1392,41 @@ begin
  begin
    ShowMessage('Informe o Valor');
    dbedtVLRTOTALBRUTO.SetFocus;
+   Exit;
+ end;
+
+ if dbedtVLRTOTALBASERET.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRTOTALBASERET.SetFocus;
+   Exit;
+ end;
+
+  if dbedtVLRTOTALRETPRINC.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRTOTALRETPRINC.SetFocus;
+   Exit;
+ end;
+
+ if dbedtVLRTOTALRETADIC.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRTOTALRETADIC.SetFocus;
+   Exit;
+ end;
+
+ if dbedtVLRTOTALNRETPRINC.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRTOTALNRETPRINC.SetFocus;
+   Exit;
+ end;
+
+ if dbedtVLRTOTALNRETADIC.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRTOTALNRETADIC.SetFocus;
    Exit;
  end;
 

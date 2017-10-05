@@ -380,7 +380,7 @@ begin
                 delete(linha,1,pos(c,linha));
                 if Registro='' then
                 begin
-                  ShowMessage('Arquivo não pode conter linhas em Branco');
+                  ShowMessage('Arquivo inválido');
                   WaitForm.Close;
                   Exit;
                 end;
@@ -503,6 +503,13 @@ begin
                     WaitForm.Close;
                     Exit;
                   end;
+
+                   if StrToDateDef(dtDecisao,0)=0 then
+                  begin
+                    ShowMessage('Data informada esta errada');
+                    WaitForm.Close;
+                    Exit;
+                  end;
                   
                 
                 
@@ -513,6 +520,7 @@ begin
                  begin
                    importou:=false;
                    showmessage('Processos já foram importados para este CNPJ. Para importar novamente, remova os dados importados anteriormente clicando em Excluir.');
+                   Exit;
                   // WaitForm.Close;
                    break;
                  end

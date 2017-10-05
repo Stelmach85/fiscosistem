@@ -420,7 +420,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             Top = 0
             Width = 969
             Height = 569
-            ActivePage = ts5
+            ActivePage = ts3
             TabOrder = 0
             object ts3: TTabSheet
               Caption = 'Detalhe da NF'
