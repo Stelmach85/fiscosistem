@@ -235,9 +235,15 @@ begin
        end
    else
     begin
+        try
          T:=TStringList.Create;
          T.LoadFromFile(lbledtArquivo.Text);
          c:=lbledtSeparador.Text;
+        except
+         ShowMessage('Arquivo não encontrado');
+         Exit;
+
+        end;
          Application.CreateForm(TWaitForm,WaitForm);
          WaitForm.jvspclprgrs1.Caption:='Importando os Processos.Aguarde...';
          WaitForm.Show;
@@ -756,6 +762,30 @@ end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar2Click(Sender: TObject);
 begin
+
+ try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+
+ try
+    if DM.unDetalheNF_ServPrest.FieldByName('ID_SERVICO').AsInteger<1 then
+    begin
+      ShowMessage('Não existem dados para serem alterados');
+      Exit;
+    end;
+    
+ except
+     ShowMessage('Não existem dados para serem alterados');
+ end;
+ 
+
  DM.unDetalheNF_ServPrest.Edit;
  habilitaCampos2;
  
@@ -770,6 +800,30 @@ end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar3Click(Sender: TObject);
 begin
+ try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+
+ try
+    if DM.unTiposServPrest_NF.FieldByName('ID_SERVICO').AsInteger<1 then
+    begin
+      ShowMessage('Não existem dados para serem alterados');
+      Exit;
+    end;
+    
+ except
+     ShowMessage('Não existem dados para serem alterados');
+ end;
+  
+
+
 DM.unTiposServPrest_NF.Edit;
 habilitaCampos3;
 
@@ -784,6 +838,28 @@ end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar4Click(Sender: TObject);
 begin
+try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+
+  try
+    if DM.unInfProcessos.FieldByName('ID_SERVICO').AsInteger<1 then
+    begin
+      ShowMessage('Não existem dados para serem alterados');
+      Exit;
+    end;
+    
+ except
+     ShowMessage('Não existem dados para serem alterados');
+ end;
+ 
 DM.unInfProcessos.Edit;
  habilitaCampos4;
  
@@ -799,6 +875,28 @@ end;
 
 procedure TFormCadRetCP_Servicos.btnAlterar5Click(Sender: TObject);
 begin
+ try
+   if DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger<1 then
+   begin
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+   end;
+ except
+     ShowMessage('Informe os dados dos Estabelecimentos primeiro');
+     Exit;
+ end;
+
+   try
+    if DM.unInfProcessosAdic.FieldByName('ID_SERVICO').AsInteger<1 then
+    begin
+      ShowMessage('Não existem dados para serem alterados');
+      Exit;
+    end;
+    
+ except
+     ShowMessage('Não existem dados para serem alterados');
+ end;
+ 
 DM.unInfProcessosAdic.Edit;
   habilitaCampos5;
  
@@ -983,6 +1081,13 @@ begin
    Exit;
  end;
 
+ if dbedtVLRBRUTO.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRBRUTO.SetFocus;
+   Exit;
+ end;
+
  if alterando=False then
 begin
  DM.qryUtil.Close;
@@ -1031,6 +1136,69 @@ begin
     Exit;
   end;
 
+ if  dbedtVLRBASERET.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRBASERET.SetFocus;
+    Exit;
+ end;
+
+ if  dbedtVLRRETENCAO.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRRETENCAO.SetFocus;
+    Exit;
+ end;
+
+ if  dbedtVLRRETSUB.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRRETSUB.SetFocus;
+    Exit;
+ end;
+
+ if  dbedtVLRNRETPRINC.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRNRETPRINC.SetFocus;
+    Exit;
+ end;
+
+ if  dbedtVLRSERVICOS15.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRSERVICOS15.SetFocus;
+    Exit;
+ end;
+
+  if  dbedtVLRSERVICOS20.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRSERVICOS20.SetFocus;
+    Exit;
+ end;
+
+ if  dbedtVLRSERVICOS25.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRSERVICOS25.SetFocus;
+    Exit;
+ end;
+
+  if  dbedtVLRADICIONAL.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRADICIONAL.SetFocus;
+    Exit;
+ end;
+
+   if  dbedtVLRNRETADIC.text='' then
+ begin
+    ShowMessage('Informe o valor');
+    dbedtVLRNRETADIC.SetFocus;
+    Exit;
+ end;
+
  if alterando=false then
 begin
  DM.qryUtil.Close;
@@ -1075,6 +1243,13 @@ begin
  begin
    ShowMessage('Informe o tipo do Processo');
    cbbTPPROCRETPRINC.SetFocus;
+   Exit;
+ end;
+
+ if dbedtVALORPRINC.Text='' then
+ begin
+   ShowMessage('Informe o Valor ');
+   dbedtVALORPRINC.SetFocus;
    Exit;
  end;
 
@@ -1123,6 +1298,13 @@ begin
  begin
    ShowMessage('Informe o tipo do Processo');
    cbbTPPROCRETADIC.SetFocus;
+   Exit;
+ end;
+
+  if dbedtVALORADIC.Text='' then
+ begin
+   ShowMessage('Informe o Valor ');
+   dbedtVALORADIC.SetFocus;
    Exit;
  end;
 
@@ -1205,8 +1387,15 @@ begin
    Exit;
  end;
 
+ if dbedtVLRTOTALBRUTO.Text='' then
+ begin
+   ShowMessage('Informe o Valor');
+   dbedtVLRTOTALBRUTO.SetFocus;
+   Exit;
+ end;
+
  
- if alterando then
+ if alterando=false then
  begin
  DM.qryUtil.Close;
  DM.qryUtil.SQL.Clear;
