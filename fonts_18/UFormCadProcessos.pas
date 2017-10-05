@@ -520,6 +520,7 @@ begin
                  begin
                    importou:=false;
                    showmessage('Processos já foram importados para este CNPJ. Para importar novamente, remova os dados importados anteriormente clicando em Excluir.');
+                   WaitForm.Close;
                    Exit;
                   // WaitForm.Close;
                    break;

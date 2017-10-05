@@ -2248,8 +2248,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
       object crdbgrdPlanoContas: TCRDBGrid
         Left = 8
         Top = 56
-        Width = 878
-        Height = 385
+        Width = 1328
+        Height = 553
         Hint = 'Dados importados dos Processos'
         OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting, dgeRecordCount, dgeSearchBar]
         Ctl3D = False
@@ -2273,8 +2273,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         TitleFont.Style = [fsBold]
       end
       object btnImportar: TBitBtn
-        Left = 452
-        Top = 458
+        Left = 756
+        Top = 626
         Width = 75
         Height = 25
         Hint = 'Importar Dados '
@@ -2307,8 +2307,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         OnClick = btnImportarClick
       end
       object btnExcel: TBitBtn
-        Left = 624
-        Top = 458
+        Left = 928
+        Top = 626
         Width = 75
         Height = 25
         Hint = 'Clique para Gerar os Dados no Excel.'
@@ -2362,8 +2362,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         OnClick = btnExcelClick
       end
       object btnConsultar: TBitBtn
-        Left = 537
-        Top = 458
+        Left = 841
+        Top = 626
         Width = 81
         Height = 25
         Hint = 'Consultar Dados J'#225' Importados'
@@ -2396,8 +2396,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         OnClick = btnConsultarClick
       end
       object btnExcluir1: TBitBtn
-        Left = 705
-        Top = 458
+        Left = 1009
+        Top = 626
         Width = 75
         Height = 25
         Hint = 'Excluir Dados Importados'
@@ -2430,8 +2430,8 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
         OnClick = btnExcluir1Click
       end
       object btnSair: TBitBtn
-        Left = 786
-        Top = 458
+        Left = 1090
+        Top = 626
         Width = 75
         Height = 25
         Hint = 'Sair da Importa'#231#227'o de Dados'

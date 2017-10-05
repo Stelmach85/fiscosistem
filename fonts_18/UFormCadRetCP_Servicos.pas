@@ -306,14 +306,14 @@ begin
                    if (NrInscEstabTom <> cnpjemp) and (Registro='R-2010-1')   then
                     begin
                       showmessage('CNPJ do Estabelecimento Não confere com o Contribuinte Cadastrado.');
-                     // WaitForm.Close;
+                      WaitForm.Close;
                       Exit;
                     end; 
 
                     if (CNPJPrestador <> cnpjemp) and (Registro='R-2020-1')  then
                     begin
                       showmessage('CNPJ do Prestador Não confere com o Contribuinte Cadastrado.');
-                     // WaitForm.Close;
+                      WaitForm.Close;
                       Exit;
                     end; 
 
@@ -322,12 +322,14 @@ begin
                    if StrToDateDef(DtemissaoInf,0)=0 then
                    begin
                      ShowMessage('Data informada inválida');
+                     WaitForm.Close;
                      Exit;
                    end;
 
                    if (IndObra='') or (NumDocto='') or (Serie='') or (VlrBruto='')  then
                    begin
                      ShowMessage('Arquivo contem registro obrigatórios em branco');
+                     WaitForm.Close;
                      Exit;
                    end;
                    
@@ -412,6 +414,7 @@ begin
                      if (Registro='R-2010-2') then                    
                      ShowMessage('Deve haver um registro R-2010-1 antes') else
                      ShowMessage('Deve haver um registro R-2020-1 antes') ;
+                     WaitForm.Close;
                      Exit;
                    end;
                   
@@ -447,6 +450,7 @@ begin
                   if Tpservico='' then
                   begin
                     ShowMessage('Tipo de serviço em branco');
+                    WaitForm.Close;
                     Exit;
                   end;
                   
@@ -486,6 +490,7 @@ begin
                      if (Registro='R-2010-2') then                    
                      ShowMessage('Deve haver um registro R-2010-1 antes') else
                      ShowMessage('Deve haver um registro R-2020-1 antes') ;
+                     WaitForm.Close;
                      Exit;
                    end;
                    
