@@ -23,7 +23,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
     Top = -6
     Width = 1369
     Height = 711
-    ActivePage = ts2
+    ActivePage = ts1
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
@@ -168,7 +168,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 0
+          TabOrder = 4
           OnExit = dbedtPERAPURExit
         end
         object cbbINDOBRA: TJvDBComboBox
@@ -188,7 +188,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             '2 -Obra de contru'#231#227'o Civil - Empreitada Parcial')
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 1
+          TabOrder = 6
           Values.Strings = (
             '0'
             '1'
@@ -262,7 +262,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 4
+          TabOrder = 5
         end
         object dbedtVLRTOTALBRUTO: TDBEdit
           Left = 17
@@ -282,7 +282,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 5
+          TabOrder = 7
         end
         object dbedtVLRTOTALBASERET: TDBEdit
           Left = 144
@@ -302,7 +302,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 6
+          TabOrder = 8
         end
         object dbedtVLRTOTALRETPRINC: TDBEdit
           Left = 276
@@ -322,7 +322,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 7
+          TabOrder = 9
         end
         object dbedtVLRTOTALRETADIC: TDBEdit
           Left = 17
@@ -342,7 +342,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 8
+          TabOrder = 10
         end
         object dbedtVLRTOTALNRETPRINC: TDBEdit
           Left = 144
@@ -362,7 +362,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 9
+          TabOrder = 11
         end
         object dbedtVLRTOTALNRETADIC: TDBEdit
           Left = 276
@@ -382,7 +382,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 10
+          TabOrder = 12
         end
         object cbbINDCPRB: TJvDBComboBox
           Left = 15
@@ -398,7 +398,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             
               '1 - Contr. da Contrib. Prev. sob. a Rec. Bruta (CPRB) Reten'#231#227'o 3' +
               ',5%')
-          TabOrder = 11
+          TabOrder = 13
           Values.Strings = (
             '0'
             '1')
@@ -414,13 +414,13 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
           Width = 974
           Height = 571
           Caption = 'pnl2'
-          TabOrder = 12
+          TabOrder = 0
           object pgc2: TPageControl
             Left = 0
             Top = 0
             Width = 969
             Height = 569
-            ActivePage = ts3
+            ActivePage = ts5
             TabOrder = 0
             object ts3: TTabSheet
               Caption = 'Detalhe da NF'
@@ -870,7 +870,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 0
+                  TabOrder = 1
                 end
                 object dbnvgr3: TDBNavigator
                   Left = 23
@@ -886,7 +886,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                     #218'ltimo')
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 1
+                  TabOrder = 10
                 end
                 object btnIncluir3: TBitBtn
                   Left = 15
@@ -919,7 +919,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 2
+                  TabOrder = 11
                   OnClick = btnIncluir3Click
                 end
                 object btnGravar3: TBitBtn
@@ -954,7 +954,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 3
+                  TabOrder = 12
                   OnClick = btnGravar3Click
                 end
                 object btnAlterar3: TBitBtn
@@ -988,7 +988,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 4
+                  TabOrder = 13
                   OnClick = btnAlterar3Click
                 end
                 object btnExcluir3: TBitBtn
@@ -1022,7 +1022,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 5
+                  TabOrder = 14
                   OnClick = btnExcluir3Click
                 end
                 object btnCancelar3: TBitBtn
@@ -1057,7 +1057,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 6
+                  TabOrder = 15
                   OnClick = btnCancelar3Click
                 end
                 object dbedtVLRRETENCAO: TDBEdit
@@ -1078,7 +1078,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 7
+                  TabOrder = 2
                 end
                 object dbedtVLRRETSUB: TDBEdit
                   Left = 281
@@ -1100,7 +1100,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 8
+                  TabOrder = 3
                 end
                 object dbedtVLRNRETPRINC: TDBEdit
                   Left = 15
@@ -1120,7 +1120,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 9
+                  TabOrder = 4
                 end
                 object dbedtVLRSERVICOS15: TDBEdit
                   Left = 137
@@ -1140,7 +1140,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 10
+                  TabOrder = 5
                 end
                 object dbedtVLRSERVICOS20: TDBEdit
                   Left = 281
@@ -1160,7 +1160,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 11
+                  TabOrder = 6
                 end
                 object dbedtVLRSERVICOS25: TDBEdit
                   Left = 422
@@ -1180,7 +1180,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 12
+                  TabOrder = 7
                 end
                 object dbedtVLRADICIONAL: TDBEdit
                   Left = 16
@@ -1200,7 +1200,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 13
+                  TabOrder = 8
                 end
                 object dbedtVLRNRETADIC: TDBEdit
                   Left = 136
@@ -1220,7 +1220,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 14
+                  TabOrder = 9
                 end
                 object cbbCLASSTRIB: TJvDBComboBox
                   Left = 13
@@ -1232,7 +1232,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   DataSource = DM.dsTiposServPrest_NF
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 15
+                  TabOrder = 0
                   ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
                   ListSettings.OutfilteredValueFont.Color = clRed
                   ListSettings.OutfilteredValueFont.Height = -11
@@ -1307,7 +1307,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 0
+                  TabOrder = 1
                 end
                 object cbbTPPROCRETPRINC: TJvDBComboBox
                   Left = 169
@@ -1321,7 +1321,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Items.Strings = (
                     '1 - Administrativo'
                     '2 - Judicial')
-                  TabOrder = 1
+                  TabOrder = 0
                   Values.Strings = (
                     '0'
                     '1'
@@ -1350,7 +1350,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   ParentFont = False
                   ParentShowHint = False
                   ShowHint = True
-                  TabOrder = 2
+                  TabOrder = 3
                 end
                 object cbbCODSUSP: TJvDBComboBox
                   Left = 7
@@ -1360,7 +1360,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Hint = 'Selecione o C'#243'digo de Suspens'#227'o'
                   DataField = 'CODSUSP'
                   DataSource = DM.dsInfProcessos
-                  TabOrder = 3
+                  TabOrder = 2
                   ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
                   ListSettings.OutfilteredValueFont.Color = clRed
                   ListSettings.OutfilteredValueFont.Height = -11
@@ -1531,6 +1531,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   Hint = 'Cancela Opera'#231#227'o Realizada'
                   Caption = 'Cancelar'
                   DoubleBuffered = True
+                  Enabled = False
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clBlack
                   Font.Height = -11
@@ -1616,7 +1617,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
-                TabOrder = 0
+                TabOrder = 1
               end
               object cbbTPPROCRETADIC: TJvDBComboBox
                 Left = 169
@@ -1632,7 +1633,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                   '2 - Judicial')
                 ParentShowHint = False
                 ShowHint = True
-                TabOrder = 1
+                TabOrder = 0
                 Values.Strings = (
                   '0'
                   '1'
@@ -1844,6 +1845,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
                 Hint = 'Cancela Opera'#231#227'o Realizada'
                 Caption = 'Cancelar'
                 DoubleBuffered = True
+                Enabled = False
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -11
@@ -1889,7 +1891,7 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
             'R-2020')
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 13
+          TabOrder = 1
           Values.Strings = (
             'R-2010'
             'R-2020')
