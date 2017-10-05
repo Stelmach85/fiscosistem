@@ -242,7 +242,7 @@ begin
    Abort;
   end;
 
-  if StrToIntdef(Copy(dbedtINIVALID.text,6,2),0) > StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0)  then
+   if ((StrToIntdef(Copy(dbedtINIVALID.text,6,2),0) > StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0)) ) and ((StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0))>0 )   then
   begin
       ShowMessage('Informe a Data inicial maior que Data final ');
        pgc1.ActivePage:=ts1;

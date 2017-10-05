@@ -210,6 +210,7 @@ begin
         DM.qryUtil.SQL.Add('delete from processos_18 where codigo=:cod')  ;
         DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
         DM.qryUtil.Execute;
+        btnConsultarClick(self);
      End;
  except
    ShowMessage('Não existem registros para serem excluídos');
@@ -271,7 +272,7 @@ begin
    Abort;
  end;
  
- if StrToIntdef(Copy(dbedtINIVALID.text,6,2),0) > StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0)  then
+ if ((StrToIntdef(Copy(dbedtINIVALID.text,6,2),0) > StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0)) ) and ((StrToIntdef(Copy(dbedtFIMVALID.text,6,2),0))>0 )   then
   begin
       ShowMessage('Informe a Data inicial maior que Data final ');
        pgc1.ActivePage:=ts1;
@@ -353,6 +354,7 @@ begin
          c:=lbledtSeparador.Text;
         except
           ShowMessage('Arquivo de importação não encontrado');
+          Exit;
         end;
          Application.CreateForm(TWaitForm,WaitForm);
          WaitForm.jvspclprgrs1.Caption:='Importando os Processos.Aguarde...';
@@ -442,8 +444,51 @@ begin
                 or (iniValid='') or (tpProc='') or (dtDecisao='') or (ufVara='') or (idVara='') then
                 begin
                   ShowMessage('Existe campo obrigatório não preenchido, por favor corrija o arquivo ');
+                  WaitForm.Close;
                   Exit;
                 end;
+                
+                if (Copy(perApur,5,1)<>'-') or (Copy(iniValid,5,1)<>'-') then
+                begin
+                  ShowMessage('Data informada esta no formato Inválido (AAAA-MM)');
+                  WaitForm.Close;
+                  Exit;
+                end;
+                
+                if  StrToIntDef((Copy(iniValid,6,2)),0)> StrToIntDef((Copy(fimValid,6,2)),12)then
+                begin
+                  ShowMessage('Data final informada maior que Data inicial');
+                  WaitForm.Close;
+                  Exit;
+                end;
+
+                if not ((perApur='01') or (perApur='02') or (perApur='03') or (perApur='04') or (perApur='05') 
+                  or (perApur='06')or (perApur='07') or (perApur='08') or (perApur='09') or (perApur='10')
+                  or (perApur='11') or (perApur='12') or (perApur='  ') )then
+                  begin
+                  ShowMessage('Mês informado esta errado');
+                  WaitForm.Close;
+                  Exit;
+                  end ;
+
+                 if not ((iniValid='01') or (iniValid='02') or (iniValid='03') or (iniValid='04') or (iniValid='05') 
+                  or (iniValid='06')or (iniValid='07') or (iniValid='08') or (iniValid='09') or (iniValid='10')
+                  or (iniValid='11') or (iniValid='12') or (iniValid='  ') )then
+                  begin
+                  ShowMessage('Mês informado esta errado');
+                  WaitForm.Close;
+                  Exit;
+                  end ;                                 
+                
+                if not ((fimValid='01') or (fimValid='02') or (fimValid='03') or (fimValid='04') or (fimValid='05') 
+                  or (fimValid='06')or (fimValid='07') or (fimValid='08') or (fimValid='09') or (fimValid='10')
+                  or (fimValid='11') or (fimValid='12') or (fimValid='  ') or (fimValid='') )then
+                  begin
+                  ShowMessage('Mês informado esta errado');
+                  WaitForm.Close;
+                  Exit;
+                  end ; 
+                
                 
 
                 
@@ -521,7 +566,7 @@ begin
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
 
- //dbedtPERAPUR.SetFocus;
+  dbedtPERAPUR.SetFocus;
 
    btnExcluir.Enabled:=False;
    btnAlterar.Enabled:=False;

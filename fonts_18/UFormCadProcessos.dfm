@@ -21,7 +21,7 @@ object FormCadProcessos: TFormCadProcessos
     Top = 0
     Width = 897
     Height = 529
-    ActivePage = ts1
+    ActivePage = ts2
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
