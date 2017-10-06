@@ -955,6 +955,7 @@ begin
 
  btnExcluir2.Enabled:=True;
  btnAlterar2.Enabled:=True;
+ btnIncluir2.Enabled:=True;
  btnCancelar2.Enabled:=False;
  dbnvgr3.Enabled:=True;
 
