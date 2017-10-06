@@ -321,7 +321,9 @@ begin
 
                   if DM.unTipoComProdRural.Locate(('CODIGO;PERAPUR;NRINSCESTAB;INDCOM'),VarArrayOf([codcurr,perApur,nrInscestab,indcom]),[loCaseInsensitive]) then
                   begin  
-                  
+                     ShowMessage('Já existem dados iguais aos que estão sendo importados. Verifique o arquivo de importação');
+                     WaitForm.Close;
+                     Exit;
                   end
                   else
                   begin
@@ -360,11 +362,26 @@ begin
                    WaitForm.Close;
                    Exit;
                  end;
+
+                 DM.qryUtil.Close;
+                 DM.qryUtil.SQL.Clear;
+                 DM.qryUtil.SQL.Add('Select * from PROCESSOS_18 where codigo=:cod and NRPROC=:proc') ;
+                 DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+                 DM.qryUtil.ParamByName('proc').AsString:= NrProc;
+                 DM.qryUtil.Open;
+                 if DM.qryUtil.Eof then
+                 begin
+                   ShowMessage('o Número do Processo deve estar cadastrado nos Processos');
+                   WaitForm.Close;
+                   Exit
+                 end;
                  
 
                   if DM.unProcAdmJud.Locate(('CODIGO;PERAPUR;NRINSCESTAB;NrProc'),VarArrayOf([codcurr,perApur,nrInscestab,NrProc]),[loCaseInsensitive]) then
                   begin
-                  
+                     ShowMessage('Já existem dados iguais aos que estão sendo importados. Verifique o arquivo de importação');
+                     WaitForm.Close;
+                     Exit;
                   end
                   else
                   begin
@@ -404,6 +421,15 @@ begin
                
 
              end;
+               T.Free;
+             importou:=true;
+          WaitForm.Close;
+          if importou then
+          begin
+
+             showmessage('Dados Importados! ');  
+             btnConsultar.OnClick(Self);           
+          end;
          end;
     end;
     
