@@ -596,6 +596,7 @@ begin
    btnExcluir.Enabled:=False;
    btnAlterar.Enabled:=False;
    btnCancelar.Enabled:=True;
+   btnnovo.Enabled:=False;
    dbnvgr1.Enabled:=False;
 end;
 

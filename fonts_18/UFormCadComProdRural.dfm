@@ -23,7 +23,7 @@ object FormCadComProdRural: TFormCadComProdRural
     Top = 0
     Width = 937
     Height = 521
-    ActivePage = ts2
+    ActivePage = ts1
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'

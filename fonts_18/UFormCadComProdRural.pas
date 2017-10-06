@@ -442,6 +442,8 @@ begin
  dm.unProcAdmJud.FilterSQL:='codigo=-1';
  dm.unProcAdmJud.Filtered:=True;
 
+ 
+
  habilitaCampos;
 
  DM.unProdRural.Insert;
@@ -456,14 +458,18 @@ begin
  DM.unProdRural.FieldByName('VLRRATSUSPTOTAL').AsFloat:=0.00;
  DM.unProdRural.FieldByName('VLRSENARSUSPTOTAL').AsFloat:=0.00;
  
-
+ cbbINDCOM.ItemIndex:=-1;
+ 
 btnGravar1.Enabled:=True; 
 pnl2.Enabled:=False;
 pnl3.Enabled:=False;
 dbedtPERAPUR.SetFocus;
 
+DM.unTipoComProdRural.Close;
+
    btnExcluir.Enabled:=False;
    btnAlterar1.Enabled:=False;
+   btnIncluir1.Enabled:=False;
    btnCancelar.Enabled:=True;
    dbnvgr2.Enabled:=False;
 end;
@@ -653,6 +659,7 @@ begin
    btnExcluir2.Enabled:=False;
    btnAlterar2.Enabled:=False;
    btnCancelar2.Enabled:=True;
+   btnIncluir2.Enabled:=False;
    dbnvgr3.Enabled:=False;
 
     dbnvgr2.Enabled:=False; 
@@ -685,6 +692,7 @@ begin
    btnAlterar3.Enabled:=False;
    btnCancelar3.Enabled:=True;
    btnGravar3.Enabled:=True;
+   btnIncluir3.Enabled:=False;
    dbnvgr1.Enabled:=False;   
    pnl1.Enabled:=False;
    pnl2.Enabled:=False;
@@ -751,7 +759,19 @@ end;
 
 procedure TFormCadComProdRural.btnAlterar3Click(Sender: TObject);
 begin
-DM.unTipoComProdRural.Edit;
+ try
+   if DM.unTipoComProdRural.FieldByName('INDCOM').AsInteger<1 then
+   begin
+     ShowMessage('Não existem registro para serem alterados');
+     Exit;
+   end;
+ except
+    ShowMessage('Não existem registro para serem alterados');
+     Exit;
+ end;
+   
+
+ DM.unTipoComProdRural.Edit;
 
  cbbINDCOM.Enabled:=False;
  dbedtVLRRECBRUTA.Enabled:=True;
