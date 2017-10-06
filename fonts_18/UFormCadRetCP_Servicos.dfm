@@ -20,10 +20,10 @@ object FormCadRetCP_Servicos: TFormCadRetCP_Servicos
   TextHeight = 13
   object pgc1: TPageControl
     Left = -1
-    Top = -6
+    Top = 0
     Width = 1369
     Height = 711
-    ActivePage = ts2
+    ActivePage = ts1
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'

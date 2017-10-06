@@ -698,17 +698,21 @@ begin
  habilitaCampos2;
  pnl1.Enabled:=False;
  pnl3.Enabled:=False;
- btnExcluir2.Enabled:=False;
- btnIncluir2.Enabled:=False;
- btnCancelar2.Enabled:=True;
- dbnvgr3.Enabled:=False;
 
-  dbnvgr2.Enabled:=False; 
+ dbnvgr3.Enabled:=False;
+ 
  btnGravar1.Enabled:=False;
  btnAlterar1.Enabled:=False;
  btnIncluir1.Enabled:=False;
  btnExcluir.Enabled:=False;
  btnCancelar.Enabled:=False; 
+
+ btnExcluir2.Enabled:=False;
+ btnIncluir2.Enabled:=False;
+ btnCancelar2.Enabled:=True;
+ btnGravar2.Enabled:=True;
+ dbnvgr2.Enabled:=False;
+ 
 end;
 
 procedure TFormCadComProdRural.btnAlterar3Click(Sender: TObject);
@@ -731,6 +735,12 @@ DM.unTipoComProdRural.Edit;
  btnIncluir1.Enabled:=False;
  btnExcluir.Enabled:=False;
  btnCancelar.Enabled:=False; 
+
+ btnExcluir3.Enabled:=False;
+ btnIncluir3.Enabled:=False;
+ btnCancelar3.Enabled:=True;
+ btnGravar3.Enabled:=True;
+ dbnvgr3.Enabled:=False;
 end;
 
 procedure TFormCadComProdRural.btnGravar1Click(Sender: TObject);

@@ -23,7 +23,7 @@ object FormCadComProdRural: TFormCadComProdRural
     Top = 0
     Width = 937
     Height = 521
-    ActivePage = ts2
+    ActivePage = ts1
     TabOrder = 0
     object ts1: TTabSheet
       Caption = 'Cadastros'
@@ -305,7 +305,7 @@ object FormCadComProdRural: TFormCadComProdRural
         Top = 458
         Width = 75
         Height = 25
-        Hint = 'Cancela Opera'#231#227'o Realizada'
+        Hint = 'Fechar'
         Caption = 'Fechar'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
