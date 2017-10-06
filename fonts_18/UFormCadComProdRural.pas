@@ -569,6 +569,9 @@ try
        DM.unProdRural.Edit;
        DM.unProdRural.FieldByName('vlrRecBrutaTotal').AsFloat:= dm.qryUtil.FieldByName('recBruta').AsFloat; 
        DM.unProdRural.Post;
+
+        DM.unProcAdmJud.Close;
+        DM.unProcAdmJud.Open;
      End;
  except
     ShowMessage('Não existem dados para ser excluído');
@@ -586,6 +589,11 @@ begin
          
         DM.unProdRural.Delete;
         ShowMessage('Registro Excluído com Sucesso');
+        DM.unTipoComProdRural.close;
+        DM.unTipoComProdRural.Open;
+
+        DM.unProcAdmJud.Close;
+        DM.unProcAdmJud.Open;
      End;
  except
     ShowMessage('Não existem dados para ser excluído');
