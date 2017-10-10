@@ -16,7 +16,11 @@ uses
   Wait in 'Wait.pas' {WaitForm},
   UFormCadBeneficiarios in 'UFormCadBeneficiarios.pas' {FormCadBeneficiarios},
   UFormCadComProdRural in 'UFormCadComProdRural.pas' {FormCadComProdRural},
-  UFormCadRetCP_Servicos in 'UFormCadRetCP_Servicos.pas' {FormCadRetCP_Servicos};
+  UFormConsultaAtivEcon_Ref in 'UFormConsultaAtivEcon_Ref.pas' {FormConsultaAtivEcon_Ref},
+  UFormCadRetCP_Servicos in 'UFormCadRetCP_Servicos.pas' {FormCadRetCP_Servicos},
+  UDMCadCPRB in 'UDMCadCPRB.pas' {DMCadCPRB: TDataModule},
+  UUtils in 'UUtils.pas',
+  UFormCadCPRB in 'UFormCadCPRB.pas' {FormCadCPRB};
 
 {$R *.res}
 
@@ -26,8 +30,7 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMScript, DMScript);
   Application.CreateForm(TDMQuerysUteis, DMQuerysUteis);
+  Application.CreateForm(TDMCadCPRB, DMCadCPRB);
   Application.CreateForm(TREINFForm, REINFForm);
-  Application.CreateForm(TFormCadComProdRural, FormCadComProdRural);
-  Application.CreateForm(TFormCadRetCP_Servicos, FormCadRetCP_Servicos);
   Application.Run;
 end.

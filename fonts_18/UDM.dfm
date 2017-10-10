@@ -1,11 +1,11 @@
 object DM: TDM
   OldCreateOrder = False
   Height = 766
-  Width = 880
+  Width = 1100
   object Conexao: TUniConnection
     ProviderName = 'InterBase'
     Port = 3050
-    Database = 'C:\REINF.FDB'
+    Database = 'K:\Reinf\Exe\Banco\REINF.FDB'
     SpecificOptions.Strings = (
       'Oracle.Direct=True')
     Username = 'SYSDBA'

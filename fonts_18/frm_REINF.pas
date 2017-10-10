@@ -132,7 +132,7 @@ implementation
 
 uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
   UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios,
-  UFormCadComProdRural, UFormCadRetCP_Servicos;
+  UFormCadComProdRural, UFormCadRetCP_Servicos, UFormCadCPRB, UFormConsultaAtivEcon_Ref;
 
 
 
@@ -849,6 +849,32 @@ begin
 
      finally
       FreeAndNil(FormCadRetCP_Servicos );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+  else
+   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Contribuição Previdenciária sobre a Receita Bruta' then
+  begin
+   If  not  assigned(FormCadCPRB ) then
+       Application.CreateForm(TFormCadCPRB,FormCadCPRB);
+     try
+       FormCadCPRB.ShowModal;
+
+     finally
+      FreeAndNil(FormCadCPRB );
+     end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+  else
+   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Código da Atividade, Prod. e Serv. Sujeitos a CPRB' then
+  begin
+   If  not  assigned(FormConsultaAtivEcon_Ref) then
+       Application.CreateForm(TFormConsultaAtivEcon_Ref,FormConsultaAtivEcon_Ref);
+     try
+       FormConsultaAtivEcon_Ref.ShowModal;
+
+     finally
+      FreeAndNil(FormConsultaAtivEcon_Ref );
      end;
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end 
