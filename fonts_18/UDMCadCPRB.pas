@@ -57,6 +57,13 @@ type
     procedure unCadCPRBAfterScroll(DataSet: TDataSet);
     procedure unDetalheReceitaAfterScroll(DataSet: TDataSet);
     procedure unCadCPRBAfterPost(DataSet: TDataSet);
+    procedure unCadCPRBAfterDelete(DataSet: TDataSet);
+    procedure unDetalheReceitaAfterDelete(DataSet: TDataSet);
+    procedure unDetalheReceitaAfterPost(DataSet: TDataSet);
+    procedure unAjustesReceitaAfterPost(DataSet: TDataSet);
+    procedure unAjustesReceitaAfterDelete(DataSet: TDataSet);
+    procedure unProcessosReceitaAfterDelete(DataSet: TDataSet);
+    procedure unProcessosReceitaAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -70,10 +77,44 @@ implementation
 
 {$R *.dfm}
 
+procedure TDMCadCPRB.unAjustesReceitaAfterDelete(DataSet: TDataSet);
+begin
+   try
+     unAjustesReceita.CommitUpdates;
+     unAjustesReceita.ApplyUpdates();
+   except
+
+   end;
+end;
+
+procedure TDMCadCPRB.unAjustesReceitaAfterPost(DataSet: TDataSet);
+begin
+   try
+     unAjustesReceita.CommitUpdates;
+     unAjustesReceita.ApplyUpdates();
+   except
+
+   end;
+end;
+
+procedure TDMCadCPRB.unCadCPRBAfterDelete(DataSet: TDataSet);
+begin
+  try
+    unCadCPRB.CommitUpdates;
+    unCadCPRB.ApplyUpdates();
+  except
+
+  end;
+end;
+
 procedure TDMCadCPRB.unCadCPRBAfterPost(DataSet: TDataSet);
 begin
-   unCadCPRB.ApplyUpdates();
-   unCadCPRB.CommitUpdates;
+  try
+    unCadCPRB.CommitUpdates;
+    unCadCPRB.ApplyUpdates();
+  except
+
+  end;
 end;
 
 procedure TDMCadCPRB.unCadCPRBAfterScroll(DataSet: TDataSet);
@@ -114,6 +155,26 @@ begin
     FormCadCPRB.btnexcluir4.Enabled := not DMCadCPRB.unAjustesReceita.IsEmpty;
 end;
 
+procedure TDMCadCPRB.unDetalheReceitaAfterDelete(DataSet: TDataSet);
+begin
+   try
+     unDetalheReceita.CommitUpdates;
+     unDetalheReceita.ApplyUpdates();
+   except
+
+   end;
+end;
+
+procedure TDMCadCPRB.unDetalheReceitaAfterPost(DataSet: TDataSet);
+begin
+   try
+     unDetalheReceita.CommitUpdates;
+     unDetalheReceita.ApplyUpdates();
+   except
+
+   end;
+end;
+
 procedure TDMCadCPRB.unDetalheReceitaAfterScroll(DataSet: TDataSet);
 begin
   FormCadCPRB.pnlgrp1.Enabled := not DMCadCPRB.unDetalheReceita.IsEmpty;
@@ -126,6 +187,26 @@ begin
      ' and codAtivEcon= ' + QuotedStr(DMCadCPRB.unDetalheReceita.FieldByName('CODATIVECON').AsString); 
   DMCadCPRB.unAjustesReceita.Filtered:=True;
   DMCadCPRB.unAjustesReceita.Open;
+end;
+
+procedure TDMCadCPRB.unProcessosReceitaAfterDelete(DataSet: TDataSet);
+begin
+   try
+     unProcessosReceita.CommitUpdates;
+     unProcessosReceita.ApplyUpdates();
+   except
+
+   end;
+end;
+
+procedure TDMCadCPRB.unProcessosReceitaAfterPost(DataSet: TDataSet);
+begin
+   try
+     unProcessosReceita.CommitUpdates;
+     unProcessosReceita.ApplyUpdates();
+   except
+
+   end;
 end;
 
 end.

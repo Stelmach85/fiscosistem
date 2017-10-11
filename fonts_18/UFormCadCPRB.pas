@@ -115,7 +115,6 @@ type
     procedure btnLocalizarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure cbbTPINSCESTABChange(Sender: TObject);
-    procedure DesabilitaCampos1;
     procedure btnAlterarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnAlterar2Click(Sender: TObject);
@@ -134,6 +133,8 @@ type
     procedure validaPeriodo(texto:string);
     procedure dbedtPERAPURExit(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtDTAJUSTEExit(Sender: TObject);
+    procedure dbedtNRINSCESTABExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -603,6 +604,8 @@ begin
   dbnvgr3.Enabled:=True;
   alterando:=False;
   HabilitaBotoesAux(Self);
+  cbbTPAJUSTE.Enabled := true;
+  cbbCODAJUSTE.Enabled := true; 
 end;
 
 procedure TFormCadCPRB.btnCancelar4Click(Sender: TObject);
@@ -619,6 +622,7 @@ begin
  dbnvgr4.Enabled:=True;
  alterando:=False;
  HabilitaBotoesAux(Self);
+ dbedtNRPROC.Enabled := true;
 end;
 
 procedure TFormCadCPRB.btnAlterar2Click(Sender: TObject);
@@ -634,6 +638,7 @@ begin
   btnAlterar2.Enabled:=False;
   alterando:=True;
   DesabilitaBotoesAux(Self);
+  cbbCODATIVECON.Enabled := false;
 end;
 
 procedure TFormCadCPRB.btnAlterar3Click(Sender: TObject);
@@ -649,6 +654,8 @@ begin
   btnAlterar3.Enabled:=False;
   alterando:=True;
   DesabilitaBotoesAux(Self);
+  cbbTPAJUSTE.Enabled := false;
+  cbbCODAJUSTE.Enabled := false; 
 end;
 
 procedure TFormCadCPRB.btnAlterar4Click(Sender: TObject);
@@ -663,7 +670,8 @@ begin
   dbnvgr4.Enabled:=False;
   btnAlterar4.Enabled:=False;
   alterando:=True; 
-  DesabilitaBotoesAux(Self); 
+  DesabilitaBotoesAux(Self);
+  dbedtNRPROC.Enabled := false;
 end;
 
 procedure TFormCadCPRB.btnAlterarClick(Sender: TObject);
@@ -676,6 +684,9 @@ begin
  
  alterando:=True;
  DesabilitaBotoesAux(Self);
+ cbbTPINSCESTAB.enabled:= false;
+ dbedtNRINSCESTAB.enabled := False;
+ dbedtPERAPUR.Enabled := False;
 end;
 
 procedure TFormCadCPRB.btncancelar2Click(Sender: TObject);
@@ -691,15 +702,20 @@ begin
   dbnvgr2.Enabled:=True;
   alterando:=False;
   HabilitaBotoesAux(Self);
+  cbbCODATIVECON.Enabled := true;
 end;
 
 procedure TFormCadCPRB.btnCancelarClick(Sender: TObject);
 begin
   DMCadCPRB.unCadCPRB.Cancel; 
-  DesabilitaCampos1;
   HabilitxW(Self, false, 'CANCELAR', DMCadCPRB.unCadCPRB);
-  alterando:=False;
+  alterando:=False; 
   HabilitaBotoesAux(Self);
+  dbnvgr1.Enabled:=True;
+  pnl1.Enabled:= false;
+  cbbTPINSCESTAB.enabled:= True;
+  dbedtNRINSCESTAB.enabled := True;
+  dbedtPERAPUR.Enabled := True; 
 end;
 
 procedure TFormCadCPRB.btnConsultarClick(Sender: TObject);
@@ -843,6 +859,7 @@ begin
   dbnvgr2.Enabled:=True;
   alterando:=False;
   HabilitaBotoesAux(Self);
+  cbbCODATIVECON.Enabled := true;
 end;
 
 procedure TFormCadCPRB.btnGravar3Click(Sender: TObject);
@@ -910,6 +927,8 @@ begin
   grp1.Enabled:= false;
   alterando:=False;
   HabilitaBotoesAux(Self);
+  cbbTPAJUSTE.Enabled := true;
+  cbbCODAJUSTE.Enabled := true; 
 end;
 
 procedure TFormCadCPRB.btnGravar4Click(Sender: TObject);
@@ -969,6 +988,7 @@ begin
    dbnvgr4.Enabled:=True;
    alterando:=False; 
    HabilitaBotoesAux(Self);
+   dbedtNRPROC.Enabled := true;
 end;
 
 procedure TFormCadCPRB.btnGravarClick(Sender: TObject);
@@ -979,9 +999,9 @@ begin
     cbbTPINSCESTAB.SetFocus;
     Exit;
   end;
-  if dbedtNRINSCESTAB.Text='  .   .   /    -  ' then
+  if (dbedtNRINSCESTAB.Text='  .   .   /    -  ') or (not ValidaCNPJ(dbedtNRINSCESTAB.Text)) then
   begin
-    ShowMessage('Informe a Inscrição do Contribuinte');
+    Showmessage('Número de inscrição do Estabelecimento inválido! Verifique o número digitado.');
     dbedtNRINSCESTAB.SetFocus;
     Exit;
   end;
@@ -1004,28 +1024,32 @@ begin
    Exit;
   end;
 
-  if alterando then
+  if alterando = false then
    begin
-         DM.qryUtil.Close;
-         DM.qryUtil.SQL.Clear;
-         DM.qryUtil.sql.Add(' select * from CadCPRB_18');
-         DM.qryUtil.sql.Add(' where Codigo=:cod and NrInscEstab=:nroInsc and PerApur=:per');
-         DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
-         DM.qryUtil.ParamByName('nroInsc').AsString:=dbedtNRINSCESTAB.Text;
-         DM.qryUtil.ParamByName('per').AsString:=  dbedtPERAPUR.Text;
-         DM.qryUtil.Open;
-         if not DM.qryUtil.Eof then
-         begin
-           ShowMessage('Já existe um registro cadastrado neste período');
-           Exit;
-         end;
+       DM.qryUtil.Close;
+       DM.qryUtil.SQL.Clear;
+       DM.qryUtil.sql.Add(' select * from CadCPRB_18');
+       DM.qryUtil.sql.Add(' where Codigo=:cod and NrInscEstab=:nroInsc and PerApur=:per');
+       DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+       DM.qryUtil.ParamByName('nroInsc').AsString:=dbedtNRINSCESTAB.Text;
+       DM.qryUtil.ParamByName('per').AsString:=  dbedtPERAPUR.Text;
+       DM.qryUtil.Open;
+       if not DM.qryUtil.Eof then
+       begin
+         ShowMessage('Já existe um registro cadastrado neste período');
+         Exit;
+       end;
    end;
  
   DMCadCPRB.unCadCPRB.Post;
   HabilitxW(Self, false, 'GRAVAR', DMCadCPRB.unCadCPRB);
-  desabilitaCampos1;
-  alterando:=False;   
+  alterando:=False;  
   HabilitaBotoesAux(Self);
+  dbnvgr1.Enabled:=True;
+  pnl1.Enabled:= false;
+  cbbTPINSCESTAB.enabled:= True;
+  dbedtNRINSCESTAB.enabled := True;
+  dbedtPERAPUR.Enabled := True; 
 end;
 
 procedure TFormCadCPRB.btnNovoClick(Sender: TObject);
@@ -1065,9 +1089,30 @@ begin
   end;
 end;
 
+procedure TFormCadCPRB.dbedtDTAJUSTEExit(Sender: TObject);
+begin
+  if Trim(dbedtDTAJUSTE.text) <> '-' then
+     validaPeriodo(Copy(dbedtDTAJUSTE.text,6,2));
+  if errodata then
+    dbedtDTAJUSTE.SetFocus;
+end;
+
+procedure TFormCadCPRB.dbedtNRINSCESTABExit(Sender: TObject);
+begin
+   if Trim(dbedtNRINSCESTAB.Text) <> '../-' then
+   Begin
+      if not ValidaCNPJ(dbedtNRINSCESTAB.Text) then
+      Begin
+         Showmessage('Número de inscrição do Estabelecimento inválido! Verifique o número digitado.');
+         dbedtNRINSCESTAB.SetFocus;
+      End;         
+   End;
+end;
+
 procedure TFormCadCPRB.dbedtPERAPURExit(Sender: TObject);
 begin
- validaPeriodo(Copy(dbedtPERAPUR.text,6,2));
+ if Trim(dbedtPERAPUR.text) <> '-' then
+    validaPeriodo(Copy(dbedtPERAPUR.text,6,2));
  if errodata then
    dbedtPERAPUR.SetFocus;
 end;
@@ -1126,18 +1171,6 @@ begin
     pgc2.ActivePage:=ts3;
 
 end;
-
-procedure TFormCadCPRB.DesabilitaCampos1;
-begin
- cbbTPINSCESTAB.Enabled:=False;
- dbedtNRINSCESTAB.Enabled:=False;
- dbedtPERAPUR.Enabled:=False;
- dbedtVLRRECBRUTATOTAL.Enabled:=False;
- dbedtVLRCPAPURTOTAL.Enabled:=False;
- dbedtVLRCPRBSUSPTOTAL.Enabled:=False;
- dbnvgr1.Enabled:=True;
- pnl1.Enabled:= false;
-end; 
 
 procedure TFormCadCPRB.validaPeriodo(texto:string);
 begin

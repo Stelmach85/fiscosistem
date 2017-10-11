@@ -6,6 +6,7 @@ uses
  Forms, Buttons, JvDBCombobox, ExtCtrls, DBCtrls, ComCtrls, StdCtrls, DateUtils, Uni, SysUtils;
 
 function HabilitxW(FTela: TForm; hab: boolean; ACAO: string; Tabela: TUniTable): boolean;
+function ValidaCNPJ(CNPJ: string): boolean;
 procedure DesabilitaCampos(FForm: TForm);
 procedure HabilitaCampos(FForm: TForm);
 procedure DesabilitaBotoesAux(FForm: TForm);
@@ -207,6 +208,55 @@ begin
     
   End;
 end;
+
+function ValidaCNPJ(CNPJ: string): boolean;
+var
+  i, digito1, digito2, cont: Integer;
+begin
+  // Deleta a mascara do CPF caso tenho
+  Delete(CNPJ, AnsiPos('.', CNPJ), 1);
+  Delete(CNPJ, AnsiPos('.', CNPJ), 1);
+  Delete(CNPJ, AnsiPos('/', CNPJ), 1);
+  Delete(CNPJ, AnsiPos('-', CNPJ), 1);
+  if (Length(CNPJ) <> 14) then // Verifica se o mesmo possui 14 digitos exatos
+    Result := False
+  else if (CNPJ = '00000000000000') then // Verifica se todos os digitos são 0
+    Result := True
+  else if (CNPJ = '11111111111111') then // Verifica se todos os digitos são 0
+    Result := True
+  else
+  begin
+    digito1 := 0;
+    digito2 := 0;
+    cont := 2;
+    try // Caso ocorra algum erro não previsto retorna False
+      for i := 12 downto 1 do
+      begin
+        if cont = 10 then
+          cont := 2;
+        digito1 := digito1 + (StrToInt(CNPJ[i]) * cont);
+        digito2 := digito2 + (StrToInt(CNPJ[i + 1]) * cont);
+        cont := cont + 1;
+      end;
+      digito2 := digito2 + (StrToInt(CNPJ[1]) * 6);
+      if (digito1 mod 11) < 2 then
+        digito1 := 0
+      else
+        digito1 := 11 - (digito1 mod 11);
+      if (digito2 mod 11) < 2 then
+        digito2 := 0
+      else
+        digito2 := 11 - (digito2 mod 11);
+      if (digito1 <> StrToInt(CNPJ[13])) or (digito2 <> StrToInt(CNPJ[14])) then
+        Result := False
+      else
+        Result := True;
+    except
+      Result := False;
+    end;
+  end;
+end;
+
 
 
 

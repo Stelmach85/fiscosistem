@@ -152,6 +152,7 @@ object FormCadCPRB: TFormCadCPRB
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          OnExit = dbedtNRINSCESTABExit
         end
         object dbedtVLRRECBRUTATOTAL: TDBEdit
           Left = 426
@@ -551,7 +552,7 @@ object FormCadCPRB: TFormCadCPRB
                 Hint = 
                   'C'#243'digo indicador correspondente '#224' atividade comercial, produto o' +
                   'u servi'#231'o sujeito a incid'#234'ncia da Contribui'#231#227'o Previdenci'#225'ria so' +
-                  'bre a Receita Bruta, conforme Tabela 09'
+                  'bre a Receita Bruta'
                 DataField = 'CODATIVECON'
                 DataSource = DMCadCPRB.dsDetalheReceita
                 ParentShowHint = False
@@ -760,6 +761,7 @@ object FormCadCPRB: TFormCadCPRB
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 2
+                OnExit = dbedtDTAJUSTEExit
               end
               object cbbTPAJUSTE: TJvDBComboBox
                 Left = 15

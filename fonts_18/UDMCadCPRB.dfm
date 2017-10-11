@@ -6,6 +6,7 @@ object DMCadCPRB: TDMCadCPRB
     TableName = 'CADCPRB_18'
     Connection = DM.Conexao
     AfterPost = unCadCPRBAfterPost
+    AfterDelete = unCadCPRBAfterDelete
     AfterScroll = unCadCPRBAfterScroll
     Left = 40
     Top = 17
@@ -52,6 +53,8 @@ object DMCadCPRB: TDMCadCPRB
   object unDetalheReceita: TUniTable
     TableName = 'DETALHERECEITA_18'
     Connection = DM.Conexao
+    AfterPost = unDetalheReceitaAfterPost
+    AfterDelete = unDetalheReceitaAfterDelete
     AfterScroll = unDetalheReceitaAfterScroll
     Left = 120
     Top = 16
@@ -108,6 +111,8 @@ object DMCadCPRB: TDMCadCPRB
   object unAjustesReceita: TUniTable
     TableName = 'AJUSTESRECEITA_18'
     Connection = DM.Conexao
+    AfterPost = unAjustesReceitaAfterPost
+    AfterDelete = unAjustesReceitaAfterDelete
     Left = 226
     Top = 16
     object unAjustesReceitaCODIGO: TIntegerField
@@ -163,6 +168,8 @@ object DMCadCPRB: TDMCadCPRB
   object unProcessosReceita: TUniTable
     TableName = 'PROCESSOSRECEITA_18'
     Connection = DM.Conexao
+    AfterPost = unProcessosReceitaAfterPost
+    AfterDelete = unProcessosReceitaAfterDelete
     Left = 339
     Top = 16
     object unProcessosReceitaCODIGO: TIntegerField
