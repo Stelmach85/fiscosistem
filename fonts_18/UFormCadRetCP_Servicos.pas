@@ -192,7 +192,7 @@ var
 
 implementation
 
-uses frm_REINF, UDM, Wait, UVerificaSistema, UUtils;
+uses frm_REINF, UDM, Wait, UVerificaSistema;
 
 {$R *.dfm}
 
@@ -1609,8 +1609,8 @@ DM.unProcessos.Open;
 DM.unInfProcessos.Open;
 DM.unInfProcessosAdic.open;
 
-HabilitxW(Self, false, 'Nada');
-DesabilitaCampos(self);
+//HabilitxW(Self, false, 'Nada',DM.unDetalheNF_ServPrest);
+DesabilitaCampos1;
 pgc1.ActivePage:=ts1; 
 pgc2.ActivePage:=ts3; 
 
