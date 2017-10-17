@@ -241,4 +241,125 @@ object DMCadCPRB: TDMCadCPRB
     Left = 43
     Top = 216
   end
+  object unqryConsultaCPRB: TUniQuery
+    Connection = DM.Conexao
+    SQL.Strings = (
+      
+        'select  c.nrinscestab, c.perapur, d.codativecon, a.tpajuste, d.v' +
+        'lrrecbrutaativ, d.vlrexcrecbruta, d.vlradicrecbruta, d.vlrbccprb' +
+        ', d.vlrcprbapur,'
+      
+        'a.vlrajuste, a.descajuste, a.dtajuste, p.nrproc, p.tpproc, p.cod' +
+        'susp, p.vlrcprbsusp'
+      'from cadcprb_18 c'
+      
+        '  left join detalhereceita_18 d on c.codigo = d.codigo and c.per' +
+        'apur = d.perapur and c.nrinscestab = d.nrinscestab'
+      
+        '  left join ajustesreceita_18 a on d.codigo = a.codigo and d.per' +
+        'apur = a.perapur and d.nrinscestab = a.nrinscestab and d.codativ' +
+        'econ = a.codativecon'
+      
+        '  left join processosreceita_18 p on c.codigo = p.codigo and c.p' +
+        'erapur = p.perapur and c.nrinscestab = p.nrinscestab'
+      'where c.codigo=:cod')
+    Left = 176
+    Top = 155
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+      end>
+    object unqryConsultaCPRBNRINSCESTAB: TStringField
+      FieldName = 'NRINSCESTAB'
+      Required = True
+      Size = 18
+    end
+    object unqryConsultaCPRBPERAPUR: TStringField
+      FieldName = 'PERAPUR'
+      Required = True
+      Size = 7
+    end
+    object unqryConsultaCPRBCODATIVECON: TStringField
+      FieldName = 'CODATIVECON'
+      ReadOnly = True
+      Size = 8
+    end
+    object unqryConsultaCPRBTPAJUSTE: TStringField
+      FieldName = 'TPAJUSTE'
+      ReadOnly = True
+      FixedChar = True
+      Size = 1
+    end
+    object cdsConsultaCPRBVLRRECBRUTAATIV: TFloatField
+      FieldName = 'VLRRECBRUTAATIV'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaCPRBVLREXCRECBRUTA: TFloatField
+      FieldName = 'VLREXCRECBRUTA'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaCPRBVLRADICRECBRUTA: TFloatField
+      FieldName = 'VLRADICRECBRUTA'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaCPRBVLRBCCPRB: TFloatField
+      FieldName = 'VLRBCCPRB'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaCPRBVLRCPRBAPUR: TFloatField
+      FieldName = 'VLRCPRBAPUR'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsConsultaCPRBVLRAJUSTE: TFloatField
+      FieldName = 'VLRAJUSTE'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object unqryConsultaCPRBDESCAJUSTE: TStringField
+      FieldName = 'DESCAJUSTE'
+      ReadOnly = True
+    end
+    object unqryConsultaCPRBDTAJUSTE: TStringField
+      FieldName = 'DTAJUSTE'
+      ReadOnly = True
+      Size = 7
+    end
+    object unqryConsultaCPRBNRPROC: TStringField
+      FieldName = 'NRPROC'
+      ReadOnly = True
+      Size = 21
+    end
+    object unqryConsultaCPRBTPPROC: TIntegerField
+      FieldName = 'TPPROC'
+      ReadOnly = True
+    end
+    object unqryConsultaCPRBCODSUSP: TStringField
+      FieldName = 'CODSUSP'
+      ReadOnly = True
+      Size = 14
+    end
+    object cdsConsultaCPRBVLRCPRBSUSP: TFloatField
+      FieldName = 'VLRCPRBSUSP'
+      ReadOnly = True
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+  end
+  object dsConsultaCPRB: TUniDataSource
+    DataSet = unqryConsultaCPRB
+    Left = 176
+    Top = 211
+  end
 end

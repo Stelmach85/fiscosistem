@@ -1681,15 +1681,17 @@ object FormCadCPRB: TFormCadCPRB
         TabOrder = 2
         Text = '|'
       end
-      object crdbgrdPlanoContas: TCRDBGrid
+      object crdbgrdCPRB: TCRDBGrid
         Left = 8
         Top = 56
         Width = 878
         Height = 385
-        Hint = 'Dados importados dos Processos'
+        Hint = 
+          'Dados importados da Contrubui'#231#227'o Previdenci'#225'ria sobre a Receita ' +
+          'Bruta'
         OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting, dgeRecordCount, dgeSearchBar]
         Ctl3D = False
-        DataSource = DM.dsRetCP_ServTom
+        DataSource = DMCadCPRB.dsConsultaCPRB
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlue
         Font.Height = -11

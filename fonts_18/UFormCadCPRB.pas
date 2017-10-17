@@ -26,7 +26,7 @@ type
     lbledtArquivo: TLabeledEdit;
     btnLocalizar: TBitBtn;
     lbledtSeparador: TLabeledEdit;
-    crdbgrdPlanoContas: TCRDBGrid;
+    crdbgrdCPRB: TCRDBGrid;
     btnImportar: TBitBtn;
     btnExcel: TBitBtn;
     btnConsultar: TBitBtn;
@@ -162,21 +162,21 @@ var
  VerificaSistema:Verifica;
  T:TStringList;
  I:integer;
- importou:boolean;
+ importou, temnivel1,temdetalhe:boolean;
  C,Linha:string;
  // nivel 1
-registro,NrInscEstabTom,CNPJPrestador,IndObra, IndCprb,NumDocto,Serie,DtemissaoInf,VlrBruto,Obs:string;
+registro,NrInscEstab,perApur,codAtivEcon,vlrRecBrutaAtiv,vlrExcRecBruta,VlrAdicRecBruta,VlrBCCPRB,VlrCPRBApur:string;
 periodo:string;
-Codigo_servico, codigo_NF, codigo_Proc:Integer;
+codigo_Proc:Integer;
 // nivel 2
-Tpservico,VlrBaseRet, VlrRetencao, VlrRetSub, VlrNRetPrinc, VlrServicos15, VlrServicos20, VlrServicos25:string;
+TpAjuste,codajuste,vlrAjuste,descAjuste,dtajuste:string;
 VlrAdicinal,VlrNRetAdic:string;
 // nivel 3
-NrProcRetPrinc,TpProcRetprinc,codsusp,VlrPrinc,NrProcRetAdic,TpProcRetAdic,CodSuspAdic,VlrAdic :string;
+NrProc,TpProc,codsusp,VlrCPRBSusp :string;
 
 begin
-  Codigo_servico:=0;
-  codigo_NF:=0;
+  temnivel1:= False;
+  temdetalhe:=False;
 
    if lbledtArquivo.Text='' then
    begin
@@ -185,306 +185,311 @@ begin
    end
    else
    if lbledtSeparador.Text='' then
-       begin
-         showmessage('Informe o caracter separador de campo.');
-         lbledtSeparador.SetFocus;
-       end
+   begin
+      showmessage('Informe o caracter separador de campo.');
+      lbledtSeparador.SetFocus;
+   end
    else
-    begin
-         T:=TStringList.Create;
-         T.LoadFromFile(lbledtArquivo.Text);
-         c:=lbledtSeparador.Text;
-         Application.CreateForm(TWaitForm,WaitForm);
-         WaitForm.jvspclprgrs1.Caption:='Importando os Processos.Aguarde...';
-         WaitForm.Show;
-         WaitForm.Update;
+   begin
+      try
+           T:=TStringList.Create;
+           T.LoadFromFile(lbledtArquivo.Text);
+           c:=lbledtSeparador.Text;
+      except
+           ShowMessage('Arquivo não encontrado');
+           Exit;
+
+      end;
+      Application.CreateForm(TWaitForm,WaitForm);
+      WaitForm.jvspclprgrs1.Caption:='Importando os Processos.Aguarde...';
+      WaitForm.Show;
+      WaitForm.Update;
+      try
+         for i:=0 to T.Count-1 Do
          begin
-            dm.unProcessos.Close;
-            DM.unProcessos.Open;
-            for i:=0 to T.Count-1 Do
-             begin
-              linha:=T[i];
+           linha:=T[i];
               
-                Registro:=copy(linha,1,pos(c,linha)-1);
-                delete(linha,1,pos(c,linha));
-              //  if (Registro<>'R-2010-1') and (Registro<>'R-2020-1') then
-                if (copy(registro,1,6)='R-2010') and (copy(registro,1,6)='R-2020') then                
-                begin
-                  ShowMessage('Este não é o arquivo de Retençoes Previdenciária ( R-2010 ou R-2020) no leiaute da Fiscosistem');
+           Registro:=copy(linha,1,pos(c,linha)-1);
+           delete(linha,1,pos(c,linha));
+           if registro='' then
+           begin
+              Exit;                  
+           end;
+                
+           if not(copy(registro,1,6)='R-2060') then                
+           begin
+              ShowMessage('Este não é o arquivo de Contribuição Previdenciária sobre a Receita Bruta (R-2060) no leiaute da Fiscosistem');
+              WaitForm.Close;
+              Exit;
+           end;
+                   
+           // nivel 1 
+           if (Registro='R-2060-1') then
+           begin
+                
+              perApur:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              NrInscEstab:=REINFForm.colocaMascara(copy(linha,1,pos(c,linha)-1));
+              delete(linha,1,pos(c,linha));
+                
+              //IndObra:=copy(linha,1,pos(c,linha)-1);
+              //delete(linha,1,pos(c,linha));
+                  
+              codAtivEcon:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              vlrRecBrutaAtiv:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              vlrExcRecBruta:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              VlrAdicRecBruta:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              VlrBCCPRB:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              VlrCPRBApur:=linha;
+
+              if (NrInscEstab <> cnpjemp) and (Registro='R-2060-1') then
+              begin
+                  showmessage('CNPJ do Estabelecimento Não confere com o Contribuinte Cadastrado.');
                   WaitForm.Close;
                   Exit;
-                end;
+              end; 
 
-                // nivel 1 
-                if (Registro='R-2010-1') or (Registro='R-2020-1') then
-                begin
-                
-                  NrInscEstabTom:=REINFForm.colocaMascara(copy(linha,1,pos(c,linha)-1));
-                  delete(linha,1,pos(c,linha));
-                
-                  CNPJPrestador:=REINFForm.colocaMascara(copy(linha,1,pos(c,linha)-1));
-                  delete(linha,1,pos(c,linha));
+              if Trim(perApur)= '' then
+              begin
+                 ShowMessage('Período de Apuração inválido');
+                 WaitForm.Close;
+                 Exit;
+              end;
 
-                  IndObra:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha));
+              if Trim(codAtivEcon)= '' then
+              begin
+                 ShowMessage('Código ind. correspondente à atividade comercial, produto ou serviço sujeito a incidência da CPRB inválido');
+                 WaitForm.Close;
+                 Exit;
+              end;
 
-                  IndCprb:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha));
+              if (Trim(vlrRecBrutaAtiv) = '') or (Trim(VlrBCCPRB) = '') or (Trim(VlrCPRBApur) = '')  then
+              begin
+                 ShowMessage('Arquivo contem registro obrigatórios em branco');
+                 WaitForm.Close;
+                 Exit;
+              end;
 
-                  NumDocto:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha));
-
-                  Serie:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha));
-
-                  DtemissaoInf:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha));
-
-                  VlrBruto:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  obs:=linha;
-
-                  periodo:= Copy( DtemissaoInf,7,4)+'-'+ Copy( DtemissaoInf,4,2);
-
-                   if DM.unRetCP_ServTom.Locate(('CODIGO;NRINSCESTABTOM;CNPJPRESTADOR;PERAPUR'),VarArrayOf([codcurr,NrInscEstabTom,CNPJPrestador,periodo]),[loCaseInsensitive]) then
-                   begin
-                    Codigo_servico:= DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger;
-                   
-                   end
-                   else
-                   begin
-                       DM.qryUtil.Close;
-                       DM.qryUtil.SQL.Clear;
-                       DM.qryUtil.SQL.Add('select Max(id_Servico) as codigo from RetCP_Servicos_18');
-                       DM.qryUtil.Open;
-                       Codigo_servico:= DM.qryUtil.FieldByName('codigo').AsInteger+1;
-                    
-                     DM.unRetCP_ServTom.Insert;
-                     DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger:= Codigo_servico;
-                     DM.unRetCP_ServTom.FieldByName('CODIGO').AsInteger:=  Codcurr ;
-                     if StrToIntdef(IndObra,0)=0 then
-                     
-                     DM.unRetCP_ServTom.FieldByName('TPINSCESTABTOM').AsInteger:= 1 else
-                     DM.unRetCP_ServTom.FieldByName('TPINSCESTABTOM').AsInteger:= 2;
-                     
-                     DM.unRetCP_ServTom.FieldByName('NRINSCESTABTOM').AsString:= NrInscEstabTom ;
-                     DM.unRetCP_ServTom.FieldByName('CNPJPRESTADOR').AsString:=  CNPJPrestador ;
-                     DM.unRetCP_ServTom.FieldByName('INDOBRA').AsInteger:= StrToIntdef(IndObra,0);
-                     DM.unRetCP_ServTom.FieldByName('PERAPUR').AsString:=  periodo  ;
-                     DM.unRetCP_ServTom.FieldByName('VLRTOTALBRUTO').AsFloat:=  0;
-                     DM.unRetCP_ServTom.FieldByName('VLRTOTALBASERET').AsFloat:=  0;
-                     DM.unRetCP_ServTom.FieldByName('VLRTOTALRETPRINC').AsFloat:=  0;
-                     DM.unRetCP_ServTom.FieldByName('VLRTOTALRETADIC').AsFloat:= 0;
-                     DM.unRetCP_ServTom.FieldByName('VLRTOTALNRETPRINC').AsFloat:= 0;
-                     DM.unRetCP_ServTom.FieldByName('VLRTOTALNRETADIC').AsFloat:= 0;
-                     DM.unRetCP_ServTom.FieldByName('INDCPRB').AsInteger:= StrToIntDef(IndCprb,0);
-                     DM.unRetCP_ServTom.FieldByName('EVENTO').AsString:= copy(registro,1,6);
-                                          
-                     DM.unRetCP_ServTom.Post;
-                   end;
-
-
-                   if DM.unDetalheNF_ServPrest.Locate(('CODIGO;SERIE;numDocto'),VarArrayOf([codcurr,serie,NumDocto]),[loCaseInsensitive]) then
-                   begin
-                      codigo_nf:= DM.unDetalheNF_ServPrest.FieldByName('id_nf').AsInteger;
-                   end
-                   else
-                   begin
-                       DM.qryUtil.Close;
-                       DM.qryUtil.SQL.Clear;
-                       DM.qryUtil.SQL.Add('select Max(id_NF) as codigo from DetalheNF_servicos_18');
-                       DM.qryUtil.Open;
-                       codigo_nf:= DM.qryUtil.FieldByName('codigo').AsInteger+1;
-                   
-                     DM.unDetalheNF_ServPrest.Insert;
-                     DM.unDetalheNF_ServPrest.FieldByName('id_nf').AsInteger:=codigo_NF;
-                     DM.unDetalheNF_ServPrest.FieldByName('id_servico').AsInteger := Codigo_servico;
-                     DM.unDetalheNF_ServPrest.FieldByName('codigo').AsInteger:=Codcurr;
-                     DM.unDetalheNF_ServPrest.FieldByName('serie').AsString:=Serie;
-                     DM.unDetalheNF_ServPrest.FieldByName('numdocto').AsString:=NumDocto;
-                     DM.unDetalheNF_ServPrest.FieldByName('dtemissaoNF').AsDateTime:= StrToDate(DtemissaoInf);
-                     DM.unDetalheNF_ServPrest.FieldByName('vlrBruto').AsFloat:=StrToFloatDef(VlrBruto,0);
-                     DM.unDetalheNF_ServPrest.FieldByName('obs').AsString:=Obs;
-
-                     DM.unDetalheNF_ServPrest.Post;
-
-                   
-                   end;
-                   
-
-                  
-                
-                end;
-
-               // nivel 2
-                if (Registro='R-2010-2') or (Registro='R-2020-2') then
-                begin
-                   if Codigo_servico=0 then
-                   begin
-                     if (Registro='R-2010-2') then                    
-                     ShowMessage('Deve haver um registro R-2010-1 antes') else
-                     ShowMessage('Deve haver um registro R-2020-1 antes') ;
-                     Exit;
-                   end;
-                  
-                  Tpservico:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrBaseRet:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrRetencao:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrRetSub:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrNRetPrinc:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrServicos15:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrServicos20:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrServicos25:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrAdicinal:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrNRetAdic:=linha;
-
-                   if DM.unTiposServPrest_NF.Locate(('tpservico;id_nf;id_servico;codigo'),VarArrayOf([Tpservico,codigo_NF,Codigo_servico,codcurr]),[loCaseInsensitive]) then
-                   begin
-                   
-                   end
-                   else
-                   begin
-                     DM.unTiposServPrest_NF.Insert;
-                     DM.unTiposServPrest_NF.FieldByName('tpservico').AsString:= Tpservico;
-                     DM.unTiposServPrest_NF.FieldByName('id_nf').AsInteger:=codigo_NF;
-                     DM.unTiposServPrest_NF.FieldByName('id_servico').AsInteger:= Codigo_servico;
-                     DM.unTiposServPrest_NF.FieldByName('codigo').AsInteger:= Codcurr;
-                     DM.unTiposServPrest_NF.FieldByName('vlrBaseRet').AsFloat:= StrToFloatDef(VlrBaseRet,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrRetencao').AsFloat:= StrToFloatDef(VlrRetencao,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrRetSub').AsFloat:= StrToFloatDef(VlrRetSub,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrNRetPrinc').AsFloat:= StrToFloatDef(VlrNRetPrinc,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrServicos15').AsFloat:= StrToFloatDef(VlrServicos15,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrServicos20').AsFloat:=StrToFloatDef(VlrServicos20,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrServicos25').AsFloat:=StrToFloatDef(VlrServicos25,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrAdicional').AsFloat:= StrToFloatDef(VlrAdicinal,0);
-                     DM.unTiposServPrest_NF.FieldByName('vlrNRetAdic').AsFloat:=  StrToFloatDef(VlrNRetAdic,0);
-                     DM.unTiposServPrest_NF.Post;
-                   
-                   end;
-                  
-                
-                end;
-
-               // nivel 3
-                if (Registro='R-2010-3') or (Registro='R-2020-3') then
-                begin 
-                  if Codigo_servico=0 then
-                   begin
-                     if (Registro='R-2010-2') then                    
-                     ShowMessage('Deve haver um registro R-2010-1 antes') else
-                     ShowMessage('Deve haver um registro R-2020-1 antes') ;
-                     Exit;
-                   end;
-                   
-                  NrProcRetPrinc:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha));
-
-                  TpProcRetprinc:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  codsusp:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrPrinc:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  NrProcRetAdic:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  TpProcRetAdic:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  CodSuspAdic:=copy(linha,1,pos(c,linha)-1);
-                  delete(linha,1,pos(c,linha)); 
-
-                  VlrAdic:=linha;
-                  
-                  if NrProcRetPrinc<>'' then
-                  begin
-                      if DM.unInfProcessos.Locate(('id_servico;codigo;nrProcRetPrinc'),VarArrayOf([Codigo_servico,codcurr,NrProcRetPrinc]),[loCaseInsensitive]) then
-                      begin
-                  
-                      end
-                      else
-                      begin
-                          DM.qryUtil.Close;
-                         DM.qryUtil.SQL.Clear;
-                         DM.qryUtil.SQL.Add('select Max(id_processo) as codigo from InfProcessos_18  ');
-                        // DM.qryUtil.ParamByName('codigo').AsInteger:=DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger;
-                         DM.qryUtil.Open;
-                         codigo_Proc:= DM.qryUtil.FieldByName('codigo').AsInteger+1;
-                      
-                        DM.unInfProcessos.Insert;
-                        DM.unInfProcessos.FieldByName('id_processo').AsInteger:= codigo_Proc;
-                        DM.unInfProcessos.FieldByName('id_servico').AsInteger:= Codigo_servico;
-                        DM.unInfProcessos.FieldByName('codigo').AsInteger:=Codcurr;
-                        DM.unInfProcessos.FieldByName('nrProcRetPrinc').AsString:=  NrProcRetPrinc;
-                        DM.unInfProcessos.FieldByName('tpprocRetPrinc').AsInteger:= StrToIntDef(TpProcRetprinc,1);
-                        DM.unInfProcessos.FieldByName('codSusp').AsString:= codsusp;
-                        DM.unInfProcessos.FieldByName('valorPrinc').AsFloat:= StrToFloatDef(VlrPrinc,0); 
-                         DM.unInfProcessos.Post;
-                      end;
-                  end;
-                  
-                  if NrProcRetAdic<>'' then
-                  begin
-                     if DM.unInfProcessosAdic.Locate(('id_servico;codigo;NrProcRetAdic'),VarArrayOf([Codigo_servico,codcurr,NrProcRetAdic]),[loCaseInsensitive]) then
-                      begin
-                  
-                      end
-                      else
-                      begin
-                          DM.qryUtil.Close;
-                         DM.qryUtil.SQL.Clear;
-                         DM.qryUtil.SQL.Add('select Max(id_processo) as codigo from InfProcessosAdic_18 --where ID_SERVICO=:codigo ');
-                       //  DM.qryUtil.ParamByName('codigo').AsInteger:=DM.unRetCP_ServTom.FieldByName('ID_SERVICO').AsInteger;
-                         DM.qryUtil.Open;
-                         codigo_Proc:= DM.qryUtil.FieldByName('codigo').AsInteger+1;
-
-                      
-                         DM.unInfProcessosAdic.Insert;
-                         DM.unInfProcessosAdic.FieldByName('Id_processo').AsInteger:= codigo_Proc;
-                         DM.unInfProcessosAdic.FieldByName('id_servico').AsInteger:=Codigo_servico;
-                         DM.unInfProcessosAdic.FieldByName('codigo').AsInteger:=Codcurr;
-                         DM.unInfProcessosAdic.FieldByName('nrProcRetAdic').AsString:=NrProcRetAdic;
-                         DM.unInfProcessosAdic.FieldByName('tpProcRetAdic').AsInteger:=StrToIntDef(TpProcRetAdic,1);
-                         DM.unInfProcessosAdic.FieldByName('CODSUSPADIC').AsString:=CodSuspAdic;
-                         DM.unInfProcessosAdic.FieldByName('ValorAdic').AsFloat:=StrToFloatDef(VlrAdic,0);
-                         DM.unInfProcessosAdic.Post;
-                      end;
-                  
-                  end;
-                  
-                  
-                
-                end;
-
-
+              if DMCadCPRB.unCadCPRB.Locate(('CODIGO;PERAPUR;NRINSCESTAB'),VarArrayOf([codcurr,perApur,nrinscEstab]),[loCaseInsensitive]) then
+              begin
+                 temnivel1:= True;  
+              end                                          
+              else
+              Begin                      
+                 DMCadCPRB.unCadCPRB.Insert;                 
+                 DMCadCPRB.unCadCPRB.FieldByName('CODIGO').AsInteger:=  Codcurr;
+                 DMCadCPRB.unCadCPRB.FieldByName('PERAPUR').AsString:=  perapur;    
+                 DMCadCPRB.unCadCPRB.FieldByName('NRINSCESTAB').AsString:= NrInscEstab;
+                 DMCadCPRB.unCadCPRB.FieldByName('TPINSCESTAB').AsString:= tipoInscEmp;
+                 DMCadCPRB.unCadCPRB.FieldByName('VLRRECBRUTATOTAL').AsFloat:=  0;
+                 DMCadCPRB.unCadCPRB.FieldByName('VLRCPAPURTOTAL').AsFloat:=  0;
+                 DMCadCPRB.unCadCPRB.FieldByName('VLRCPRBSUSPTOTAL').AsFloat:=  0;                                          
+                 try
+                   DMCadCPRB.unCadCPRB.Post;
+                   temnivel1:= True; 
+                 except        
+                    Showmessage('Problemas na inserção dos dados no Cadastro do CPRB. Verifique os dados!');
+                    exit;
+                 end;
+              End;
               
-             end;
-         end;
+              if DMCadCPRB.unDetalhereceita.Locate(('CODIGO;PERAPUR;NRINSCESTAB;CODATIVECON'),VarArrayOf([codcurr,perApur,nrinscEstab,codAtivEcon]),[loCaseInsensitive]) then
+              begin
+                   
+              end                                          
+              else
+              Begin     
+                 DMCadCPRB.unDetalhereceita.Insert;
+                 DMCadCPRB.unDetalhereceita.FieldByName('codigo').AsInteger:=Codcurr;
+                 DMCadCPRB.unDetalhereceita.FieldByName('perapur').AsString:=perapur;
+                 DMCadCPRB.unDetalhereceita.FieldByName('NrInscEstab').AsString := NrInscEstab;             
+                 DMCadCPRB.unDetalhereceita.FieldByName('codAtivEcon').AsString:=codAtivEcon;
+                 DMCadCPRB.unDetalhereceita.FieldByName('vlrRecBrutaAtiv').AsFloat:=StrToFloatDef(vlrRecBrutaAtiv,0);
+                 DMCadCPRB.unDetalhereceita.FieldByName('vlrExcRecBruta').AsFloat:=StrToFloatDef(vlrExcRecBruta,0);
+                 DMCadCPRB.unDetalhereceita.FieldByName('vlrAdicRecBruta').AsFloat:=StrToFloatDef(vlrAdicRecBruta,0);
+                 DMCadCPRB.unDetalhereceita.FieldByName('vlrBCCPRB').AsFloat:=StrToFloatDef(vlrBCCPRB,0);
+                 DMCadCPRB.unDetalhereceita.FieldByName('vlrCPRBApur').AsFloat:=StrToFloatDef(vlrCPRBApur,0);
+                 try
+                   DMCadCPRB.unDetalhereceita.Post;
+                 except
+                    Showmessage('Problemas na inserção dos dados nos Detalhes da Receita. Verifique os dados!');
+                    exit;
+                 end;
+              End;
+           end;
+
+           // nivel 2
+           if (Registro='R-2060-2') then
+           begin              
+
+              if not(temNivel1) then
+              begin                         
+                 ShowMessage('Deve haver um registro R-2060-1 antes');
+                 WaitForm.Close;
+                 Exit;
+              end;  
+                
+              TpAjuste:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha)); 
+
+              codAjuste:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha)); 
+
+              VlrAjuste:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha)); 
+
+              descAjuste:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));           
+
+              dtAjuste:=linha;
+
+              if Tpajuste='' then
+              begin
+                ShowMessage('Código corresp. ao tipo de Ajuste em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+
+              if codAjuste='' then
+              begin
+                ShowMessage('Código do Ajuste em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+
+              if (vlrAjuste='') then
+              begin
+                ShowMessage('Valor do Ajuste em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+
+              if (descAjuste = '') then
+              begin
+                ShowMessage('Descrição Resumida do Ajuste em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+                  
+              if DMCadCPRB.unAjustesReceita.Locate(('CODIGO;PERAPUR;NRINSCESTAB;CODATIVECON;TPAJUSTE;CODAJUSTE'),VarArrayOf([codcurr,perApur,nrinscEstab,codAtivEcon,TpAjuste,codAjuste]),[loCaseInsensitive]) then
+              begin
+                   
+              end
+              else
+              begin
+                 DMCadCPRB.unAjustesReceita.Insert;
+                 DMCadCPRB.unAjustesReceita.FieldByName('codigo').AsInteger:=Codcurr;
+                 DMCadCPRB.unAjustesReceita.FieldByName('perapur').AsString:=perapur;
+                 DMCadCPRB.unAjustesReceita.FieldByName('NrInscEstab').AsString := NrInscEstab;             
+                 DMCadCPRB.unAjustesReceita.FieldByName('codAtivEcon').AsString:=codAtivEcon;
+                 DMCadCPRB.unAjustesReceita.FieldByName('tpAjuste').AsString:=tpAjuste;
+                 DMCadCPRB.unAjustesReceita.FieldByName('codAjuste').AsString:=codAjuste;
+                 DMCadCPRB.unAjustesReceita.FieldByName('vlrAjuste').AsFloat:= StrToFloatDef(Vlrajuste,0);
+                 DMCadCPRB.unAjustesReceita.FieldByName('descAjuste').AsString:= descAjuste;
+                 DMCadCPRB.unAjustesReceita.FieldByName('dtajuste').AsString:= dtAjuste;                 
+                 try
+                   DMCadCPRB.unAjustesReceita.Post;                   
+                 except
+                   Showmessage('Problemas na inserção dos dados nos Ajustes da Receita. Verifique os dados!');
+                    exit;
+                 end;
+              end;
+                                  
+           end;
+
+           // nivel 3
+           if (Registro='R-2060-3') then
+           begin 
+           
+              if not(temNivel1) then
+              begin                         
+                 ShowMessage('Deve haver um registro R-2060-1 antes');
+                 WaitForm.Close;
+                 Exit;
+              end;  
+                   
+              NrProc:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha));
+
+              TpProc:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha)); 
+
+              codsusp:=copy(linha,1,pos(c,linha)-1);
+              delete(linha,1,pos(c,linha)); 
+
+              VlrCPRBSusp:=linha; 
+
+              if NrProc='' then
+              begin
+                ShowMessage('Número do Processo Adm./Judicial em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+
+              if TpProc='' then
+              begin
+                ShowMessage('Tipo de Processo em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+
+              if codSusp='' then
+              begin
+                ShowMessage('Código indicativo de Suspensão em branco');
+                WaitForm.Close;
+                Exit;
+              end;
+
+              if vlrCPRBSusp='' then
+              begin
+                ShowMessage('Valor da Contribuição Previdenciária com exigibilidade suspensa em branco');
+                WaitForm.Close;
+                Exit;
+              end;                     
+                  
+              
+              if DMCadCPRB.unProcessosReceita.Locate(('CODIGO;PERAPUR;NRINSCESTAB;NRPROC'),VarArrayOf([codcurr,perApur,nrinscEstab,NrProc]),[loCaseInsensitive]) then
+              begin
+                  
+              end
+              else
+              begin                                           
+                 DMCadCPRB.unProcessosReceita.Insert;
+                 DMCadCPRB.unProcessosReceita.FieldByName('CODIGO').AsInteger:=  Codcurr;
+                 DMCadCPRB.unProcessosReceita.FieldByName('PERAPUR').AsString:=  perapur;    
+                 DMCadCPRB.unProcessosReceita.FieldByName('NRINSCESTAB').AsString:= NrInscEstab;
+                 DMCadCPRB.unProcessosReceita.FieldByName('nrProc').AsString:=  NrProc;
+                 DMCadCPRB.unProcessosReceita.FieldByName('tpproc').AsInteger:= StrToIntDef(TpProc,1);
+                 DMCadCPRB.unProcessosReceita.FieldByName('codSusp').AsString:= codsusp;
+                 DMCadCPRB.unProcessosReceita.FieldByName('vlrCPRBSusp').AsFloat:= StrToFloatDef(VlrCPRBSusp,0); 
+                 try
+                   DMCadCPRB.unProcessosReceita.Post;
+                 except
+                   Showmessage('Problemas na inserção dos dados nos Processos da Receita. Verifique os dados!');
+                    exit;
+                 end;
+              end;             
+
+           end;
+         end;      
          WaitForm.Close;
          ShowMessage('Importação efetuada com sucesso');
+      finally
+        WaitForm.Close;
+      end;
     end;
+
 
 
 end;
@@ -720,27 +725,23 @@ end;
 
 procedure TFormCadCPRB.btnConsultarClick(Sender: TObject);
 begin
-   dm.unConsultaServicos.Close;
-   dm.unConsultaServicos.Filtered:=False;
-   dm.unConsultaServicos.FilterSQL:='Codigo='+ IntToStr(Codcurr);
-   dm.unConsultaServicos.Filtered:=True;
-   dm.unConsultaServicos.Open;
+   DMCadCPRB.unqryConsultaCPRB.Close;
+   DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+   DMCadCPRB.unqryConsultaCPRB.Open;
 end;
 
 procedure TFormCadCPRB.btnExcelClick(Sender: TObject);
 begin
-        DM.qryUtil.Close;
-        DM.qryUtil.SQL.Clear;
-        DM.qryUtil.SQL.Add('select * from RETCP_SERVICOS_18 where codigo=:cod')  ;
-        DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
-        DM.qryUtil.Open;
-        REINFForm.GeraExcel(DM.qryUtil);
+   DMCadCPRB.unqryConsultaCPRB.Close;
+   DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+   DMCadCPRB.unqryConsultaCPRB.Open;
+   REINFForm.GeraExcel(DMCadCPRB.unqryConsultaCPRB);
 end;
 
 procedure TFormCadCPRB.btnExcluir1Click(Sender: TObject);
 begin
 try
-  If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
+  {If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DM.qryUtil.Close;
@@ -752,7 +753,7 @@ try
         dm.unRetCP_ServTom.Close;
         dm.unRetCP_ServTom.Open;        
         btnConsultar.OnClick(self);
-     End;
+     End;}
 except
    ShowMessage('Não há Dados para serem excluídos');
 end;
@@ -761,7 +762,7 @@ end;
 procedure TFormCadCPRB.btnExcluir2Click(Sender: TObject);
 begin
   try
-    If MessageDLG ('Confirma Exclusão do Documento ' + '???' +#13+
+    If MessageDLG ('Confirma Exclusão do Detalhe ' + '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DMCadCPRB.unDetalheReceita.Delete;
@@ -774,7 +775,7 @@ end;
 procedure TFormCadCPRB.btnExcluir3Click(Sender: TObject);
 begin
    try
-      If MessageDLG ('Confirma Exclusão do Serviço ' + '???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+      If MessageDLG ('Confirma Exclusão do Ajuste da Receita ' + '???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
        Begin
           DMCadCPRB.unAjustesReceita.Delete;
        End;
@@ -800,7 +801,7 @@ begin
    try
      If MessageDLG ('Confirma Exclusão do registro ' + '???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
-          DM.unRetCP_ServTom.Delete;
+          DMCadCPRB.unCadCPRB.Delete;
      End;
    except
       ShowMessage('Não existem dados para serem excluídos');
@@ -877,19 +878,19 @@ begin
     cbbCODAJUSTE.SetFocus;
     Exit;
   end;
-  if dbedtvlrAjuste.Text='    -  ' then
+  if dbedtvlrAjuste.Text='' then
   begin
     ShowMessage('Informe o Valor do Ajuste ');
     dbedtvlrAjuste.SetFocus;
     Exit;
   end;
-  if dbedtDescAjuste.Text='    -  ' then
+  if dbedtDescAjuste.Text='' then
   begin
     ShowMessage('Informe a Descrição Resumida do Ajuste ');
     dbedtDescAjuste.SetFocus;
     Exit;
   end;
-  if dbedtDtAjuste.Text='    -  ' then
+  if Trim(dbedtDtAjuste.Text)='-' then
   begin
     ShowMessage('Informe o mês e ano do Ajuste ');
     dbedtDtAjuste.SetFocus;
@@ -1139,6 +1140,10 @@ begin
     DMCadCPRB.unCadCPRB.FilterSQL:='Codigo='+ IntToStr(Codcurr);
     DMCadCPRB.unCadCPRB.Filtered:=True;
     DMCadCPRB.unCadCPRB.Open;
+
+    DMCadCPRB.unqryConsultaCPRB.Close;
+    DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+    DMCadCPRB.unqryConsultaCPRB.Open;
     
     {DMCadCPRB.unDetalheReceita.Close;
     DMCadCPRB.unDetalheReceita.FilterSQL:='Codigo= '+ IntToStr(Codcurr) +

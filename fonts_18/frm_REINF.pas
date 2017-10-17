@@ -97,7 +97,7 @@ var
   REINFdir,REINFdir_users,REINFexe,spath,spath_users,empresa,cnpj,dataevento,calculo,inicial,imprimir: string;
   Codcurr,apuracao,EscrituracaoLPresumido,tributacao,qualificacao,mesevento,mes_calculo,ano_apuracao,ano_utilizacao,tipocalculo,ano_anterior:Integer;
   atividade,mes,pagini,num, gravaimposto, red_reinvestimento, RegimeApuracaoReceitas: integer;
-  entidade,Atividaderural,Linflac,lexplor,Descricao,cnpjemp:string;
+  entidade,Atividaderural,Linflac,lexplor,Descricao,cnpjemp,tipoInscEmp:string;
   Todos,democalc,demorural,demodemais,cancelou,diferido,atualizaimposto,so_parteb:boolean;
   Day,Year,MesInic,MesFinal,mesinicPres,MesFinalPres: word;
   Nomeemp,periodo,modulo,anomodulo,cpf,demo,mesparteb:string;
