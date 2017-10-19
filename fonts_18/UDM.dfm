@@ -784,88 +784,6 @@ object DM: TDM
     Left = 280
     Top = 536
   end
-  object unConslBeneficiarios: TUniTable
-    TableName = 'BENEFICIARIOS_18'
-    Connection = Conexao
-    Left = 792
-    Top = 288
-    object StringField7: TStringField
-      DisplayLabel = 'N'#186' de Inscri'#231#227'o'
-      FieldName = 'NRINSCBENEF'
-      Required = True
-      Size = 14
-    end
-    object IntegerField3: TIntegerField
-      DisplayLabel = 'Tipo Inscri'#231#227'o'
-      FieldName = 'TPINSCBENF'
-      Required = True
-    end
-    object StringField15: TStringField
-      DisplayLabel = 'Nome Benef.'
-      FieldName = 'NMRAZAOBENEF'
-      Required = True
-      Size = 150
-    end
-    object StringField16: TStringField
-      DisplayLabel = 'Pa'#237's'
-      FieldName = 'PAISRESID'
-      Size = 3
-    end
-    object StringField17: TStringField
-      DisplayLabel = 'Logradouro'
-      FieldName = 'DSCLOGRAD'
-      Size = 80
-    end
-    object StringField18: TStringField
-      DisplayLabel = 'N'#186' '
-      FieldName = 'NRLOGRAD'
-      Size = 10
-    end
-    object StringField19: TStringField
-      DisplayLabel = 'Compl.'
-      FieldName = 'COMPLEM'
-      Size = 30
-    end
-    object StringField20: TStringField
-      DisplayLabel = 'Bairro'
-      FieldName = 'BAIRRO'
-      Size = 60
-    end
-    object StringField21: TStringField
-      DisplayLabel = 'Cidade'
-      FieldName = 'CIDADE'
-      Size = 30
-    end
-    object StringField22: TStringField
-      DisplayLabel = 'C'#243'd. Postal'
-      FieldName = 'CODPOSTA'
-      Size = 12
-    end
-    object IntegerField4: TIntegerField
-      DisplayLabel = 'Ind. NIF'
-      FieldName = 'INDNIF'
-      Required = True
-    end
-    object StringField23: TStringField
-      DisplayLabel = 'N'#186' NIF'
-      FieldName = 'NIFBENEF'
-    end
-    object StringField24: TStringField
-      DisplayLabel = 'Rel. Fonte'
-      FieldName = 'RELFONTEPAGAD'
-      Size = 3
-    end
-    object dtmfld2: TDateTimeField
-      DisplayLabel = 'Data Laudo'
-      FieldName = 'DTLAUDO'
-      EditMask = '!99/99/0000;1;_'
-    end
-  end
-  object dsConsulBeneficiarios: TUniDataSource
-    DataSet = unConslBeneficiarios
-    Left = 792
-    Top = 344
-  end
   object dsRetCP_ServTom: TUniDataSource
     DataSet = unRetCP_ServTom
     Left = 264
@@ -1229,5 +1147,108 @@ object DM: TDM
     DataSet = qryConsultaProdRural
     Left = 192
     Top = 672
+  end
+  object unConslBeneficiarios: TUniTable
+    TableName = 'BENEFICIARIOS_18'
+    Connection = Conexao
+    Left = 792
+    Top = 288
+    object StringField7: TStringField
+      DisplayLabel = 'N'#186' de Inscri'#231#227'o'
+      FieldName = 'NRINSCBENEF'
+      Required = True
+      Size = 14
+    end
+    object IntegerField2: TIntegerField
+      DisplayLabel = 'Tipo Inscri'#231#227'o'
+      FieldName = 'TPINSCBENF'
+      Required = True
+    end
+    object StringField15: TStringField
+      DisplayLabel = 'Nome Benef.'
+      FieldName = 'NMRAZAOBENEF'
+      Required = True
+      Size = 150
+    end
+    object StringField16: TStringField
+      DisplayLabel = 'Pa'#237's'
+      FieldName = 'PAISRESID'
+      Size = 3
+    end
+    object StringField17: TStringField
+      DisplayLabel = 'Logradouro'
+      FieldName = 'DSCLOGRAD'
+      Size = 80
+    end
+    object StringField18: TStringField
+      DisplayLabel = 'N'#186' '
+      FieldName = 'NRLOGRAD'
+      Size = 10
+    end
+    object StringField19: TStringField
+      DisplayLabel = 'Compl.'
+      FieldName = 'COMPLEM'
+      Size = 30
+    end
+    object StringField20: TStringField
+      DisplayLabel = 'Bairro'
+      FieldName = 'BAIRRO'
+      Size = 60
+    end
+    object StringField21: TStringField
+      DisplayLabel = 'Cidade'
+      FieldName = 'CIDADE'
+      Size = 30
+    end
+    object StringField22: TStringField
+      DisplayLabel = 'C'#243'd. Postal'
+      FieldName = 'CODPOSTA'
+      Size = 12
+    end
+    object IntegerField3: TIntegerField
+      DisplayLabel = 'Ind. NIF'
+      FieldName = 'INDNIF'
+      Required = True
+    end
+    object StringField23: TStringField
+      DisplayLabel = 'N'#186' NIF'
+      FieldName = 'NIFBENEF'
+    end
+    object StringField24: TStringField
+      DisplayLabel = 'Rel. Fonte'
+      FieldName = 'RELFONTEPAGAD'
+      Size = 3
+    end
+    object dtmfld2: TDateTimeField
+      DisplayLabel = 'Data Laudo'
+      FieldName = 'DTLAUDO'
+      EditMask = '!99/99/0000;1;_'
+    end
+  end
+  object dsConsulBeneficiarios: TUniDataSource
+    DataSet = unConslBeneficiarios
+    Left = 792
+    Top = 344
+  end
+  object unREF_CODPAGAMENTO: TUniTable
+    TableName = 'Ref_codpagamentos'
+    Connection = Conexao
+    Left = 344
+    Top = 632
+    object unREF_CODPAGAMENTOCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Required = True
+      Size = 4
+    end
+    object unREF_CODPAGAMENTODESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Required = True
+      Size = 255
+    end
+  end
+  object dsRef_CodPagamento: TUniDataSource
+    DataSet = unREF_CODPAGAMENTO
+    Left = 344
+    Top = 688
   end
 end

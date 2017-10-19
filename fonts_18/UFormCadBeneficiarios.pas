@@ -79,6 +79,7 @@ type
 
 var
   FormCadBeneficiarios: TFormCadBeneficiarios;
+  Alterrando:Boolean;
 
 implementation
 
@@ -107,16 +108,18 @@ begin
  btnGravar.Enabled:=True;
  dbnvgr1.Enabled:=False;
  
+ Alterrando:=True;
 end;
 
 procedure TFormCadBeneficiarios.btnCancelarClick(Sender: TObject);
 begin
- DM.unProcessos.Cancel;
+ DM.unBeneficiarios.Cancel;
  btnNovo.Enabled:=True;
  btnAlterar.Enabled:=True;
  btnGravar.Enabled:=False;
  btnCancelar.Enabled:=False;
  DesabilitaCampos;
+ Alterrando:=False;
 
  btnExcluir.Enabled:=True;
  btnAlterar.Enabled:=True;
@@ -137,15 +140,103 @@ end;
 
 procedure TFormCadBeneficiarios.btnExcluirClick(Sender: TObject);
 begin
+ try
  If MessageDLG ('Confirma Exclusão do registro ' +DM.unBeneficiarios.FieldByName('NMRAZAOBENEF').AsString+ '???' +#13+
      '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
-        DM.unProcessos.Delete;
+        DM.unBeneficiarios.Delete;
      End;
+ except
+   ShowMessage('Não existem dados para ser excluídos');
+ end;
 end;
 
 procedure TFormCadBeneficiarios.btnGravarClick(Sender: TObject);
 begin
+
+  if dbedtNMRAZAOBENEF.text='' then
+  begin
+    ShowMessage('Informe a razão do beneficiário');
+    dbedtNMRAZAOBENEF.SetFocus;
+    Exit;
+  end;
+
+  if cbbTPINSC.text='' then
+  begin
+    ShowMessage('Informe o tipo De inscrição');
+    cbbTPINSC.SetFocus;
+    Exit;
+  end;
+
+  if dbedtNRINSC.text='' then
+  begin
+    ShowMessage('Informe o CPF/CNPJ');
+    dbedtNRINSC.SetFocus;
+    Exit;
+  end;
+
+  if cbbPAISRESID.text='' then
+  begin
+    ShowMessage('Informe o país de residência');
+    cbbPAISRESID.SetFocus;
+    Exit;
+  end;
+
+  if dbedtDSCLOGRAD.text='' then
+  begin
+    ShowMessage('Informe o logradouro');
+    dbedtDSCLOGRAD.SetFocus;
+    Exit;
+  end;
+  
+   if dbedtNRLOGRAD.text='' then
+  begin
+    ShowMessage('Informe o número');
+    dbedtNRLOGRAD.SetFocus;
+    Exit;
+  end;
+  
+   if dbedtCIDADE.text='' then
+  begin
+    ShowMessage('Informe a cidade');
+    dbedtCIDADE.SetFocus;
+    Exit;
+  end;
+
+   if dbedtBAIRRO.text='' then
+  begin
+    ShowMessage('Informe a cidade');
+    dbedtBAIRRO.SetFocus;
+    Exit;
+  end;
+
+  if cbbINDNIF.text='' then
+  begin
+    ShowMessage('Informe o indicativo do número de identificação físcal');
+    cbbINDNIF.SetFocus;
+    Exit;
+  end;
+
+ if Alterrando=False then
+ begin 
+   DM.qryUtil.Close;
+   DM.qryUtil.SQL.Clear;
+   DM.qryUtil.SQL.Add('Select * from BENEFICIARIOS_18 where');
+   DM.qryUtil.SQL.Add('codigo=:cod and NRINSCBENEF=:cpf');
+   DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+   DM.qryUtil.ParamByName('cpf').AsString:=dbedtNRINSC.Text;
+   DM.qryUtil.Open;
+   if not DM.qryUtil.eof then
+   begin
+     ShowMessage('Já Existe um Benificiário cadastrado com esta inscrição');
+     dbedtNRINSC.SetFocus;
+     Exit;     
+   end;
+   
+   
+
+ 
+ end;
 
 
  DM.unBeneficiarios.Post;
@@ -159,13 +250,14 @@ begin
  btnAlterar.Enabled:=True;
  btnCancelar.Enabled:=False;
  dbnvgr1.Enabled:=True;
- 
+ Alterrando:=False;
 end;
 
 procedure TFormCadBeneficiarios.btnNovoClick(Sender: TObject);
 begin
  DM.unBeneficiarios.Insert;
  DM.unBeneficiarios.FieldByName('Codigo').AsInteger:= Codcurr;
+ DM.unBeneficiarios.FieldByName('paisResid').AsString:= '105';
 
  btnNovo.Enabled:=False;
  btnGravar.Enabled:=True;
@@ -173,11 +265,12 @@ begin
 
  HabilitaCampos;
  dbedtNMRAZAOBENEF.SetFocus;
+ Alterrando:=False;
  
- btnExcluir.Enabled:=False;
+   btnExcluir.Enabled:=False;
    btnAlterar.Enabled:=False;
    btnCancelar.Enabled:=True;
-   dbnvgr1.Enabled:=False;
+   dbnvgr1.Enabled:=False; 
 end;
 
 procedure TFormCadBeneficiarios.btnSairClick(Sender: TObject);

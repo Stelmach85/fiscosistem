@@ -1,10 +1,9 @@
-object FormCadBeneficiarios: TFormCadBeneficiarios
+object FormCadRendimentos: TFormCadRendimentos
   Left = 0
   Top = 0
-  BorderIcons = []
-  Caption = 'Cadastro de Benefici'#225'rios dos Rendimentos Tribut'#225'veis'
-  ClientHeight = 529
-  ClientWidth = 897
+  Caption = 'FormCadRendimentos'
+  ClientHeight = 544
+  ClientWidth = 1060
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +11,6 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -26,213 +24,231 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
     object ts1: TTabSheet
       Caption = 'Cadastros'
       object pnl1: TPanel
-        Left = 28
-        Top = 40
+        Left = 3
+        Top = 0
         Width = 841
-        Height = 353
+        Height = 366
         TabOrder = 0
-        object lbl1: TLabel
-          Left = 16
-          Top = 8
-          Width = 168
-          Height = 13
-          Caption = 'Nome/Raz'#227'o Social do Beneficiario:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl3: TLabel
-          Left = 258
-          Top = 176
-          Width = 211
-          Height = 13
-          Caption = 'Indicativo do N'#250'mero de Identifica'#231#227'o F'#237'scal'
-          ParentShowHint = False
-          ShowHint = True
-        end
         object lbl5: TLabel
-          Left = 509
-          Top = 7
-          Width = 85
+          Left = 25
+          Top = 119
+          Width = 104
           Height = 13
-          Caption = 'Tipo de Inscri'#231#227'o:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl4: TLabel
-          Left = 679
-          Top = 8
-          Width = 52
-          Height = 13
-          Caption = 'CPF/CNPJ:'
+          Caption = 'Ind. de Exigib. Susp.:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl12: TLabel
-          Left = 16
-          Top = 66
+          Left = 20
+          Top = -12
           Width = 100
           Height = 13
           Caption = 'Pa'#237's da Resid. Fiscal:'
           ParentShowHint = False
           ShowHint = True
         end
-        object lbl2: TLabel
-          Left = 258
-          Top = 67
-          Width = 56
+        object lbl13: TLabel
+          Left = 25
+          Top = 7
+          Width = 59
           Height = 13
-          Caption = 'logradouro:'
+          Caption = 'Benefici'#225'rio:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl4: TLabel
+          Left = 550
+          Top = 7
+          Width = 52
+          Height = 13
+          Caption = 'CPF/CNPJ:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl1: TLabel
+          Left = 25
+          Top = 60
+          Width = 94
+          Height = 13
+          Caption = 'C'#243'digo Pagamento:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl2: TLabel
+          Left = 550
+          Top = 60
+          Width = 52
+          Height = 13
+          Caption = 'Data Pgto:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl3: TLabel
+          Left = 208
+          Top = 118
+          Width = 77
+          Height = 13
+          Caption = 'Vlr. Rend. Trib.:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl6: TLabel
-          Left = 679
-          Top = 67
-          Width = 41
+          Left = 382
+          Top = 118
+          Width = 47
           Height = 13
-          Caption = 'Numero:'
+          Caption = 'Vlr. IRRF:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl7: TLabel
-          Left = 16
-          Top = 128
-          Width = 69
+          Left = 550
+          Top = 118
+          Width = 107
           Height = 13
-          Caption = 'Complemento:'
+          Caption = 'Vlr. Ded. Prev. Oficial:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl8: TLabel
-          Left = 258
-          Top = 128
-          Width = 37
+          Left = 25
+          Top = 174
+          Width = 100
           Height = 13
-          Caption = 'Cidade:'
+          Caption = 'Vlr. Ded. Prev. Priv.:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl9: TLabel
-          Left = 679
-          Top = 128
-          Width = 23
+          Left = 208
+          Top = 172
+          Width = 72
           Height = 13
-          Caption = 'CEP:'
+          Caption = 'Vlr. Ded. FAPI:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl10: TLabel
-          Left = 16
-          Top = 176
-          Width = 32
+          Left = 382
+          Top = 172
+          Width = 94
           Height = 13
-          Caption = 'Bairro:'
+          Caption = 'Vlr. Ded. Funpresp:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl11: TLabel
-          Left = 16
-          Top = 232
-          Width = 184
+          Left = 550
+          Top = 172
+          Width = 112
           Height = 13
-          Caption = 'N'#250'mero de indentifica'#231#227'o Fiscal -  NIF:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl13: TLabel
-          Left = 679
-          Top = 176
-          Width = 59
-          Height = 13
-          Caption = 'Data Laudo:'
+          Caption = 'Vlr. Ded. Pens'#227'o Alim.l:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl14: TLabel
-          Left = 258
-          Top = 232
-          Width = 220
+          Left = 25
+          Top = 230
+          Width = 130
           Height = 13
-          Caption = 'Rela'#231#227'o Fonte Pagadora PJ e Benefici'#225'rio PJ :'
+          Caption = 'Vlr. Comp. Ano Calend'#225'rio:'
           ParentShowHint = False
           ShowHint = True
         end
-        object dbedtNMRAZAOBENEF: TDBEdit
-          Left = 16
-          Top = 27
-          Width = 473
-          Height = 19
-          Hint = 'Nome do Benefici'#225'rio'
-          Ctl3D = False
-          DataField = 'NMRAZAOBENEF'
-          DataSource = DM.dsBeneficiarios
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
+        object lbl15: TLabel
+          Left = 208
+          Top = 230
+          Width = 118
+          Height = 13
+          Caption = 'Vlr. Comp. Ano Anterior:'
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 1
         end
-        object cbbINDNIF: TJvDBComboBox
-          Left = 258
-          Top = 195
-          Width = 404
-          Height = 22
-          Hint = 'Informe o Indicativo do N'#250'emro de F'#237'scal'
-          Style = csOwnerDrawFixed
-          DataField = 'INDNIF'
-          DataSource = DM.dsBeneficiarios
-          Items.Strings = (
-            '1 - Beneficiario com NIF'
-            '2 - Beneficiario dispensado do NIF'
-            '3 - Pa'#237's n'#227'o exige NIF')
-          TabOrder = 10
-          Values.Strings = (
-            '1'
-            '2'
-            '3')
-          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
-          ListSettings.OutfilteredValueFont.Color = clRed
-          ListSettings.OutfilteredValueFont.Height = -11
-          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
-          ListSettings.OutfilteredValueFont.Style = []
+        object lbl16: TLabel
+          Left = 382
+          Top = 230
+          Width = 113
+          Height = 13
+          Caption = 'Vlr. Ded. Dependentes:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl17: TLabel
+          Left = 550
+          Top = 230
+          Width = 54
+          Height = 13
+          Caption = 'Vlr. Isento:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl18: TLabel
+          Left = 550
+          Top = 288
+          Width = 130
+          Height = 13
+          Caption = 'Vlr. Rend. Isento/N'#227'o Trib:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl19: TLabel
+          Left = 25
+          Top = 287
+          Width = 80
+          Height = 13
+          Caption = 'Tipo de Isen'#231#227'o:'
+          ParentShowHint = False
+          ShowHint = True
         end
         object cbbTPINSC: TJvDBComboBox
-          Left = 509
-          Top = 26
+          Left = 25
+          Top = 138
           Width = 153
           Height = 22
           Hint = 'Informe o tipo de Inscri'#231#227'o CPF/CNPJ'
           Style = csOwnerDrawFixed
-          DataField = 'TPINSCBENF'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'INDSUSPEXIG'
+          DataSource = DM.dsRendimentos
           Items.Strings = (
-            '1 - CNPJ'
-            '2 - CPF')
+            'S - Sim'
+            'N - N'#227'o')
           TabOrder = 0
           Values.Strings = (
-            '1'
-            '2')
+            'S'
+            'N')
           ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
           ListSettings.OutfilteredValueFont.Color = clRed
           ListSettings.OutfilteredValueFont.Height = -11
           ListSettings.OutfilteredValueFont.Name = 'Tahoma'
           ListSettings.OutfilteredValueFont.Style = []
-          OnChange = cbbTPINSCChange
         end
-        object dbedtNRINSC: TDBEdit
-          Left = 679
-          Top = 27
+        object cbbPAISRESID: TJvDBComboBox
+          Left = 25
+          Top = 80
+          Width = 424
+          Height = 21
+          Hint = 'Selecione o Pais do Contribuinte'
+          DataField = 'CODPGTO'
+          DataSource = DM.dsRendimentos
+          TabOrder = 1
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+          ListSettings.KeyField = 'CODIGO'
+          ListSettings.DisplayField = 'descricao'
+          ListSettings.DataSource = DM.dsRef_CodPagamento
+        end
+        object dbedtDTLAUDO: TDBEdit
+          Left = 550
+          Top = 81
           Width = 138
           Height = 19
-          Hint = 'Informe o N'#186' da inscri'#231#227'o'
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'NRINSCBENEF'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'DTPGTO'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -244,33 +260,15 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 2
         end
-        object cbbPAISRESID: TJvDBComboBox
-          Left = 16
-          Top = 85
-          Width = 220
-          Height = 21
-          Hint = 'Selecione o Pais do Contribuinte'
-          DataField = 'PAISRESID'
-          DataSource = DM.dsBeneficiarios
-          TabOrder = 3
-          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
-          ListSettings.OutfilteredValueFont.Color = clRed
-          ListSettings.OutfilteredValueFont.Height = -11
-          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
-          ListSettings.OutfilteredValueFont.Style = []
-          ListSettings.KeyField = 'COD_PAIS'
-          ListSettings.DisplayField = 'descricao'
-          ListSettings.DataSource = DM.dsPais
-        end
-        object dbedtDSCLOGRAD: TDBEdit
-          Left = 258
-          Top = 86
-          Width = 404
+        object dbedtNRINSC: TDBEdit
+          Left = 550
+          Top = 26
+          Width = 138
           Height = 19
-          Hint = 'Informe o Logradouro'
+          Hint = 'Informe o N'#186' da inscri'#231#227'o'
           Ctl3D = False
-          DataField = 'DSCLOGRAD'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'NRINSCBENEF'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -280,17 +278,35 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 4
+          TabOrder = 3
         end
-        object dbedtNRLOGRAD: TDBEdit
-          Left = 679
-          Top = 86
+        object cbbCODPGTO: TJvDBComboBox
+          Left = 25
+          Top = 25
+          Width = 424
+          Height = 21
+          Hint = 'Selecione o Pais do Contribuinte'
+          DataField = 'NRINSCBENEF'
+          DataSource = DM.dsRendimentos
+          TabOrder = 4
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+          ListSettings.KeyField = 'nrInscBenef'
+          ListSettings.DisplayField = 'mmRazaoBenef'
+          ListSettings.DataSource = DM.dsBeneficiarios
+        end
+        object dbedtDTPGTO: TDBEdit
+          Left = 208
+          Top = 139
           Width = 138
           Height = 19
-          Hint = 'Informe o N'#186' '
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'NRLOGRAD'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRRENDTRIBUTAVEL'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -302,15 +318,15 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 5
         end
-        object dbedtCOMPLEM: TDBEdit
-          Left = 16
-          Top = 147
-          Width = 220
+        object dbedtVLRRENDTRIBUTAVEL: TDBEdit
+          Left = 382
+          Top = 139
+          Width = 138
           Height = 19
-          Hint = 'Informe o Complemento do Endere'#231'o'
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'COMPLEM'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRRRF'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -322,15 +338,15 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 6
         end
-        object dbedtCIDADE: TDBEdit
-          Left = 258
-          Top = 147
-          Width = 404
+        object dbedtVLRRRF: TDBEdit
+          Left = 550
+          Top = 139
+          Width = 138
           Height = 19
-          Hint = 'Informe a Cidade'
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'CIDADE'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRDEDPREVOFIC'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -342,15 +358,15 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 7
         end
-        object dbedtCODPOSTA: TDBEdit
-          Left = 679
-          Top = 147
+        object dbedtVLRDEDPREVOFIC: TDBEdit
+          Left = 25
+          Top = 193
           Width = 138
           Height = 19
-          Hint = 'Informe o CEP'
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'CODPOSTA'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRDEDPREVPRIV'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -362,15 +378,15 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 8
         end
-        object dbedtBAIRRO: TDBEdit
-          Left = 16
-          Top = 195
-          Width = 220
+        object dbedtVLRDEDPREVOFIC1: TDBEdit
+          Left = 208
+          Top = 193
+          Width = 138
           Height = 19
-          Hint = 'Informe o Bairro'
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'BAIRRO'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRDEDFAPI'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -382,15 +398,15 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 9
         end
-        object dbedtNIFBENEF: TDBEdit
-          Left = 16
-          Top = 251
-          Width = 220
+        object dbedtVLRDEDPREVOFIC2: TDBEdit
+          Left = 382
+          Top = 193
+          Width = 138
           Height = 19
-          Hint = 'Informe o N'#186' da NIF'
+          Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'NIFBENEF'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRDEDFUNPRESP'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -400,17 +416,17 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 12
+          TabOrder = 10
         end
-        object dbedtDTLAUDO: TDBEdit
-          Left = 679
-          Top = 195
+        object dbedtVLRDEDPREVOFIC3: TDBEdit
+          Left = 550
+          Top = 193
           Width = 138
           Height = 19
           Hint = 'Informe a Data do Laudo'
           Ctl3D = False
-          DataField = 'DTLAUDO'
-          DataSource = DM.dsBeneficiarios
+          DataField = 'VLRDEDPENSAO'
+          DataSource = DM.dsRendimentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -422,59 +438,149 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
           ShowHint = True
           TabOrder = 11
         end
-        object cbbRELFONTEPAGAD: TJvDBComboBox
-          Left = 258
+        object dbedtVLRDEDPREVOFIC4: TDBEdit
+          Left = 25
           Top = 251
-          Width = 559
-          Height = 22
-          Hint = 'Informe a Rela'#231#227'o entre a Fonte Pagadora e o Benefeciario '
-          Style = csOwnerDrawFixed
-          DataField = 'RELFONTEPAGAD'
-          DataSource = DM.dsBeneficiarios
-          Items.Strings = (
-            '500 - A fonte pagadora '#233' matriz da benefici'#225'ria no exterior'
-            
-              '510 - A fonte pagadora '#233' filial, surcusal ou ag'#234'ncia da benefici' +
-              #225'ria no exterior'
-            
-              '520 - A fonte pagadora '#233' controlada ou coligada da benefici'#225'ria ' +
-              'no exterior, na forma dos '#163#163' 1'#186' e 2'#186' do art. 243 da Lei n'#186' 6.404' +
-              ', de 1976'
-            
-              '530 - A fonte pagadora '#233' controladora ou coligada da benefici'#225'ri' +
-              'a no exterior, na forma dos '#163#163' 1'#186' e 2'#186' do art. 243 da Lei n'#186' 6.4' +
-              '04, de 1976'
-            
-              '540 - A fonte pagadora e a benefici'#225'ria no exterior est'#227'o sob co' +
-              'ntrole societ'#225'rio ou administrativo comum ou quando pelo menos 1' +
-              '0% do capital de cada uma , pertencer a uma mesma pessoa fisica ' +
-              'ou jur'#237'dica'
-            
-              '550 - A fonte pagadora e a benefici'#225'ria no exterior tem particip' +
-              'a'#231#227'o societ'#225'ria no capital de uma terceira pessoa jur'#237'dica, cuja' +
-              ' soma as caracterize como controladoras ou coligadas na forma do' +
-              's '#163#163' 1'#186' e 2'#186' do art. 243 da Lei n'#186' 6.404. de 1976'
-            
-              '560 - A fonte pagadora ou a benefici'#225'ria no exterior mantenha co' +
-              'ntrato de exclusividade como agente, como distribuidor ou como c' +
-              'oncession'#225'rio nas opera'#231#245'es com bens, servi'#231'os e direitos'
-            
-              '570 - A fonte pagadora e a benefici'#225'ria mant'#234'm acordo de atua'#231#227'o' +
-              ' conjunta'
-            
-              '900 - N'#227'o h'#225' rela'#231#227'o entre a fonte pagadpra e a benefici'#225'ria no ' +
-              'exterior')
+          Width = 138
+          Height = 19
+          Hint = 'Informe a Data do Laudo'
+          Ctl3D = False
+          DataField = 'VLRCOMPANOCALEND'
+          DataSource = DM.dsRendimentos
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 12
+        end
+        object dbedtVLRDEDPREVOFIC5: TDBEdit
+          Left = 208
+          Top = 251
+          Width = 138
+          Height = 19
+          Hint = 'Informe a Data do Laudo'
+          Ctl3D = False
+          DataField = 'VLRCOMPANOANT'
+          DataSource = DM.dsRendimentos
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 13
+        end
+        object dbedtVLRDEDPREVOFIC6: TDBEdit
+          Left = 382
+          Top = 251
+          Width = 138
+          Height = 19
+          Hint = 'Informe a Data do Laudo'
+          Ctl3D = False
+          DataField = 'VLRDEDDEPEND'
+          DataSource = DM.dsRendimentos
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 14
+        end
+        object dbedtVLRDEDPREVOFIC7: TDBEdit
+          Left = 550
+          Top = 251
+          Width = 138
+          Height = 19
+          Hint = 'Informe a Data do Laudo'
+          Ctl3D = False
+          DataField = 'VLRISENTO'
+          DataSource = DM.dsRendimentos
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 15
+        end
+        object dbedtVLRDEDPREVOFIC8: TDBEdit
+          Left = 550
+          Top = 307
+          Width = 138
+          Height = 19
+          Hint = 'Informe a Data do Laudo'
+          Ctl3D = False
+          DataField = 'VLRDEDPREVOFIC'
+          DataSource = DM.dsRendimentos
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 16
+        end
+        object cbbINDSUSPEXIG: TJvDBComboBox
+          Left = 25
+          Top = 306
+          Width = 495
+          Height = 22
+          Hint = 'Informe o tipo de Inscri'#231#227'o CPF/CNPJ'
+          Style = csOwnerDrawFixed
+          DataField = 'TPISENSAO'
+          DataSource = DM.dsRendimentos
+          Items.Strings = (
+            '1 - Parcela Isenta 65 anos'
+            '2 - Di'#225'ria e Ajuda de Custo;'
+            
+              '3 -Indeniza'#231#227'o e resci'#231#227'o de contratato, inclusive a t'#237'tulo de P' +
+              'DV;'
+            '4 - Abono Pecuni'#225'rio;'
+            '5 - Outros'
+            '6 - Lucros e dividendos pagos a partir de 1996;'
+            
+              '7 - Valores pagos a t'#237'tular ou S'#243'cio de microempresa ou empresa ' +
+              'de pequeno porte, exceto Pr'#243'-labore'
+            
+              '8 - Pens'#227'o, aposentadoria ou reforma por mol'#233'stia grave ou acide' +
+              'nte em servi'#231'o'
+            
+              '9 - Benef'#237'cios indiretos e/ou reembolso de despesas recebidas po' +
+              'r voluntarios da Copa'
+            '10 - Bolsa de estudos recebida por m'#233'dico residente'
+            '11 - Complementa'#231#227'o de aposentadoria ')
+          TabOrder = 17
           Values.Strings = (
-            '500'
-            '510'
-            '520'
-            '530'
-            '540'
-            '550'
-            '560'
-            '570'
-            '900')
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            '6'
+            '7'
+            '8'
+            '9'
+            '10'
+            '11'
+            '')
           ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
           ListSettings.OutfilteredValueFont.Color = clRed
           ListSettings.OutfilteredValueFont.Height = -11
@@ -484,7 +590,7 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
       end
       object dbnvgr1: TDBNavigator
         Left = 28
-        Top = 399
+        Top = 420
         Width = 236
         Height = 26
         DataSource = DM.dsBeneficiarios
@@ -499,7 +605,7 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
         TabOrder = 1
       end
       object btnNovo: TBitBtn
-        Left = 20
+        Left = 28
         Top = 452
         Width = 75
         Height = 25
@@ -633,7 +739,6 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
-        OnClick = btnExcluirClick
       end
       object btnCancelar: TBitBtn
         Left = 359
@@ -702,7 +807,6 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
-        OnClick = btn1Click
       end
     end
     object ts2: TTabSheet
@@ -970,7 +1074,6 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
-        OnClick = btnConsultarClick
       end
       object btnExcluir1: TBitBtn
         Left = 705
@@ -1037,15 +1140,7 @@ object FormCadBeneficiarios: TFormCadBeneficiarios
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
-        OnClick = btnSairClick
       end
     end
-  end
-  object OpenArquivo: TOpenDialog
-    Filter = 'txt|*.txt'
-    InitialDir = 'C:\'
-    Options = [ofHideReadOnly, ofAllowMultiSelect]
-    Left = 852
-    Top = 36
   end
 end
