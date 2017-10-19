@@ -163,6 +163,13 @@ begin
     FormCadCPRB.btnalterar3.Enabled := not DMCadCPRB.unAjustesReceita.IsEmpty;
     FormCadCPRB.btnexcluir3.Enabled := not DMCadCPRB.unAjustesReceita.IsEmpty;
 
+    DM.unProcessos.Close;
+    DM.unProcessos.FilterSQL:='Codigo= '+ IntToStr(Codcurr) +
+     ' and PerApur= '+ QuotedStr(DMCadCPRB.unCadCPRB.FieldByName('PERAPUR').AsString) +
+     ' and nrInsc= ' + QuotedStr(DMCadCPRB.unCadCPRB.FieldByName('NRINSCESTAB').AsString); 
+    DM.unProcessos.Filtered:=True;
+    DM.unProcessos.Open;
+
     DMCadCPRB.unProcessosReceita.Close;
     DMCadCPRB.unProcessosReceita.FilterSQL:='Codigo= '+ IntToStr(Codcurr) +
      ' and PerApur= '+ QuotedStr(DMCadCPRB.unCadCPRB.FieldByName('PERAPUR').AsString) +

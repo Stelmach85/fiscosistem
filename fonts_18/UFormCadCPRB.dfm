@@ -1278,26 +1278,6 @@ object FormCadCPRB: TFormCadCPRB
                 ParentShowHint = False
                 ShowHint = True
               end
-              object dbedtNRPROC: TDBEdit
-                Left = 7
-                Top = 32
-                Width = 129
-                Height = 19
-                Hint = 'Informe o N'#186' do Processo'
-                Ctl3D = False
-                DataField = 'NRPROC'
-                DataSource = DMCadCPRB.dsProcessosReceita
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clBlack
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentCtl3D = False
-                ParentFont = False
-                ParentShowHint = False
-                ShowHint = True
-                TabOrder = 0
-              end
               object cbbTPPROC: TJvDBComboBox
                 Left = 169
                 Top = 31
@@ -1312,7 +1292,6 @@ object FormCadCPRB: TFormCadCPRB
                   '2 - Judicial')
                 TabOrder = 1
                 Values.Strings = (
-                  '0'
                   '1'
                   '2')
                 ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
@@ -1341,7 +1320,7 @@ object FormCadCPRB: TFormCadCPRB
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
-                TabOrder = 2
+                TabOrder = 3
               end
               object cbbCODSUSP: TJvDBComboBox
                 Left = 7
@@ -1351,7 +1330,7 @@ object FormCadCPRB: TFormCadCPRB
                 Hint = 'Selecione o C'#243'digo de Suspens'#227'o'
                 DataField = 'CODSUSP'
                 DataSource = DMCadCPRB.dsProcessosReceita
-                TabOrder = 3
+                TabOrder = 2
                 ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
                 ListSettings.OutfilteredValueFont.Color = clRed
                 ListSettings.OutfilteredValueFont.Height = -11
@@ -1360,6 +1339,33 @@ object FormCadCPRB: TFormCadCPRB
                 ListSettings.KeyField = 'CODSUSP'
                 ListSettings.DisplayField = 'CODSUSP'
                 ListSettings.DataSource = DM.dsProcessos
+              end
+              object cbbNRPROC: TJvDBComboBox
+                Left = 7
+                Top = 32
+                Width = 139
+                Height = 22
+                Hint = 'Informe o N'#186' do Processo'
+                Style = csOwnerDrawFixed
+                DataField = 'NRPROC'
+                DataSource = DMCadCPRB.dsProcessosReceita
+                Items.Strings = (
+                  '1 - Administrativo'
+                  '2 - Judicial')
+                TabOrder = 0
+                Values.Strings = (
+                  '0'
+                  '1'
+                  '2')
+                ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+                ListSettings.OutfilteredValueFont.Color = clRed
+                ListSettings.OutfilteredValueFont.Height = -11
+                ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+                ListSettings.OutfilteredValueFont.Style = []
+                ListSettings.KeyField = 'NRPROC'
+                ListSettings.DisplayField = 'NRPROC'
+                ListSettings.DataSource = DM.dsProcessos
+                OnChange = cbbNRPROCChange
               end
             end
             object pnl41: TPanel
@@ -1582,7 +1588,9 @@ object FormCadCPRB: TFormCadCPRB
         Top = 5
         Width = 365
         Height = 19
-        Hint = 'Arquivo de Importa'#231#227'o dos Processos'
+        Hint = 
+          'Arquivo de Importa'#231#227'o da Contribui'#231#227'o Previdenci'#225'ria sobre a Rec' +
+          'eita Bruta'
         Ctl3D = False
         EditLabel.Width = 164
         EditLabel.Height = 13

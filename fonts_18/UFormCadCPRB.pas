@@ -90,7 +90,6 @@ type
     lbl28: TLabel;
     lbl29: TLabel;
     lbl30: TLabel;
-    dbedtNRPROC: TDBEdit;
     cbbTPPROC: TJvDBComboBox;
     dbedtVLRCPRBSUSP: TDBEdit;
     cbbCODSUSP: TJvDBComboBox;
@@ -101,6 +100,7 @@ type
     btnExcluir4: TBitBtn;
     btnCancelar4: TBitBtn;
     dbnvgr4: TDBNavigator;
+    cbbNRPROC: TJvDBComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -135,6 +135,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure dbedtDTAJUSTEExit(Sender: TObject);
     procedure dbedtNRINSCESTABExit(Sender: TObject);
+    procedure cbbNRPROCChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -148,7 +149,7 @@ var
 
 implementation
 
-uses frm_REINF, UDM, Wait, UVerificaSistema, UUtils, UDMCadCPRB;
+uses frm_REINF, UDM, Wait, UVerificaSistema, UUtils, UDMCadCPRB, UFormPeriodo;
 
 {$R *.dfm}
 
@@ -267,11 +268,39 @@ begin
                  Exit;
               end;
 
+              if not ( (Copy(perApur,6,2)='01') or (Copy(perApur,6,2)='02') or (Copy(perApur,6,2)='03') or (Copy(perApur,6,2)='04') or (Copy(perApur,6,2)='05') 
+                  or (Copy(perApur,6,2)='06')or (Copy(perApur,6,2)='07') or (Copy(perApur,6,2)='08') or (Copy(perApur,6,2)='09') or (Copy(perApur,6,2)='10')
+                  or (Copy(perApur,6,2)='11') or (Copy(perApur,6,2)='12') or (Copy(perApur,6,2)='  ') )then
+              begin
+                 ShowMessage('Verifique o Mês informado, pois o mesmo está errado');
+                 WaitForm.Close;
+                 Exit;
+              end ;
+
+              if (StrToIntDef(Copy(perApur,1,4),0)=0)then
+              begin
+                 ShowMessage('Verifique o Ano informado, pois o mesmo está errado');
+                 WaitForm.Close;
+                 Exit;
+              end;
+
               if Trim(codAtivEcon)= '' then
               begin
                  ShowMessage('Código ind. correspondente à atividade comercial, produto ou serviço sujeito a incidência da CPRB inválido');
                  WaitForm.Close;
                  Exit;
+              end;
+
+              DM.qryUtil.Close;
+              DM.qryUtil.SQL.Clear;
+              DM.qryUtil.SQL.Add('Select * from REF_ATIVECON where codigo=:cod') ;
+              DM.qryUtil.ParamByName('cod').AsString:=codAtivEcon;              
+              DM.qryUtil.Open;
+              if DM.qryUtil.Eof then
+              begin
+                 ShowMessage('O Código da Atividade Econômica não foi encontrado na tabela referencial do sistema');
+                 WaitForm.Close;
+                 Exit
               end;
 
               if (Trim(vlrRecBrutaAtiv) = '') or (Trim(VlrBCCPRB) = '') or (Trim(VlrCPRBApur) = '')  then
@@ -437,6 +466,21 @@ begin
                 Exit;
               end;
 
+              DM.qryUtil.Close;
+              DM.qryUtil.SQL.Clear;
+              DM.qryUtil.SQL.Add('Select * from PROCESSOS_18 where codigo=:cod and NRPROC=:proc and NRINSC=:nrinsc and PERAPUR=:perapur') ;
+              DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+              DM.qryUtil.ParamByName('proc').AsString:= NrProc;
+              DM.qryUtil.ParamByName('nrinsc').AsString:= NrInscEstab;
+              DM.qryUtil.ParamByName('perapur').AsString:= PerApur;
+              DM.qryUtil.Open;
+              if DM.qryUtil.Eof then
+              begin
+                 ShowMessage('O Número do Processo deve estar cadastrado nos Processos para este Contribuinte, no período da importação');
+                 WaitForm.Close;
+                 Exit
+              end;
+
               if TpProc='' then
               begin
                 ShowMessage('Tipo de Processo em branco');
@@ -444,11 +488,43 @@ begin
                 Exit;
               end;
 
+              DM.qryUtil.Close;
+              DM.qryUtil.SQL.Clear;
+              DM.qryUtil.SQL.Add('Select * from PROCESSOS_18 where codigo=:cod and NRPROC=:proc and TPPROC=:tpproc and NRINSC=:nrinsc and PERAPUR=:perapur') ;
+              DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+              DM.qryUtil.ParamByName('proc').AsString:= NrProc;
+              DM.qryUtil.ParamByName('tpproc').AsString:= TpProc;
+              DM.qryUtil.ParamByName('nrinsc').AsString:= NrInscEstab;
+              DM.qryUtil.ParamByName('perapur').AsString:= PerApur;
+              DM.qryUtil.Open;
+              if DM.qryUtil.Eof then
+              begin
+                 ShowMessage('O Tipo do Processo deve ser o mesmo associado ao Número do Processo: ' + nrProc);
+                 WaitForm.Close;
+                 Exit
+              end;
+
               if codSusp='' then
               begin
                 ShowMessage('Código indicativo de Suspensão em branco');
                 WaitForm.Close;
                 Exit;
+              end;
+
+              DM.qryUtil.Close;
+              DM.qryUtil.SQL.Clear;
+              DM.qryUtil.SQL.Add('Select * from PROCESSOS_18 where codigo=:cod and NRPROC=:proc and CODSUSP=:codSusp and NRINSC=:nrinsc and PERAPUR=:perapur') ;
+              DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+              DM.qryUtil.ParamByName('proc').AsString:= NrProc;
+              DM.qryUtil.ParamByName('codSusp').AsString:= codSusp;
+              DM.qryUtil.ParamByName('nrinsc').AsString:= NrInscEstab;
+              DM.qryUtil.ParamByName('perapur').AsString:= PerApur;
+              DM.qryUtil.Open;
+              if DM.qryUtil.Eof then
+              begin
+                 ShowMessage('O Código da Suspensão deve ser o mesmo associado ao Número do Processo: ' + nrProc);
+                 WaitForm.Close;
+                 Exit
               end;
 
               if vlrCPRBSusp='' then
@@ -469,8 +545,8 @@ begin
                  DMCadCPRB.unProcessosReceita.FieldByName('CODIGO').AsInteger:=  Codcurr;
                  DMCadCPRB.unProcessosReceita.FieldByName('PERAPUR').AsString:=  perapur;    
                  DMCadCPRB.unProcessosReceita.FieldByName('NRINSCESTAB').AsString:= NrInscEstab;
-                 DMCadCPRB.unProcessosReceita.FieldByName('nrProc').AsString:=  NrProc;
-                 DMCadCPRB.unProcessosReceita.FieldByName('tpproc').AsInteger:= StrToIntDef(TpProc,1);
+                 DMCadCPRB.unProcessosReceita.FieldByName('nrProc').AsString:=  NrProc;               
+                 DMCadCPRB.unProcessosReceita.FieldByName('tpproc').AsInteger:= StrToInt(TpProc);
                  DMCadCPRB.unProcessosReceita.FieldByName('codSusp').AsString:= codsusp;
                  DMCadCPRB.unProcessosReceita.FieldByName('vlrCPRBSusp').AsFloat:= StrToFloatDef(VlrCPRBSusp,0); 
                  try
@@ -627,11 +703,16 @@ begin
  dbnvgr4.Enabled:=True;
  alterando:=False;
  HabilitaBotoesAux(Self);
- dbedtNRPROC.Enabled := true;
+ cbbNRPROC.Enabled := true;
 end;
 
 procedure TFormCadCPRB.btnAlterar2Click(Sender: TObject);
 begin
+  if DMCadCPRB.unDetalheReceita.isEmpty then
+  Begin
+     ShowMessage('Não existe registro para alteração');
+     Exit;
+  End;
   DMCadCPRB.unDetalheReceita.Edit;
   pnl3.Enabled:= true;
  
@@ -648,6 +729,11 @@ end;
 
 procedure TFormCadCPRB.btnAlterar3Click(Sender: TObject);
 begin
+  if DMCadCPRB.unAjustesReceita.isEmpty then
+  Begin
+     ShowMessage('Não existe registro para alteração');
+     Exit;
+  End;
   DMCadCPRB.unAjustesReceita.Edit;
   grp1.enabled:= true;
 
@@ -665,6 +751,11 @@ end;
 
 procedure TFormCadCPRB.btnAlterar4Click(Sender: TObject);
 begin
+  if DMCadCPRB.unProcessosReceita.isEmpty then
+  Begin
+     ShowMessage('Não existe registro para alteração');
+     Exit;
+  End;
   DMCadCPRB.unProcessosReceita.Edit;
   pnl4.Enabled:= true;
  
@@ -676,7 +767,7 @@ begin
   btnAlterar4.Enabled:=False;
   alterando:=True; 
   DesabilitaBotoesAux(Self);
-  dbedtNRPROC.Enabled := false;
+  cbbNRPROC.Enabled := false;
 end;
 
 procedure TFormCadCPRB.btnAlterarClick(Sender: TObject);
@@ -724,46 +815,100 @@ begin
 end;
 
 procedure TFormCadCPRB.btnConsultarClick(Sender: TObject);
+var
+  periodo, mes: string;
 begin
-   DMCadCPRB.unqryConsultaCPRB.Close;
-   DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
-   DMCadCPRB.unqryConsultaCPRB.Open;
+   If not assigned(FormPeriodo) then
+       Application.CreateForm(TFormPeriodo, FormPeriodo);
+   try
+     if FormPeriodo.ShowModal = mrOK then
+     //if FormPeriodo.ModalResult = mrOK then
+     Begin
+       mes:= inttoStr(FormPeriodo.cbbMes.ItemIndex + 1);
+       if Length(mes) = 1 then
+          mes := '0' + mes;
+     
+       periodo:= FormPeriodo.cbbAno.Text + '-' + mes;
+       DMCadCPRB.unqryConsultaCPRB.Close;
+       DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+       DMCadCPRB.unqryConsultaCPRB.ParamByName('perapur').AsString:=periodo;
+       DMCadCPRB.unqryConsultaCPRB.Open;
+     End;
+   finally
+     FreeAndNil(FormPeriodo);
+   end;
 end;
 
 procedure TFormCadCPRB.btnExcelClick(Sender: TObject);
+var
+  periodo, mes: string;
 begin
-   DMCadCPRB.unqryConsultaCPRB.Close;
-   DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
-   DMCadCPRB.unqryConsultaCPRB.Open;
-   REINFForm.GeraExcel(DMCadCPRB.unqryConsultaCPRB);
+   If not assigned(FormPeriodo) then
+       Application.CreateForm(TFormPeriodo, FormPeriodo);
+   try
+     FormPeriodo.ShowModal;
+     if FormPeriodo.ModalResult = mrOK then
+     Begin
+       mes:= inttoStr(FormPeriodo.cbbMes.ItemIndex + 1);
+       if Length(mes) = 1 then
+          mes := '0' + mes;
+     
+       periodo:= FormPeriodo.cbbAno.Text + '-' + mes;
+  
+       DMCadCPRB.unqryConsultaCPRB.Close;
+       DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+       DMCadCPRB.unqryConsultaCPRB.ParamByName('perapur').AsString:=periodo;
+       DMCadCPRB.unqryConsultaCPRB.Open;
+       REINFForm.GeraExcel(DMCadCPRB.unqryConsultaCPRB);
+     End;
+   finally
+     FreeAndNil(FormPeriodo);
+   end;
+   
 end;
 
 procedure TFormCadCPRB.btnExcluir1Click(Sender: TObject);
+var
+  periodo, mes: string;
 begin
-try
-  {If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+
-     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
-     Begin
-        DM.qryUtil.Close;
-        DM.qryUtil.SQL.Clear;
-        DM.qryUtil.SQL.Add('delete from RETCP_SERVICOS_18 where codigo=:cod')  ;
-        DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
-        DM.qryUtil.Execute;
-        ShowMessage('Dados Excluídos com sucesso');
-        dm.unRetCP_ServTom.Close;
-        dm.unRetCP_ServTom.Open;        
-        btnConsultar.OnClick(self);
-     End;}
-except
-   ShowMessage('Não há Dados para serem excluídos');
-end;
+    try
+      If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+      Begin
+         If not assigned(FormPeriodo) then
+           Application.CreateForm(TFormPeriodo, FormPeriodo);
+         try
+           FormPeriodo.ShowModal;
+           if FormPeriodo.ModalResult = mrOK then
+           Begin
+             mes:= inttoStr(FormPeriodo.cbbMes.ItemIndex + 1);
+             if Length(mes) = 1 then
+                mes := '0' + mes;
+
+             periodo:= FormPeriodo.cbbAno.Text + '-' + mes;
+             DM.qryUtil.Close;
+             DM.qryUtil.SQL.Clear;
+             DM.qryUtil.SQL.Add('delete from CADCPRB_18 where codigo=:cod and perapur=:perapur')  ;
+             DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+             DM.qryUtil.ParamByName('perapur').AsString:=periodo;
+             DM.qryUtil.Execute;
+             ShowMessage('Dados Excluídos com sucesso');
+             dmCadCPRB.unCadCPRB.Close;
+             dmCadCPRB.unCadCPRB.Open;
+             //btnConsultar.OnClick(self);
+           End;
+         finally
+           FreeAndNil(FormPeriodo);
+         end;
+      End;
+    except
+       ShowMessage('Não há Dados para serem excluídos');
+    end;
 end;
 
 procedure TFormCadCPRB.btnExcluir2Click(Sender: TObject);
 begin
   try
-    If MessageDLG ('Confirma Exclusão do Detalhe ' + '???' +#13+
-     '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
+    If MessageDLG ('Confirma Exclusão do Detalhe ' + '???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
         DMCadCPRB.unDetalheReceita.Delete;
      End;
@@ -934,10 +1079,10 @@ end;
 
 procedure TFormCadCPRB.btnGravar4Click(Sender: TObject);
 begin
-   if dbedtNRPROC.Text='' then
+   if cbbNRPROC.Text='' then
    begin
      ShowMessage('Informe o número do Processo');
-     dbedtNRPROC.SetFocus;
+     cbbNRPROC.SetFocus;
      Exit;
    end;
    if cbbTPPROC.Text='' then
@@ -968,7 +1113,7 @@ begin
      DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
      DM.qryUtil.ParamByName('perApur').AsString:= dbedtPerApur.Text;
      DM.qryUtil.ParamByName('nrInscEstab').AsString:= dbedtNrInscEstab.Text;
-     DM.qryUtil.ParamByName('nrProc').AsString:= dbedtNRPROC.Text;
+     DM.qryUtil.ParamByName('nrProc').AsString:= cbbNRPROC.Field.Value;
      DM.qryUtil.Open;
      if not DM.qryUtil.eof then
      begin
@@ -989,7 +1134,7 @@ begin
    dbnvgr4.Enabled:=True;
    alterando:=False; 
    HabilitaBotoesAux(Self);
-   dbedtNRPROC.Enabled := true;
+   cbbNRPROC.Enabled := true;
 end;
 
 procedure TFormCadCPRB.btnGravarClick(Sender: TObject);
@@ -1076,6 +1221,12 @@ close;
 end;
 
 
+procedure TFormCadCPRB.cbbNRPROCChange(Sender: TObject);
+begin
+  //cbbTPPROC.ItemIndex := DM.unProcessosTPPROC.AsInteger - 1;
+  cbbTPPROC.Field.Value := cbbNRPROC.ListSettings.DataSource.DataSet.FieldByName('TPPROC').AsVariant;
+end;
+
 procedure TFormCadCPRB.cbbTPINSCESTABChange(Sender: TObject);
 begin
   if cbbTPINSCESTAB.Text='1 - CNPJ' then
@@ -1134,7 +1285,6 @@ begin
     grp1.Enabled := False;
 
     DMCadCPRB.unRefAtivEcon.Open;   
-    DM.unProcessos.Open;
     
     DMCadCPRB.unCadCPRB.Close;
     DMCadCPRB.unCadCPRB.FilterSQL:='Codigo='+ IntToStr(Codcurr);

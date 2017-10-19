@@ -262,95 +262,115 @@ object DMCadCPRB: TDMCadCPRB
       
         '  left join processosreceita_18 p on c.codigo = p.codigo and c.p' +
         'erapur = p.perapur and c.nrinscestab = p.nrinscestab'
-      'where c.codigo=:cod')
+      'where c.codigo=:cod and c.perapur=:perapur')
     Left = 176
     Top = 155
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'cod'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'perapur'
       end>
     object unqryConsultaCPRBNRINSCESTAB: TStringField
+      DisplayLabel = 'Nr. Inscri'#231#227'o Estab.'
       FieldName = 'NRINSCESTAB'
       Required = True
       Size = 18
     end
     object unqryConsultaCPRBPERAPUR: TStringField
+      DisplayLabel = 'Per'#237'odo Apura'#231#227'o'
       FieldName = 'PERAPUR'
       Required = True
       Size = 7
     end
     object unqryConsultaCPRBCODATIVECON: TStringField
+      DisplayLabel = 'Cod. Atividade Econ.'
       FieldName = 'CODATIVECON'
       ReadOnly = True
       Size = 8
     end
     object unqryConsultaCPRBTPAJUSTE: TStringField
+      DisplayLabel = 'Tipo de Ajuste'
       FieldName = 'TPAJUSTE'
       ReadOnly = True
       FixedChar = True
       Size = 1
     end
     object cdsConsultaCPRBVLRRECBRUTAATIV: TFloatField
+      DisplayLabel = 'Vlr total Rec. Atividade'
       FieldName = 'VLRRECBRUTAATIV'
       ReadOnly = True
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end
     object cdsConsultaCPRBVLREXCRECBRUTA: TFloatField
+      DisplayLabel = 'Vlr total Exclus'#245'es RB'
       FieldName = 'VLREXCRECBRUTA'
       ReadOnly = True
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end
     object cdsConsultaCPRBVLRADICRECBRUTA: TFloatField
+      DisplayLabel = 'Vlr total Adi'#231#245'es RB'
       FieldName = 'VLRADICRECBRUTA'
       ReadOnly = True
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end
     object cdsConsultaCPRBVLRBCCPRB: TFloatField
+      DisplayLabel = 'Vlr Base C'#225'lculo CPRB'
       FieldName = 'VLRBCCPRB'
       ReadOnly = True
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end
     object cdsConsultaCPRBVLRCPRBAPUR: TFloatField
+      DisplayLabel = 'Vlr Contr. Previd. sobre a RB'
       FieldName = 'VLRCPRBAPUR'
       ReadOnly = True
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end
     object cdsConsultaCPRBVLRAJUSTE: TFloatField
+      DisplayLabel = 'Vlr Ajuste'
       FieldName = 'VLRAJUSTE'
       ReadOnly = True
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end
     object unqryConsultaCPRBDESCAJUSTE: TStringField
+      DisplayLabel = 'Descri'#231#227'o do Ajuste'
       FieldName = 'DESCAJUSTE'
       ReadOnly = True
     end
     object unqryConsultaCPRBDTAJUSTE: TStringField
+      DisplayLabel = 'Data Ajuste'
       FieldName = 'DTAJUSTE'
       ReadOnly = True
       Size = 7
     end
     object unqryConsultaCPRBNRPROC: TStringField
+      DisplayLabel = 'Nr. Processo'
       FieldName = 'NRPROC'
       ReadOnly = True
       Size = 21
     end
     object unqryConsultaCPRBTPPROC: TIntegerField
+      DisplayLabel = 'Tipo Processo'
       FieldName = 'TPPROC'
       ReadOnly = True
     end
     object unqryConsultaCPRBCODSUSP: TStringField
+      DisplayLabel = 'C'#243'd. Suspens'#227'o'
       FieldName = 'CODSUSP'
       ReadOnly = True
       Size = 14
     end
     object cdsConsultaCPRBVLRCPRBSUSP: TFloatField
+      DisplayLabel = 'Vlr CPRB com Exib. Susp.'
       FieldName = 'VLRCPRBSUSP'
       ReadOnly = True
       DisplayFormat = '#0.00'
