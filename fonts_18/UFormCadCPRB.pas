@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, CRGrid, ExtCtrls, StdCtrls, Buttons, DBCtrls,
-  JvExStdCtrls, JvCombobox, JvDBCombobox, Mask, ComCtrls,db;
+  JvExStdCtrls, JvCombobox, JvDBCombobox, Mask, ComCtrls,db, JvExComCtrls;
 
 type
   TFormCadCPRB = class(TForm)
@@ -101,6 +101,8 @@ type
     btnCancelar4: TBitBtn;
     dbnvgr4: TDBNavigator;
     cbbNRPROC: TJvDBComboBox;
+    lblPeriodoConsulta: TLabel;
+    medtPeriodo: TMaskEdit;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -136,6 +138,8 @@ type
     procedure dbedtDTAJUSTEExit(Sender: TObject);
     procedure dbedtNRINSCESTABExit(Sender: TObject);
     procedure cbbNRPROCChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure medtPeriodoExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,7 +153,7 @@ var
 
 implementation
 
-uses frm_REINF, UDM, Wait, UVerificaSistema, UUtils, UDMCadCPRB, UFormPeriodo;
+uses frm_REINF, UDM, Wait, UVerificaSistema, UUtils, UDMCadCPRB;
 
 {$R *.dfm}
 
@@ -561,6 +565,7 @@ begin
          end;      
          WaitForm.Close;
          ShowMessage('Importação efetuada com sucesso');
+         medtPeriodo.SetFocus;
       finally
         WaitForm.Close;
       end;
@@ -816,89 +821,72 @@ end;
 
 procedure TFormCadCPRB.btnConsultarClick(Sender: TObject);
 var
-  periodo, mes: string;
+  periodo: string;
 begin
-   If not assigned(FormPeriodo) then
-       Application.CreateForm(TFormPeriodo, FormPeriodo);
-   try
-     if FormPeriodo.ShowModal = mrOK then
-     //if FormPeriodo.ModalResult = mrOK then
-     Begin
-       mes:= inttoStr(FormPeriodo.cbbMes.ItemIndex + 1);
-       if Length(mes) = 1 then
-          mes := '0' + mes;
-     
-       periodo:= FormPeriodo.cbbAno.Text + '-' + mes;
-       DMCadCPRB.unqryConsultaCPRB.Close;
-       DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
-       DMCadCPRB.unqryConsultaCPRB.ParamByName('perapur').AsString:=periodo;
-       DMCadCPRB.unqryConsultaCPRB.Open;
-     End;
-   finally
-     FreeAndNil(FormPeriodo);
-   end;
+   If  Trim(medtPeriodo.text) = '-' then
+   Begin
+       Showmessage('Verifique o período para a Consulta!');
+       medtPeriodo.SetFocus;
+       exit;
+   End; 
+  
+   DMCadCPRB.unqryConsultaCPRB.Close;
+   DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+   DMCadCPRB.unqryConsultaCPRB.ParamByName('perapur').AsString:=medtPeriodo.text;
+   DMCadCPRB.unqryConsultaCPRB.Open;
+   medtPeriodo.SetFocus;
 end;
 
 procedure TFormCadCPRB.btnExcelClick(Sender: TObject);
 var
-  periodo, mes: string;
+  periodo: string;
 begin
-   If not assigned(FormPeriodo) then
-       Application.CreateForm(TFormPeriodo, FormPeriodo);
-   try
-     FormPeriodo.ShowModal;
-     if FormPeriodo.ModalResult = mrOK then
-     Begin
-       mes:= inttoStr(FormPeriodo.cbbMes.ItemIndex + 1);
-       if Length(mes) = 1 then
-          mes := '0' + mes;
-     
-       periodo:= FormPeriodo.cbbAno.Text + '-' + mes;
+   If  Trim(medtPeriodo.text) = '-' then
+   Begin
+       Showmessage('Verifique o período para a Consulta!');
+       medtPeriodo.SetFocus;
+       exit;
+   End;
   
-       DMCadCPRB.unqryConsultaCPRB.Close;
-       DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
-       DMCadCPRB.unqryConsultaCPRB.ParamByName('perapur').AsString:=periodo;
-       DMCadCPRB.unqryConsultaCPRB.Open;
-       REINFForm.GeraExcel(DMCadCPRB.unqryConsultaCPRB);
-     End;
-   finally
-     FreeAndNil(FormPeriodo);
-   end;
-   
+   DMCadCPRB.unqryConsultaCPRB.Close;
+   DMCadCPRB.unqryConsultaCPRB.ParamByName('cod').AsInteger:=Codcurr;
+   DMCadCPRB.unqryConsultaCPRB.ParamByName('perapur').AsString:=medtPeriodo.text;
+   DMCadCPRB.unqryConsultaCPRB.Open;
+   REINFForm.GeraExcel(DMCadCPRB.unqryConsultaCPRB); 
+   medtPeriodo.SetFocus;  
 end;
 
 procedure TFormCadCPRB.btnExcluir1Click(Sender: TObject);
 var
-  periodo, mes: string;
+  periodo: string;
 begin
     try
       If MessageDLG ('Confirma Exclusão de todos registros  ???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
       Begin
-         If not assigned(FormPeriodo) then
-           Application.CreateForm(TFormPeriodo, FormPeriodo);
-         try
-           FormPeriodo.ShowModal;
-           if FormPeriodo.ModalResult = mrOK then
-           Begin
-             mes:= inttoStr(FormPeriodo.cbbMes.ItemIndex + 1);
-             if Length(mes) = 1 then
-                mes := '0' + mes;
+         If  Trim(medtPeriodo.text) = '-' then
+         Begin
+            Showmessage('Verifique o período para a Consulta!');
+            medtPeriodo.SetFocus;
+            exit;
+         End;
 
-             periodo:= FormPeriodo.cbbAno.Text + '-' + mes;
-             DM.qryUtil.Close;
-             DM.qryUtil.SQL.Clear;
-             DM.qryUtil.SQL.Add('delete from CADCPRB_18 where codigo=:cod and perapur=:perapur')  ;
-             DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
-             DM.qryUtil.ParamByName('perapur').AsString:=periodo;
-             DM.qryUtil.Execute;
-             ShowMessage('Dados Excluídos com sucesso');
-             dmCadCPRB.unCadCPRB.Close;
-             dmCadCPRB.unCadCPRB.Open;
-             //btnConsultar.OnClick(self);
-           End;
-         finally
-           FreeAndNil(FormPeriodo);
-         end;
+         DM.qryUtil.Close;
+         DM.qryUtil.SQL.Clear;
+         DM.qryUtil.SQL.Add('delete from CADCPRB_18 where codigo=:cod and perapur=:perapur')  ;
+         DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+         DM.qryUtil.ParamByName('perapur').AsString:=medtPeriodo.text;
+         DM.qryUtil.Execute;
+         ShowMessage('Dados Excluídos com sucesso');              
+         DMCadCPRB.unCadCPRB.Close;
+         DMCadCPRB.unDetalheReceita.Close;
+         DMCadCPRB.unAjustesReceita.Close;
+         DM.unProcessos.Close;
+         DMCadCPRB.unProcessosReceita.Close;
+         DMCadCPRB.unqryConsultaCPRB.Close;
+         DMCadCPRB.unCadCPRB.Open;
+         DMCadCPRB.unCadCPRB.AfterScroll(DMCadCPRB.dsCadCPRB.DataSet);
+         btnConsultar.OnClick(self);
+         medtPeriodo.SetFocus;
       End;
     except
        ShowMessage('Não há Dados para serem excluídos');
@@ -1269,6 +1257,17 @@ begin
    dbedtPERAPUR.SetFocus;
 end;
 
+procedure TFormCadCPRB.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DMCadCPRB.unRefAtivEcon.Close;   
+  DMCadCPRB.unCadCPRB.Close;
+  DMCadCPRB.unDetalheReceita.Close;
+  DMCadCPRB.unAjustesReceita.Close;
+  DM.unProcessos.Close;
+  DMCadCPRB.unProcessosReceita.Close;
+  DMCadCPRB.unqryConsultaCPRB.Close;
+end;
+
 procedure TFormCadCPRB.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   //verifica se a tecla pressionada é a tecla ENTER, conhecida como #13 
@@ -1325,6 +1324,14 @@ begin
     pgc1.ActivePage:=ts1; 
     pgc2.ActivePage:=ts3;
 
+end;
+
+procedure TFormCadCPRB.medtPeriodoExit(Sender: TObject);
+begin
+  if Trim(medtPeriodo.text) <> '-' then
+    validaPeriodo(Copy(medtPeriodo.text,6,2));
+ if errodata then
+    medtPeriodo.SetFocus;
 end;
 
 procedure TFormCadCPRB.validaPeriodo(texto:string);

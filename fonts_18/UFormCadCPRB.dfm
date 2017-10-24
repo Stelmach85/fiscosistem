@@ -14,6 +14,7 @@ object FormCadCPRB: TFormCadCPRB
   KeyPreview = True
   OldCreateOrder = False
   Position = poOwnerFormCenter
+  OnClose = FormClose
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
@@ -1583,6 +1584,21 @@ object FormCadCPRB: TFormCadCPRB
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object lblPeriodoConsulta: TLabel
+        Left = 8
+        Top = 453
+        Width = 110
+        Height = 13
+        Caption = 'Per'#237'odo para Consulta:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+      end
       object lbledtArquivo: TLabeledEdit
         Left = 204
         Top = 5
@@ -1719,8 +1735,8 @@ object FormCadCPRB: TFormCadCPRB
         TitleFont.Style = [fsBold]
       end
       object btnImportar: TBitBtn
-        Left = 452
-        Top = 458
+        Left = 476
+        Top = 460
         Width = 75
         Height = 25
         Hint = 'Importar Dados '
@@ -1753,8 +1769,8 @@ object FormCadCPRB: TFormCadCPRB
         OnClick = btnImportarClick
       end
       object btnExcel: TBitBtn
-        Left = 624
-        Top = 458
+        Left = 648
+        Top = 460
         Width = 75
         Height = 25
         Hint = 'Clique para Gerar os Dados no Excel.'
@@ -1808,8 +1824,8 @@ object FormCadCPRB: TFormCadCPRB
         OnClick = btnExcelClick
       end
       object btnConsultar: TBitBtn
-        Left = 537
-        Top = 458
+        Left = 561
+        Top = 460
         Width = 81
         Height = 25
         Hint = 'Consultar Dados J'#225' Importados'
@@ -1842,8 +1858,8 @@ object FormCadCPRB: TFormCadCPRB
         OnClick = btnConsultarClick
       end
       object btnExcluir1: TBitBtn
-        Left = 705
-        Top = 458
+        Left = 729
+        Top = 460
         Width = 75
         Height = 25
         Hint = 'Excluir Dados Importados'
@@ -1876,8 +1892,8 @@ object FormCadCPRB: TFormCadCPRB
         OnClick = btnExcluir1Click
       end
       object btnSair: TBitBtn
-        Left = 786
-        Top = 458
+        Left = 810
+        Top = 460
         Width = 75
         Height = 25
         Hint = 'Sair da Importa'#231#227'o de Dados'
@@ -1908,6 +1924,17 @@ object FormCadCPRB: TFormCadCPRB
         ShowHint = True
         TabOrder = 8
         OnClick = btnSairClick
+      end
+      object medtPeriodo: TMaskEdit
+        Left = 124
+        Top = 450
+        Width = 116
+        Height = 21
+        EditMask = '0000-!99;1; '
+        MaxLength = 7
+        TabOrder = 9
+        Text = '    -  '
+        OnExit = medtPeriodoExit
       end
     end
   end

@@ -20,8 +20,7 @@ uses
   UFormCadRetCP_Servicos in 'UFormCadRetCP_Servicos.pas' {FormCadRetCP_Servicos},
   UDMCadCPRB in 'UDMCadCPRB.pas' {DMCadCPRB: TDataModule},
   UUtils in 'UUtils.pas',
-  UFormCadCPRB in 'UFormCadCPRB.pas' {FormCadCPRB},
-  UFormPeriodo in 'UFormPeriodo.pas' {FormPeriodo};
+  UFormCadCPRB in 'UFormCadCPRB.pas' {FormCadCPRB};
 
 {$R *.res}
 

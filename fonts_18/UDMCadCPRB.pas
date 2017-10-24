@@ -82,6 +82,7 @@ type
     procedure unAjustesReceitaAfterDelete(DataSet: TDataSet);
     procedure unProcessosReceitaAfterDelete(DataSet: TDataSet);
     procedure unProcessosReceitaAfterPost(DataSet: TDataSet);
+    procedure unProcessosReceitaAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -232,6 +233,16 @@ begin
    except
 
    end;
+end;
+
+procedure TDMCadCPRB.unProcessosReceitaAfterScroll(DataSet: TDataSet);
+begin
+  DM.unProcessos.Close;
+  DM.unProcessos.FilterSQL:='Codigo= '+ IntToStr(Codcurr) +
+    ' and PerApur= '+ QuotedStr(DMCadCPRB.unCadCPRB.FieldByName('PERAPUR').AsString) +
+    ' and nrInsc= ' + QuotedStr(DMCadCPRB.unCadCPRB.FieldByName('NRINSCESTAB').AsString); 
+  DM.unProcessos.Filtered:=True;
+  DM.unProcessos.Open;
 end;
 
 end.

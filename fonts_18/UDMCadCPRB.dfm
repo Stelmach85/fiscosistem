@@ -170,6 +170,7 @@ object DMCadCPRB: TDMCadCPRB
     Connection = DM.Conexao
     AfterPost = unProcessosReceitaAfterPost
     AfterDelete = unProcessosReceitaAfterDelete
+    AfterScroll = unProcessosReceitaAfterScroll
     Left = 339
     Top = 16
     object unProcessosReceitaCODIGO: TIntegerField
