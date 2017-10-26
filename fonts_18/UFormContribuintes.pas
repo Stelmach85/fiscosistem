@@ -83,6 +83,18 @@ type
     btnGravar: TBitBtn;
     btnNovo: TBitBtn;
     dbnvgr1: TDBNavigator;
+    ts3: TTabSheet;
+    pnl1: TPanel;
+    dbchkR1000: TDBCheckBox;
+    dbchkR1001: TDBCheckBox;
+    dbchkR1070: TDBCheckBox;
+    dbchkR2010: TDBCheckBox;
+    dbchkR2020: TDBCheckBox;
+    dbchkR2030: TDBCheckBox;
+    dbchkR2040: TDBCheckBox;
+    dbchkR2050: TDBCheckBox;
+    dbchkR2060: TDBCheckBox;
+    dbchkR3010: TDBCheckBox;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -150,6 +162,7 @@ begin
  end;
 
  DM.unContribuintes.Edit;
+ dm.unPerfil.Edit;
  btnAlterar.Enabled:=False;
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
@@ -171,6 +184,7 @@ end;
 procedure TFormContribuintes.btnCancelarClick(Sender: TObject);
 begin
   DM.unContribuintes.Cancel;
+  dm.unPerfil.Cancel;
  btnNovo.Enabled:=True;
  btnAlterar.Enabled:=True;
  btnGravar.Enabled:=False;
@@ -319,6 +333,7 @@ begin
 
 
  DM.unContribuintes.Post;
+ dm.unPerfil.Post;
  btnNovo.Enabled:=True;
  btnAlterar.Enabled:=True;
  btnGravar.Enabled:=False;
@@ -348,6 +363,20 @@ begin
  btnGravar.Enabled:=True;
  btnCancelar.Enabled:=True;
  HabilitaCampos;
+
+ dm.unPerfil.Insert;
+ dm.unPerfil.FieldByName('codigo').AsInteger:=codigoNovo;
+ dm.unPerfil.FieldByName('R1000').AsString:='S';
+ dm.unPerfil.FieldByName('R1070').AsString:='N';
+ dm.unPerfil.FieldByName('R2010').AsString:='N';
+ dm.unPerfil.FieldByName('R2020').AsString:='N';
+ dm.unPerfil.FieldByName('R2030').AsString:='N';
+ dm.unPerfil.FieldByName('R2040').AsString:='N';
+ dm.unPerfil.FieldByName('R2050').AsString:='N';
+ dm.unPerfil.FieldByName('R2060').AsString:='N';
+ dm.unPerfil.FieldByName('R2070').AsString:='N';
+ dm.unPerfil.FieldByName('R3010').AsString:='N';
+ 
 end;
 
 procedure TFormContribuintes.cbbTPINSCChange(Sender: TObject);
@@ -388,6 +417,11 @@ procedure TFormContribuintes.FormShow(Sender: TObject);
 begin
  DM.unContribuintes.Open;
  DM.unContribuintes.First;
+ dm.unPerfil.Close;
+ dm.unPerfil.FilterSQL:='Codigo='+ IntToStr(Codcurr);
+ dm.unPerfil.Filtered:=True;
+ dm.unPerfil.Open;
+ 
  dm.unrefClasTrib.open;
  DesabilitaCampos;
  pgc1.ActivePage:=ts1;

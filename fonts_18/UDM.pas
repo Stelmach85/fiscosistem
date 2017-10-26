@@ -243,6 +243,19 @@ type
     unREF_CODPAGAMENTOCODIGO: TStringField;
     unREF_CODPAGAMENTODESCRICAO: TStringField;
     dsRef_CodPagamento: TUniDataSource;
+    unPerfil: TUniTable;
+    unPerfilCODIGO: TIntegerField;
+    unPerfilR1000: TStringField;
+    unPerfilR1070: TStringField;
+    unPerfilR2010: TStringField;
+    unPerfilR2020: TStringField;
+    unPerfilR2030: TStringField;
+    unPerfilR2040: TStringField;
+    unPerfilR2050: TStringField;
+    unPerfilR2060: TStringField;
+    unPerfilR3010: TStringField;
+    dsPerfil: TUniDataSource;
+    unPerfilR2070: TStringField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);
@@ -268,6 +281,9 @@ type
     procedure unProdRuralAfterPost(DataSet: TDataSet);
     procedure unTipoComProdRuralAfterPost(DataSet: TDataSet);
     procedure unTipoComProdRuralAfterDelete(DataSet: TDataSet);
+    procedure unContribuintesAfterScroll(DataSet: TDataSet);
+    procedure unPerfilAfterPost(DataSet: TDataSet);
+    procedure unPerfilAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -321,6 +337,18 @@ begin
 except
 
  end;
+end;
+
+procedure TDM.unContribuintesAfterScroll(DataSet: TDataSet);
+begin
+try
+ dm.unPerfil.Close;
+ dm.unPerfil.FilterSQL:='Codigo='+ IntToStr(Codcurr);
+ dm.unPerfil.Filtered:=True;
+ dm.unPerfil.Open;
+except
+
+end;
 end;
 
 procedure TDM.unDetalheNF_ServPrestAfterDelete(DataSet: TDataSet);
@@ -406,6 +434,26 @@ begin
    try
    unParametros.CommitUpdates;
    unParametros.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unPerfilAfterDelete(DataSet: TDataSet);
+begin
+try
+   unPerfil.CommitUpdates;
+   unPerfil.ApplyUpdates();
+except
+
+ end;
+end;
+
+procedure TDM.unPerfilAfterPost(DataSet: TDataSet);
+begin
+        try
+   unPerfil.CommitUpdates;
+   unPerfil.ApplyUpdates();
 except
 
  end;

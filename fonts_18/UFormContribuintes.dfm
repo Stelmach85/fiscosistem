@@ -21,7 +21,7 @@ object FormContribuintes: TFormContribuintes
     Top = -1
     Width = 768
     Height = 320
-    ActivePage = ts1
+    ActivePage = ts3
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -11
@@ -991,6 +991,207 @@ object FormContribuintes: TFormContribuintes
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
+      end
+    end
+    object ts3: TTabSheet
+      Caption = 'Perfil do Contribuinte'
+      ImageIndex = 2
+      object pnl1: TPanel
+        Left = 3
+        Top = 3
+        Width = 754
+        Height = 286
+        TabOrder = 0
+        object dbchkR1000: TDBCheckBox
+          Left = 5
+          Top = 9
+          Width = 120
+          Height = 17
+          Caption = 'R-1000'
+          DataField = 'R1000'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 0
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR1001: TDBCheckBox
+          Left = 5
+          Top = 36
+          Width = 120
+          Height = 17
+          Caption = 'R-1070'
+          DataField = 'R1070'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 1
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR1070: TDBCheckBox
+          Left = 5
+          Top = 63
+          Width = 120
+          Height = 17
+          Caption = 'R-2010'
+          DataField = 'R2010'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 2
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR2010: TDBCheckBox
+          Left = 5
+          Top = 90
+          Width = 120
+          Height = 17
+          Caption = 'R-2020'
+          DataField = 'R2020'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 3
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR2020: TDBCheckBox
+          Left = 5
+          Top = 117
+          Width = 120
+          Height = 17
+          Caption = 'R-2030'
+          DataField = 'R2030'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 4
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR2030: TDBCheckBox
+          Left = 207
+          Top = 9
+          Width = 120
+          Height = 17
+          Caption = 'R-2040'
+          DataField = 'R2040'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 5
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR2040: TDBCheckBox
+          Left = 207
+          Top = 36
+          Width = 120
+          Height = 17
+          Caption = 'R-2050'
+          DataField = 'R2050'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 6
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR2050: TDBCheckBox
+          Left = 207
+          Top = 63
+          Width = 120
+          Height = 17
+          Caption = 'R-2060'
+          DataField = 'R2060'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 7
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR2060: TDBCheckBox
+          Left = 207
+          Top = 90
+          Width = 120
+          Height = 17
+          Caption = 'R-2070'
+          DataField = 'R2070'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 8
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbchkR3010: TDBCheckBox
+          Left = 207
+          Top = 117
+          Width = 120
+          Height = 17
+          Caption = 'R-3010'
+          DataField = 'R3010'
+          DataSource = DM.dsPerfil
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Font.Quality = fqProof
+          ParentFont = False
+          TabOrder = 9
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
       end
     end
   end

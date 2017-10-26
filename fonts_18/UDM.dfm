@@ -52,6 +52,7 @@ object DM: TDM
     IndexFieldNames = 'CODIGO'
     AfterPost = unContribuintesAfterPost
     AfterDelete = unContribuintesAfterDelete
+    AfterScroll = unContribuintesAfterScroll
     Left = 32
     Top = 136
     object unContribuintesCODIGO: TIntegerField
@@ -1250,5 +1251,72 @@ object DM: TDM
     DataSet = unREF_CODPAGAMENTO
     Left = 344
     Top = 688
+  end
+  object unPerfil: TUniTable
+    TableName = 'PERFILREINF_18'
+    Connection = Conexao
+    AfterPost = unPerfilAfterPost
+    AfterDelete = unPerfilAfterDelete
+    Left = 568
+    Top = 40
+    object unPerfilCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unPerfilR1000: TStringField
+      FieldName = 'R1000'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR1070: TStringField
+      FieldName = 'R1070'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2010: TStringField
+      FieldName = 'R2010'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2020: TStringField
+      FieldName = 'R2020'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2030: TStringField
+      FieldName = 'R2030'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2040: TStringField
+      FieldName = 'R2040'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2050: TStringField
+      FieldName = 'R2050'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2060: TStringField
+      FieldName = 'R2060'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR3010: TStringField
+      FieldName = 'R3010'
+      Required = True
+      Size = 1
+    end
+    object unPerfilR2070: TStringField
+      FieldName = 'R2070'
+      Required = True
+      Size = 1
+    end
+  end
+  object dsPerfil: TUniDataSource
+    DataSet = unPerfil
+    Left = 560
+    Top = 96
   end
 end

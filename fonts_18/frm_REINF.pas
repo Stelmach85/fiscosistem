@@ -132,7 +132,8 @@ implementation
 
 uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
   UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios,
-  UFormCadComProdRural, UFormCadRetCP_Servicos, UFormCadCPRB, UFormConsultaAtivEcon_Ref;
+  UFormCadComProdRural, UFormCadRetCP_Servicos, UFormCadCPRB, UFormConsultaAtivEcon_Ref,
+  UFormMensageria;
 
 
 
@@ -888,6 +889,19 @@ begin
 
        finally
         FreeAndNil(FormCadComProdRural );
+       end;
+      tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+    end 
+   else
+   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Transmissão' then
+    begin
+     If  not  assigned(FormMensageria ) then
+         Application.CreateForm(TFormMensageria ,FormMensageria);
+       try
+         FormMensageria .ShowModal;
+
+       finally
+        FreeAndNil(FormMensageria );
        end;
       tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
     end 
