@@ -651,6 +651,10 @@ object DM: TDM
       Required = True
       Size = 100
     end
+    object unParametrosAMBIENTE: TStringField
+      FieldName = 'AMBIENTE'
+      Size = 1
+    end
   end
   object dsParametros: TUniDataSource
     DataSet = unParametros

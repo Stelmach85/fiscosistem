@@ -256,6 +256,7 @@ type
     unPerfilR3010: TStringField;
     dsPerfil: TUniDataSource;
     unPerfilR2070: TStringField;
+    unParametrosAMBIENTE: TStringField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);

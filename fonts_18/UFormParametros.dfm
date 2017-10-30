@@ -78,6 +78,15 @@ object FormParametros: TFormParametros
         ParentShowHint = False
         ShowHint = True
       end
+      object lbl9: TLabel
+        Left = 607
+        Top = 66
+        Width = 49
+        Height = 13
+        Caption = 'Ambiente:'
+        ParentShowHint = False
+        ShowHint = True
+      end
       object dbedtID: TDBEdit
         Left = 15
         Top = 38
@@ -175,6 +184,30 @@ object FormParametros: TFormParametros
         Values.Strings = (
           'A1'
           'A2')
+        ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+        ListSettings.OutfilteredValueFont.Color = clRed
+        ListSettings.OutfilteredValueFont.Height = -11
+        ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+        ListSettings.OutfilteredValueFont.Style = []
+      end
+      object cbbAMBIENTEAMBIENTE: TJvDBComboBox
+        Left = 607
+        Top = 85
+        Width = 171
+        Height = 22
+        Hint = 'Modelo do certificado'
+        Style = csOwnerDrawFixed
+        DataField = 'AMBIENTE'
+        DataSource = DM.dsParametros
+        Items.Strings = (
+          '1 - Produ'#231#227'o '
+          '2 - Pr'#233' - Produ'#231#227'o - dados reais'
+          '3 - Pr'#233' - Produ'#231#227'o - dados fict'#237'cios')
+        TabOrder = 5
+        Values.Strings = (
+          '1'
+          '2'
+          '3')
         ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
         ListSettings.OutfilteredValueFont.Color = clRed
         ListSettings.OutfilteredValueFont.Height = -11

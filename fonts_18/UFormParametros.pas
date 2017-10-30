@@ -45,6 +45,8 @@ type
     btnCancelar: TBitBtn;
     btn5: TBitBtn;
     dbnvgr1: TDBNavigator;
+    lbl9: TLabel;
+    cbbAMBIENTEAMBIENTE: TJvDBComboBox;
     procedure btnLocalizarClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -211,6 +213,13 @@ begin
     dbedtXML_RETORNO_ERRO.SetFocus;
     Abort;
   end;
+  if cbbAMBIENTEAMBIENTE.text='' then
+  begin
+    ShowMessage('Informe o ambiente de envio do XML');
+    cbbAMBIENTEAMBIENTE.SetFocus;
+    Abort;
+  end;  
+  
 
 
 
@@ -240,6 +249,12 @@ procedure TFormParametros.btnNovoClick(Sender: TObject);
 begin
 DM.unParametros.Insert;
 DM.unParametros.FieldByName('Codigo').AsInteger:= Codcurr;
+DM.unParametros.FieldByName('XML_IMPORTADO').AsString:= REINFdir+'XML\Importados' ;
+DM.unParametros.FieldByName('XML_GERADO').AsString:= REINFdir+'XML\Gerados' ;
+DM.unParametros.FieldByName('XML_TRANSMITIDO').AsString:= REINFdir+'XML\Enviados' ;
+DM.unParametros.FieldByName('XML_RETORNO').AsString:= REINFdir+'XML\Retornados' ;
+DM.unParametros.FieldByName('XML_RETORNO_ERRO').AsString:=  REINFdir+'XML\Retornados_erro' ;
+
 
  btnNovo.Enabled:=False;
  btnGravar.Enabled:=True;

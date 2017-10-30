@@ -32,8 +32,8 @@ type
     chk2099: TCheckBox;
     chk9000: TCheckBox;
     ChkRetificadora: TCheckBox;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
+    chk2060: TCheckBox;
+    chk2070: TCheckBox;
     Button1: TButton;
     lbl1: TLabel;
     cbbEvento: TComboBox;
@@ -50,6 +50,7 @@ type
     procedure btnGerarClick(Sender: TObject);
     procedure btnEnviarClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FACBrReinf: TACBrReinf;
     procedure PreencherXMLEventos;
@@ -78,7 +79,7 @@ implementation
 
 uses ACBrDFeSSL, pcnConversao, ShellAPI, ACBrReinfClasses, Rtti, ACBrReinfR1070, ACBrReinfR1000,
   ACBrReinfR2010, ACBrReinfR2020, ACBrReinfR2099, ACBrReinfR2098, ACBrReinfR9000,
-  UDMREINF, frm_REINF;
+  UDMREINF, frm_REINF, UDM;
 
 procedure TFormMensageria.AntesDeEnviar(const Axml: string);
 begin
@@ -246,6 +247,34 @@ end;
 procedure TFormMensageria.DepoisDeEnviar(const Axml: string);
 begin
   Memo2.Lines.Text := Axml;
+end;
+
+procedure TFormMensageria.FormShow(Sender: TObject);
+begin
+ dm.qryUtil.Close;  
+ dm.qryUtil.SQL.Clear;
+ dm.qryUtil.SQL.Add('Select * from PERFILREINF_18 where codigo=:cod') ;
+ DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
+ DM.qryUtil.Open;
+
+ if DM.qryUtil.FieldByName('R1000').AsString='S' then
+ chk1000.Checked:=True else chk1000.Checked:=False;
+
+ if DM.qryUtil.FieldByName('R1070').AsString='S' then
+ chk1070.Checked:=True else chk1070.Checked:=False;
+
+ if DM.qryUtil.FieldByName('R2010').AsString='S' then
+ chk2010.Checked:=True else chk2010.Checked:=False;
+
+ if DM.qryUtil.FieldByName('R2020').AsString='S' then
+ chk2020.Checked:=True else chk2020.Checked:=False;
+
+ if DM.qryUtil.FieldByName('R2060').AsString='S' then
+ chk2060.Checked:=True else chk2060.Checked:=False;
+ 
+ if DM.qryUtil.FieldByName('R2070').AsString='S' then
+ chk2070.Checked:=True else chk2070.Checked:=False;
+ 
 end;
 
 procedure TFormMensageria.LimparDocsPasta;

@@ -12,6 +12,7 @@ object FormMensageria: TFormMensageria
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label5: TLabel
@@ -68,10 +69,6 @@ object FormMensageria: TFormMensageria
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = '  Eventos   '
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl3: TLabel
         Left = 13
         Top = 575
@@ -235,7 +232,7 @@ object FormMensageria: TFormMensageria
           ParentFont = False
           TabOrder = 6
         end
-        object CheckBox3: TCheckBox
+        object chk2060: TCheckBox
           Left = 8
           Top = 126
           Width = 337
@@ -251,7 +248,7 @@ object FormMensageria: TFormMensageria
           ParentFont = False
           TabOrder = 7
         end
-        object CheckBox4: TCheckBox
+        object chk2070: TCheckBox
           Left = 8
           Top = 149
           Width = 337
@@ -397,10 +394,6 @@ object FormMensageria: TFormMensageria
     object TabSheet2: TTabSheet
       Caption = '  Dados de Retorno Eventos'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object mmoRet: TMemo
         Left = 0
         Top = 0
@@ -415,10 +408,6 @@ object FormMensageria: TFormMensageria
     object TabSheet3: TTabSheet
       Caption = '  XML de Envio   '
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Memo1: TMemo
         Left = 0
         Top = 0
@@ -434,10 +423,6 @@ object FormMensageria: TFormMensageria
     object TabSheet4: TTabSheet
       Caption = '  XML Retorno  '
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Memo2: TMemo
         Left = 0
         Top = 0
