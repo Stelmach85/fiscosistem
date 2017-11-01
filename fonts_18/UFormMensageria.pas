@@ -35,18 +35,24 @@ type
     chk2060: TCheckBox;
     chk2070: TCheckBox;
     Button1: TButton;
-    lbl1: TLabel;
-    cbbEvento: TComboBox;
     btnEnviar: TButton;
     edtRecibo: TEdit;
     grp1: TGroupBox;
     lbl2: TLabel;
-    lbl3: TLabel;
-    edtProtocolo: TEdit;
     chkClear: TCheckBox;
     btn1: TButton;
-    cbb1: TComboBox;
+    grp2: TGroupBox;
+    lbl1: TLabel;
+    cbbEvento: TComboBox;
+    grp3: TGroupBox;
     lbl4: TLabel;
+    cbbperiodo: TComboBox;
+    chk2050: TCheckBox;
+    btn2: TButton;
+    lblAmbiente: TLabel;
+    grp4: TGroupBox;
+    lbl5: TLabel;
+    edtProtocolo: TEdit;
     procedure btnGerarClick(Sender: TObject);
     procedure btnEnviarClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
@@ -62,6 +68,9 @@ type
     procedure GerarReinf1070;
     procedure GerarReinf2010;
     procedure GerarReinf2020;
+    procedure GerarReinf2050;
+    procedure GerarReinf2060;
+    procedure GerarReinf2070;
     procedure GerarReinf2099;
     procedure GerarReinf2098;
     procedure GerarReinf9000;
@@ -79,7 +88,7 @@ implementation
 
 uses ACBrDFeSSL, pcnConversao, ShellAPI, ACBrReinfClasses, Rtti, ACBrReinfR1070, ACBrReinfR1000,
   ACBrReinfR2010, ACBrReinfR2020, ACBrReinfR2099, ACBrReinfR2098, ACBrReinfR9000,
-  UDMREINF, frm_REINF, UDM;
+  frm_REINF, UDM, UDMREINF;
 
 procedure TFormMensageria.AntesDeEnviar(const Axml: string);
 begin
@@ -188,60 +197,77 @@ end;
 
 procedure TFormMensageria.Configurar(AACBrReinf: TACBrReinf);
 begin
- DMREINF.qryregistro1000.Close;
-  DMREINF.qryregistro1000.ParamByName('emp').AsInteger:=codcurr;
-  DMREINF.qryregistro1000.Open;
-
-  DMREINF.qryParametros.Close;
-  DMREINF.qryParametros.ParamByName('emp').AsInteger:=codcurr;
-  DMREINF.qryParametros.Open;
-  
-  // Configuracao Geral
-  AACBrReinf.Configuracoes.Arquivos.PathSchemas := IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + 'Schemas';
-  AACBrReinf.Configuracoes.Arquivos.Salvar := False;
-  AACBrReinf.Configuracoes.Arquivos.SepararPorCNPJ := True;
-  AACBrReinf.Configuracoes.Geral.Salvar := True;
-  AACBrReinf.Configuracoes.WebServices.Salvar  := True;
-  AACBrReinf.Configuracoes.Geral.FormaEmissao := teNormal;
-  AACBrReinf.Configuracoes.WebServices.Ambiente := taHomologacao;
-  AACBrReinf.Configuracoes.WebServices.Salvar := True;
-  
-  
-  // Configuracao WebService
-  AACBrReinf.Configuracoes.WebServices.UF := 'RS';
-  AACBrReinf.Configuracoes.Certificados.VerificarValidade := True;
-  AACBrReinf.Configuracoes.WebServices.AguardarConsultaRet      := 5000; // tempo padrão que vai aguardar para consultar após enviar a NF-e
-  AACBrReinf.Configuracoes.WebServices.IntervaloTentativas      := 3000; // Intervalo entre as tentativas de envio
-  AACBrReinf.Configuracoes.WebServices.Tentativas               := 10;   // quantidade de tentativas de envio
-  AACBrReinf.Configuracoes.WebServices.AjustaAguardaConsultaRet := True; // ajustar "AguardarConsultaRet" com o valor retornado pelo webservice
-  // Configuracao Certificados
-  AACBrReinf.Configuracoes.Geral.SSLLib := libOpenSSL;
-  AACBrReinf.Configuracoes.GeraL.SSLCryptLib:=cryCapicom;
-  AACBrReinf.Configuracoes.Geral.SSLHttpLib := httpWinHttp;
-  AACBrReinf.Configuracoes.Geral.Salvar := True;
- 
-  // certificado digital A1 da Fiscosistem
-  // aqui dave pegar os parametros do cadastro de parametros do sistema
-  AACBrReinf.Configuracoes.Certificados.ArquivoPFX := 'C:\Certificado Digital A1 FISCOSISTEM\FISCOSISTEM DESENVOLVIMENTO DE SOLUCOES FISCAIS L21117450000139.pfx';
-  AACBrReinf.Configuracoes.Certificados.NumeroSerie := '25351710095e1e66';
-  AACBrReinf.Configuracoes.Certificados.Senha := 'fisco2017'; 
-  
- { AACBrReinf.Configuracoes.Certificados.ArquivoPFX := DMREINF.qryParametros.FieldByName('nome').AsString;
-  AACBrReinf.Configuracoes.Certificados.NumeroSerie := DMREINF.qryParametros.FieldByName('serie').AsString;
-  AACBrReinf.Configuracoes.Certificados.Senha :=DMREINF.qryParametros.FieldByName('senha').AsString; }
-  
+  {IdeContri}
+  // aqui deve pegar o cnpj do cadstro de empresa
+  FACBrReinf.ideContri.TpInsc := tiCNPJ;
+  FACBrReinf.ideContri.NrInsc := '21117450000139'; 
   {IdeEvento}
-  FACBrReinf.IdeEvento.TpAmb := taProducaoRestritaDadosReais;
+  // pegar do cadastro de parametros
+{  if tipo de ambiente = 1 then   // produção
+     FACBrReinf.IdeEvento.TpAmb:= taProducao
+  else   
+  if tipo de ambiente = 2 then   // pré-produção restrita com dados reais
+     FACBrReinf.IdeEvento.TpAmb := taProducaoRestritaDadosReais
+  else   
+  if tipo de ambiente = 3 then   // pré-produção restrita com dados ficticios
+     FACBrReinf.IdeEvento.TpAmb := taProducaoRestritaDadosFicticios;}
+     
+  FACBrReinf.IdeEvento.TpAmb := taProducaoRestritaDadosFicticios;
   FACBrReinf.IdeEvento.ProcEmi := peAplicEmpregador;
   FACBrReinf.IdeEvento.VerProc := '1.0';
 
-  {IdeContri}
-  if DMREINF.qryregistro1000.FieldByName('TPINSC').asstring='1' then
-  FACBrReinf.ideContri.TpInsc := tiCNPJ
-  else
-   FACBrReinf.ideContri.TpInsc := tiCPF;
-  // aqui dave pegar o cnpj do cadstro de empresa
-  FACBrReinf.ideContri.NrInsc := TiraPontos(DMREINF.qryregistro1000.FieldByName('NRINSC').asstring);  
+  // Configurações dos Arquivos
+  AACBrReinf.Configuracoes.Arquivos.PathSchemas:=IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + 'Schemas';
+  // salvar arquivos em pastas separadas por cnpj do certificado
+  AACBrReinf.Configuracoes.Arquivos.SepararPorCNPJ:=True;
+  // salvar arquivos em pastas separadas 
+  AACBrReinf.Configuracoes.Arquivos.Salvar:=True;
+  // criar pastas mensalmente
+  AACBrReinf.Configuracoes.Arquivos.SepararPorMes:=True;
+  // adicional literal no nome das pastas
+  AACBrReinf.Configuracoes.Arquivos.AdicionarLiteral:=False;
+
+  // Configurações do WebService
+  AACBrReinf.Configuracoes.WebServices.UF := 'RS';
+{  if tipo de ambiente = 1 then   // produção
+     AACBrReinf.Configuracoes.WebServices.Ambiente:=taProducao
+  else   
+     AACBrReinf.Configuracoes.WebServices.Ambiente:=taHomologacao;
+ }
+  AACBrReinf.Configuracoes.WebServices.Ambiente := taHomologacao;
+  // Retorno de Envio
+  AACBrReinf.Configuracoes.WebServices.AguardarConsultaRet      := 5000;  // tempo padrão que vai aguardar para consultar após enviar 
+  AACBrReinf.Configuracoes.WebServices.IntervaloTentativas      := 3000;  // Intervalo entre as tentativas de envio
+  AACBrReinf.Configuracoes.WebServices.Tentativas               := 10;    // quantidade de tentativas de envio
+  AACBrReinf.Configuracoes.WebServices.AjustaAguardaConsultaRet := True;  // ajustar "AguardarConsultaRet" com o valor retornado pelo webservice
+  AACBrReinf.Configuracoes.WebServices.TimeOut                  := 4000; // time-out
+  AACBrReinf.Configuracoes.WebServices.Salvar                   := True; 
+  // proxy
+  // pegar do cadastro de parametros
+    AACBrReinf.Configuracoes.WebServices.ProxyHost:='';
+  AACBrReinf.Configuracoes.WebServices.ProxyPort:='';
+  AACBrReinf.Configuracoes.WebServices.ProxyUser:='';  
+  AACBrReinf.Configuracoes.WebServices.ProxyPass:='';  
+
+  //  Configurações Gerais
+  //  Configurações de Segurança do Certificado
+  AACBrReinf.Configuracoes.Geral.SSLLib:=libOpenSSL;  
+  AACBrReinf.Configuracoes.Geral.SSLCryptLib:=cryOpenSSL;
+  AACBrReinf.Configuracoes.Geral.SSLHttpLib:=httpOpenSSL;
+  AACBrReinf.Configuracoes.Geral.SSLXmlSignLib:=xsXmlSec;
+  // outras configurações
+  AACBrReinf.Configuracoes.Geral.FormaEmissao:=teNormal;
+  AACBrReinf.Configuracoes.Geral.ExibirErroSchema:=True;
+  AACBrReinf.Configuracoes.Geral.RetirarAcentos:=True;
+  AACBrReinf.Configuracoes.Geral.FormatoAlerta:='TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.';
+  AACBrReinf.Configuracoes.Geral.Salvar := True;
+  
+  // Configurações do Certificado Digital
+  // aqui deve pegar os parametros do cadastro de parametros do sistema
+  AACBrReinf.Configuracoes.Certificados.ArquivoPFX := 'C:\Certificado Digital A1 FISCOSISTEM\FISCOSISTEM DESENVOLVIMENTO DE SOLUCOES FISCAIS L21117450000139.pfx';
+  AACBrReinf.Configuracoes.Certificados.NumeroSerie := '25351710095e1e66';
+  AACBrReinf.Configuracoes.Certificados.Senha := 'fisco2017';
+  AACBrReinf.Configuracoes.Certificados.VerificarValidade := True;
 end;
 
 procedure TFormMensageria.DepoisDeEnviar(const Axml: string);
@@ -274,7 +300,6 @@ begin
  
  if DM.qryUtil.FieldByName('R2070').AsString='S' then
  chk2070.Checked:=True else chk2070.Checked:=False;
- 
 end;
 
 procedure TFormMensageria.LimparDocsPasta;
@@ -307,6 +332,15 @@ begin
 
   if chk2020.Checked then
     GerarReinf2020;
+
+  if chk2050.Checked then
+    GerarReinf2050;
+
+  if chk2060.Checked then
+    GerarReinf2060;
+
+  if chk2070.Checked then
+    GerarReinf2070;
 
   if chk2098.Checked then
     GerarReinf2098;
@@ -648,6 +682,28 @@ begin
  end;
 end;
 
+procedure TFormMensageria.GerarReinf2050;
+var
+  R2050: TR2020;  // TR2050
+begin
+
+end;
+
+procedure TFormMensageria.GerarReinf2060;
+var
+  R2060: TR2020;  // TR2060
+begin
+
+end;
+
+procedure TFormMensageria.GerarReinf2070;
+var
+  R2070: TR2020;   // TR2070
+begin
+
+end;
+
+
 procedure TFormMensageria.GerarReinf2098;
 var
   R2098: TR2098;
@@ -655,7 +711,7 @@ begin
   R2098 := FACBrReinf.Eventos.AddR2098;
   with R2098 do
   begin
-    R2098.perApur := '2017-08';
+    R2098.perApur := Copy(cbbperiodo.Text,4,4)+'-'+Copy(cbbperiodo.Text,1,2);
   end;
 end;
 
@@ -666,7 +722,7 @@ begin
   R2099 := FACBrReinf.Eventos.AddR2099;
   with R2099 do
   begin
-    perApur := '2017-08';
+    perApur := Copy(cbbperiodo.Text,4,4)+'-'+Copy(cbbperiodo.Text,1,2);
     with R2099.ideRespInf do
     begin
       nmResp := 'Leivio Fontenele';
@@ -699,7 +755,7 @@ begin
   begin
     infoExclusao.tpEvento := cbbEvento.Items.Strings[cbbEvento.ItemIndex];
     infoExclusao.nrRecEvt := Trim(edtRecibo.Text);
-    infoExclusao.perApur := '2017-08';
+    infoExclusao.perApur := Copy(cbbperiodo.Text,4,4)+'-'+Copy(cbbperiodo.Text,1,2);
   end;
 
 end;

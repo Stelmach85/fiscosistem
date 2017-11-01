@@ -47,6 +47,15 @@ type
     dbnvgr1: TDBNavigator;
     lbl9: TLabel;
     cbbAMBIENTEAMBIENTE: TJvDBComboBox;
+    grpproxy: TGroupBox;
+    dbedtHOST: TDBEdit;
+    dbedtPORTA: TDBEdit;
+    dbedtUSUARIO: TDBEdit;
+    dbedtSENHAHOST: TDBEdit;
+    lbl10: TLabel;
+    lbl12: TLabel;
+    lbl13: TLabel;
+    lbl14: TLabel;
     procedure btnLocalizarClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -117,6 +126,7 @@ begin
  btnCancelar.Enabled:=True;
  grpCertificado.Enabled:=True;
  grpXML.Enabled:=True;
+ grpproxy.Enabled:=True;
 
  btnExcluir.Enabled:=False;
  btnNovo.Enabled:=False;
@@ -134,6 +144,7 @@ begin
  btnCancelar.Enabled:=False;
  grpCertificado.Enabled:=False;
  grpXML.Enabled:=False;
+ grpproxy.Enabled:=False;
  
  btnExcluir.Enabled:=True;
  btnAlterar.Enabled:=True;
@@ -231,6 +242,7 @@ begin
  btnCancelar.Enabled:=False;
  grpCertificado.Enabled:=False;
  grpXML.Enabled:=False;
+ grpproxy.Enabled:=False;
  
  btnExcluir.Enabled:=True;
  btnAlterar.Enabled:=True;
@@ -262,6 +274,7 @@ DM.unParametros.FieldByName('XML_RETORNO_ERRO').AsString:=  REINFdir+'XML\Retorn
 
  grpCertificado.Enabled:=True;
  grpXML.Enabled:=True;
+ grpproxy.Enabled:=True;
 
    btnExcluir.Enabled:=False;
    btnAlterar.Enabled:=False;

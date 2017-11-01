@@ -257,6 +257,10 @@ type
     dsPerfil: TUniDataSource;
     unPerfilR2070: TStringField;
     unParametrosAMBIENTE: TStringField;
+    unParametrosHOST: TStringField;
+    unParametrosPORTA: TStringField;
+    unParametrosUSUARIO: TStringField;
+    unParametrosSENHAHOST: TStringField;
     procedure unContribuintesAfterPost(DataSet: TDataSet);
     procedure unContribuintesAfterDelete(DataSet: TDataSet);
     procedure unProcessosAfterDelete(DataSet: TDataSet);

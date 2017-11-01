@@ -217,8 +217,8 @@ object FormParametros: TFormParametros
     end
     object grpXML: TGroupBox
       Left = 16
-      Top = 183
-      Width = 841
+      Top = 166
+      Width = 505
       Height = 314
       Caption = 'Caminho do XML'
       Enabled = False
@@ -654,6 +654,132 @@ object FormParametros: TFormParametros
         OnClick = btn4Click
       end
     end
+    object grpproxy: TGroupBox
+      Left = 527
+      Top = 166
+      Width = 330
+      Height = 171
+      Caption = 'Configura'#231#227'o Proxy'
+      Enabled = False
+      TabOrder = 2
+      object lbl10: TLabel
+        Left = 14
+        Top = 22
+        Width = 26
+        Height = 13
+        Caption = 'Host:'
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object lbl12: TLabel
+        Left = 262
+        Top = 22
+        Width = 30
+        Height = 13
+        Caption = 'Porta:'
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object lbl13: TLabel
+        Left = 14
+        Top = 77
+        Width = 40
+        Height = 13
+        Caption = 'Usu'#225'rio:'
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object lbl14: TLabel
+        Left = 206
+        Top = 77
+        Width = 34
+        Height = 13
+        Caption = 'Senha:'
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object dbedtHOST: TDBEdit
+        Left = 15
+        Top = 41
+        Width = 226
+        Height = 19
+        Hint = 'N'#250'mero de s'#233'rie do certificado'
+        Ctl3D = False
+        DataField = 'HOST'
+        DataSource = DM.dsParametros
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+      end
+      object dbedtPORTA: TDBEdit
+        Left = 247
+        Top = 41
+        Width = 74
+        Height = 19
+        Hint = 'N'#250'mero de s'#233'rie do certificado'
+        Ctl3D = False
+        DataField = 'PORTA'
+        DataSource = DM.dsParametros
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+      end
+      object dbedtUSUARIO: TDBEdit
+        Left = 15
+        Top = 96
+        Width = 170
+        Height = 19
+        Hint = 'N'#250'mero de s'#233'rie do certificado'
+        Ctl3D = False
+        DataField = 'USUARIO'
+        DataSource = DM.dsParametros
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+      end
+      object dbedtSENHAHOST: TDBEdit
+        Left = 199
+        Top = 96
+        Width = 122
+        Height = 19
+        Hint = 'N'#250'mero de s'#233'rie do certificado'
+        Ctl3D = False
+        DataField = 'SENHAHOST'
+        DataSource = DM.dsParametros
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentCtl3D = False
+        ParentFont = False
+        ParentShowHint = False
+        PasswordChar = '*'
+        ShowHint = True
+        TabOrder = 3
+      end
+    end
   end
   object btnNovo: TBitBtn
     Left = 36
@@ -759,7 +885,7 @@ object FormParametros: TFormParametros
     OnClick = btnAlterarClick
   end
   object btnExcluir: TBitBtn
-    Left = 290
+    Left = 291
     Top = 599
     Width = 75
     Height = 25
@@ -879,7 +1005,7 @@ object FormParametros: TFormParametros
   end
   object JvSelectDirectory1: TJvSelectDirectory
     InitialDir = 'C:\'
-    Left = 640
-    Top = 224
+    Left = 368
+    Top = 184
   end
 end

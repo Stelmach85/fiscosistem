@@ -655,6 +655,20 @@ object DM: TDM
       FieldName = 'AMBIENTE'
       Size = 1
     end
+    object unParametrosHOST: TStringField
+      FieldName = 'HOST'
+      Size = 60
+    end
+    object unParametrosPORTA: TStringField
+      FieldName = 'PORTA'
+    end
+    object unParametrosUSUARIO: TStringField
+      FieldName = 'USUARIO'
+      Size = 50
+    end
+    object unParametrosSENHAHOST: TStringField
+      FieldName = 'SENHAHOST'
+    end
   end
   object dsParametros: TUniDataSource
     DataSet = unParametros
