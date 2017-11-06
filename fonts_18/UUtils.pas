@@ -7,6 +7,7 @@ uses
 
 function HabilitxW(FTela: TForm; hab: boolean; ACAO: string; Tabela: TUniTable): boolean;
 function ValidaCNPJ(CNPJ: string): boolean;
+function ValidaCPF(CPF: string): boolean;
 procedure DesabilitaCampos(FForm: TForm);
 procedure HabilitaCampos(FForm: TForm);
 procedure DesabilitaBotoesAux(FForm: TForm);
@@ -257,6 +258,47 @@ begin
   end;
 end;
 
+
+function ValidaCPF(CPF: string): Boolean;
+var
+  i, digito1, digito2, cont: integer;
+begin
+  Delete(cpf,ansipos('.',cpf),1);
+  Delete(cpf,ansipos('.',cpf),1);
+  Delete(cpf,ansipos('-',cpf),1);
+  if Length(CPF) <> 11 then
+    Result := false
+  else if (CPF = '00000000000') or (CPF = '11111111111') or (CPF = '22222222222')
+    or (CPF = '33333333333') or (CPF = '44444444444') or (CPF = '55555555555')
+    or (CPF = '66666666666') or (CPF = '77777777777') or (CPF = '88888888888')
+    or (CPF = '99999999999') then
+    Result := false
+  else
+  begin
+    digito1 := 0;
+    digito2 := 0;
+    cont := 10;
+    for i := 1 to 9 do
+    begin
+      digito1 := digito1 + (StrToInt(Cpf[i]) * cont);
+      digito2 := digito2 + (StrToInt(CPF[i]) * (cont + 1));
+      cont := cont - 1;
+    end;
+    digito2 := digito2 + (StrToInt(CPF[10]) * 2);
+    if (digito1 mod 11) < 2 then
+      digito1 := 0
+    else
+      digito1 := (11 - (digito1 mod 11));
+    if (digito2 mod 11) < 2 then
+      digito2 := 0
+    else
+      digito2 := (11 - (digito2 mod 11));
+    if (digito1 <> StrToInt(CPF[10])) or (digito2 <> StrToInt(CPF[11])) then
+      Result := False
+    else
+      Result := True;
+  end;
+end;
 
 
 

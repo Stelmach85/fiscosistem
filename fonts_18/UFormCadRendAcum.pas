@@ -1,21 +1,18 @@
-unit UFormCadRendimentos;
+unit UFormCadRendAcum;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, CRGrid, ExtCtrls, StdCtrls, Buttons, DBCtrls,
-  JvExStdCtrls, JvCombobox, JvDBCombobox, Mask, ComCtrls;
+  JvExStdCtrls, JvCombobox, JvDBCombobox, Mask, ComCtrls, DB;
 
 type
-  TFormCadRendimentos = class(TForm)
+  TFormCadRendAcum = class(TForm)
     pgc1: TPageControl;
     ts1: TTabSheet;
     pnl1: TPanel;
-    lbl5: TLabel;
-    lbl12: TLabel;
     lbl13: TLabel;
-    cbbINDSUSPEXIG: TJvDBComboBox;
     cbbCODPGTO: TJvDBComboBox;
     dbedtDTPGTO: TDBEdit;
     dbnvgr1: TDBNavigator;
@@ -39,33 +36,27 @@ type
     cbbNRINSCBENEF: TJvDBComboBox;
     lbl1: TLabel;
     lbl2: TLabel;
-    lbl3: TLabel;
-    dbedtVLRRENDTRIBUTAVEL: TDBEdit;
-    lbl6: TLabel;
-    dbedtVLRIRRF: TDBEdit;
     lbl7: TLabel;
-    dbedtVLRDEDPREVOFIC: TDBEdit;
+    dbedtNATRRA: TDBEdit;
     lbl8: TLabel;
-    dbedtVLRDEDPREVPRIV: TDBEdit;
+    dbedtQTDMESESRRA: TDBEdit;
     lbl9: TLabel;
-    dbedtVLRDEDFAPI: TDBEdit;
+    dbedtVLRDESPCUSTAS: TDBEdit;
     lbl10: TLabel;
-    dbedtVLRDEDFUNPRESP: TDBEdit;
-    lbl11: TLabel;
-    dbedtVLRDEDPENSAO: TDBEdit;
-    lbl14: TLabel;
-    dbedtVLRCOMPANOCALEND: TDBEdit;
-    lbl15: TLabel;
-    dbedtVLRCOMPANOANT: TDBEdit;
+    dbedtVLRDESPADVOGADOS: TDBEdit;
     lbl16: TLabel;
-    dbedtVLRDEDDEPEND: TDBEdit;
-    lbl17: TLabel;
-    dbedtVLRISENTO: TDBEdit;
-    lbl18: TLabel;
-    dbedtDESCRENDIMENTO: TDBEdit;
-    lbl19: TLabel;
-    cbbTPISENSAO: TJvDBComboBox;
+    dbedtVLRADVOGADO: TDBEdit;
     btnCadastro: TBitBtn;
+    lbl27: TLabel;
+    cbbTPPROCRRA: TJvDBComboBox;
+    lbl28: TLabel;
+    cbbCODSUSP: TJvDBComboBox;
+    lbl30: TLabel;
+    cbbTPINSCADVOGADO: TJvDBComboBox;
+    lbl5: TLabel;
+    lbl4: TLabel;
+    dbedtNRINSCADVOGADO: TDBEdit;
+    cbbNRPROCRRA: TJvDBComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -78,6 +69,8 @@ type
     procedure dbedtDTPGTOExit(Sender: TObject);
     procedure validaPeriodo(texto:string);
     procedure btnCadastroClick(Sender: TObject);
+    procedure cbbTPINSCADVOGADOChange(Sender: TObject);
+    procedure cbbNRPROCRRAExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,7 +78,7 @@ type
   end;
 
 var
-  FormCadRendimentos: TFormCadRendimentos;
+  FormCadRendAcum: TFormCadRendAcum;
   errodata,alterando:Boolean;
 
 implementation
@@ -94,15 +87,15 @@ uses UDM, frm_REINF, UUtils, UFormCadBeneficiarios;
 
 {$R *.dfm}
 
-procedure TFormCadRendimentos.btn1Click(Sender: TObject);
+procedure TFormCadRendAcum.btn1Click(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TFormCadRendimentos.btnAlterarClick(Sender: TObject);
+procedure TFormCadRendAcum.btnAlterarClick(Sender: TObject);
 begin
-  DM.unRendimentos.Edit;
-  HabilitxW(Self, false, 'ALTERAR', DM.unRendimentos);
+  DM.unRendimentosCum.Edit;
+  HabilitxW(Self, false, 'ALTERAR', DM.unRendimentosCum);
   pnl1.Enabled:= true;
   dbnvgr1.Enabled:=False;
  
@@ -112,7 +105,7 @@ begin
   dbedtDTPGTO.enabled := False; 
 end;
 
-procedure TFormCadRendimentos.btnCadastroClick(Sender: TObject);
+procedure TFormCadRendAcum.btnCadastroClick(Sender: TObject);
 begin
   If not  assigned(FormCadBeneficiarios ) then
      Application.CreateForm(TFormCadBeneficiarios ,FormCadBeneficiarios);
@@ -125,11 +118,11 @@ begin
   DM.unBeneficiarios.open;
 end;
 
-procedure TFormCadRendimentos.btnCancelarClick(Sender: TObject);
+procedure TFormCadRendAcum.btnCancelarClick(Sender: TObject);
 begin
-  DM.unRendimentos.Cancel;
+  DM.unRendimentosCum.Cancel;
 
-  HabilitxW(Self, false, 'CANCELAR', DM.unRendimentos);
+  HabilitxW(Self, false, 'CANCELAR', DM.unRendimentosCum);
   alterando:=False; 
   dbnvgr1.Enabled:=True;
   pnl1.Enabled:= false;
@@ -138,19 +131,19 @@ begin
   dbedtDTPGTO.enabled := True; 
 end;
 
-procedure TFormCadRendimentos.btnExcluirClick(Sender: TObject);
+procedure TFormCadRendAcum.btnExcluirClick(Sender: TObject);
 begin
   try
      If MessageDLG ('Confirma Exclusão do registro ' + '???' +#13+ '', MTConfirmation, [MBYes, MBNo],0)=MRYes then
      Begin
-          DM.unRendimentos.Delete;
+          DM.unRendimentosCum.Delete;
      End;
    except
       ShowMessage('Não existem dados para serem excluídos');
    end;
 end;
 
-procedure TFormCadRendimentos.btnGravarClick(Sender: TObject);
+procedure TFormCadRendAcum.btnGravarClick(Sender: TObject);
 begin
   if (cbbNRINSCBENEF.Field.Value='  .   .   /    -  ') or (not ValidaCNPJ(cbbNRINSCBENEF.Field.Value)) then
   begin
@@ -170,64 +163,52 @@ begin
     dbedtDTPGTO.SetFocus;
     Exit;
   end;
-  if cbbINDSUSPEXIG.Text='' then
+  if cbbNRPROCRRA.Text='' then
   begin
-    ShowMessage('Informe o Indicativo de Exibilidade Suspensa');
-    cbbINDSUSPEXIG.SetFocus;
+    ShowMessage('Informe o Número do Processo');
+    cbbNRPROCRRA.SetFocus;
     Exit;
   end;
-  if dbedtVLRRENDTRIBUTAVEL.Text='' then
+  if cbbTPPROCRRA.Text='' then
   begin
-    ShowMessage('Informe o Valor do Rendimento Tributável');
-    dbedtVLRRENDTRIBUTAVEL.SetFocus;
+    ShowMessage('Informe o Tipo de Processo');
+    cbbTPPROCRRA.SetFocus;
     Exit;
   end;
-  if dbedtVLRIRRF.Text='' then
+  if dbedtVLRDESPCUSTAS.Text='' then
   begin
-    ShowMessage('Informe o Valor do Imposto Retido na Fonte');
-    dbedtVLRIRRF.SetFocus;
+    ShowMessage('Informe o Valor da Despesa com Custas Judiciais');
+    dbedtVLRDESPCUSTAS.SetFocus;
     Exit;
   end;
-  if dbedtVLRDEDPREVOFIC.Text='' then
+  if dbedtVLRDESPADVOGADOS.Text='' then
   begin
-    ShowMessage('Informe o Valor da Dedução da Previdência Oficial');
-    dbedtVLRDEDPREVOFIC.SetFocus;
+    ShowMessage('Informe o Valor da Despesa com Advogados');
+    dbedtVLRDESPADVOGADOS.SetFocus;
     Exit;
   end;
-  if dbedtVLRDEDPREVPRIV.Text='' then
+  if cbbTPINSCADVOGADO.Text='' then
   begin
-    ShowMessage('Informe o Valor da Dedução da Previdência Privada');
-    dbedtVLRDEDPREVPRIV.SetFocus;
+    ShowMessage('Informe o Tipo de Inscrição do Advogado');
+    cbbTPINSCADVOGADO.SetFocus;
     Exit;
   end;
-  if dbedtVLRDEDFAPI.Text='' then
+  if (cbbTPINSCADVOGADO.Field.Value='1') and ((dbedtNRINSCADVOGADO.Text='  .   .   /    -  ') or (not ValidaCNPJ(dbedtNRINSCADVOGADO.Text))) then
   begin
-    ShowMessage('Informe o Valor da Dedução da FAPI');
-    dbedtVLRDEDFAPI.SetFocus;
+    ShowMessage('Informe o Número de Inscrição do Advogado ou verifique o número digitado!');
+    dbedtNRINSCADVOGADO.SetFocus;
     Exit;
   end;
-  if dbedtVLRDEDFUNPRESP.Text='' then
+  if (cbbTPINSCADVOGADO.Field.Value='2') and ((dbedtNRINSCADVOGADO.Text='   .   .   -  ') or (not ValidaCPF(dbedtNRINSCADVOGADO.Text))) then
   begin
-    ShowMessage('Informe o Valor da Dedução da FUNPRESP');
-    dbedtVLRDEDFUNPRESP.SetFocus;
+    ShowMessage('Informe o Número de Inscrição do Advogado ou verifique o número digitado!');
+    dbedtNRINSCADVOGADO.SetFocus;
     Exit;
   end;
-  if dbedtVLRDEDPENSAO.Text='' then
+  if (dbedtVLRADVOGADO.Text='') then
   begin
-    ShowMessage('Informe o Valor da Dedução da Pensão Alimentícia');
-    dbedtVLRDEDPENSAO.SetFocus;
-    Exit;
-  end;
-  if dbedtVLRDEDDEPEND.Text='' then
-  begin
-    ShowMessage('Informe o Valor da Dedução dos Dependentes');
-    dbedtVLRDEDDEPEND.SetFocus;
-    Exit;
-  end;
-  if (dbedtVLRISENTO.Text <>'0,00') and (cbbTPISENSAO.Text='') then
-  begin
-    ShowMessage('Informe o Tipo de Isenção');
-    cbbTPISENSAO.SetFocus;
+    ShowMessage('Informe o Valor da Despesa com Advogado');
+    dbedtVLRADVOGADO.SetFocus;
     Exit;
   end;
 
@@ -235,7 +216,7 @@ begin
    begin
        DM.qryUtil.Close;
        DM.qryUtil.SQL.Clear;
-       DM.qryUtil.sql.Add(' select * from RENDIMENTOS_18');
+       DM.qryUtil.sql.Add(' select * from RENDIMENTOSCUM_18');
        DM.qryUtil.sql.Add(' where Codigo=:cod and NrInscBenef=:nroInsc and codPgto=:codPgto and dtPgto=:dtPgto');
        DM.qryUtil.ParamByName('cod').AsInteger:=Codcurr;
        DM.qryUtil.ParamByName('nroInsc').AsString:= cbbNRINSCBENEF.Field.Value;
@@ -249,8 +230,8 @@ begin
        end;
    end;
  
-  DM.unRendimentos.post;
-  HabilitxW(Self, false, 'GRAVAR', DM.unRendimentos);
+  DM.unRendimentosCum.post;
+  HabilitxW(Self, false, 'GRAVAR', DM.unRendimentosCum);
   alterando:=False;  
   dbnvgr1.Enabled:=True;
   pnl1.Enabled:= false;
@@ -259,22 +240,15 @@ begin
   dbedtDTPGTO.enabled := True;
 end;
 
-procedure TFormCadRendimentos.btnNovoClick(Sender: TObject);
+procedure TFormCadRendAcum.btnNovoClick(Sender: TObject);
 begin
-  DM.unRendimentos.Insert;
-  DM.unRendimentos.FieldByName('Codigo').AsInteger:= Codcurr;
+  DM.unRendimentosCum.Insert;
+  DM.unRendimentosCum.FieldByName('Codigo').AsInteger:= Codcurr;
 
-  DM.unRendimentos.FieldByName('VLRRENDTRIBUTAVEL').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrIRRF').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrDedPrevOfic').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrDedPrevPriv').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrDedFapi').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrDedFunpresp').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrDedPensao').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrCompAnoCalend').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrCompAnoAnt').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrDedDepend').AsFloat:= 0;
-  DM.unRendimentos.FieldByName('vlrIsento').AsFloat:= 0;
+  DM.unRendimentosCum.FieldByName('vlrDespCustas').AsFloat:= 0;
+  DM.unRendimentosCum.FieldByName('vlrDespAdvogados').AsFloat:= 0;
+  DM.unRendimentosCum.FieldByName('vlrAdvogado').AsFloat:= 0;
+  DM.unRendimentosCum.FieldByName('codPgto').AsString:= '1889';
 
   pnl1.Enabled:= true;
   HabilitxW(Self, false, 'INSERIR', NIL);
@@ -282,7 +256,30 @@ begin
   cbbNRINSCBENEF.SetFocus;
 end;
 
-procedure TFormCadRendimentos.dbedtDTPGTOExit(Sender: TObject);
+procedure TFormCadRendAcum.cbbNRPROCRRAExit(Sender: TObject);
+begin
+  if cbbNRPROCRRA.ListSettings.DataSource.DataSet.Locate(('NRPROC'),VarArrayOf([cbbNRPROCRRA.Field.Value]),[loCaseInsensitive]) then
+  Begin
+    cbbTPPROCRRA.Field.Value := cbbNRPROCRRA.ListSettings.DataSource.DataSet.FieldByName('TPPROC').AsVariant;
+    cbbCODSUSP.Field.Value := cbbNRPROCRRA.ListSettings.DataSource.DataSet.FieldByName('CODSUSP').AsVariant;
+  End;
+end;
+
+procedure TFormCadRendAcum.cbbTPINSCADVOGADOChange(Sender: TObject);
+begin
+  if cbbTPINSCADVOGADO.Text= '1 - CNPJ' then
+  begin
+    DM.unRendimentosCumNRINSCADVOGADO.EditMask:='99.999.999/9999-99;1; ';
+    cbbTPINSCADVOGADO.ItemIndex:=0;
+  end
+  else 
+  begin  
+    DM.unRendimentosCumNRINSCADVOGADO.EditMask:='999.999.999-99;1; ' ; 
+    cbbTPINSCADVOGADO.ItemIndex:=1;
+  end;
+end;
+
+procedure TFormCadRendAcum.dbedtDTPGTOExit(Sender: TObject);
 begin
   if Trim(dbedtDTPGTO.text) <> '-' then
     validaPeriodo(Copy(dbedtDTPGTO.text,4,2));
@@ -290,16 +287,17 @@ begin
    dbedtDTPGTO.SetFocus;
 end;
 
-procedure TFormCadRendimentos.FormClose(Sender: TObject;
+procedure TFormCadRendAcum.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   DM.unREF_CODPAGAMENTO.Close;
   DM.unBeneficiarios.Close;
-  DM.unRendimentos.Filtered:=False;
-  DM.unRendimentos.Close;
+  DM.unRendimentosCum.Filtered:=False;
+  DM.unRendimentosCum.Close;
+  DM.unProcessos.Close;
 end;
 
-procedure TFormCadRendimentos.FormKeyPress(Sender: TObject; var Key: Char);
+procedure TFormCadRendAcum.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   //verifica se a tecla pressionada é a tecla ENTER, conhecida como #13 
   If key = #13 then Begin 
@@ -309,22 +307,27 @@ begin
   end;
 end;
 
-procedure TFormCadRendimentos.FormShow(Sender: TObject);
+procedure TFormCadRendAcum.FormShow(Sender: TObject);
 begin
   DesabilitaCampos(self);
   DM.unREF_CODPAGAMENTO.open;
   DM.unBeneficiarios.open;
 
-  DM.unRendimentos.Close;
-  DM.unRendimentos.FilterSQL:='Codigo='+ IntToStr(Codcurr);
-  DM.unRendimentos.Filtered:=True;
-  DM.unRendimentos.Open;
+  DM.unProcessos.Close;
+  DM.unProcessos.FilterSQL:='Codigo= '+ IntToStr(Codcurr); 
+  DM.unProcessos.Filtered:=True;
+  DM.unProcessos.Open;  
 
-  HabilitxW(Self, false, 'ABERTURA', DM.unRendimentos);
+  DM.unRendimentosCum.Close;
+  DM.unRendimentosCum.FilterSQL:='Codigo='+ IntToStr(Codcurr);
+  DM.unRendimentosCum.Filtered:=True;
+  DM.unRendimentosCum.Open;
+
+  HabilitxW(Self, false, 'ABERTURA', DM.unRendimentosCum);
   pgc1.ActivePage:=ts1; 
 end;
 
-procedure TFormCadRendimentos.validaPeriodo(texto:string);
+procedure TFormCadRendAcum.validaPeriodo(texto:string);
 begin
    if not ((texto='01') or (texto='02') or (texto='03') or (texto='04') or (texto='05') 
       or (texto='06')or (texto='07') or (texto='08') or (texto='09') or (texto='10')

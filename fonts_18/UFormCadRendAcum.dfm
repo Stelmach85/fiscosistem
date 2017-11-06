@@ -1,9 +1,9 @@
-object FormCadRendimentos: TFormCadRendimentos
+object FormCadRendAcum: TFormCadRendAcum
   Left = 0
   Top = 0
-  Caption = 'Cadastro de Rendimentos Tribut'#225'veis e Isentos/N'#227'o Tribut'#225'veis'
-  ClientHeight = 527
-  ClientWidth = 898
+  Caption = 'Cadastro de Rendimentos Recebidos Acumuladamente'
+  ClientHeight = 428
+  ClientWidth = 816
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object FormCadRendimentos: TFormCadRendimentos
   object pgc1: TPageControl
     Left = 0
     Top = 0
-    Width = 897
-    Height = 529
+    Width = 817
+    Height = 429
     ActivePage = ts1
     TabOrder = 0
     object ts1: TTabSheet
@@ -30,27 +30,9 @@ object FormCadRendimentos: TFormCadRendimentos
       object pnl1: TPanel
         Left = 3
         Top = 0
-        Width = 886
-        Height = 408
+        Width = 897
+        Height = 308
         TabOrder = 0
-        object lbl5: TLabel
-          Left = 25
-          Top = 119
-          Width = 104
-          Height = 13
-          Caption = 'Ind. de Exigib. Susp.:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl12: TLabel
-          Left = 20
-          Top = -12
-          Width = 100
-          Height = 13
-          Caption = 'Pa'#237's da Resid. Fiscal:'
-          ParentShowHint = False
-          ShowHint = True
-        end
         object lbl13: TLabel
           Left = 25
           Top = 7
@@ -78,144 +60,95 @@ object FormCadRendimentos: TFormCadRendimentos
           ParentShowHint = False
           ShowHint = True
         end
-        object lbl3: TLabel
-          Left = 208
-          Top = 118
-          Width = 77
-          Height = 13
-          Caption = 'Vlr. Rend. Trib.:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl6: TLabel
-          Left = 382
-          Top = 118
-          Width = 47
-          Height = 13
-          Caption = 'Vlr. IRRF:'
-          ParentShowHint = False
-          ShowHint = True
-        end
         object lbl7: TLabel
           Left = 550
-          Top = 118
-          Width = 107
+          Top = 117
+          Width = 123
           Height = 13
-          Caption = 'Vlr. Ded. Prev. Oficial:'
+          Caption = 'Natureza do Rendimento:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl8: TLabel
           Left = 25
           Top = 174
-          Width = 100
+          Width = 108
           Height = 13
-          Caption = 'Vlr. Ded. Prev. Priv.:'
+          Caption = 'Quantidade de Meses:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl9: TLabel
           Left = 208
           Top = 172
-          Width = 72
+          Width = 122
           Height = 13
-          Caption = 'Vlr. Ded. FAPI:'
+          Caption = 'Vlr. Despesa com Custas:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl10: TLabel
           Left = 382
           Top = 172
-          Width = 94
+          Width = 143
           Height = 13
-          Caption = 'Vlr. Ded. Funpresp:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl11: TLabel
-          Left = 550
-          Top = 172
-          Width = 112
-          Height = 13
-          Caption = 'Vlr. Ded. Pens'#227'o Alim.l:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl14: TLabel
-          Left = 25
-          Top = 230
-          Width = 130
-          Height = 13
-          Caption = 'Vlr. Comp. Ano Calend'#225'rio:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object lbl15: TLabel
-          Left = 208
-          Top = 230
-          Width = 118
-          Height = 13
-          Caption = 'Vlr. Comp. Ano Anterior:'
+          Caption = 'Vlr. Despesa com Advogados:'
           ParentShowHint = False
           ShowHint = True
         end
         object lbl16: TLabel
           Left = 382
           Top = 230
-          Width = 113
+          Width = 72
           Height = 13
-          Caption = 'Vlr. Ded. Dependentes:'
+          Caption = 'Vlr. Advogado:'
           ParentShowHint = False
           ShowHint = True
         end
-        object lbl17: TLabel
-          Left = 550
+        object lbl27: TLabel
+          Left = 26
+          Top = 118
+          Width = 73
+          Height = 13
+          Caption = 'N'#186' do Processo'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl28: TLabel
+          Left = 207
+          Top = 118
+          Width = 85
+          Height = 13
+          Caption = 'Tipo de Processo:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl30: TLabel
+          Left = 382
+          Top = 117
+          Width = 97
+          Height = 13
+          Caption = 'C'#243'd. da Suspens'#227'o:'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object lbl5: TLabel
+          Left = 26
           Top = 230
-          Width = 54
+          Width = 85
           Height = 13
-          Caption = 'Vlr. Isento:'
+          Caption = 'Tipo de Inscri'#231#227'o:'
           ParentShowHint = False
           ShowHint = True
         end
-        object lbl18: TLabel
-          Left = 25
-          Top = 345
-          Width = 229
+        object lbl4: TLabel
+          Left = 208
+          Top = 231
+          Width = 119
           Height = 13
-          Caption = 'Descri'#231#227'o do Rendimento Isento/N'#227'o Tribit'#225'vel:'
+          Caption = 'CPF/CNPJ do Advogado:'
           ParentShowHint = False
           ShowHint = True
-        end
-        object lbl19: TLabel
-          Left = 25
-          Top = 287
-          Width = 80
-          Height = 13
-          Caption = 'Tipo de Isen'#231#227'o:'
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object cbbINDSUSPEXIG: TJvDBComboBox
-          Left = 25
-          Top = 138
-          Width = 153
-          Height = 22
-          Hint = 'Informe o indicativo de Exibilidade Suspensa'
-          Style = csOwnerDrawFixed
-          DataField = 'INDSUSPEXIG'
-          DataSource = DM.dsRendimentos
-          Items.Strings = (
-            'S - Sim'
-            'N - N'#227'o')
-          TabOrder = 3
-          Values.Strings = (
-            'S'
-            'N')
-          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
-          ListSettings.OutfilteredValueFont.Color = clRed
-          ListSettings.OutfilteredValueFont.Height = -11
-          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
-          ListSettings.OutfilteredValueFont.Style = []
         end
         object cbbCODPGTO: TJvDBComboBox
           Left = 25
@@ -224,7 +157,7 @@ object FormCadRendimentos: TFormCadRendimentos
           Height = 21
           Hint = 'Selecione o C'#243'digo do Pagamento'
           DataField = 'CODPGTO'
-          DataSource = DM.dsRendimentos
+          DataSource = DM.dsRendimentosCum
           TabOrder = 1
           ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
           ListSettings.OutfilteredValueFont.Color = clRed
@@ -240,10 +173,10 @@ object FormCadRendimentos: TFormCadRendimentos
           Top = 81
           Width = 138
           Height = 19
-          Hint = 'Informe a Data do Pagamento'
+          Hint = 'Informe a Data do Pagamento ou Cr'#233'dito, base para renten'#231#227'o'
           Ctl3D = False
           DataField = 'DTPGTO'
-          DataSource = DM.dsRendimentos
+          DataSource = DM.dsRendimentosCum
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -263,7 +196,7 @@ object FormCadRendimentos: TFormCadRendimentos
           Height = 21
           Hint = 'Selecione o N'#250'mero de Inscri'#231#227'o do Benefici'#225'rio'
           DataField = 'NRINSCBENEF'
-          DataSource = DM.dsRendimentos
+          DataSource = DM.dsRendimentosCum
           TabOrder = 0
           ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
           ListSettings.OutfilteredValueFont.Color = clRed
@@ -274,35 +207,15 @@ object FormCadRendimentos: TFormCadRendimentos
           ListSettings.DisplayField = 'nmRazaoBenef'
           ListSettings.DataSource = DM.dsBeneficiarios
         end
-        object dbedtVLRRENDTRIBUTAVEL: TDBEdit
-          Left = 208
-          Top = 139
-          Width = 138
+        object dbedtNATRRA: TDBEdit
+          Left = 550
+          Top = 137
+          Width = 200
           Height = 19
-          Hint = 'Informe o Valor do Rendimento Tribut'#225'vel'
+          Hint = 'Informe a Natureza do Rendimento Recebido Acumuladamente'
           Ctl3D = False
-          DataField = 'VLRRENDTRIBUTAVEL'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 4
-        end
-        object dbedtVLRIRRF: TDBEdit
-          Left = 382
-          Top = 139
-          Width = 138
-          Height = 19
-          Hint = 'Informe o Valor do Imposto Retido na Fonte'
-          Ctl3D = False
-          DataField = 'VLRIRRF'
-          DataSource = DM.dsRendimentos
+          DataField = 'NATRRA'
+          DataSource = DM.dsRendimentosCum
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -314,15 +227,15 @@ object FormCadRendimentos: TFormCadRendimentos
           ShowHint = True
           TabOrder = 5
         end
-        object dbedtVLRDEDPREVOFIC: TDBEdit
-          Left = 550
-          Top = 139
+        object dbedtQTDMESESRRA: TDBEdit
+          Left = 25
+          Top = 193
           Width = 138
           Height = 19
-          Hint = 'Informe o Valor da Dedu'#231#227'o da Previd'#234'ncia Oficial'
+          Hint = 'Informe a Quantidade de Meses'
           Ctl3D = False
-          DataField = 'VLRDEDPREVOFIC'
-          DataSource = DM.dsRendimentos
+          DataField = 'QTDMESESRRA'
+          DataSource = DM.dsRendimentosCum
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -334,15 +247,15 @@ object FormCadRendimentos: TFormCadRendimentos
           ShowHint = True
           TabOrder = 6
         end
-        object dbedtVLRDEDPREVPRIV: TDBEdit
-          Left = 25
+        object dbedtVLRDESPCUSTAS: TDBEdit
+          Left = 208
           Top = 193
           Width = 138
           Height = 19
-          Hint = 'Informe o valor da Dedu'#231#227'o da Previd'#234'ncia Privada'
+          Hint = 'Informe o Valor da Despesa com Custas Judiciais'
           Ctl3D = False
-          DataField = 'VLRDEDPREVPRIV'
-          DataSource = DM.dsRendimentos
+          DataField = 'VLRDESPCUSTAS'
+          DataSource = DM.dsRendimentosCum
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -354,15 +267,15 @@ object FormCadRendimentos: TFormCadRendimentos
           ShowHint = True
           TabOrder = 7
         end
-        object dbedtVLRDEDFAPI: TDBEdit
-          Left = 208
+        object dbedtVLRDESPADVOGADOS: TDBEdit
+          Left = 382
           Top = 193
           Width = 138
           Height = 19
-          Hint = 'Informe o Valor da Dedu'#231#227'o FAPI'
+          Hint = 'Informe o Valor da Despesa com Advogados'
           Ctl3D = False
-          DataField = 'VLRDEDFAPI'
-          DataSource = DM.dsRendimentos
+          DataField = 'VLRDESPADVOGADOS'
+          DataSource = DM.dsRendimentosCum
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -374,55 +287,15 @@ object FormCadRendimentos: TFormCadRendimentos
           ShowHint = True
           TabOrder = 8
         end
-        object dbedtVLRDEDFUNPRESP: TDBEdit
+        object dbedtVLRADVOGADO: TDBEdit
           Left = 382
-          Top = 193
-          Width = 138
-          Height = 19
-          Hint = 'Informe o Valor da Dedu'#231#227'o FUNPRESP'
-          Ctl3D = False
-          DataField = 'VLRDEDFUNPRESP'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 9
-        end
-        object dbedtVLRDEDPENSAO: TDBEdit
-          Left = 550
-          Top = 193
-          Width = 138
-          Height = 19
-          Hint = 'Informe o Valor da Dedu'#231#227'o da Pens'#227'o Aliment'#237'cia'
-          Ctl3D = False
-          DataField = 'VLRDEDPENSAO'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 10
-        end
-        object dbedtVLRCOMPANOCALEND: TDBEdit
-          Left = 25
           Top = 251
           Width = 138
           Height = 19
-          Hint = 'Informe a Compensa'#231#227'o Judicial relativa ao Ano Calend'#225'rio'
+          Hint = 'Informe o Valor da Despesa com Advogado'
           Ctl3D = False
-          DataField = 'VLRCOMPANOCALEND'
-          DataSource = DM.dsRendimentos
+          DataField = 'VLRADVOGADO'
+          DataSource = DM.dsRendimentosCum
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -433,137 +306,6 @@ object FormCadRendimentos: TFormCadRendimentos
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
-        end
-        object dbedtVLRCOMPANOANT: TDBEdit
-          Left = 208
-          Top = 251
-          Width = 138
-          Height = 19
-          Hint = 
-            'Informe a Compensa'#231#227'o Judicial aos Anos Anteriores ao Ano Calend' +
-            #225'rio'
-          Ctl3D = False
-          DataField = 'VLRCOMPANOANT'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 12
-        end
-        object dbedtVLRDEDDEPEND: TDBEdit
-          Left = 382
-          Top = 251
-          Width = 138
-          Height = 19
-          Hint = 'Informe o Valor da Dedu'#231#227'o de Dependentes'
-          Ctl3D = False
-          DataField = 'VLRDEDDEPEND'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 13
-        end
-        object dbedtVLRISENTO: TDBEdit
-          Left = 550
-          Top = 251
-          Width = 138
-          Height = 19
-          Hint = 'Informe o Valor da Parcela Isenta '
-          Ctl3D = False
-          DataField = 'VLRISENTO'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 14
-        end
-        object dbedtDESCRENDIMENTO: TDBEdit
-          Left = 25
-          Top = 364
-          Width = 400
-          Height = 19
-          Hint = 'Informe a Descri'#231#227'o do Rendimento Isento e N'#227'o Tribut'#225'vel'
-          Ctl3D = False
-          DataField = 'DESCRENDIMENTO'
-          DataSource = DM.dsRendimentos
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 16
-        end
-        object cbbTPISENSAO: TJvDBComboBox
-          Left = 25
-          Top = 306
-          Width = 495
-          Height = 22
-          Hint = 'Informe o tipo de Insen'#231#227'o'
-          Style = csOwnerDrawFixed
-          DataField = 'TPISENSAO'
-          DataSource = DM.dsRendimentos
-          Items.Strings = (
-            '1 - Parcela Isenta 65 anos'
-            '2 - Di'#225'ria e Ajuda de Custo;'
-            
-              '3 -Indeniza'#231#227'o e resci'#231#227'o de contratato, inclusive a t'#237'tulo de P' +
-              'DV;'
-            '4 - Abono Pecuni'#225'rio;'
-            '5 - Outros'
-            '6 - Lucros e dividendos pagos a partir de 1996;'
-            
-              '7 - Valores pagos a t'#237'tular ou S'#243'cio de microempresa ou empresa ' +
-              'de pequeno porte, exceto Pr'#243'-labore'
-            
-              '8 - Pens'#227'o, aposentadoria ou reforma por mol'#233'stia grave ou acide' +
-              'nte em servi'#231'o'
-            
-              '9 - Benef'#237'cios indiretos e/ou reembolso de despesas recebidas po' +
-              'r voluntarios da Copa'
-            '10 - Bolsa de estudos recebida por m'#233'dico residente'
-            '11 - Complementa'#231#227'o de aposentadoria ')
-          TabOrder = 15
-          Values.Strings = (
-            '1'
-            '2'
-            '3'
-            '4'
-            '5'
-            '6'
-            '7'
-            '8'
-            '9'
-            '10'
-            '11'
-            '')
-          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
-          ListSettings.OutfilteredValueFont.Color = clRed
-          ListSettings.OutfilteredValueFont.Height = -11
-          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
-          ListSettings.OutfilteredValueFont.Style = []
         end
         object btnCadastro: TBitBtn
           Left = 465
@@ -583,16 +325,126 @@ object FormCadRendimentos: TFormCadRendimentos
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 17
+          TabOrder = 12
           OnClick = btnCadastroClick
+        end
+        object cbbTPPROCRRA: TJvDBComboBox
+          Left = 207
+          Top = 136
+          Width = 139
+          Height = 22
+          Hint = 'Informe o Tipo do Processo'
+          Style = csOwnerDrawFixed
+          DataField = 'TPPROCRRA'
+          DataSource = DM.dsRendimentosCum
+          Items.Strings = (
+            '1 - Administrativo'
+            '2 - Judicial')
+          TabOrder = 3
+          Values.Strings = (
+            '1'
+            '2')
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+        end
+        object cbbCODSUSP: TJvDBComboBox
+          Left = 382
+          Top = 136
+          Width = 138
+          Height = 21
+          Hint = 'Selecione o C'#243'digo de Suspens'#227'o'
+          DataField = 'CODSUSP'
+          DataSource = DM.dsRendimentosCum
+          TabOrder = 4
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+          ListSettings.KeyField = 'CODSUSP'
+          ListSettings.DisplayField = 'CODSUSP'
+          ListSettings.DataSource = DM.dsProcessos
+        end
+        object cbbTPINSCADVOGADO: TJvDBComboBox
+          Left = 26
+          Top = 250
+          Width = 153
+          Height = 22
+          Hint = 'Informe o tipo de Inscri'#231#227'o CPF/CNPJ do Advogado'
+          Style = csOwnerDrawFixed
+          DataField = 'TPINSCADVOGADO'
+          DataSource = DM.dsRendimentosCum
+          Items.Strings = (
+            '1 - CNPJ'
+            '2 - CPF')
+          TabOrder = 9
+          Values.Strings = (
+            '1'
+            '2')
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+          OnChange = cbbTPINSCADVOGADOChange
+        end
+        object dbedtNRINSCADVOGADO: TDBEdit
+          Left = 208
+          Top = 250
+          Width = 138
+          Height = 19
+          Hint = 'Informe o N'#186' da inscri'#231#227'o do Advogado'
+          Ctl3D = False
+          DataField = 'NRINSCADVOGADO'
+          DataSource = DM.dsRendimentosCum
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 10
+        end
+        object cbbNRPROCRRA: TJvDBComboBox
+          Left = 26
+          Top = 136
+          Width = 139
+          Height = 22
+          Hint = 'Informe o N'#186' do Processo'
+          Style = csOwnerDrawFixed
+          DataField = 'NRPROCRRA'
+          DataSource = DM.dsRendimentosCum
+          Items.Strings = (
+            '1 - Administrativo'
+            '2 - Judicial')
+          TabOrder = 13
+          Values.Strings = (
+            '0'
+            '1'
+            '2')
+          ListSettings.OutfilteredValueFont.Charset = DEFAULT_CHARSET
+          ListSettings.OutfilteredValueFont.Color = clRed
+          ListSettings.OutfilteredValueFont.Height = -11
+          ListSettings.OutfilteredValueFont.Name = 'Tahoma'
+          ListSettings.OutfilteredValueFont.Style = []
+          ListSettings.KeyField = 'NRPROC'
+          ListSettings.DisplayField = 'NRPROC'
+          ListSettings.DataSource = DM.dsProcessos
+          OnExit = cbbNRPROCRRAExit
         end
       end
       object dbnvgr1: TDBNavigator
-        Left = 28
-        Top = 420
+        Left = 20
+        Top = 314
         Width = 236
         Height = 26
-        DataSource = DM.dsRendimentos
+        DataSource = DM.dsRendimentosCum
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
         Hints.Strings = (
           'Primeira '
@@ -604,8 +456,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 1
       end
       object btnNovo: TBitBtn
-        Left = 28
-        Top = 452
+        Left = 20
+        Top = 356
         Width = 75
         Height = 25
         Hint = 'Cadastra um novo Rendimento'
@@ -638,8 +490,8 @@ object FormCadRendimentos: TFormCadRendimentos
         OnClick = btnNovoClick
       end
       object btnGravar: TBitBtn
-        Left = 109
-        Top = 452
+        Left = 101
+        Top = 356
         Width = 75
         Height = 25
         Hint = 'Grava os dados do Processo'
@@ -673,8 +525,8 @@ object FormCadRendimentos: TFormCadRendimentos
         OnClick = btnGravarClick
       end
       object btnAlterar: TBitBtn
-        Left = 193
-        Top = 452
+        Left = 185
+        Top = 356
         Width = 75
         Height = 25
         Hint = 'Altera os dados do Processo'
@@ -707,8 +559,8 @@ object FormCadRendimentos: TFormCadRendimentos
         OnClick = btnAlterarClick
       end
       object btnExcluir: TBitBtn
-        Left = 274
-        Top = 452
+        Left = 266
+        Top = 356
         Width = 75
         Height = 25
         Hint = 'Exclui um Processo'
@@ -741,8 +593,8 @@ object FormCadRendimentos: TFormCadRendimentos
         OnClick = btnExcluirClick
       end
       object btnCancelar: TBitBtn
-        Left = 359
-        Top = 452
+        Left = 351
+        Top = 356
         Width = 75
         Height = 25
         Hint = 'Cancela Opera'#231#227'o Realizada'
@@ -776,8 +628,8 @@ object FormCadRendimentos: TFormCadRendimentos
         OnClick = btnCancelarClick
       end
       object btn1: TBitBtn
-        Left = 448
-        Top = 452
+        Left = 440
+        Top = 356
         Width = 75
         Height = 25
         Hint = 'Fechar'
@@ -815,7 +667,7 @@ object FormCadRendimentos: TFormCadRendimentos
       ImageIndex = 1
       object lblDados: TLabel
         Left = 8
-        Top = 37
+        Top = 66
         Width = 203
         Height = 13
         Caption = 'Dados Importados do arquivo (TXT)'
@@ -827,7 +679,7 @@ object FormCadRendimentos: TFormCadRendimentos
         ParentFont = False
       end
       object lbledtArquivo: TLabeledEdit
-        Left = 204
+        Left = 222
         Top = 5
         Width = 365
         Height = 19
@@ -849,8 +701,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 0
       end
       object btnLocalizar: TBitBtn
-        Left = 575
-        Top = 5
+        Left = 593
+        Top = 3
         Width = 35
         Height = 20
         Hint = 'Selecionar o arquivo de importa'#231#227'o'
@@ -905,8 +757,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 1
       end
       object lbledtSeparador: TLabeledEdit
-        Left = 814
-        Top = 6
+        Left = 222
+        Top = 30
         Width = 24
         Height = 19
         Hint = 'Caracter Separador de Campo'
@@ -931,9 +783,9 @@ object FormCadRendimentos: TFormCadRendimentos
       end
       object crdbgrdPlanoContas: TCRDBGrid
         Left = 8
-        Top = 56
-        Width = 878
-        Height = 385
+        Top = 85
+        Width = 785
+        Height = 249
         Hint = 'Dados importados dos Processos'
         OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting, dgeRecordCount, dgeSearchBar]
         Ctl3D = False
@@ -957,8 +809,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TitleFont.Style = [fsBold]
       end
       object btnImportar: TBitBtn
-        Left = 452
-        Top = 458
+        Left = 380
+        Top = 354
         Width = 75
         Height = 25
         Hint = 'Importar Dados '
@@ -990,8 +842,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 4
       end
       object btnExcel: TBitBtn
-        Left = 624
-        Top = 458
+        Left = 552
+        Top = 354
         Width = 75
         Height = 25
         Hint = 'Clique para Gerar os Dados no Excel.'
@@ -1044,8 +896,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 6
       end
       object btnConsultar: TBitBtn
-        Left = 537
-        Top = 458
+        Left = 465
+        Top = 354
         Width = 81
         Height = 25
         Hint = 'Consultar Dados J'#225' Importados'
@@ -1077,8 +929,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 5
       end
       object btnExcluir1: TBitBtn
-        Left = 705
-        Top = 458
+        Left = 633
+        Top = 354
         Width = 75
         Height = 25
         Hint = 'Excluir Dados Importados'
@@ -1110,8 +962,8 @@ object FormCadRendimentos: TFormCadRendimentos
         TabOrder = 7
       end
       object btnSair: TBitBtn
-        Left = 786
-        Top = 458
+        Left = 714
+        Top = 354
         Width = 75
         Height = 25
         Hint = 'Sair da Importa'#231#227'o de Dados'

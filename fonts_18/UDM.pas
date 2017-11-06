@@ -256,6 +256,40 @@ type
     unPerfilR3010: TStringField;
     dsPerfil: TUniDataSource;
     unPerfilR2070: TStringField;
+    dsRendimentos: TUniDataSource;
+    unRendimentosCODIGO: TIntegerField;
+    unRendimentosCODPGTO: TStringField;
+    dtmfldRendimentosDTPGTO: TDateTimeField;
+    unRendimentosNRINSCBENEF: TStringField;
+    unRendimentosINDSUSPEXIG: TStringField;
+    cdsRendimentosVLRRENDTRIBUTAVEL: TFloatField;
+    cdsRendimentosVLRIRRF: TFloatField;
+    cdsRendimentosVLRDEDPREVOFIC: TFloatField;
+    cdsRendimentosVLRDEDPREVPRIV: TFloatField;
+    cdsRendimentosVLRDEDFAPI: TFloatField;
+    cdsRendimentosVLRDEDFUNPRESP: TFloatField;
+    cdsRendimentosVLRDEDPENSAO: TFloatField;
+    cdsRendimentosVLRCOMPANOCALEND: TFloatField;
+    cdsRendimentosVLRCOMPANOANT: TFloatField;
+    cdsRendimentosVLRDEDDEPEND: TFloatField;
+    unRendimentosTPISENSAO: TIntegerField;
+    cdsRendimentosVLRISENTO: TFloatField;
+    unRendimentosDESCRENDIMENTO: TStringField;
+    dsRendimentosCum: TUniDataSource;
+    unRendimentosCumCODIGO: TIntegerField;
+    unRendimentosCumCODPGTO: TStringField;
+    dtmfldRendimentosCumDTPGTO: TDateTimeField;
+    unRendimentosCumNRINSCBENEF: TStringField;
+    unRendimentosCumTPPROCRRA: TIntegerField;
+    unRendimentosCumNRPROCRRA: TStringField;
+    unRendimentosCumCODSUSP: TStringField;
+    unRendimentosCumNATRRA: TStringField;
+    unRendimentosCumQTDMESESRRA: TStringField;
+    cdsRendimentosCumVLRDESPCUSTAS: TFloatField;
+    unRendimentosCumTPINSCADVOGADO: TIntegerField;
+    unRendimentosCumNRINSCADVOGADO: TStringField;
+    cdsRendimentosCumVLRADVOGADO: TFloatField;
+    cdsRendimentosCumVLRDESPADVOGADOS: TFloatField;
     unParametrosAMBIENTE: TStringField;
     unParametrosHOST: TStringField;
     unParametrosPORTA: TStringField;
@@ -289,6 +323,11 @@ type
     procedure unContribuintesAfterScroll(DataSet: TDataSet);
     procedure unPerfilAfterPost(DataSet: TDataSet);
     procedure unPerfilAfterDelete(DataSet: TDataSet);
+    procedure unRendimentosAfterPost(DataSet: TDataSet);
+    procedure unRendimentosAfterDelete(DataSet: TDataSet);
+    procedure unRendimentosCumAfterPost(DataSet: TDataSet);
+    procedure unRendimentosCumAfterDelete(DataSet: TDataSet);
+    procedure unRendimentosCumAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -546,6 +585,54 @@ begin
     
   end;
   
+end;
+
+procedure TDM.unRendimentosAfterDelete(DataSet: TDataSet);
+begin
+  try
+    unRendimentos.CommitUpdates;
+    unRendimentos.ApplyUpdates();
+  except
+
+  end;
+end;
+
+procedure TDM.unRendimentosAfterPost(DataSet: TDataSet);
+begin
+  try
+    unRendimentos.CommitUpdates;
+    unRendimentos.ApplyUpdates();
+  except
+
+  end;
+end;
+
+procedure TDM.unRendimentosCumAfterDelete(DataSet: TDataSet);
+begin
+  try
+    unRendimentosCum.CommitUpdates;
+    unRendimentosCum.ApplyUpdates();
+  except
+
+  end;
+end;
+
+procedure TDM.unRendimentosCumAfterPost(DataSet: TDataSet);
+begin
+  try
+    unRendimentosCum.CommitUpdates;
+    unRendimentosCum.ApplyUpdates();
+  except
+
+  end;
+end;
+
+procedure TDM.unRendimentosCumAfterScroll(DataSet: TDataSet);
+begin
+  DM.unProcessos.Close;
+  DM.unProcessos.FilterSQL:='Codigo= '+ IntToStr(Codcurr); 
+  DM.unProcessos.Filtered:=True;
+  DM.unProcessos.Open;
 end;
 
 procedure TDM.unRetCP_ServTomAfterDelete(DataSet: TDataSet);

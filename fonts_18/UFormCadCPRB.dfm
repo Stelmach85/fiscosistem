@@ -1930,7 +1930,7 @@ object FormCadCPRB: TFormCadCPRB
         Top = 450
         Width = 116
         Height = 21
-        EditMask = '0000-!99;1; '
+        EditMask = '9999-!99;1; '
         MaxLength = 7
         TabOrder = 9
         Text = '    -  '

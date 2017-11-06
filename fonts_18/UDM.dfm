@@ -551,14 +551,169 @@ object DM: TDM
   object unRendimentos: TUniTable
     TableName = 'RENDIMENTOS_18'
     Connection = Conexao
+    AfterPost = unRendimentosAfterPost
+    AfterDelete = unRendimentosAfterDelete
     Left = 480
     Top = 136
+    object unRendimentosCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unRendimentosCODPGTO: TStringField
+      FieldName = 'CODPGTO'
+      Required = True
+      Size = 4
+    end
+    object dtmfldRendimentosDTPGTO: TDateTimeField
+      FieldName = 'DTPGTO'
+      Required = True
+      EditMask = '99/!99/9999;1; '
+    end
+    object unRendimentosNRINSCBENEF: TStringField
+      FieldName = 'NRINSCBENEF'
+      Required = True
+      Size = 18
+    end
+    object unRendimentosINDSUSPEXIG: TStringField
+      FieldName = 'INDSUSPEXIG'
+      Required = True
+      Size = 1
+    end
+    object cdsRendimentosVLRRENDTRIBUTAVEL: TFloatField
+      FieldName = 'VLRRENDTRIBUTAVEL'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRIRRF: TFloatField
+      FieldName = 'VLRIRRF'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRDEDPREVOFIC: TFloatField
+      FieldName = 'VLRDEDPREVOFIC'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRDEDPREVPRIV: TFloatField
+      FieldName = 'VLRDEDPREVPRIV'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRDEDFAPI: TFloatField
+      FieldName = 'VLRDEDFAPI'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRDEDFUNPRESP: TFloatField
+      FieldName = 'VLRDEDFUNPRESP'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRDEDPENSAO: TFloatField
+      FieldName = 'VLRDEDPENSAO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRCOMPANOCALEND: TFloatField
+      FieldName = 'VLRCOMPANOCALEND'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRCOMPANOANT: TFloatField
+      FieldName = 'VLRCOMPANOANT'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosVLRDEDDEPEND: TFloatField
+      FieldName = 'VLRDEDDEPEND'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object unRendimentosTPISENSAO: TIntegerField
+      FieldName = 'TPISENSAO'
+    end
+    object cdsRendimentosVLRISENTO: TFloatField
+      FieldName = 'VLRISENTO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object unRendimentosDESCRENDIMENTO: TStringField
+      FieldName = 'DESCRENDIMENTO'
+      Size = 100
+    end
   end
   object unRendimentosCum: TUniTable
     TableName = 'RENDIMENTOSCUM_18'
     Connection = Conexao
+    AfterPost = unRendimentosCumAfterPost
+    AfterDelete = unRendimentosCumAfterDelete
+    AfterScroll = unRendimentosCumAfterScroll
     Left = 480
     Top = 288
+    object unRendimentosCumCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object unRendimentosCumCODPGTO: TStringField
+      FieldName = 'CODPGTO'
+      Required = True
+      Size = 4
+    end
+    object dtmfldRendimentosCumDTPGTO: TDateTimeField
+      FieldName = 'DTPGTO'
+      Required = True
+      EditMask = '99/!99/9999;1;'
+    end
+    object unRendimentosCumNRINSCBENEF: TStringField
+      FieldName = 'NRINSCBENEF'
+      Required = True
+      Size = 18
+    end
+    object unRendimentosCumTPPROCRRA: TIntegerField
+      FieldName = 'TPPROCRRA'
+      Required = True
+    end
+    object unRendimentosCumNRPROCRRA: TStringField
+      FieldName = 'NRPROCRRA'
+      Required = True
+      Size = 21
+    end
+    object unRendimentosCumCODSUSP: TStringField
+      FieldName = 'CODSUSP'
+      Size = 14
+    end
+    object unRendimentosCumNATRRA: TStringField
+      FieldName = 'NATRRA'
+      Size = 50
+    end
+    object unRendimentosCumQTDMESESRRA: TStringField
+      FieldName = 'QTDMESESRRA'
+      Size = 5
+    end
+    object cdsRendimentosCumVLRDESPCUSTAS: TFloatField
+      FieldName = 'VLRDESPCUSTAS'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object cdsRendimentosCumVLRDESPADVOGADOS: TFloatField
+      FieldName = 'VLRDESPADVOGADOS'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
+    object unRendimentosCumTPINSCADVOGADO: TIntegerField
+      FieldName = 'TPINSCADVOGADO'
+      Required = True
+    end
+    object unRendimentosCumNRINSCADVOGADO: TStringField
+      FieldName = 'NRINSCADVOGADO'
+      Required = True
+      Size = 18
+    end
+    object cdsRendimentosCumVLRADVOGADO: TFloatField
+      FieldName = 'VLRADVOGADO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
+    end
   end
   object unPagtoExterior: TUniTable
     TableName = 'PAGTOEXTERIOR_18'
@@ -774,12 +929,12 @@ object DM: TDM
   object dsConslProcessos: TUniDataSource
     DataSet = unConslProcessos
     Left = 792
-    Top = 208
+    Top = 192
   end
   object dsBeneficiarios: TUniDataSource
     DataSet = unBeneficiarios
-    Left = 392
-    Top = 200
+    Left = 376
+    Top = 192
   end
   object unPais: TUniTable
     TableName = 'REF_PAISES'
@@ -832,7 +987,7 @@ object DM: TDM
   object dsInfProcessos: TUniDataSource
     DataSet = unInfProcessos
     Left = 632
-    Top = 200
+    Top = 192
   end
   object dsInfProcessosAdic: TUniDataSource
     DataSet = unInfProcessosAdic
@@ -1250,7 +1405,7 @@ object DM: TDM
     Top = 344
   end
   object unREF_CODPAGAMENTO: TUniTable
-    TableName = 'Ref_codpagamentos'
+    TableName = 'REF_CODPAGAMENTO'
     Connection = Conexao
     Left = 344
     Top = 632
@@ -1336,5 +1491,15 @@ object DM: TDM
     DataSet = unPerfil
     Left = 560
     Top = 96
+  end
+  object dsRendimentos: TUniDataSource
+    DataSet = unRendimentos
+    Left = 480
+    Top = 192
+  end
+  object dsRendimentosCum: TUniDataSource
+    DataSet = unRendimentosCum
+    Left = 480
+    Top = 344
   end
 end

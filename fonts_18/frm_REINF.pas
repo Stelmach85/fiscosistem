@@ -132,8 +132,8 @@ implementation
 
 uses UFormSelecionaEmpresa, UVerificaSistema, UFormContribuintes,
   UFormCadProcessos, UFormParametros, UFormConexao, UFormCadBeneficiarios,
-  UFormCadComProdRural, UFormCadRetCP_Servicos, UFormCadCPRB, UFormConsultaAtivEcon_Ref,
-  UFormMensageria;
+  UFormCadComProdRural, UFormCadRetCP_Servicos, UFormCadCPRB, UFormConsultaAtivEcon_Ref{,
+  UFormMensageria}, UFormCadRendimentos, UFormCadRendAcum;
 
 
 
@@ -854,18 +854,44 @@ begin
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end 
   else
-   if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Contribuição Previdenciária sobre a Receita Bruta' then
+  if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Contribuição Previdenciária sobre a Receita Bruta' then
   begin
-   If  not  assigned(FormCadCPRB ) then
+   If  not  assigned(FormCadCPRB) then
        Application.CreateForm(TFormCadCPRB,FormCadCPRB);
      try
        FormCadCPRB.ShowModal;
 
      finally
-      FreeAndNil(FormCadCPRB );
+      FreeAndNil(FormCadCPRB);
      end;
     tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
   end 
+  else
+  if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Rendimentos Tributáveis e Isentos/Não Tributáveis' then
+  begin
+    If  not  assigned(FormCadRendimentos) then
+       Application.CreateForm(TFormCadRendimentos,FormCadRendimentos);
+    try
+      FormCadRendimentos.ShowModal;
+
+    finally
+      FreeAndNil(FormCadRendimentos);
+    end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end 
+  else
+  if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Rendimentos Recebidos Acumuladamente' then
+  begin
+    If  not  assigned(FormCadRendAcum) then
+       Application.CreateForm(TFormCadRendAcum,FormCadRendAcum);
+    try
+      FormCadRendAcum.ShowModal;
+
+    finally
+      FreeAndNil(FormCadRendAcum);
+    end;
+    tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
+  end
   else
    if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Código da Atividade, Prod. e Serv. Sujeitos a CPRB' then
   begin
@@ -892,7 +918,7 @@ begin
        end;
       tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
     end 
-   else
+   {else
    if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Transmissão' then
     begin
      If  not  assigned(FormMensageria ) then
@@ -904,7 +930,7 @@ begin
         FreeAndNil(FormMensageria );
        end;
       tvmenu.Select(tvmenu.Items.Item[tvmenu.Selected.Parent.AbsoluteIndex],[]);
-    end 
+    end }
    else
    if tvmenu.Items[tvmenu.Selected.AbsoluteIndex].Text ='Parâmetros do Sistema' then
   begin
